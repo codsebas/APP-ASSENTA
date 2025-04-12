@@ -29,7 +29,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         new ControladorLogin(modelo, vista, this);
         this.cambiarPanel(vista);
     }
-    
+
     public void cambiarPanel(JPanel nuevoPanel){
         contenedor.removeAll();
         contenedor.add(nuevoPanel);
