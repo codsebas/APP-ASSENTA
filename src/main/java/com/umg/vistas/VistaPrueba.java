@@ -4,36 +4,31 @@
  */
 package com.umg.vistas;
 
+import com.umg.controlador.ControladorPrueba;
+import com.umg.modelos.ModeloPrueba;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
 /**
  *
  * @author axels
  */
-public class VistaLogin extends javax.swing.JPanel {
+public class VistaPrueba extends javax.swing.JPanel {
 
     /**
-     * Creates new form VistaLogin
+     * Creates new form VistaPrueba
      */
-    public VistaLogin() {
+    public VistaPrueba() {
         initComponents();
+//        ModeloPrueba modelo = new ModeloPrueba(this);
+//        ControladorPrueba controlador = new ControladorPrueba(modelo);
     }
 
-    public JButton getBtnIniciarSesion() {
-        return btnIniciarSesion;
+    public JButton getBtnRegresar() {
+        return btnRegresar;
     }
 
-    public void setBtnIniciarSesion(JButton btnIniciarSesion) {
-        this.btnIniciarSesion = btnIniciarSesion;
-    }
-
-    public JTextField getTxt1() {
-        return txt1;
-    }
-
-    public void setTxt1(JTextField txt1) {
-        this.txt1 = txt1;
+    public void setBtnRegresar(JButton btnRegresar) {
+        this.btnRegresar = btnRegresar;
     }
     
     
@@ -47,41 +42,42 @@ public class VistaLogin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fondo = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnIniciarSesion = new javax.swing.JButton();
-        txt1 = new javax.swing.JTextField();
+        btnRegresar = new javax.swing.JButton();
 
-        fondo.setBackground(new java.awt.Color(255, 255, 255));
-        fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INICIO DE SESIÓN");
-        fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 2, 1270, 60));
+        jLabel1.setText("PANEL DE PRUEBA");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 70));
 
-        btnIniciarSesion.setText("INICIAR SESIÓN");
-        fondo.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
-        fondo.add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 120, -1));
+        btnRegresar.setText("REGRESAR AL LOGIN");
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JPanel fondo;
+    public javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField txt1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+//    public void setControlador(ControladorPrueba controlador){
+//        btnRegresar.addActionListener(controlador);
+//    }
 }
