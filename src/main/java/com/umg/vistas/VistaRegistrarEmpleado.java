@@ -4,6 +4,9 @@
  */
 package com.umg.vistas;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author axels
@@ -28,14 +31,30 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+
+        jScrollPane1.setLayout(new ScrollPaneLayout(){
+            public void layoutContainer(Container parent) {
+                super.layoutContainer(parent);
+                if (vsb != null && viewport != null) {
+                    Rectangle vpBounds = viewport.getBounds();
+                    Rectangle vsbBounds = vsb.getBounds();
+
+                    vsb.setLocation(vpBounds.x, vsbBounds.y);
+                }
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
         panelOpciones.setBackground(new java.awt.Color(204, 204, 255));
         panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -71,7 +90,22 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jTextField3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelOpciones.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 200, -1));
 
-        jScrollPane1.setViewportView(panelOpciones);
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+
+        panelOpciones.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, -1, 350));
+
+        jPanel3.add(panelOpciones);
+
+        jScrollPane1.setViewportView(jPanel3);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1230, 720));
 
@@ -93,6 +127,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
