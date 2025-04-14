@@ -23,16 +23,6 @@ public class VistaPrueba extends javax.swing.JPanel {
 //        ControladorPrueba controlador = new ControladorPrueba(modelo);
     }
 
-    public JButton getBtnRegresar() {
-        return btnRegresar;
-    }
-
-    public void setBtnRegresar(JButton btnRegresar) {
-        this.btnRegresar = btnRegresar;
-    }
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,39 +32,84 @@ public class VistaPrueba extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        PanelPrincipal = new javax.swing.JPanel();
+        panelMenu = new javax.swing.JPanel();
+        btnMeReUser = new javax.swing.JPanel();
+        btnExpandirMenu = new javax.swing.JPanel();
+        lblImagen = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
+        contenedor = new javax.swing.JPanel();
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMinimumSize(new java.awt.Dimension(0, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PanelPrincipal.setBackground(new java.awt.Color(204, 204, 204));
+        PanelPrincipal.setLayout(new java.awt.BorderLayout());
+
+        panelMenu.setBackground(new java.awt.Color(153, 153, 153));
+        panelMenu.setPreferredSize(new java.awt.Dimension(50, 720));
+        panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMeReUser.setBackground(new java.awt.Color(204, 204, 255));
+
+        javax.swing.GroupLayout btnMeReUserLayout = new javax.swing.GroupLayout(btnMeReUser);
+        btnMeReUser.setLayout(btnMeReUserLayout);
+        btnMeReUserLayout.setHorizontalGroup(
+            btnMeReUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        btnMeReUserLayout.setVerticalGroup(
+            btnMeReUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(btnMeReUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 50));
+
+        btnExpandirMenu.setBackground(new java.awt.Color(153, 255, 255));
+        btnExpandirMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExpandirMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/menuIcono.png"))); // NOI18N
+        btnExpandirMenu.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        jLabel1.setBackground(new java.awt.Color(153, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PANEL DE PRUEBA");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 70));
+        jLabel1.setText("Menú");
+        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(0, 0, 0)));
+        jLabel1.setOpaque(true);
+        btnExpandirMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
 
-        btnRegresar.setText("REGRESAR AL LOGIN");
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, -1, -1));
+        panelMenu.add(btnExpandirMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 50));
+
+        PanelPrincipal.add(panelMenu, java.awt.BorderLayout.LINE_START);
+
+        contenedor.setBackground(new java.awt.Color(204, 204, 204));
+        contenedor.setLayout(new javax.swing.BoxLayout(contenedor, javax.swing.BoxLayout.LINE_AXIS));
+        PanelPrincipal.add(contenedor, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnRegresar;
+    private javax.swing.JPanel PanelPrincipal;
+    public javax.swing.JPanel btnExpandirMenu;
+    public javax.swing.JPanel btnMeReUser;
+    public javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblImagen;
+    public javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 
 //    public void setControlador(ControladorPrueba controlador){
