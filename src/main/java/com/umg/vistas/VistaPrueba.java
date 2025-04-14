@@ -38,6 +38,12 @@ public class VistaPrueba extends javax.swing.JPanel {
         btnExpandirMenu = new javax.swing.JPanel();
         lblImagen = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btnMeReUser1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         contenedor = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(0, 720));
@@ -83,6 +89,86 @@ public class VistaPrueba extends javax.swing.JPanel {
 
         panelMenu.add(btnExpandirMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 50));
 
+        btnMeReUser1.setBackground(new java.awt.Color(204, 204, 255));
+
+        javax.swing.GroupLayout btnMeReUser1Layout = new javax.swing.GroupLayout(btnMeReUser1);
+        btnMeReUser1.setLayout(btnMeReUser1Layout);
+        btnMeReUser1Layout.setHorizontalGroup(
+            btnMeReUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        btnMeReUser1Layout.setVerticalGroup(
+            btnMeReUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(btnMeReUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 50));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 200, 50));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 50));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 420));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 200, 50));
+
         PanelPrincipal.add(panelMenu, java.awt.BorderLayout.LINE_START);
 
         contenedor.setBackground(new java.awt.Color(204, 204, 204));
@@ -106,8 +192,14 @@ public class VistaPrueba extends javax.swing.JPanel {
     private javax.swing.JPanel PanelPrincipal;
     public javax.swing.JPanel btnExpandirMenu;
     public javax.swing.JPanel btnMeReUser;
+    public javax.swing.JPanel btnMeReUser1;
     public javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblImagen;
     public javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables

@@ -40,6 +40,8 @@ public class ControladorPrueba implements ActionListener, MouseListener {
 
         vista.btnMeReUser.addMouseListener(this);
         vista.btnExpandirMenu.addMouseListener(this);
+        vista.panelMenu.addMouseListener(this);
+        vista.contenedor.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -123,6 +125,11 @@ public class ControladorPrueba implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e) {
         if (e.getComponent().equals(vista.btnExpandirMenu)) {
             vista.btnExpandirMenu.setBackground(new Color(0, 153, 153));
+        } else if(e.getComponent().equals(vista.contenedor)){
+            if (!estado){
+                moverIzquierda(vista.panelMenu, 1, 2, 50);
+                estado = true;
+            }
         }
     }
 
