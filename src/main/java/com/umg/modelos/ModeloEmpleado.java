@@ -3,6 +3,7 @@ package com.umg.modelos;
 public class ModeloEmpleado {
 
     // DATOS PERSONALES
+    private int id_empleado;
     private String primerNombre;
     private String segundoNombre;
     private String tercerNombre;
@@ -40,13 +41,14 @@ public class ModeloEmpleado {
     public ModeloEmpleado() {
     }
 
-    public ModeloEmpleado(String primerNombre, String segundoNombre, String tercerNombre,
+    public ModeloEmpleado(int id_empleado, String primerNombre, String segundoNombre, String tercerNombre,
                           String primerApellido, String segundoApellido, String apellidoCasado,
                           String fechaNacimiento, int edad, String dpi,
                           String numeroTelefono, String correoElectronico,
                           String departamento, String municipio, String aldeaColonia, String direccionVivienda,
                           String puesto, String tipoJornada, String diaInicioJornada, String diaFinJornada,
                           String huella1, String huella2, String huella3, String huella4) {
+        this.id_empleado = id_empleado;
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
         this.tercerNombre = tercerNombre;
@@ -74,6 +76,15 @@ public class ModeloEmpleado {
 
 
 
+
+    public int getId_empleado() {
+        return id_empleado;
+
+    }
+
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
+    }
     public String getPrimerNombre() {
         return primerNombre;
     }
