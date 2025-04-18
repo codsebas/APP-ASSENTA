@@ -4,6 +4,8 @@
  */
 package com.umg.vistas;
 
+import com.umg.controlador.ControladorRegistrarEmpleado;
+import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,6 +20,9 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
      */
     public VistaRegistrarEmpleado() {
         initComponents();
+        ModeloVistaRegistrarEmpleado modelo = new ModeloVistaRegistrarEmpleado(this);
+        ControladorRegistrarEmpleado controlador = new ControladorRegistrarEmpleado(modelo);
+        setControlador(controlador);
     }
 
     /**
@@ -34,7 +39,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         panelOpciones = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        btnRegistrarEmpleado = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         panelInfoPersonal = new javax.swing.JPanel();
@@ -68,19 +73,19 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 127, 75));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Registrar Usuario");
+        jLabel1.setText("Registrar Empleado");
         panelOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 70));
 
-        jPanel2.setBackground(new java.awt.Color(219, 252, 231));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnRegistrarEmpleado.setBackground(new java.awt.Color(219, 252, 231));
+        btnRegistrarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Registrar Usuario");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
+        jLabel2.setText("Registrar Empleado");
+        btnRegistrarEmpleado.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 30));
 
-        panelOpciones.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 130, 30));
+        panelOpciones.add(btnRegistrarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 370, 130, 30));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -231,6 +236,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel btnRegistrarEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -243,21 +249,25 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    public javax.swing.JTextField jTextField10;
+    public javax.swing.JTextField jTextField11;
+    public javax.swing.JTextField jTextField3;
+    public javax.swing.JTextField jTextField6;
+    public javax.swing.JTextField jTextField7;
+    public javax.swing.JTextField jTextField8;
+    public javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JPanel panelInfoPersonal;
     public javax.swing.JPanel panelOpciones;
-    private javax.swing.JTextField txtNom1;
-    private javax.swing.JTextField txtNom2;
+    public javax.swing.JTextField txtNom1;
+    public javax.swing.JTextField txtNom2;
     // End of variables declaration//GEN-END:variables
+
+    public void setControlador(ControladorRegistrarEmpleado controlador){
+        btnRegistrarEmpleado.addMouseListener(controlador);
+    }
+
 }
