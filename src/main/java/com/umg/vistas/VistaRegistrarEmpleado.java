@@ -63,6 +63,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         btnRegistrarEmpleado = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -88,7 +90,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
             .addGap(0, 350, Short.MAX_VALUE)
         );
 
-        panelOpciones.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, -1, 350));
+        panelOpciones.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, -1, 350));
 
         panelInfoPersonal.setBackground(new java.awt.Color(240, 253, 244));
         panelInfoPersonal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -221,13 +223,19 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
 
         jPanel2.add(btnRegistrarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alta Verapaz", "Baja Verapaz", "Chimaltenango", "Chiquimula", "El Progreso", "Escuintla", "Guatemala", "Huehuetenango", "Izabal", "Jalapa", "Jutiapa", "Petén", "Quetzaltenango", "Quiché", "Retalhuleu", "Sacatepéquez", "San Marcos", "Santa Rosa", "Sololá", "Suchitepéquez", "Totonicapán", "Zacapa" }));
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 150, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elige un departamento primero" }));
+        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 210, -1));
+
         panelOpciones.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 970, 70));
 
         jPanel3.add(panelOpciones);
 
         jScrollPane1.setViewportView(jPanel3);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1230, 720));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1230, 930));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -244,6 +252,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel btnRegistrarEmpleado;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

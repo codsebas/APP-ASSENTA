@@ -48,6 +48,7 @@ public class ControladorRegistrarEmpleado implements MouseListener {
         String texto;
         texto = modelo.getvRegistraEmpleado().txtNom1.getText() + " " + modelo.getvRegistraEmpleado().txtNom2.getText();
         System.out.println("El nombre unido es: " + texto);
+
     }
     
 }
