@@ -4,27 +4,27 @@
  */
 package com.umg.modelos;
 
-import com.umg.vistas.VistaPrueba;
+import com.umg.vistas.VistaMenu;
 
 /**
  *
  * @author axels
  */
-public class ModeloPrueba {
-    VistaPrueba vistaP;
+public class ModeloMenu {
+    VistaMenu vistaP;
 
-    public ModeloPrueba() {
+    public ModeloMenu() {
     }
 
-    public ModeloPrueba(VistaPrueba vistaP) {
+    public ModeloMenu(VistaMenu vistaP) {
         this.vistaP = vistaP;
     }
 
-    public VistaPrueba getVistaP() {
+    public VistaMenu getVistaP() {
         return vistaP;
     }
 
-    public void setVistaP(VistaPrueba vistaP) {
+    public void setVistaP(VistaMenu vistaP) {
         this.vistaP = vistaP;
     }
     

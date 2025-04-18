@@ -5,10 +5,10 @@
 package com.umg.controlador;
 
 import com.umg.modelos.ModeloLogin;
-import com.umg.modelos.ModeloPrueba;
+import com.umg.modelos.ModeloMenu;
 import com.umg.vistas.VistaLogin;
 import com.umg.vistas.VistaPrincipal;
-import com.umg.vistas.VistaPrueba;
+import com.umg.vistas.VistaMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -34,10 +34,10 @@ public class ControladorLogin implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(vista.getTxt1().getText());
-        ModeloPrueba modelo2 = new ModeloPrueba();
+        ModeloMenu modelo2 = new ModeloMenu();
         
-        VistaPrueba vista2 = new VistaPrueba();
-        new ControladorPrueba(modelo2,vista2, vistaPrincipal);
+        VistaMenu vista2 = new VistaMenu();
+        new ControladorMenu(modelo2,vista2, vistaPrincipal);
         vistaPrincipal.cambiarPanel(vista2);                
     }
 

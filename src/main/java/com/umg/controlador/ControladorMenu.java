@@ -5,10 +5,10 @@
 package com.umg.controlador;
 
 import com.umg.modelos.ModeloLogin;
-import com.umg.modelos.ModeloPrueba;
+import com.umg.modelos.ModeloMenu;
 import com.umg.vistas.VistaLogin;
 import com.umg.vistas.VistaPrincipal;
-import com.umg.vistas.VistaPrueba;
+import com.umg.vistas.VistaMenu;
 import com.umg.vistas.VistaRegistrarEmpleado;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,15 +25,15 @@ import javax.swing.SwingUtilities;
  *
  * @author axels
  */
-public class ControladorPrueba implements ActionListener, MouseListener {
+public class ControladorMenu implements ActionListener, MouseListener {
 
-    ModeloPrueba modelo;
-    VistaPrueba vista;
+    ModeloMenu modelo;
+    VistaMenu vista;
     VistaPrincipal vistsaPrincipal;
 
     private boolean estado = true;
 
-    public ControladorPrueba(ModeloPrueba modelo, VistaPrueba vista, VistaPrincipal vistsaPrincipal) {
+    public ControladorMenu(ModeloMenu modelo, VistaMenu vista, VistaPrincipal vistsaPrincipal) {
         this.modelo = modelo;
         this.vista = vista;
         this.vistsaPrincipal = vistsaPrincipal;

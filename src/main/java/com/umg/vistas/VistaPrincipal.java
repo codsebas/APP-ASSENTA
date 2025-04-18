@@ -6,7 +6,7 @@ package com.umg.vistas;
 
 import com.umg.controlador.ControladorLogin;
 import com.umg.modelos.ModeloLogin;
-import com.umg.modelos.ModeloPrueba;
+import com.umg.modelos.ModeloMenu;
 import javax.swing.JPanel;
 
 /**

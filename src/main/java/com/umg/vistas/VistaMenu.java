@@ -4,23 +4,23 @@
  */
 package com.umg.vistas;
 
-import com.umg.controlador.ControladorPrueba;
-import com.umg.modelos.ModeloPrueba;
+import com.umg.controlador.ControladorMenu;
+import com.umg.modelos.ModeloMenu;
 import javax.swing.JButton;
 
 /**
  *
  * @author axels
  */
-public class VistaPrueba extends javax.swing.JPanel {
+public class VistaMenu extends javax.swing.JPanel {
 
     /**
      * Creates new form VistaPrueba
      */
-    public VistaPrueba() {
+    public VistaMenu() {
         initComponents();
-//        ModeloPrueba modelo = new ModeloPrueba(this);
-//        ControladorPrueba controlador = new ControladorPrueba(modelo);
+//        ModeloMenu modelo = new ModeloMenu(this);
+//        ControladorMenu controlador = new ControladorMenu(modelo);
     }
 
     /**
@@ -204,7 +204,7 @@ public class VistaPrueba extends javax.swing.JPanel {
     public javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 
-//    public void setControlador(ControladorPrueba controlador){
+//    public void setControlador(ControladorMenu controlador){
 //        btnRegresar.addActionListener(controlador);
 //    }
 }
