@@ -124,12 +124,14 @@ public class ControladorMenu implements ActionListener, MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getComponent().equals(vista.btnExpandirMenu)) {
-            vista.btnExpandirMenu.setBackground(new Color(0, 153, 153));
-        } else if(e.getComponent().equals(vista.contenedor)){
-            if (!estado){
+            vista.btnExpandirMenu.setBackground(new Color(38,163,106));
+        } else if (e.getComponent().equals(vista.contenedor)) {
+            if (!estado) {
                 moverIzquierda(vista.panelMenu, 1, 2, 50);
                 estado = true;
             }
+        } else if (e.getComponent().equals(vista.btnMeReUser)) {
+            vista.btnMeReUser.setBackground(new Color(38,163,106));
         }
     }
 
@@ -137,7 +139,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
 
         if (e.getComponent().equals(vista.btnExpandirMenu)) {
-            vista.btnExpandirMenu.setBackground(new Color(153, 255, 255));
+            vista.btnExpandirMenu.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnMeReUser)) {
+            vista.btnMeReUser.setBackground(new Color(0, 127, 75));
         }
 
     }

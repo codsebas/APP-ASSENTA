@@ -5,6 +5,8 @@
 package com.umg.vistas;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -18,22 +20,31 @@ public class VistaLogin extends javax.swing.JPanel {
      */
     public VistaLogin() {
         initComponents();
+        this.setSize(1280, 720);
     }
 
-    public JButton getBtnIniciarSesion() {
+    public JPanel getBtnIniciarSesion() {
         return btnIniciarSesion;
     }
 
-    public void setBtnIniciarSesion(JButton btnIniciarSesion) {
+    public void setBtnIniciarSesion(JPanel btnIniciarSesion) {
         this.btnIniciarSesion = btnIniciarSesion;
     }
 
-    public JTextField getTxt1() {
-        return txt1;
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
     }
 
-    public void setTxt1(JTextField txt1) {
-        this.txt1 = txt1;
+    public void setTxtPassword(JPasswordField txtPassword) {
+        this.txtPassword = txtPassword;
+    }
+
+    public JTextField getTxtUsuario() {
+        return txtUsuario;
+    }
+
+    public void setTxtUsuario(JTextField txtUsuario) {
+        this.txtUsuario = txtUsuario;
     }
     
     
@@ -49,21 +60,70 @@ public class VistaLogin extends javax.swing.JPanel {
 
         fondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnIniciarSesion = new javax.swing.JButton();
-        txt1 = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtUsuario = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        btnIniciarSesion = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
 
-        fondo.setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+
+        fondo.setBackground(new java.awt.Color(240, 253, 244));
+        fondo.setMinimumSize(new java.awt.Dimension(1280, 720));
         fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(0, 127, 75));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("INICIO DE SESIÓN");
-        fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 2, 1270, 60));
+        jLabel1.setText("Inicio de Sesión");
+        fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 400, 60));
 
-        btnIniciarSesion.setText("INICIAR SESIÓN");
-        fondo.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
-        fondo.add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 120, -1));
+        jPanel1.setBackground(new java.awt.Color(240, 253, 244));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 127, 75));
+        jLabel3.setText("Usuario");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 260, 20));
+
+        txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        txtUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(26, 75, 54));
+        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUsuario.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 260, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 127, 75));
+        jLabel4.setText("Contraseña");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 260, 20));
+
+        btnIniciarSesion.setBackground(new java.awt.Color(0, 127, 75));
+        btnIniciarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Iniciar Sesión");
+        btnIniciarSesion.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+
+        jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 160, 30));
+
+        txtPassword.setBackground(new java.awt.Color(255, 255, 255));
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPassword.setForeground(new java.awt.Color(26, 75, 54));
+        txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPassword.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 260, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-iniciosesion.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 600));
+
+        fondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 400, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,9 +139,15 @@ public class VistaLogin extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JPanel btnIniciarSesion;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField txt1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,7 +20,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
      */
     public VistaPrincipal() {
         initComponents();
-        this.setTitle("Vista Principal");
+        this.setTitle("Mantenimineto Empleados");
         setSize(1280, 720);
         this.setLocationRelativeTo(null);
         
@@ -49,19 +49,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         contenedor = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1280, 760));
+        setPreferredSize(new java.awt.Dimension(1280, 760));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1280, 760));
 
+        contenedor.setMinimumSize(new java.awt.Dimension(1280, 720));
+        contenedor.setPreferredSize(new java.awt.Dimension(1280, 720));
         contenedor.setLayout(new java.awt.BorderLayout());
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(contenedor, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

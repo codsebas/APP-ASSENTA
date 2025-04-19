@@ -35,6 +35,8 @@ public class VistaMenu extends javax.swing.JPanel {
         PanelPrincipal = new javax.swing.JPanel();
         panelMenu = new javax.swing.JPanel();
         btnMeReUser = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         btnExpandirMenu = new javax.swing.JPanel();
         lblImagen = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -56,22 +58,26 @@ public class VistaMenu extends javax.swing.JPanel {
         panelMenu.setPreferredSize(new java.awt.Dimension(50, 720));
         panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnMeReUser.setBackground(new java.awt.Color(204, 204, 255));
+        btnMeReUser.setBackground(new java.awt.Color(0, 127, 75));
+        btnMeReUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMeReUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout btnMeReUserLayout = new javax.swing.GroupLayout(btnMeReUser);
-        btnMeReUser.setLayout(btnMeReUserLayout);
-        btnMeReUserLayout.setHorizontalGroup(
-            btnMeReUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        btnMeReUserLayout.setVerticalGroup(
-            btnMeReUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Registrar Empleado");
+        jLabel3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
+        btnMeReUser.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/empleadosIcono.png"))); // NOI18N
+        btnMeReUser.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
         panelMenu.add(btnMeReUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 50));
 
-        btnExpandirMenu.setBackground(new java.awt.Color(153, 255, 255));
+        btnExpandirMenu.setBackground(new java.awt.Color(0, 127, 75));
         btnExpandirMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExpandirMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -80,11 +86,10 @@ public class VistaMenu extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(153, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Menú");
-        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(0, 0, 0)));
-        jLabel1.setOpaque(true);
+        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
         btnExpandirMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
 
         panelMenu.add(btnExpandirMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 50));
@@ -195,6 +200,8 @@ public class VistaMenu extends javax.swing.JPanel {
     public javax.swing.JPanel btnMeReUser1;
     public javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

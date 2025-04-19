@@ -9,6 +9,7 @@ import com.umg.modelos.ModeloMenu;
 import com.umg.vistas.VistaLogin;
 import com.umg.vistas.VistaPrincipal;
 import com.umg.vistas.VistaMenu;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -28,22 +29,22 @@ public class ControladorLogin implements ActionListener, MouseListener {
         this.vista = vista;
         this.vistaPrincipal = vistaPrincipal;
         
-        vista.getBtnIniciarSesion().addActionListener(this);
+        vista.getBtnIniciarSesion().addMouseListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(vista.getTxt1().getText());
-        ModeloMenu modelo2 = new ModeloMenu();
-        
-        VistaMenu vista2 = new VistaMenu();
-        new ControladorMenu(modelo2,vista2, vistaPrincipal);
-        vistaPrincipal.cambiarPanel(vista2);                
+               
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        if(e.getComponent().equals(vista.getBtnIniciarSesion())){
+            ModeloMenu modelo = new ModeloMenu();
+            VistaMenu vista = new VistaMenu();
+            new ControladorMenu(modelo, vista, vistaPrincipal);
+            vistaPrincipal.cambiarPanel(vista);
+        }
     }
 
     @Override
@@ -58,11 +59,15 @@ public class ControladorLogin implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if(e.getComponent().equals(vista.getBtnIniciarSesion())){
+            vista.getBtnIniciarSesion().setBackground(new Color(38,163,106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if(e.getComponent().equals(vista.getBtnIniciarSesion())){
+            vista.getBtnIniciarSesion().setBackground(new Color(0,127,75));
+        }
     }
 }
