@@ -98,6 +98,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1226, 720));
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
 
         jPanel4.setMinimumSize(new java.awt.Dimension(1220, 720));
         jPanel4.setPreferredSize(new java.awt.Dimension(1220, 1000));
