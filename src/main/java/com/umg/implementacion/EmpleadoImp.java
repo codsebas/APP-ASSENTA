@@ -25,28 +25,31 @@ public class EmpleadoImp implements IEmpleados {
 
         try {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
-            ps.setInt(1, modelo.getId_empleado());
-            ps.setString(2, modelo.getPrimerNombre());
-            ps.setString(3, modelo.getSegundoNombre());
-            ps.setString (4, modelo.getPrimerApellido());
-            ps.setString (5, modelo.getSegundoApellido());
-            ps.setString (6, modelo.getFechaNacimiento());
-            ps.setInt(7, modelo.getEdad());
-            ps.setString(8, modelo.getDpi());
-            ps.setString(10, modelo.getNumeroTelefono());
-            ps.setString(11, modelo.getCorreoElectronico());
-            ps.setString(12,modelo.getDireccionVivienda());
-            ps.setString(13, modelo.getMunicipio());
-            ps.setString(14, modelo.getAldeaColonia());
-            ps.setString(15, modelo.getDireccionVivienda());
-            ps.setString(16, modelo.getPuesto());
-            ps.setString(17, modelo.getTipoJornada());
-            ps.setString(18, modelo.getDiaInicioJornada());
-            ps.setString(19, modelo.getDiaFinJornada());
-            ps.setString(20, modelo.getHuella1());
-            ps.setString(21, modelo.getHuella2());
-            ps.setString(22, modelo.getHuella3());
-            ps.setString(23, modelo.getHuella4());
+            ps.setInt(1, modelo.getIdEmpleado());
+            ps.setString(2, modelo.getDpi());
+            ps.setString(3, modelo.getSexo());
+            ps.setString(4, modelo.getPrimerNombre());
+            ps.setString(5, modelo.getSegundoNombre());
+            ps.setString(6, modelo.getTercerNombre());
+            ps.setString(7, modelo.getPrimerApellido());
+            ps.setString(8, modelo.getSegundoApellido());
+            ps.setString(9, modelo.getApellidoCasada());
+            ps.setString(10, modelo.getFechaNacimiento());
+            ps.setInt(11, modelo.getEdad());
+            ps.setInt(12, modelo.getIdPuesto());
+            ps.setString(13, modelo.getHorarioEntrada());
+            ps.setString(14, modelo.getHorarioSalida());
+            ps.setInt(15, modelo.getIdJefeInmediato());
+            ps.setInt(16, modelo.getIdDireccion());
+            ps.setString(17, modelo.getDepartamento());
+            ps.setString(18, modelo.getMunicipio());
+            ps.setString(19, modelo.getAldeaColonia());
+            ps.setString(20, modelo.getDireccionVivienda());
+            ps.setInt(21, modelo.getIdHuella());
+            ps.setBytes(22, modelo.getHuella()); // ← Aquí insertas la huella como byte[]
+
+            ps.executeUpdate();
+            resultado = true;
 
 
             // Ejecutar y procesar resultado...
@@ -95,28 +98,29 @@ public class EmpleadoImp implements IEmpleados {
             while (rs.next()) {
                 ps =    conector.preparar(sql.getCONSULTA_TODOS_EMPLEADO());
                 ps.setInt(1, dpi_empleado);
-                modelo.setId_empleado(Integer.parseInt(rs.getString(1)));
-                modelo.setPrimerNombre(rs.getString(2));
-                modelo.setSegundoNombre(rs.getString(3));
-                modelo.setPrimerApellido(rs.getString(4));
-                modelo.setSegundoApellido(rs.getString(5));
-                modelo.setFechaNacimiento(rs.getString(6));
-                modelo.setEdad(Integer.parseInt(rs.getString(7)));
-                modelo.setDpi(rs.getString(8));
-                modelo.setNumeroTelefono(rs.getString(10));
-                modelo.setCorreoElectronico(rs.getString(11));
-                modelo.setDireccionVivienda(rs.getString(12));
-                modelo.setMunicipio(rs.getString(13));
-                modelo.setAldeaColonia(rs.getString(14));
-                modelo.setDireccionVivienda(rs.getString(15));
-                modelo.setPuesto(rs.getString(16));
-                modelo.setTipoJornada(rs.getString(17));
-                modelo.setDiaInicioJornada(rs.getString(18));
-                modelo.setDiaFinJornada(rs.getString(19));
-                modelo.setHuella1(rs.getString(20));
-                modelo.setHuella2(rs.getString(21));
-                modelo.setHuella3(rs.getString(22));
-                modelo.setHuella4(rs.getString(23));
+                modelo.setIdEmpleado(Integer.parseInt(rs.getString(1)));
+                modelo.setDpi(rs.getString(2));
+               modelo.setSexo(rs.getString(3));
+               modelo.setPrimerNombre(rs.getString(4));
+               modelo.setSegundoNombre(rs.getString(5));
+               modelo.setTercerNombre(rs.getString(6));
+               modelo.setPrimerApellido(rs.getString(7));
+               modelo.setSegundoApellido(rs.getString(8));
+               modelo.setApellidoCasada(rs.getString(9));
+               modelo.setFechaNacimiento(rs.getString(10));
+               modelo.setEdad(rs.getInt(11));
+               modelo.setIdPuesto(Integer.parseInt(rs.getString(12)));
+               modelo.setHorarioEntrada(rs.getString(13));
+               modelo.setHorarioSalida(rs.getString(14));
+               modelo.setIdJefeInmediato(Integer.parseInt(rs.getString(15)));
+               modelo.setIdDireccion(Integer.parseInt(rs.getString(16)));
+               modelo.setDepartamento(rs.getString(17));
+               modelo.setMunicipio(rs.getString(18));
+               modelo.setAldeaColonia(rs.getString(19));
+               modelo.setDireccionVivienda(rs.getString(20));
+               modelo.setIdHuella(Integer.parseInt(rs.getString(21)));
+                modelo.setHuella(rs.getBytes(21));
+
 
             }
            conector.desconectar();
