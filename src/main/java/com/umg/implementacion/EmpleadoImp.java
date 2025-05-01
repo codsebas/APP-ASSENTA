@@ -100,27 +100,26 @@ public class EmpleadoImp implements IEmpleados {
                 ps.setInt(1, dpi_empleado);
                 modelo.setIdEmpleado(Integer.parseInt(rs.getString(1)));
                 modelo.setDpi(rs.getString(2));
-               modelo.setSexo(rs.getString(3));
-               modelo.setPrimerNombre(rs.getString(4));
-               modelo.setSegundoNombre(rs.getString(5));
-               modelo.setTercerNombre(rs.getString(6));
-               modelo.setPrimerApellido(rs.getString(7));
-               modelo.setSegundoApellido(rs.getString(8));
-               modelo.setApellidoCasada(rs.getString(9));
-               modelo.setFechaNacimiento(rs.getString(10));
-               modelo.setEdad(rs.getInt(11));
-               modelo.setIdPuesto(Integer.parseInt(rs.getString(12)));
-               modelo.setHorarioEntrada(rs.getString(13));
-               modelo.setHorarioSalida(rs.getString(14));
-               modelo.setIdJefeInmediato(Integer.parseInt(rs.getString(15)));
-               modelo.setIdDireccion(Integer.parseInt(rs.getString(16)));
-               modelo.setDepartamento(rs.getString(17));
-               modelo.setMunicipio(rs.getString(18));
-               modelo.setAldeaColonia(rs.getString(19));
-               modelo.setDireccionVivienda(rs.getString(20));
-               modelo.setIdHuella(Integer.parseInt(rs.getString(21)));
+                modelo.setSexo(rs.getString(3));
+                modelo.setPrimerNombre(rs.getString(4));
+                modelo.setSegundoNombre(rs.getString(5));
+                modelo.setTercerNombre(rs.getString(6));
+                modelo.setPrimerApellido(rs.getString(7));
+                modelo.setSegundoApellido(rs.getString(8));
+                modelo.setApellidoCasada(rs.getString(9));
+                modelo.setFechaNacimiento(rs.getString(10));
+                modelo.setEdad(rs.getInt(11));
+                modelo.setIdPuesto(Integer.parseInt(rs.getString(12)));
+                modelo.setHorarioEntrada(rs.getString(13));
+                modelo.setHorarioSalida(rs.getString(14));
+                modelo.setIdJefeInmediato(Integer.parseInt(rs.getString(15)));
+                modelo.setIdDireccion(Integer.parseInt(rs.getString(16)));
+                modelo.setDepartamento(rs.getString(17));
+                modelo.setMunicipio(rs.getString(18));
+                modelo.setAldeaColonia(rs.getString(19));
+                modelo.setDireccionVivienda(rs.getString(20));
+                modelo.setIdHuella(Integer.parseInt(rs.getString(21)));
                 modelo.setHuella(rs.getBytes(21));
-
 
             }
            conector.desconectar();
