@@ -3,20 +3,23 @@ package com.umg.modelos;
 public class ModeloEmpleado {
 
     // DATOS PERSONALES
-    private int id_empleado;
+    private int idEmpleado;
+    private String dpi;
+    private String sexo;
+    private String estadoCivil; // 'C' o 'S'
     private String primerNombre;
     private String segundoNombre;
     private String tercerNombre;
     private String primerApellido;
     private String segundoApellido;
     private String apellidoCasado;
-    private String fechaNacimiento;
+    private String fechaNacimiento; // Se puede usar java.util.Date o java.time.LocalDate si lo prefieres
     private int edad;
-    private String dpi;
 
     // DATOS CONTACTO
-    private String numeroTelefono;
     private String correoElectronico;
+    private String numeroTelefono1;
+    private String numeroTelefono2;
 
     // DIRECCION
     private String departamento;
@@ -25,72 +28,60 @@ public class ModeloEmpleado {
     private String direccionVivienda;
 
     // PUESTO EN LA EMPRESA
+    private int idPuesto;
     private String puesto;
 
     // JORNADA
-    private String tipoJornada;
-    private String diaInicioJornada;
-    private String diaFinJornada;
+    private String horarioEntrada;
+    private String horarioSalida;
 
-    // HUELLAS XD
+    // JEFE
+    private int idJefeInmediato;
+
+    // HUELLAS DIGITALES (puedes cambiar a byte[] si planeas manejar los datos binarios reales)
     private String huella1;
     private String huella2;
     private String huella3;
     private String huella4;
 
-    public ModeloEmpleado() {
+    public int getIdEmpleado() {
+        return idEmpleado;
     }
 
-    public ModeloEmpleado(int id_empleado, String primerNombre, String segundoNombre, String tercerNombre,
-                          String primerApellido, String segundoApellido, String apellidoCasado,
-                          String fechaNacimiento, int edad, String dpi,
-                          String numeroTelefono, String correoElectronico,
-                          String departamento, String municipio, String aldeaColonia, String direccionVivienda,
-                          String puesto, String tipoJornada, String diaInicioJornada, String diaFinJornada,
-                          String huella1, String huella2, String huella3, String huella4) {
-        this.id_empleado = id_empleado;
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.tercerNombre = tercerNombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
-        this.apellidoCasado = apellidoCasado;
-        this.fechaNacimiento = fechaNacimiento;
-        this.edad = edad;
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public String getDpi() {
+        return dpi;
+    }
+
+    public void setDpi(String dpi) {
         this.dpi = dpi;
-        this.numeroTelefono = numeroTelefono;
-        this.correoElectronico = correoElectronico;
-        this.departamento = departamento;
-        this.municipio = municipio;
-        this.aldeaColonia = aldeaColonia;
-        this.direccionVivienda = direccionVivienda;
-        this.puesto = puesto;
-        this.tipoJornada = tipoJornada;
-        this.diaInicioJornada = diaInicioJornada;
-        this.diaFinJornada = diaFinJornada;
-        this.huella1 = huella1;
-        this.huella2 = huella2;
-        this.huella3 = huella3;
-        this.huella4 = huella4;
     }
 
-
-
-
-    public int getId_empleado() {
-        return id_empleado;
-
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setId_empleado(int id_empleado) {
-        this.id_empleado = id_empleado;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
+
     public String getPrimerNombre() {
         return primerNombre;
     }
 
     public void setPrimerNombre(String primerNombre) {
         this.primerNombre = primerNombre;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
     public String getSegundoNombre() {
@@ -149,28 +140,28 @@ public class ModeloEmpleado {
         this.edad = edad;
     }
 
-    public String getDpi() {
-        return dpi;
-    }
-
-    public void setDpi(String dpi) {
-        this.dpi = dpi;
-    }
-
-    public String getNumeroTelefono() {
-        return numeroTelefono;
-    }
-
-    public void setNumeroTelefono(String numeroTelefono) {
-        this.numeroTelefono = numeroTelefono;
-    }
-
     public String getCorreoElectronico() {
         return correoElectronico;
     }
 
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
+    }
+
+    public String getNumeroTelefono1() {
+        return numeroTelefono1;
+    }
+
+    public void setNumeroTelefono1(String numeroTelefono1) {
+        this.numeroTelefono1 = numeroTelefono1;
+    }
+
+    public String getNumeroTelefono2() {
+        return numeroTelefono2;
+    }
+
+    public void setNumeroTelefono2(String numeroTelefono2) {
+        this.numeroTelefono2 = numeroTelefono2;
     }
 
     public String getDepartamento() {
@@ -205,6 +196,22 @@ public class ModeloEmpleado {
         this.direccionVivienda = direccionVivienda;
     }
 
+    public int getIdPuesto() {
+        return idPuesto;
+    }
+
+    public void setIdPuesto(int idPuesto) {
+        this.idPuesto = idPuesto;
+    }
+
+    public String getHorarioEntrada() {
+        return horarioEntrada;
+    }
+
+    public void setHorarioEntrada(String horarioEntrada) {
+        this.horarioEntrada = horarioEntrada;
+    }
+
     public String getPuesto() {
         return puesto;
     }
@@ -213,28 +220,12 @@ public class ModeloEmpleado {
         this.puesto = puesto;
     }
 
-    public String getTipoJornada() {
-        return tipoJornada;
+    public String getHorarioSalida() {
+        return horarioSalida;
     }
 
-    public void setTipoJornada(String tipoJornada) {
-        this.tipoJornada = tipoJornada;
-    }
-
-    public String getDiaInicioJornada() {
-        return diaInicioJornada;
-    }
-
-    public void setDiaInicioJornada(String diaInicioJornada) {
-        this.diaInicioJornada = diaInicioJornada;
-    }
-
-    public String getDiaFinJornada() {
-        return diaFinJornada;
-    }
-
-    public void setDiaFinJornada(String diaFinJornada) {
-        this.diaFinJornada = diaFinJornada;
+    public void setHorarioSalida(String horarioSalida) {
+        this.horarioSalida = horarioSalida;
     }
 
     public String getHuella1() {
@@ -243,6 +234,14 @@ public class ModeloEmpleado {
 
     public void setHuella1(String huella1) {
         this.huella1 = huella1;
+    }
+
+    public int getIdJefeInmediato() {
+        return idJefeInmediato;
+    }
+
+    public void setIdJefeInmediato(int idJefeInmediato) {
+        this.idJefeInmediato = idJefeInmediato;
     }
 
     public String getHuella2() {
@@ -268,5 +267,41 @@ public class ModeloEmpleado {
     public void setHuella4(String huella4) {
         this.huella4 = huella4;
     }
+// Getters y Setters (puedes generarlos automáticamente si usas un IDE como IntelliJ o Eclipse)
+
+    // Constructor vacío
+    public ModeloEmpleado() {}
+
+    public ModeloEmpleado(int idEmpleado, String dpi, String sexo, String estadoCivil, String primerNombre, String segundoNombre, String tercerNombre, String primerApellido, String segundoApellido, String apellidoCasado, String fechaNacimiento, int edad, String correoElectronico, String numeroTelefono1, String numeroTelefono2, String departamento, String municipio, String aldeaColonia, String direccionVivienda, int idPuesto, String puesto, String horarioEntrada, String horarioSalida, int idJefeInmediato, String huella1, String huella2, String huella3, String huella4) {
+        this.idEmpleado = idEmpleado;
+        this.dpi = dpi;
+        this.sexo = sexo;
+        this.estadoCivil = estadoCivil;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.tercerNombre = tercerNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.apellidoCasado = apellidoCasado;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = edad;
+        this.correoElectronico = correoElectronico;
+        this.numeroTelefono1 = numeroTelefono1;
+        this.numeroTelefono2 = numeroTelefono2;
+        this.departamento = departamento;
+        this.municipio = municipio;
+        this.aldeaColonia = aldeaColonia;
+        this.direccionVivienda = direccionVivienda;
+        this.idPuesto = idPuesto;
+        this.puesto = puesto;
+        this.horarioEntrada = horarioEntrada;
+        this.horarioSalida = horarioSalida;
+        this.idJefeInmediato = idJefeInmediato;
+        this.huella1 = huella1;
+        this.huella2 = huella2;
+        this.huella3 = huella3;
+        this.huella4 = huella4;
+    }
+
 }
 
