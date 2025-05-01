@@ -137,6 +137,16 @@ public class EmpleadoImp implements IEmpleados {
     public boolean actualizarEmpleado(ModeloEmpleado modelo) {
         return false;
     }
+
+    @Override
+    public DefaultTableModel modeloEmpleado(String dpi) {
+        return null;
+    }
+
+    @Override
+    public ModeloEmpleado mostrarEmpleado(String dpi) {
+        return null;
+    }
 }
 //NITIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 //gerson te odio vv ojala don diablo ame mas aaxel

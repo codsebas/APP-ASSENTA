@@ -176,7 +176,7 @@ public class VistaMenu extends javax.swing.JPanel {
 
         PanelPrincipal.add(panelMenu, java.awt.BorderLayout.LINE_START);
 
-        contenedor.setBackground(new java.awt.Color(204, 204, 204));
+        contenedor.setBackground(new java.awt.Color(240, 253, 244));
         contenedor.setLayout(new javax.swing.BoxLayout(contenedor, javax.swing.BoxLayout.LINE_AXIS));
         PanelPrincipal.add(contenedor, java.awt.BorderLayout.CENTER);
 
