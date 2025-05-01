@@ -41,4 +41,57 @@ public class ModeloEmpleado {
     // HUELLAS DIGITALES (puedes cambiar a byte[] si planeas manejar los datos binarios reales)
     private int idHuella;
     private byte[] huella;
+
+    public ModeloEmpleado(int idEmpleado) {
+
+    }
+
+    public ModeloEmpleado(int idEmpleado, String dpi, String sexo, String estadoCivil, String primerNombre, String segundoNombre, String tercerNombre, String primerApellido, String segundoApellido, String apellidoCasada, String fechaNacimiento, int edad, String correoElectronico, String numeroTelefono1, String numeroTelefono2, int idPuesto, String horarioEntrada, String horarioSalida, int idJefeInmediato) {
+        this.idEmpleado = idEmpleado;
+        this.dpi = dpi;
+        this.sexo = sexo;
+        this.estadoCivil = estadoCivil;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.tercerNombre = tercerNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.apellidoCasada = apellidoCasada;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = edad;
+        this.correoElectronico = correoElectronico;
+        this.numeroTelefono1 = numeroTelefono1;
+        this.numeroTelefono2 = numeroTelefono2;
+        this.idPuesto = idPuesto;
+        this.horarioEntrada = horarioEntrada;
+        this.horarioSalida = horarioSalida;
+        this.idJefeInmediato = idJefeInmediato;
+    }
+
+    public ModeloEmpleado(int idDireccion, String departamento, String municipio, String aldeaColonia, String direccionVivienda) {
+        this.idDireccion = idDireccion;
+        this.departamento = departamento;
+        this.municipio = municipio;
+        this.aldeaColonia = aldeaColonia;
+        this.direccionVivienda = direccionVivienda;
+    }
+
+    public ModeloEmpleado(String departamento, String municipio, String aldeaColonia, String direccionVivienda) {
+        this.departamento = departamento;
+        this.municipio = municipio;
+        this.aldeaColonia = aldeaColonia;
+        this.direccionVivienda = direccionVivienda;
+    }
+
+    public ModeloEmpleado(int idHuella, byte[] huella) {
+
+        this.idHuella = idHuella;
+        this.huella = huella;
+    }
+
+    public ModeloEmpleado(byte[] huella) {
+        this.huella = huella;
+    }
 }
+
+
