@@ -42,12 +42,33 @@ public class ModeloEmpleado {
     private int idHuella;
     private byte[] huella;
 
-    public ModeloEmpleado(int idEmpleado) {
+    public ModeloEmpleado() {
 
     }
 
     public ModeloEmpleado(int idEmpleado, String dpi, String sexo, String estadoCivil, String primerNombre, String segundoNombre, String tercerNombre, String primerApellido, String segundoApellido, String apellidoCasada, String fechaNacimiento, int edad, String correoElectronico, String numeroTelefono1, String numeroTelefono2, int idPuesto, String horarioEntrada, String horarioSalida, int idJefeInmediato) {
         this.idEmpleado = idEmpleado;
+        this.dpi = dpi;
+        this.sexo = sexo;
+        this.estadoCivil = estadoCivil;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.tercerNombre = tercerNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.apellidoCasada = apellidoCasada;
+        this.fechaNacimiento = fechaNacimiento;
+        this.edad = edad;
+        this.correoElectronico = correoElectronico;
+        this.numeroTelefono1 = numeroTelefono1;
+        this.numeroTelefono2 = numeroTelefono2;
+        this.idPuesto = idPuesto;
+        this.horarioEntrada = horarioEntrada;
+        this.horarioSalida = horarioSalida;
+        this.idJefeInmediato = idJefeInmediato;
+    }
+
+    public ModeloEmpleado(String dpi, String sexo, String estadoCivil, String primerNombre, String segundoNombre, String tercerNombre, String primerApellido, String segundoApellido, String apellidoCasada, String fechaNacimiento, int edad, String correoElectronico, String numeroTelefono1, String numeroTelefono2, int idPuesto, String horarioEntrada, String horarioSalida, int idJefeInmediato) {
         this.dpi = dpi;
         this.sexo = sexo;
         this.estadoCivil = estadoCivil;
