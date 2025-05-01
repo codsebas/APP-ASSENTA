@@ -10,10 +10,10 @@ public class Conector {
 
 
     private static String CLASE = "com.postgres.jdbc.Driver";
-    private final String HOST = ".host";
-    private final String USER = ".username";
-    private final String PASS = ".password";
-    private final String DATABASE = ".database";
+    private final String HOST = "localhost";
+    private final String USER = "postgres";
+    private final String PASS = "umg.2025";
+    private final String DATABASE = "assenta_db";
     private final String URL;
 
     private Connection link;
