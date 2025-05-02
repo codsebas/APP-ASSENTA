@@ -14,17 +14,15 @@ import com.umg.vistas.VistaMenu;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.AbstractDocument;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 /**
  *
  * @author axels
  */
-public class ControladorLogin implements ActionListener, MouseListener, DocumentListener {
+public class ControladorLogin implements ActionListener, MouseListener, DocumentListener, KeyListener {
 
     ModeloLogin modelo;
     VistaLogin vista;
@@ -39,6 +37,8 @@ public class ControladorLogin implements ActionListener, MouseListener, Document
         vista.getBtnIniciarSesion().addMouseListener(this);
         vista.getTxtUsuario().getDocument().addDocumentListener(this);
         vista.getTxtPassword().getDocument().addDocumentListener(this);
+        vista.getTxtPassword().addKeyListener(this);
+        vista.getTxtUsuario().addKeyListener(this);
     }
 
     @Override
@@ -49,16 +49,7 @@ public class ControladorLogin implements ActionListener, MouseListener, Document
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getComponent().equals(vista.getBtnIniciarSesion())){
-            if(this.vista.getTxtUsuario().getText().trim().isEmpty() || this.vista.getTxtPassword().getText().trim().isEmpty()){
-                if(this.vista.getTxtUsuario().getText().trim().isEmpty()){
-                    this.vista.lblErrorUsuario.setText("*Ingrese un usuario");
-                }
-                if(this.vista.getTxtPassword().getText().trim().isEmpty()){
-                    this.vista.lblErrorPassword.setText("*Ingrese una contraseña");
-                }
-            }else{
-                validarUsuario();
-            }
+            validarCampos();
         }
     }
 
@@ -87,18 +78,57 @@ public class ControladorLogin implements ActionListener, MouseListener, Document
     }
 
     @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if(e.getComponent().equals(this.vista.getTxtUsuario())){
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                this.vista.getTxtPassword().requestFocus();
+            }
+        }else if(e.getComponent().equals(this.vista.getTxtPassword())){
+            if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                validarCampos();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
     public void insertUpdate(DocumentEvent e) {
         verificarCampoVacio();
+        camposNoMayores();
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
         verificarCampoVacio();
+        camposNoMayores();
     }
 
     @Override
     public void changedUpdate(DocumentEvent e) {
         verificarCampoVacio();
+        camposNoMayores();
+    }
+
+    private void validarCampos(){
+        if(this.vista.getTxtUsuario().getText().trim().isEmpty() || String.valueOf(this.vista.getTxtPassword().getPassword()).trim().isEmpty()){
+            if(this.vista.getTxtUsuario().getText().trim().isEmpty()){
+                this.vista.lblErrorUsuario.setText("*Ingrese un usuario");
+            }
+            if(String.valueOf(this.vista.getTxtPassword().getPassword()).trim().isEmpty()){
+                this.vista.lblErrorPassword.setText("*Ingrese una contraseña");
+            }
+        }else{
+            validarUsuario();
+        }
     }
 
     private void validarUsuario(){
@@ -123,4 +153,10 @@ public class ControladorLogin implements ActionListener, MouseListener, Document
             this.vista.getLblErrorPassword().setText("");
         }
     }
+
+    private void camposNoMayores(){
+        ((AbstractDocument) this.vista.getTxtUsuario().getDocument()).setDocumentFilter(new LimiteCaracteres(15));
+        ((AbstractDocument) this.vista.getTxtPassword().getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+    }
+
 }
