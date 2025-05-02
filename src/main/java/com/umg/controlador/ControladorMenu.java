@@ -7,6 +7,7 @@ package com.umg.controlador;
 import com.umg.modelos.ModeloLogin;
 import com.umg.modelos.ModeloMenu;
 import com.umg.vistas.VistaLogin;
+import com.umg.vistas.VistaMantenimientoUsuarios;
 import com.umg.vistas.VistaPrincipal;
 import com.umg.vistas.VistaMenu;
 import com.umg.vistas.VistaRegistrarEmpleado;
@@ -42,6 +43,7 @@ public class ControladorMenu implements ActionListener, MouseListener {
         vista.btnExpandirMenu.addMouseListener(this);
         vista.panelMenu.addMouseListener(this);
         vista.contenedor.addMouseListener(this);
+        vista.btnGestionUsuarios.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -100,6 +102,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
         if (e.getComponent().equals(vista.btnMeReUser)) {
             VistaRegistrarEmpleado panel = new VistaRegistrarEmpleado();
             cambiarVista(panel);
+        } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
+            VistaMantenimientoUsuarios panel = new VistaMantenimientoUsuarios();
+            cambiarVista(panel);
         } else if (e.getComponent().equals(vista.btnExpandirMenu)) {
             if (estado) {
                 moverDerecha(vista.panelMenu, 1, 2, 200);
@@ -124,14 +129,14 @@ public class ControladorMenu implements ActionListener, MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         if (e.getComponent().equals(vista.btnExpandirMenu)) {
-            vista.btnExpandirMenu.setBackground(new Color(38,163,106));
+            vista.btnExpandirMenu.setBackground(new Color(38, 163, 106));
         } else if (e.getComponent().equals(vista.contenedor)) {
             if (!estado) {
                 moverIzquierda(vista.panelMenu, 1, 2, 50);
                 estado = true;
             }
         } else if (e.getComponent().equals(vista.btnMeReUser)) {
-            vista.btnMeReUser.setBackground(new Color(38,163,106));
+            vista.btnMeReUser.setBackground(new Color(38, 163, 106));
         }
     }
 

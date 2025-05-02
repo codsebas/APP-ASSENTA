@@ -7,9 +7,7 @@ import javax.swing.JOptionPane;
 import java.lang.reflect.InvocationTargetException;
 
 public class Conector {
-
-
-    private static String CLASE = "com.postgres.jdbc.Driver";
+    private static final String CLASE = "org.postgresql.Driver";
     private final String HOST = "localhost";
     private final String USER = "postgres";
     private final String PASS = "umg.2025";
@@ -20,41 +18,42 @@ public class Conector {
     private PreparedStatement ps;
 
     public Conector() {
-        this.URL = "jdbc:postgres://" + this.HOST + "/" + this.DATABASE;
+        this.URL = "jdbc:postgresql://" + this.HOST + "/" + this.DATABASE;
     }
-
 
     public void conectar() {
         try {
-            Class.forName(CLASE).getDeclaredConstructor().newInstance();
+            Class.forName(CLASE);
             this.link = DriverManager.getConnection(this.URL, this.USER, this.PASS);
-        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SQLException ex) {
-            System.out.println(ex.getMessage());
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Error al conectar: " + ex.getMessage());
         }
-
     }
-
 
     public void desconectar() {
         try {
-            this.link.close();
+            if (this.link != null) {
+                this.link.close();
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-        public PreparedStatement preparar(String sql) {
-            try {
-                ps = link.prepareStatement(sql);
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
-            return ps;
+    public PreparedStatement preparar(String sql) {
+        if (this.link == null) {
+            System.out.println("ERROR: La conexión no está activa. Llama a conectar().");
+            return null;
         }
-
-        public void mensaje(String mensaje, String titulo, int tipoMensaje){
-            JOptionPane.showMessageDialog(null, mensaje, titulo, tipoMensaje);
+        try {
+            ps = link.prepareStatement(sql);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
+        return ps;
     }
 
-
+    public void mensaje(String mensaje, String titulo, int tipoMensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, titulo, tipoMensaje);
+    }
+}

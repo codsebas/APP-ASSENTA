@@ -43,7 +43,7 @@ public class VistaMenu extends javax.swing.JPanel {
         btnMeReUser1 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        btnGestionUsuarios = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         contenedor = new javax.swing.JPanel();
@@ -135,18 +135,9 @@ public class VistaMenu extends javax.swing.JPanel {
 
         panelMenu.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        panelMenu.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 50));
+        btnGestionUsuarios.setBackground(new java.awt.Color(0, 127, 75));
+        btnGestionUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelMenu.add(btnGestionUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 50));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -196,6 +187,7 @@ public class VistaMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
     public javax.swing.JPanel btnExpandirMenu;
+    public javax.swing.JPanel btnGestionUsuarios;
     public javax.swing.JPanel btnMeReUser;
     public javax.swing.JPanel btnMeReUser1;
     public javax.swing.JPanel contenedor;
@@ -204,7 +196,6 @@ public class VistaMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblImagen;
