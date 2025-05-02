@@ -24,6 +24,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         this.lblErrorContra.setVisible(false);
         this.lblErrorContraVa.setVisible(false);
         this.lblErrorContraVa1.setVisible(false);
+        this.lblErrorUsuario.setVisible(false);
     }
 
     /**
@@ -47,6 +48,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         btnAgregarUsuario = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         lblErrorContraVa1 = new javax.swing.JLabel();
+        lblErrorUsuario = new javax.swing.JLabel();
         lblErrorContraVa = new javax.swing.JLabel();
         lblErrorContra = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -128,6 +130,10 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         lblErrorContraVa1.setForeground(new java.awt.Color(153, 0, 0));
         lblErrorContraVa1.setText("*Debe ingresar una contraseña");
         jPanel2.add(lblErrorContraVa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
+
+        lblErrorUsuario.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorUsuario.setText("*Debe ingresar un usuario");
+        jPanel2.add(lblErrorUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         lblErrorContraVa.setForeground(new java.awt.Color(153, 0, 0));
         lblErrorContraVa.setText("*Debe ingresar una contraseña");
@@ -259,6 +265,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
     public javax.swing.JLabel lblErrorContra;
     public javax.swing.JLabel lblErrorContraVa;
     public javax.swing.JLabel lblErrorContraVa1;
+    public javax.swing.JLabel lblErrorUsuario;
     public javax.swing.JPasswordField txtPasswordMant;
     public javax.swing.JPasswordField txtPasswordMantAc;
     public javax.swing.JPasswordField txtPasswordMantConf;
@@ -273,5 +280,6 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         this.btnEliminarUsuario.addMouseListener(controlador);
         this.txtPasswordMantConf.getDocument().addDocumentListener(controlador);
         this.txtPasswordMant.getDocument().addDocumentListener(controlador);
+        this.txtUsuarioMant.getDocument().addDocumentListener(controlador);
     }
 }

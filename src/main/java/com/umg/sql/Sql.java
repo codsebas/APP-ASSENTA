@@ -6,7 +6,8 @@ public class Sql {
     private final String INSERTAR_EMPLEADO = "INSERT INTO empleado VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private final String ELIMINAR_EMPLEADO = "DELETE FROM cliente WHERE dpi_empleado = ?";
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";
-    private final String CONSULTA_USUARIO_ID = "SELECT * FROM usuarios WHERE id_usuario = ?";
+    private final String CONSULTA_USUARIO = "SELECT * FROM usuarios WHERE usuario = ?";
+    private final String CONSULTA_USUARIO_LOGIN = "SELECT * FROM usuarios WHERE usuario = ? AND password = crypt(?, password)";
     private final String INSERTAR_USUARIO = "INSERT INTO usuarios (usuario, password) VALUES (?, crypt(?, gen_salt('bf')))";
     private final String ACTUALIZAR_USUARIO = "UPDATE usuarios SET password = crypt(?, gen_salt('bf')), usuario = ? WHERE id_usuario = ?";
     private final String ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE id_usuario = ?";
@@ -35,8 +36,8 @@ public class Sql {
         return CONSULTA_TODOS_USUARIO;
     }
 
-    public String getCONSULTA_USUARIO_ID() {
-        return CONSULTA_USUARIO_ID;
+    public String getCONSULTA_USUARIO() {
+        return CONSULTA_USUARIO;
     }
 
     public String getINSERTAR_USUARIO() {
@@ -49,5 +50,9 @@ public class Sql {
 
     public String getELIMINAR_USUARIO() {
         return ELIMINAR_USUARIO;
+    }
+
+    public String getCONSULTA_USUARIO_LOGIN() {
+        return CONSULTA_USUARIO_LOGIN;
     }
 }

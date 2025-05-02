@@ -80,7 +80,7 @@ public class UsuarioImp implements IUsuario {
         modelo.setColumnIdentifiers(new Object[]{"ID", "Usuario"});
         this.conector.conectar();
         try {
-            this.ps = this.conector.preparar(this.sql.getCONSULTA_USUARIO_ID());
+            this.ps = this.conector.preparar(this.sql.getCONSULTA_USUARIO());
             this.ps.setInt(1, idUsuario);
             this.rs = this.ps.executeQuery();
 

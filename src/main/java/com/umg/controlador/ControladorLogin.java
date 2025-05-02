@@ -4,11 +4,16 @@
  */
 package com.umg.controlador;
 
+import com.umg.implementacion.LoginImp;
 import com.umg.modelos.ModeloLogin;
 import com.umg.modelos.ModeloMenu;
 import com.umg.vistas.VistaLogin;
 import com.umg.vistas.VistaPrincipal;
 import com.umg.vistas.VistaMenu;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,10 +24,12 @@ import java.awt.event.MouseListener;
  *
  * @author axels
  */
-public class ControladorLogin implements ActionListener, MouseListener {
+public class ControladorLogin implements ActionListener, MouseListener, DocumentListener {
+
     ModeloLogin modelo;
     VistaLogin vista;
     VistaPrincipal vistaPrincipal;
+    LoginImp implementacion = new LoginImp();
 
     public ControladorLogin(ModeloLogin modelo, VistaLogin vista, VistaPrincipal vistaPrincipal) {
         this.modelo = modelo;
@@ -30,6 +37,8 @@ public class ControladorLogin implements ActionListener, MouseListener {
         this.vistaPrincipal = vistaPrincipal;
         
         vista.getBtnIniciarSesion().addMouseListener(this);
+        vista.getTxtUsuario().getDocument().addDocumentListener(this);
+        vista.getTxtPassword().getDocument().addDocumentListener(this);
     }
 
     @Override
@@ -40,10 +49,16 @@ public class ControladorLogin implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getComponent().equals(vista.getBtnIniciarSesion())){
-            ModeloMenu modelo = new ModeloMenu();
-            VistaMenu vista = new VistaMenu();
-            new ControladorMenu(modelo, vista, vistaPrincipal);
-            vistaPrincipal.cambiarPanel(vista);
+            if(this.vista.getTxtUsuario().getText().trim().isEmpty() || this.vista.getTxtPassword().getText().trim().isEmpty()){
+                if(this.vista.getTxtUsuario().getText().trim().isEmpty()){
+                    this.vista.lblErrorUsuario.setText("*Ingrese un usuario");
+                }
+                if(this.vista.getTxtPassword().getText().trim().isEmpty()){
+                    this.vista.lblErrorPassword.setText("*Ingrese una contraseña");
+                }
+            }else{
+                validarUsuario();
+            }
         }
     }
 
@@ -68,6 +83,44 @@ public class ControladorLogin implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
         if(e.getComponent().equals(vista.getBtnIniciarSesion())){
             vista.getBtnIniciarSesion().setBackground(new Color(0,127,75));
+        }
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        verificarCampoVacio();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        verificarCampoVacio();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        verificarCampoVacio();
+    }
+
+    private void validarUsuario(){
+        boolean respuesta = this.implementacion.consultaUsuario(this.vista.getTxtUsuario().getText(), String.valueOf(this.vista.getTxtPassword().getPassword()));
+        if(respuesta){
+            ModeloMenu modelo = new ModeloMenu();
+            VistaMenu vista = new VistaMenu();
+            new ControladorMenu(modelo, vista, vistaPrincipal);
+            vistaPrincipal.cambiarPanel(vista);
+        }else {
+            JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "Error al iniciar sesión", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void verificarCampoVacio(){
+        String usuario = this.vista.getTxtUsuario().getText();
+        String password = String.valueOf(this.vista.getTxtPassword().getPassword());
+        if(!usuario.trim().isEmpty()){
+            this.vista.getLblErrorUsuario().setText("");
+        }
+        if(!password.trim().isEmpty()){
+            this.vista.getLblErrorPassword().setText("");
         }
     }
 }

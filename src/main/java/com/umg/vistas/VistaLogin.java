@@ -5,6 +5,7 @@
 package com.umg.vistas;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -46,6 +47,24 @@ public class VistaLogin extends javax.swing.JPanel {
     public void setTxtUsuario(JTextField txtUsuario) {
         this.txtUsuario = txtUsuario;
     }
+
+    public JLabel getLblErrorPassword() {
+        return lblErrorPassword;
+    }
+
+    public void setLblErrorPassword(JLabel lblErrorPassword) {
+        this.lblErrorPassword = lblErrorPassword;
+    }
+
+    public JLabel getLblErrorUsuario() {
+        return lblErrorUsuario;
+    }
+
+    public void setLblErrorUsuario(JLabel lblErrorUsuario) {
+        this.lblErrorUsuario = lblErrorUsuario;
+    }
+    
+    
     
     
 
@@ -61,6 +80,8 @@ public class VistaLogin extends javax.swing.JPanel {
         fondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        lblErrorPassword = new javax.swing.JLabel();
+        lblErrorUsuario = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -85,10 +106,16 @@ public class VistaLogin extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(240, 253, 244));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lblErrorPassword.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel1.add(lblErrorPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 170, 20));
+
+        lblErrorUsuario.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel1.add(lblErrorUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 200, 20));
+
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 127, 75));
         jLabel3.setText("Usuario");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 260, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 60, 20));
 
         txtUsuario.setBackground(new java.awt.Color(255, 255, 255));
         txtUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -100,7 +127,7 @@ public class VistaLogin extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 127, 75));
         jLabel4.setText("Contraseña");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 260, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 80, 20));
 
         btnIniciarSesion.setBackground(new java.awt.Color(0, 127, 75));
         btnIniciarSesion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,6 +174,8 @@ public class VistaLogin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JLabel lblErrorPassword;
+    public javax.swing.JLabel lblErrorUsuario;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
