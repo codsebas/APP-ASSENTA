@@ -21,6 +21,9 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         ModeloUsuario modelo = new ModeloUsuario(this);
         ControladorUsuario controlador = new ControladorUsuario(modelo);
         setControlador(controlador);
+        this.lblErrorContra.setVisible(false);
+        this.lblErrorContraVa.setVisible(false);
+        this.lblErrorContraVa1.setVisible(false);
     }
 
     /**
@@ -37,19 +40,29 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        txtPasswordMantConf = new javax.swing.JPasswordField();
         txtUsuarioMant = new javax.swing.JTextField();
         txtPasswordMant = new javax.swing.JPasswordField();
         btnAgregarUsuario = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        btnActualizarUsuario = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        lblErrorContraVa1 = new javax.swing.JLabel();
+        lblErrorContraVa = new javax.swing.JLabel();
+        lblErrorContra = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnEliminarUsuario = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblUsuarios = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtUsuarioBus = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtPasswordMantConfAc = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
+        txtPasswordMantAc = new javax.swing.JPasswordField();
+        fondoImagen = new javax.swing.JLabel();
+        btnActualizarUsuario = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
 
         fondo.setBackground(new java.awt.Color(240, 253, 244));
         fondo.setMinimumSize(new java.awt.Dimension(1230, 720));
@@ -66,13 +79,25 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 127, 75));
-        jLabel2.setText("Usuario");
+        jLabel2.setText("Usuario*");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 127, 76));
-        jLabel3.setText("Contraseña");
+        jLabel3.setText("Contraseña*");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 127, 76));
+        jLabel12.setText("Confirmar Contraseña*");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, -1, -1));
+
+        txtPasswordMantConf.setBackground(new java.awt.Color(255, 255, 255));
+        txtPasswordMantConf.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPasswordMantConf.setForeground(new java.awt.Color(26, 75, 54));
+        txtPasswordMantConf.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtPasswordMantConf.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.add(txtPasswordMantConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 270, -1));
 
         txtUsuarioMant.setBackground(new java.awt.Color(255, 255, 255));
         txtUsuarioMant.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -98,26 +123,26 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         jLabel5.setText("Agregar Usuario");
         btnAgregarUsuario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        jPanel2.add(btnAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 140, 30));
+        jPanel2.add(btnAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 140, 30));
 
-        btnActualizarUsuario.setBackground(new java.awt.Color(0, 127, 75));
-        btnActualizarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnActualizarUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        lblErrorContraVa1.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorContraVa1.setText("*Debe ingresar una contraseña");
+        jPanel2.add(lblErrorContraVa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Actualizar Usuario");
-        btnActualizarUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
+        lblErrorContraVa.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorContraVa.setText("*Debe ingresar una contraseña");
+        jPanel2.add(lblErrorContraVa, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, -1, -1));
 
-        jPanel2.add(btnActualizarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 50, 140, 30));
+        lblErrorContra.setForeground(new java.awt.Color(153, 0, 0));
+        lblErrorContra.setText("*La contraseña es diferente");
+        jPanel2.add(lblErrorContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, 180, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-datos-usuarios.png"))); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 130));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 190));
 
-        fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 970, 130));
+        fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 970, 190));
 
-        jPanel3.setBackground(new java.awt.Color(240, 253, 244));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEliminarUsuario.setBackground(new java.awt.Color(0, 127, 75));
@@ -131,29 +156,68 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         jLabel8.setText("Eliminar Usuario");
         btnEliminarUsuario.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        jPanel3.add(btnEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 320, 140, 30));
+        jPanel3.add(btnEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 160, 140, 30));
 
-        tblUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tblUsuarios.setForeground(new java.awt.Color(26, 75, 54));
-        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "ID", "USUARIO"
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 127, 75));
+        jLabel9.setText("BUSCAR USUARIO");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 127, 75));
+        jLabel10.setText("Usuario");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
+        txtUsuarioBus.setBackground(new java.awt.Color(255, 255, 255));
+        txtUsuarioBus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtUsuarioBus.setForeground(new java.awt.Color(26, 75, 54));
+        txtUsuarioBus.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtUsuarioBus.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel3.add(txtUsuarioBus, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 270, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 127, 76));
+        jLabel11.setText("Contraseña");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, -1, -1));
+
+        txtPasswordMantConfAc.setBackground(new java.awt.Color(255, 255, 255));
+        txtPasswordMantConfAc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPasswordMantConfAc.setForeground(new java.awt.Color(26, 75, 54));
+        txtPasswordMantConfAc.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtPasswordMantConfAc.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel3.add(txtPasswordMantConfAc, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, 270, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 127, 76));
+        jLabel6.setText("Contraseña");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
+
+        txtPasswordMantAc.setBackground(new java.awt.Color(255, 255, 255));
+        txtPasswordMantAc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPasswordMantAc.setForeground(new java.awt.Color(26, 75, 54));
+        txtPasswordMantAc.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtPasswordMantAc.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        txtPasswordMantAc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordMantAcActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(tblUsuarios);
+        });
+        jPanel3.add(txtPasswordMantAc, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 270, -1));
+        jPanel3.add(fondoImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 240));
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 890, 270));
+        btnActualizarUsuario.setBackground(new java.awt.Color(0, 127, 75));
+        btnActualizarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizarUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-tabla-usuarios.png"))); // NOI18N
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 390));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Actualizar Usuario");
+        btnActualizarUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        fondo.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 970, 390));
+        jPanel3.add(btnActualizarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, -1));
+
+        fondo.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 970, 240));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -167,13 +231,21 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtPasswordMantAcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordMantAcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordMantAcActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel btnActualizarUsuario;
     public javax.swing.JPanel btnAgregarUsuario;
     public javax.swing.JPanel btnEliminarUsuario;
     private javax.swing.JPanel fondo;
+    private javax.swing.JLabel fondoImagen;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -181,11 +253,17 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    public javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JTable tblUsuarios;
+    public javax.swing.JLabel lblErrorContra;
+    public javax.swing.JLabel lblErrorContraVa;
+    public javax.swing.JLabel lblErrorContraVa1;
     public javax.swing.JPasswordField txtPasswordMant;
+    public javax.swing.JPasswordField txtPasswordMantAc;
+    public javax.swing.JPasswordField txtPasswordMantConf;
+    public javax.swing.JPasswordField txtPasswordMantConfAc;
+    public javax.swing.JTextField txtUsuarioBus;
     public javax.swing.JTextField txtUsuarioMant;
     // End of variables declaration//GEN-END:variables
 
@@ -193,5 +271,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         this.btnAgregarUsuario.addMouseListener(controlador);
         this.btnActualizarUsuario.addMouseListener(controlador);
         this.btnEliminarUsuario.addMouseListener(controlador);
+        this.txtPasswordMantConf.getDocument().addDocumentListener(controlador);
+        this.txtPasswordMant.getDocument().addDocumentListener(controlador);
     }
 }

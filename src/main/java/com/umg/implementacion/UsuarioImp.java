@@ -5,6 +5,7 @@ import com.umg.modelos.ModeloUsuario;
 import com.umg.sql.Conector;
 import com.umg.sql.Sql;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +31,11 @@ public class UsuarioImp implements IUsuario {
             this.ps.setString(2, modeloUsuario.getPassword());
             resultado = this.ps.execute();
         }catch (SQLException ex){
-            this.conector.mensaje(ex.getMessage(), "Error en la insercion", 0);
+            if(ex.getSQLState().equals("23505")){
+                JOptionPane.showMessageDialog(null, "El usuario ingresado ya existe, por favor intente de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+            }else {
+                this.conector.mensaje(ex.getMessage(), "Error en la insercion", 0);
+            }
         }
         return resultado;
     }
