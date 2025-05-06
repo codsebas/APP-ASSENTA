@@ -24,15 +24,15 @@ public class EmpleadoImp implements IEmpleados {
 
         try {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
-            ps.setString(1, "1234567890127");
+            ps.setString(1, "2234567890127");
             ps.setString(2, "Masculino");
             ps.setString(3, "S");
-            ps.setString(4, "Albino");
-            ps.setString(5, "Ignacio");
-            ps.setString(6, "");
-            ps.setString(7, "Bodoque");
-            ps.setString(8, "Ramírez");
-            ps.setString(9, "");
+            ps.setString(4, modelo.getPrimerNombre());
+            ps.setString(5, modelo.getSegundoNombre());
+            ps.setString(6, modelo.getTercerNombre());
+            ps.setString(7, modelo.getPrimerApellido());
+            ps.setString(8, modelo.getSegundoApellido());
+            ps.setString(9, modelo.getApellidoCasada());
             ps.setDate(10, Date.valueOf("1990-06-15"));
             ps.setInt(11, 34);
             ps.setInt(12, 1); // Asegúrate de que el puesto exista
@@ -53,8 +53,8 @@ public class EmpleadoImp implements IEmpleados {
             try {
                 ps = conector.preparar(sql.getINSERTAR_DIRECCION());
                 ps.setInt(1, id_empleado);
-                ps.setString(2, "Guatemala");
-                ps.setString(3, "Mixco");
+                ps.setString(2, modelo.getDepartamento());
+                ps.setString(3, modelo.getMunicipio());
                 ps.setString(4, "Lo de Fuentes");
                 ps.setString(5, "Zona 11, casa 123");
                 ps.executeUpdate();

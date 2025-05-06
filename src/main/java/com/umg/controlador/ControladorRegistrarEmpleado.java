@@ -33,13 +33,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     public void mouseClicked(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
             unirNombre();
-            ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
-           boolean resultado =  implementacion.insertarEmpleado(modeloEmpleado);
-           if (!resultado) {
-               JOptionPane.showMessageDialog(null, "empleado registrado con exito", "Exito", 1);
-           }else {
-               JOptionPane.showMessageDialog(null, "empleado no registrado axel jodete","ERROR PUTO",0);
-           }
+           insertarEmpleado();
         }
     }
     
@@ -84,6 +78,27 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         };
 
         modelo.getvRegistraEmpleado().cbDepto = new JComboBox<>(departamentos);
+    }
+
+    private void insertarEmpleado(){
+        String departamento = String.valueOf(modelo.getvRegistraEmpleado().cbDepto.getSelectedItem());
+        String municipio = String.valueOf(modelo.getvRegistraEmpleado().cbMun.getSelectedItem());
+        ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
+        modeloEmpleado.setPrimerNombre(modelo.getvRegistraEmpleado().txtNom1.getText());
+        modeloEmpleado.setSegundoNombre(modelo.getvRegistraEmpleado().txtNom2.getText());
+        modeloEmpleado.setTercerNombre(modelo.getvRegistraEmpleado().txtNom3.getText());
+        modeloEmpleado.setPrimerApellido(modelo.getvRegistraEmpleado().txtApe1.getText());
+        modeloEmpleado.setSegundoApellido(modelo.getvRegistraEmpleado().txtApe2.getText());
+        modeloEmpleado.setApellidoCasada(modelo.getvRegistraEmpleado().txtApeC.getText());
+        modeloEmpleado.setDepartamento(departamento);
+        modeloEmpleado.setMunicipio(municipio);
+
+        boolean resultado =  implementacion.insertarEmpleado(modeloEmpleado);
+        if (!resultado) {
+            JOptionPane.showMessageDialog(null, "empleado registrado con exito", "Exito", 1);
+        }else {
+            JOptionPane.showMessageDialog(null, "empleado no registrado axel jodete","ERROR PUTO",0);
+        }
     }
     
     private void agregarMunicipios() {
