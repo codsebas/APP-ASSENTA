@@ -3,7 +3,26 @@ package com.umg.sql;
 public class Sql {
     private final String CONSULTA_TODOS_EMPLEADO = "SELECT * FROM empleado";
     private final String CONSULTA_EMPLEADO_DPI = "SELECT * FROM empleado WHERE dpi_empelado = ?";
-    private final String INSERTAR_EMPLEADO = "INSERT INTO empleado VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String INSERTAR_EMPLEADO = """
+    INSERT INTO empleado (
+        dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,
+        nombre2_empleado, nombre3_empleado, apellido1_empleado, apellido2_empleado,
+        apellidocasada_empleado, fec_nacimiento, edad_empleado, puesto_id,
+        email_empleado, telefono1_empleado, telefono2_empleado,
+        horario_entrada, horario_salida, jefe_inmediato_id
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    RETURNING id_empleado;
+    """;
+
+
+    private final String INSERTAR_DIRECCION = """
+    INSERT INTO direccion_empleado (
+        empleado_id, departamento, municipio, aldea, direccion
+    ) VALUES (?, ?, ?, ?, ?);
+    """;
+
+
+    private final String INSERTAR_HUELLA = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?);";
     private final String ACTUALIZAR_EMPLEADO =
             "UPDATE empleado SET dpi = ?, sexo = ?, primer_nombre = ?, segundo_nombre = ?, tercer_nombre = ?, " +
                     "primer_apellido = ?, segundo_apellido = ?, apellido_casada = ?, fecha_nacimiento = ?, edad = ?, " +
@@ -62,4 +81,15 @@ public class Sql {
     public String getCONSULTA_USUARIO_LOGIN() {
         return CONSULTA_USUARIO_LOGIN;
     }
+
+    public String getINSERTAR_DIRECCION() {
+        return INSERTAR_DIRECCION;
+    }
+
+    public String getINSERTAR_HUELLA() {
+        return INSERTAR_HUELLA;
+    }
 }
+
+//axel and hichos forever because your love is the best esto fue escrito por axel con any desk mientras javier se fue uwu dayane te amo
+

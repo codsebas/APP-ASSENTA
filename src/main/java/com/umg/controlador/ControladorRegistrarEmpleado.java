@@ -1,5 +1,7 @@
 package com.umg.controlador;
 
+import com.umg.implementacion.EmpleadoImp;
+import com.umg.modelos.ModeloEmpleado;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 
 import javax.swing.*;
@@ -12,25 +14,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControladorRegistrarEmpleado implements MouseListener, ActionListener {
+    EmpleadoImp implementacion = new EmpleadoImp();
+    ModeloVistaRegistrarEmpleado modelo;
+    private Map<String, String[]> municipiosPorDepartamento;
+
+    
+    public ControladorRegistrarEmpleado(ModeloVistaRegistrarEmpleado modelo) {
+        this.modelo = modelo;
+        agregarMunicipios();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals(modelo.getvRegistraEmpleado().cbDepto.getActionCommand())){
             actualizarMunicipios();
         }
     }
-
-    ModeloVistaRegistrarEmpleado modelo;
-    private Map<String, String[]> municipiosPorDepartamento;
-    
-    public ControladorRegistrarEmpleado(ModeloVistaRegistrarEmpleado modelo) {
-        this.modelo = modelo;
-        agregarMunicipios();
-    }
-    
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
             unirNombre();
+            ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
+           boolean resultado =  implementacion.insertarEmpleado(modeloEmpleado);
+           if (!resultado) {
+               JOptionPane.showMessageDialog(null, "empleado registrado con exito", "Exito", 1);
+           }else {
+               JOptionPane.showMessageDialog(null, "empleado no registrado axel jodete","ERROR PUTO",0);
+           }
         }
     }
     

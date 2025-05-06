@@ -6,9 +6,7 @@ import com.umg.sql.Conector;
 import com.umg.sql.Sql;
 
 import javax.swing.table.DefaultTableModel;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class EmpleadoImp implements IEmpleados {
 
@@ -22,39 +20,64 @@ public class EmpleadoImp implements IEmpleados {
     public boolean insertarEmpleado(ModeloEmpleado modelo) {
         boolean resultado = true;
         conector.conectar();
+        int id_empleado;
 
         try {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
-            ps.setInt(1, modelo.getIdEmpleado());
-            ps.setString(2, modelo.getDpi());
-            ps.setString(3, modelo.getSexo());
-            ps.setString(4, modelo.getPrimerNombre());
-            ps.setString(5, modelo.getSegundoNombre());
-            ps.setString(6, modelo.getTercerNombre());
-            ps.setString(7, modelo.getPrimerApellido());
-            ps.setString(8, modelo.getSegundoApellido());
-            ps.setString(9, modelo.getApellidoCasada());
-            ps.setString(10, modelo.getFechaNacimiento());
-            ps.setInt(11, modelo.getEdad());
-            ps.setInt(12, modelo.getIdPuesto());
-            ps.setString(13, modelo.getHorarioEntrada());
-            ps.setString(14, modelo.getHorarioSalida());
-            ps.setInt(15, modelo.getIdJefeInmediato());
-            ps.setInt(16, modelo.getIdDireccion());
-            ps.setString(17, modelo.getDepartamento());
-            ps.setString(18, modelo.getMunicipio());
-            ps.setString(19, modelo.getAldeaColonia());
-            ps.setString(20, modelo.getDireccionVivienda());
-            ps.setInt(21, modelo.getIdHuella());
-            ps.setBytes(22, modelo.getHuella()); // ← Aquí insertas la huella como byte[]
+            ps.setString(1, "1234567890127");
+            ps.setString(2, "Masculino");
+            ps.setString(3, "S");
+            ps.setString(4, "Albino");
+            ps.setString(5, "Ignacio");
+            ps.setString(6, "");
+            ps.setString(7, "Bodoque");
+            ps.setString(8, "Ramírez");
+            ps.setString(9, "");
+            ps.setDate(10, Date.valueOf("1990-06-15"));
+            ps.setInt(11, 34);
+            ps.setInt(12, 1); // Asegúrate de que el puesto exista
+            ps.setString(13, "albino.bodoque@example.com");
+            ps.setString(14, "5555-1234");
+            ps.setString(15, "5555-5678");
+            ps.setTime(16, Time.valueOf("08:00:00"));
+            ps.setTime(17, Time.valueOf("17:00:00"));
+            ps.setInt(18, 1); // Sin jefe
 
-            ps.executeUpdate();
+
+             this.rs = this.ps.executeQuery();
+            if (rs.next()) {
+                id_empleado = rs.getInt("id_empleado");
+            } else {
+                throw new SQLException("No se pudo obtener el ID del empleado insertado.");
+            }
+            try {
+                ps = conector.preparar(sql.getINSERTAR_DIRECCION());
+                ps.setInt(1, id_empleado);
+                ps.setString(2, "Guatemala");
+                ps.setString(3, "Mixco");
+                ps.setString(4, "Lo de Fuentes");
+                ps.setString(5, "Zona 11, casa 123");
+                ps.executeUpdate();
+            } catch (Exception e) {
+                conector.mensaje(e.getMessage(), "Error al ingresar direccion", 0);
+            }
+            /*
+            try {
+                ps = conector.preparar(sql.getINSERTAR_HUELLA());
+                for (int i = 1; i <= 4; i++) {
+                    ps.setInt(1, id_empleado);
+                    ps.setBytes(2, generarHuellaFicticia(i)); // Función para generar huellas
+                    ps.executeUpdate();
+                }
+                }
+                */
+
             resultado = true;
 
 
             // Ejecutar y procesar resultado...
         } catch (SQLException ex) {
-            conector.mensaje("No se pudo ingresar el empleado", "Error al eliminar", 0);
+            conector.mensaje(ex.getMessage(), "Error al ingresar", 0);
             return resultado;
         }
 
