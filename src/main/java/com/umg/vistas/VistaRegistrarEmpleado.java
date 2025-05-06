@@ -40,9 +40,9 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         panelOpciones1 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         panelInfoPersonal1 = new javax.swing.JPanel();
-        txtNom3 = new javax.swing.JTextField();
         txtNom1 = new javax.swing.JTextField();
         txtNom2 = new javax.swing.JTextField();
+        txtNom3 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -53,18 +53,18 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel32 = new javax.swing.JLabel();
         txtApeC = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        txtCorreo1 = new javax.swing.JTextField();
+        txtDPI = new javax.swing.JTextField();
+        cbEstadoCivil = new javax.swing.JComboBox<>();
+        txtCorreo = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         txtNum1 = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
         txtNum2 = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbSexo = new javax.swing.JComboBox<>();
         jLabel40 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         lblFondo1 = new javax.swing.JLabel();
@@ -82,12 +82,12 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        txtPuesto = new javax.swing.JTextField();
-        cbMun2 = new javax.swing.JComboBox<>();
-        cbMun1 = new javax.swing.JComboBox<>();
+        txtHoraEntrada = new javax.swing.JTextField();
+        cbJefeInmediato = new javax.swing.JComboBox<>();
+        cbPuesto = new javax.swing.JComboBox<>();
         jLabel38 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
-        txtPuesto1 = new javax.swing.JTextField();
+        txtHoraSalida = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
         btnRegistrarEmpleado = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -121,13 +121,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         panelInfoPersonal1.setBackground(new java.awt.Color(240, 253, 244));
         panelInfoPersonal1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtNom3.setBackground(new java.awt.Color(255, 255, 255));
-        txtNom3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtNom3.setForeground(new java.awt.Color(26, 75, 54));
-        txtNom3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtNom3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtNom3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 270, -1));
-
         txtNom1.setBackground(new java.awt.Color(255, 255, 255));
         txtNom1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNom1.setForeground(new java.awt.Color(26, 75, 54));
@@ -141,6 +134,13 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         txtNom2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNom2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelInfoPersonal1.add(txtNom2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, -1));
+
+        txtNom3.setBackground(new java.awt.Color(255, 255, 255));
+        txtNom3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNom3.setForeground(new java.awt.Color(26, 75, 54));
+        txtNom3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtNom3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        panelInfoPersonal1.add(txtNom3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 270, -1));
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 127, 75));
@@ -198,12 +198,12 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel33.setText("Fecha de Nacimiento*");
         panelInfoPersonal1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 130, -1));
 
-        jTextField15.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField15.setForeground(new java.awt.Color(26, 75, 54));
-        jTextField15.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField15.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 270, -1));
+        txtFecha.setBackground(new java.awt.Color(255, 255, 255));
+        txtFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtFecha.setForeground(new java.awt.Color(26, 75, 54));
+        txtFecha.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtFecha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        panelInfoPersonal1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 270, -1));
 
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(0, 127, 75));
@@ -215,26 +215,26 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel35.setText("DPI*");
         panelInfoPersonal1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 40, -1));
 
-        jTextField17.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField17.setForeground(new java.awt.Color(26, 75, 54));
-        jTextField17.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField17.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 270, -1));
+        txtDPI.setBackground(new java.awt.Color(255, 255, 255));
+        txtDPI.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtDPI.setForeground(new java.awt.Color(26, 75, 54));
+        txtDPI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtDPI.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        panelInfoPersonal1.add(txtDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 270, -1));
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(26, 75, 54));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Estado Civil", "Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a", "Unión de Hecho" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 270, -1));
+        cbEstadoCivil.setBackground(new java.awt.Color(255, 255, 255));
+        cbEstadoCivil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbEstadoCivil.setForeground(new java.awt.Color(26, 75, 54));
+        cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Estado Civil", "Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a", "Unión de Hecho" }));
+        cbEstadoCivil.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        panelInfoPersonal1.add(cbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 270, -1));
 
-        txtCorreo1.setBackground(new java.awt.Color(255, 255, 255));
-        txtCorreo1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtCorreo1.setForeground(new java.awt.Color(26, 75, 54));
-        txtCorreo1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtCorreo1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtCorreo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 270, -1));
+        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
+        txtCorreo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtCorreo.setForeground(new java.awt.Color(26, 75, 54));
+        txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtCorreo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        panelInfoPersonal1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 270, -1));
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(0, 127, 75));
@@ -265,12 +265,12 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         txtNum2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelInfoPersonal1.add(txtNum2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, 270, -1));
 
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(26, 75, 54));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Sexo", "Masculino", "Femenino" }));
-        jComboBox2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 270, -1));
+        cbSexo.setBackground(new java.awt.Color(255, 255, 255));
+        cbSexo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbSexo.setForeground(new java.awt.Color(26, 75, 54));
+        cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Sexo", "Masculino", "Femenino" }));
+        cbSexo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        panelInfoPersonal1.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 270, -1));
 
         jLabel40.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(0, 127, 75));
@@ -361,24 +361,24 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel21.setText("Hora de Entrada");
         jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 100, -1));
 
-        txtPuesto.setBackground(new java.awt.Color(255, 255, 255));
-        txtPuesto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPuesto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        jPanel7.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 270, -1));
+        txtHoraEntrada.setBackground(new java.awt.Color(255, 255, 255));
+        txtHoraEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtHoraEntrada.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel7.add(txtHoraEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 270, -1));
 
-        cbMun2.setBackground(new java.awt.Color(255, 255, 255));
-        cbMun2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cbMun2.setForeground(new java.awt.Color(26, 75, 54));
-        cbMun2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Jefe Inmediato" }));
-        cbMun2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        jPanel7.add(cbMun2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, -1));
+        cbJefeInmediato.setBackground(new java.awt.Color(255, 255, 255));
+        cbJefeInmediato.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbJefeInmediato.setForeground(new java.awt.Color(26, 75, 54));
+        cbJefeInmediato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Jefe Inmediato" }));
+        cbJefeInmediato.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel7.add(cbJefeInmediato, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, -1));
 
-        cbMun1.setBackground(new java.awt.Color(255, 255, 255));
-        cbMun1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cbMun1.setForeground(new java.awt.Color(26, 75, 54));
-        cbMun1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Puesto" }));
-        cbMun1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        jPanel7.add(cbMun1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
+        cbPuesto.setBackground(new java.awt.Color(255, 255, 255));
+        cbPuesto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbPuesto.setForeground(new java.awt.Color(26, 75, 54));
+        cbPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Puesto" }));
+        cbPuesto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel7.add(cbPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
 
         jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(0, 127, 75));
@@ -390,10 +390,10 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel41.setText("Jefe Inmediato");
         jPanel7.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
-        txtPuesto1.setBackground(new java.awt.Color(255, 255, 255));
-        txtPuesto1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtPuesto1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        jPanel7.add(txtPuesto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 270, -1));
+        txtHoraSalida.setBackground(new java.awt.Color(255, 255, 255));
+        txtHoraSalida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtHoraSalida.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel7.add(txtHoraSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 270, -1));
 
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(0, 127, 75));
@@ -461,11 +461,11 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel btnRegistrarEmpleado;
     public javax.swing.JComboBox<String> cbDepto;
+    public javax.swing.JComboBox<String> cbEstadoCivil;
+    public javax.swing.JComboBox<String> cbJefeInmediato;
     public javax.swing.JComboBox<String> cbMun;
-    public javax.swing.JComboBox<String> cbMun1;
-    public javax.swing.JComboBox<String> cbMun2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    public javax.swing.JComboBox<String> cbPuesto;
+    public javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -501,8 +501,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextField jTextField15;
-    public javax.swing.JTextField jTextField17;
     private javax.swing.JLabel lblFondo1;
     private javax.swing.JPanel panelInfoPersonal1;
     public javax.swing.JPanel panelOpciones1;
@@ -510,15 +508,17 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JTextField txtApe1;
     public javax.swing.JTextField txtApe2;
     public javax.swing.JTextField txtApeC;
-    public javax.swing.JTextField txtCorreo1;
+    public javax.swing.JTextField txtCorreo;
+    public javax.swing.JTextField txtDPI;
     public javax.swing.JTextField txtDireccion;
+    public javax.swing.JTextField txtFecha;
+    public javax.swing.JTextField txtHoraEntrada;
+    public javax.swing.JTextField txtHoraSalida;
     public javax.swing.JTextField txtNom1;
     public javax.swing.JTextField txtNom2;
     public javax.swing.JTextField txtNom3;
     public javax.swing.JTextField txtNum1;
     public javax.swing.JTextField txtNum2;
-    public javax.swing.JTextField txtPuesto;
-    public javax.swing.JTextField txtPuesto1;
     // End of variables declaration//GEN-END:variables
 
     public void setControlador(ControladorRegistrarEmpleado controlador){
