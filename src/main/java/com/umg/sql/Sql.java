@@ -4,6 +4,12 @@ public class Sql {
     private final String CONSULTA_TODOS_EMPLEADO = "SELECT * FROM empleado";
     private final String CONSULTA_EMPLEADO_DPI = "SELECT * FROM empleado WHERE dpi_empelado = ?";
     private final String INSERTAR_EMPLEADO = "INSERT INTO empleado VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String ACTUALIZAR_EMPLEADO =
+            "UPDATE empleado SET dpi = ?, sexo = ?, primer_nombre = ?, segundo_nombre = ?, tercer_nombre = ?, " +
+                    "primer_apellido = ?, segundo_apellido = ?, apellido_casada = ?, fecha_nacimiento = ?, edad = ?, " +
+                    "id_puesto = ?, horario_entrada = ?, horario_salida = ?, id_jefe_inmediato = ?, id_direccion = ?, " +
+                    "departamento = ?, municipio = ?, aldea_colonia = ?, direccion_vivienda = ?, id_huella = ?, huella = ? " +
+                    "WHERE id_empleado = ?";
     private final String ELIMINAR_EMPLEADO = "DELETE FROM cliente WHERE dpi_empleado = ?";
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";
     private final String CONSULTA_USUARIO = "SELECT * FROM usuarios WHERE usuario = ?";
@@ -15,6 +21,7 @@ public class Sql {
     public Sql() {
 
     }
+    public String getACTUALIZAR_EMPLEADO(){ return ACTUALIZAR_EMPLEADO; }
 
     public String getCONSULTA_TODOS_EMPLEADO() {
         return CONSULTA_TODOS_EMPLEADO;

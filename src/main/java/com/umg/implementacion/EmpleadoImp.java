@@ -135,9 +135,43 @@ public class EmpleadoImp implements IEmpleados {
 
     @Override
     public boolean actualizarEmpleado(ModeloEmpleado modelo) {
-        return false;
-    }
+        boolean resultado = false;
+        conector.conectar();
 
+        try {
+            ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
+            ps.setString(1, modelo.getDpi());
+            ps.setString(2, modelo.getSexo());
+            ps.setString(3, modelo.getPrimerNombre());
+            ps.setString(4, modelo.getSegundoNombre());
+            ps.setString(5, modelo.getTercerNombre());
+            ps.setString(6, modelo.getPrimerApellido());
+            ps.setString(7, modelo.getSegundoApellido());
+            ps.setString(8, modelo.getApellidoCasada());
+            ps.setString(9, modelo.getFechaNacimiento());
+            ps.setInt(10, modelo.getEdad());
+            ps.setInt(11, modelo.getIdPuesto());
+            ps.setString(12, modelo.getHorarioEntrada());
+            ps.setString(13, modelo.getHorarioSalida());
+            ps.setInt(14, modelo.getIdJefeInmediato());
+            ps.setInt(15, modelo.getIdDireccion());
+            ps.setString(16, modelo.getDepartamento());
+            ps.setString(17, modelo.getMunicipio());
+            ps.setString(18, modelo.getAldeaColonia());
+            ps.setString(19, modelo.getDireccionVivienda());
+            ps.setInt(20, modelo.getIdHuella());
+            ps.setBytes(21, modelo.getHuella());
+            ps.setInt(22, modelo.getIdEmpleado()); //
+            ps.executeUpdate();
+            resultado = true;
+        } catch (SQLException ex) {
+            conector.mensaje("No se pudo actualizar el empleado", "Error al actualizar", 0);
+        } finally {
+            conector.desconectar();
+        }
+
+        return resultado;
+    }
     @Override
     public DefaultTableModel modeloEmpleado(String dpi) {
         return null;
