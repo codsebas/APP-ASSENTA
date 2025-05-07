@@ -83,6 +83,8 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     private void insertarEmpleado(){
         String departamento = String.valueOf(modelo.getvRegistraEmpleado().cbDepto.getSelectedItem());
         String municipio = String.valueOf(modelo.getvRegistraEmpleado().cbMun.getSelectedItem());
+        String estadoCivil = String.valueOf(modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedItem());
+        String sexo = String.valueOf(modelo.getvRegistraEmpleado().cbSexo.getSelectedItem());
         ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
         modeloEmpleado.setPrimerNombre(modelo.getvRegistraEmpleado().txtNom1.getText());
         modeloEmpleado.setSegundoNombre(modelo.getvRegistraEmpleado().txtNom2.getText());
@@ -92,6 +94,20 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setApellidoCasada(modelo.getvRegistraEmpleado().txtApeC.getText());
         modeloEmpleado.setDepartamento(departamento);
         modeloEmpleado.setMunicipio(municipio);
+        modeloEmpleado.setFechaNacimiento(modelo.getvRegistraEmpleado().txtFecha.getText());
+        modeloEmpleado.setEstadoCivil(estadoCivil);
+        modeloEmpleado.setSexo(sexo);
+        modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
+        modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum1.getText());
+        modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum2.getText());
+        modeloEmpleado.setDpi(modelo.getvRegistraEmpleado().txtDPI.getText());
+        modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
+        modeloEmpleado.setHorarioEntrada(modelo.getvRegistraEmpleado().txtHoraEntrada.getText());
+        modeloEmpleado.setHorarioSalida(modelo.getvRegistraEmpleado().txtHoraSalida.getText());
+        modeloEmpleado.setAldeaColonia(modelo.getvRegistraEmpleado().txtAldea.getText());
+        modeloEmpleado.setDireccionVivienda(modelo.getvRegistraEmpleado().txtDireccion.getText());
+
+
 
         boolean resultado =  implementacion.insertarEmpleado(modeloEmpleado);
         if (!resultado) {

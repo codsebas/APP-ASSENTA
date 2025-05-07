@@ -16,6 +16,15 @@ public class EmpleadoImp implements IEmpleados {
     ResultSet rs;
 
 
+    private void setNullableString(PreparedStatement ps, int index, String valor) throws SQLException {
+        if (valor == null || valor.trim().isEmpty()) {
+            ps.setNull(index, Types.VARCHAR);
+        } else {
+            ps.setString(index, valor);
+        }
+    }
+
+
     @Override
     public boolean insertarEmpleado(ModeloEmpleado modelo) {
         boolean resultado = true;
@@ -24,24 +33,27 @@ public class EmpleadoImp implements IEmpleados {
 
         try {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
-            ps.setString(1, "2234567890127");
-            ps.setString(2, "Masculino");
-            ps.setString(3, "S");
+            ps.setString(1, modelo.getDpi());
+            ps.setString(2, modelo.getSexo());
+            ps.setString(3, modelo.getEstadoCivil());
             ps.setString(4, modelo.getPrimerNombre());
             ps.setString(5, modelo.getSegundoNombre());
-            ps.setString(6, modelo.getTercerNombre());
+
+            setNullableString(ps, 6, modelo.getTercerNombre()); // opcional
             ps.setString(7, modelo.getPrimerApellido());
             ps.setString(8, modelo.getSegundoApellido());
-            ps.setString(9, modelo.getApellidoCasada());
+
+            setNullableString(ps, 9, modelo.getApellidoCasada()); // opcional
+
             ps.setDate(10, Date.valueOf("1990-06-15"));
-            ps.setInt(11, 34);
-            ps.setInt(12, 1); // Asegúrate de que el puesto exista
-            ps.setString(13, "albino.bodoque@example.com");
-            ps.setString(14, "5555-1234");
-            ps.setString(15, "5555-5678");
-            ps.setTime(16, Time.valueOf("08:00:00"));
-            ps.setTime(17, Time.valueOf("17:00:00"));
-            ps.setInt(18, 1); // Sin jefe
+            ps.setInt(11, modelo.getEdad());
+            ps.setInt(12, 1); // puesto_id
+            ps.setString(13, modelo.getCorreoElectronico());
+            ps.setString(14, modelo.getNumeroTelefono1());
+            ps.setString(15, modelo.getNumeroTelefono2());
+            ps.setTime(16, Time.valueOf(modelo.getHorarioEntrada()));
+            ps.setTime(17, Time.valueOf(modelo.getHorarioSalida()));
+            ps.setInt(18, 1); // jefe_inmediato_id
 
 
              this.rs = this.ps.executeQuery();
@@ -55,8 +67,8 @@ public class EmpleadoImp implements IEmpleados {
                 ps.setInt(1, id_empleado);
                 ps.setString(2, modelo.getDepartamento());
                 ps.setString(3, modelo.getMunicipio());
-                ps.setString(4, "Lo de Fuentes");
-                ps.setString(5, "Zona 11, casa 123");
+                ps.setString(4, modelo.getAldeaColonia());
+                ps.setString(5, modelo.getDireccionVivienda());
                 ps.executeUpdate();
             } catch (Exception e) {
                 conector.mensaje(e.getMessage(), "Error al ingresar direccion", 0);
