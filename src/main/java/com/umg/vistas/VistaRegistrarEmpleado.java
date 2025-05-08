@@ -5,9 +5,11 @@
 package com.umg.vistas;
 
 import com.umg.controlador.ControladorRegistrarEmpleado;
+import com.umg.implementacion.PuestoImp;
+import com.umg.modelos.ModeloPuesto;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 import javax.swing.*;
-import java.awt.*;
+import java.util.List;
 
 /**
  *
@@ -20,10 +22,23 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
      */
     public VistaRegistrarEmpleado() {
         initComponents();
+        cargarPuestos();
         ModeloVistaRegistrarEmpleado modelo = new ModeloVistaRegistrarEmpleado(this);
         ControladorRegistrarEmpleado controlador = new ControladorRegistrarEmpleado(modelo);
         setControlador(controlador);
     }
+
+    public void cargarPuestos() {
+        PuestoImp puesto = new PuestoImp();
+        List<ModeloPuesto> puestos = puesto.obtenerPuestos();
+        cbPuesto.removeAllItems(); // Limpia si ya tenía datos
+
+        for (ModeloPuesto p : puestos) {
+            cbPuesto.addItem(String.valueOf(p));
+        }
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +99,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         txtHoraEntrada = new javax.swing.JTextField();
         cbJefeInmediato = new javax.swing.JComboBox<>();
-        cbPuesto = new javax.swing.JComboBox<>();
+        cbPuesto = new JComboBox<String>();
         jLabel38 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         txtHoraSalida = new javax.swing.JTextField();
@@ -376,7 +391,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         cbPuesto.setBackground(new java.awt.Color(255, 255, 255));
         cbPuesto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbPuesto.setForeground(new java.awt.Color(26, 75, 54));
-        cbPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Puesto" }));
+        cbPuesto.setModel(new DefaultComboBoxModel<String>(new String[] { "Elegir Puesto" }));
         cbPuesto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel7.add(cbPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
 
@@ -464,7 +479,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JComboBox<String> cbEstadoCivil;
     public javax.swing.JComboBox<String> cbJefeInmediato;
     public javax.swing.JComboBox<String> cbMun;
-    public javax.swing.JComboBox<String> cbPuesto;
+    public JComboBox<String> cbPuesto;
     public javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;

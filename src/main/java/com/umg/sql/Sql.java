@@ -37,6 +37,12 @@ public class Sql {
     private final String ACTUALIZAR_USUARIO = "UPDATE usuarios SET password = crypt(?, gen_salt('bf')), usuario = ? WHERE id_usuario = ?";
     private final String ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE id_usuario = ?";
 
+    private final String CONSULTAR_PUESTO = "SELECT * FROM empleado WHERE id_empleado = ?";
+    private final String CONSULTA_TODOS_PUESTOS = "SELECT id_puesto, nombre_puesto FROM puesto";
+    private final String INSERTAR_PUESTO = "INSERT INTO puesto (nombre_puesto) VALUES (?)";
+    private final String ACTUALIZAR_PUESTO = "UPDATE puesto SET nombre_puesto = ? WHERE id_puesto = ?";
+    private final String ELIMINAR_PUESTO = "DELETE FROM puesto WHERE id_puesto = ?";
+
     public Sql() {
 
     }
@@ -89,7 +95,29 @@ public class Sql {
     public String getINSERTAR_HUELLA() {
         return INSERTAR_HUELLA;
     }
+
+    public String getCONSULTA_TODOS_PUESTOS() {
+        return CONSULTA_TODOS_PUESTOS;
+    }
+
+    public String getINSERTAR_PUESTO() {
+        return INSERTAR_PUESTO;
+    }
+
+    public String getACTUALIZAR_PUESTO() {
+        return ACTUALIZAR_PUESTO;
+    }
+
+    public String getELIMINAR_PUESTO() {
+        return ELIMINAR_PUESTO;
+    }
+
+public String getCONSULTAR_PUESTO(){
+    return CONSULTAR_PUESTO;
 }
+
+}
+
 
 //axel and hichos forever because your love is the best esto fue escrito por axel con any desk mientras javier se fue uwu dayane te amo
 
