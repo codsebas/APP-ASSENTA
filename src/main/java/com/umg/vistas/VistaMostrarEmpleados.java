@@ -37,7 +37,7 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
         panelInfoPersonal1 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEmpleados = new javax.swing.JTable();
         lblFondo1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1230, 720));
@@ -92,8 +92,8 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
         jLabel19.setText("DATOS GENERALES");
         panelInfoPersonal1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpleados.setBackground(new java.awt.Color(255, 255, 255));
+        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -104,7 +104,7 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEmpleados);
 
         panelInfoPersonal1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 870, 280));
 
@@ -127,7 +127,7 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnBuscarEmpleado;
+    public javax.swing.JPanel btnBuscarEmpleado;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
@@ -135,10 +135,10 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo1;
     private javax.swing.JPanel panelInfoPersonal1;
+    public javax.swing.JTable tblEmpleados;
     public javax.swing.JTextField txtDPI;
     // End of variables declaration//GEN-END:variables
 }
