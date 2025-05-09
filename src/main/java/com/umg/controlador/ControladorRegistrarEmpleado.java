@@ -5,38 +5,54 @@ import com.umg.modelos.ModeloEmpleado;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class ControladorRegistrarEmpleado implements MouseListener, ActionListener {
     EmpleadoImp implementacion = new EmpleadoImp();
     ModeloVistaRegistrarEmpleado modelo;
+    ModeloEmpleado modeloEmpleado;
+
     private Map<String, String[]> municipiosPorDepartamento;
 
-    
+
     public ControladorRegistrarEmpleado(ModeloVistaRegistrarEmpleado modelo) {
         this.modelo = modelo;
+
+
+
         agregarMunicipios();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals(modelo.getvRegistraEmpleado().cbDepto.getActionCommand())){
+        if (e.getActionCommand().equals(modelo.getvRegistraEmpleado().cbDepto.getActionCommand())) {
             actualizarMunicipios();
         }
+
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
+          //  mostrarEmpleado();
             unirNombre();
            insertarEmpleado();
+
         }
-    }
-    
+        }
+
+
+
     @Override
     public void mousePressed(MouseEvent e) {
         
@@ -83,7 +99,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     private void insertarEmpleado(){
         String departamento = String.valueOf(modelo.getvRegistraEmpleado().cbDepto.getSelectedItem());
         String municipio = String.valueOf(modelo.getvRegistraEmpleado().cbMun.getSelectedItem());
-        String estadoCivil = String.valueOf(modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedItem());
+        //String estadoCivil = String.valueOf(modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedItem());
         String sexo = String.valueOf(modelo.getvRegistraEmpleado().cbSexo.getSelectedItem());
         ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
         modeloEmpleado.setPrimerNombre(modelo.getvRegistraEmpleado().txtNom1.getText());
@@ -95,7 +111,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setDepartamento(departamento);
         modeloEmpleado.setMunicipio(municipio);
         modeloEmpleado.setFechaNacimiento(modelo.getvRegistraEmpleado().txtFecha.getText());
-        modeloEmpleado.setEstadoCivil(estadoCivil);
+       // modeloEmpleado.setEstadoCivil(estadoCivil);
         modeloEmpleado.setSexo(sexo);
         modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
         modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum1.getText());
@@ -116,7 +132,15 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             JOptionPane.showMessageDialog(null, "empleado no registrado axel jodete","ERROR PUTO",0);
         }
     }
-    
+
+
+
+
+
+
+
+
+
     private void agregarMunicipios() {
         municipiosPorDepartamento = new HashMap<>();
 

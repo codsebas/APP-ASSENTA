@@ -7,6 +7,7 @@ import com.umg.sql.Sql;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class EmpleadoImp implements IEmpleados {
 
@@ -35,7 +36,7 @@ public class EmpleadoImp implements IEmpleados {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
             ps.setString(1, modelo.getDpi());
             ps.setString(2, modelo.getSexo());
-            ps.setString(3, modelo.getEstadoCivil());
+           // ps.setString(3, modelo.getEstadoCivil());
             ps.setString(4, modelo.getPrimerNombre());
             ps.setString(5, modelo.getSegundoNombre());
 
@@ -45,7 +46,7 @@ public class EmpleadoImp implements IEmpleados {
 
             setNullableString(ps, 9, modelo.getApellidoCasada()); // opcional
 
-            ps.setDate(10, Date.valueOf("1990-06-15"));
+            ps.setDate(10, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(11, modelo.getEdad());
             ps.setInt(12, 1); // puesto_id
             ps.setString(13, modelo.getCorreoElectronico());
@@ -124,16 +125,19 @@ public class EmpleadoImp implements IEmpleados {
     }
 
     @Override
-    public ModeloEmpleado mostrarEmpleado(int dpi_empleado) {
-        boolean resultado = true;
+    public ModeloEmpleado mostrarEmpleado(String dpi_empleado) {
         conector.conectar();
-        ModeloEmpleado modelo = new ModeloEmpleado();
-        try{
+        ModeloEmpleado modelo = null; // <- Aquí importante: empieza como null
+
+        try {
+            ps = conector.preparar(sql.getCONSULTA_EMPLEADO_DPI()); // SELECT * FROM empleado WHERE dpi_empleado = ?
+            ps.setString(1, dpi_empleado);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                ps =    conector.preparar(sql.getCONSULTA_TODOS_EMPLEADO());
-                ps.setInt(1, dpi_empleado);
-                modelo.setIdEmpleado(Integer.parseInt(rs.getString(1)));
+
+            if (rs.next()) {
+                modelo = new ModeloEmpleado(); // Solo si encuentra resultado
+
+                modelo.setIdEmpleado(rs.getInt(1));
                 modelo.setDpi(rs.getString(2));
                 modelo.setSexo(rs.getString(3));
                 modelo.setPrimerNombre(rs.getString(4));
@@ -142,30 +146,31 @@ public class EmpleadoImp implements IEmpleados {
                 modelo.setPrimerApellido(rs.getString(7));
                 modelo.setSegundoApellido(rs.getString(8));
                 modelo.setApellidoCasada(rs.getString(9));
-                modelo.setFechaNacimiento(rs.getString(10));
+
+                // Usamos índice en lugar de nombre por seguridad
+                modelo.setFechaNacimiento(rs.getString(10)); // columna 10 = fec_nacimiento
+
                 modelo.setEdad(rs.getInt(11));
-                modelo.setIdPuesto(Integer.parseInt(rs.getString(12)));
+                modelo.setIdPuesto(rs.getInt(12));
                 modelo.setHorarioEntrada(rs.getString(13));
                 modelo.setHorarioSalida(rs.getString(14));
-                modelo.setIdJefeInmediato(Integer.parseInt(rs.getString(15)));
-                modelo.setIdDireccion(Integer.parseInt(rs.getString(16)));
+                modelo.setIdJefeInmediato(rs.getInt(15));
+                modelo.setIdDireccion(rs.getInt(16));
                 modelo.setDepartamento(rs.getString(17));
                 modelo.setMunicipio(rs.getString(18));
                 modelo.setAldeaColonia(rs.getString(19));
                 modelo.setDireccionVivienda(rs.getString(20));
-                modelo.setIdHuella(Integer.parseInt(rs.getString(21)));
-                modelo.setHuella(rs.getBytes(21));
-
+                modelo.setIdHuella(rs.getInt(21));
+                modelo.setHuella(rs.getBytes(22));
             }
-           conector.desconectar();
 
-
+            conector.desconectar();
         } catch (SQLException ex) {
             conector.mensaje(ex.getMessage(), "Error al mostrar", 0);
             conector.desconectar();
         }
-        return modelo;
 
+        return modelo;
     }
 
     @Override
@@ -212,10 +217,10 @@ public class EmpleadoImp implements IEmpleados {
         return null;
     }
 
-    @Override
+   /* @Override
     public ModeloEmpleado mostrarEmpleado(String dpi) {
         return null;
-    }
-}
+    */}
+//}
 //NITIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 //gerson te odio vv ojala don diablo ame mas aaxel

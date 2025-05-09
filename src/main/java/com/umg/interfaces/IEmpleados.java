@@ -10,10 +10,11 @@ public interface IEmpleados {
     public boolean eliminarEmpleado(String dpi_empleado);
     public DefaultTableModel modeloEmpleado();
     public DefaultTableModel modeloEmpleado(int dpi_empleado);
-    public ModeloEmpleado mostrarEmpleado (int dpi_empleado);
+    ModeloEmpleado mostrarEmpleado(String dpi_empleado);
+
     public boolean actualizarEmpleado(ModeloEmpleado modelo);
 
     DefaultTableModel modeloEmpleado(String dpi);
 
-    ModeloEmpleado mostrarEmpleado(String dpi);
+    //ModeloEmpleado mostrarEmpleado(String dpi);
 }

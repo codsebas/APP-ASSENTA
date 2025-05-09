@@ -5,6 +5,7 @@ import com.umg.vistas.VistaRegistrarEmpleado;
 public class ModeloVistaRegistrarEmpleado {
     VistaRegistrarEmpleado vRegistraEmpleado;
 
+
     public ModeloVistaRegistrarEmpleado(VistaRegistrarEmpleado vRegistraEmpleado) {
         this.vRegistraEmpleado = vRegistraEmpleado;
     }

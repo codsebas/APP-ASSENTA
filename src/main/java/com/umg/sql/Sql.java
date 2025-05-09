@@ -2,7 +2,7 @@ package com.umg.sql;
 
 public class Sql {
     private final String CONSULTA_TODOS_EMPLEADO = "SELECT * FROM empleado";
-    private final String CONSULTA_EMPLEADO_DPI = "SELECT * FROM empleado WHERE dpi_empelado = ?";
+    private final String CONSULTA_EMPLEADO_DPI = "SELECT * FROM empleado WHERE dpi_empleado = ?";
     private final String INSERTAR_EMPLEADO = """
     INSERT INTO empleado (
         dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,

@@ -1,5 +1,7 @@
 package com.umg.modelos;
 
+import com.umg.vistas.VistaMostrarEmpleados;
+
 public class ModeloEmpleado {
 
     // DATOS PERSONALES
@@ -41,6 +43,9 @@ public class ModeloEmpleado {
     // HUELLAS DIGITALES (puedes cambiar a byte[] si planeas manejar los datos binarios reales)
     private int idHuella;
     private byte[] huella;
+
+    //Vista
+private VistaMostrarEmpleados vista;
 
     public ModeloEmpleado() {
 
@@ -108,6 +113,14 @@ public class ModeloEmpleado {
 
         this.idHuella = idHuella;
         this.huella = huella;
+    }
+
+    public VistaMostrarEmpleados getVista() {
+        return vista;
+    }
+
+    public void setVista(VistaMostrarEmpleados vista) {
+        this.vista = vista;
     }
 
     public ModeloEmpleado(byte[] huella) {
