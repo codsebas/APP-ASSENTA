@@ -10,6 +10,7 @@ import com.umg.vistas.VistaLogin;
 import com.umg.vistas.VistaMantenimientoUsuarios;
 import com.umg.vistas.VistaPrincipal;
 import com.umg.vistas.VistaMenu;
+import com.umg.vistas.VistaMostrarEmpleados;
 import com.umg.vistas.VistaRegistrarEmpleado;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,6 +45,7 @@ public class ControladorMenu implements ActionListener, MouseListener {
         vista.panelMenu.addMouseListener(this);
         vista.contenedor.addMouseListener(this);
         vista.btnGestionUsuarios.addMouseListener(this);
+        vista.btnMeMoEmple.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -104,6 +106,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
             cambiarVista(panel);
         } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
             VistaMantenimientoUsuarios panel = new VistaMantenimientoUsuarios();
+            cambiarVista(panel);
+        } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
+            VistaMostrarEmpleados panel = new VistaMostrarEmpleados();
             cambiarVista(panel);
         } else if (e.getComponent().equals(vista.btnExpandirMenu)) {
             if (estado) {

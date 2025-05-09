@@ -243,9 +243,9 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel btnActualizarUsuario;
+    private javax.swing.JPanel btnActualizarUsuario;
     public javax.swing.JPanel btnAgregarUsuario;
-    public javax.swing.JPanel btnEliminarUsuario;
+    private javax.swing.JPanel btnEliminarUsuario;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel fondoImagen;
     private javax.swing.JLabel jLabel1;
@@ -267,10 +267,10 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
     public javax.swing.JLabel lblErrorContraVa1;
     public javax.swing.JLabel lblErrorUsuario;
     public javax.swing.JPasswordField txtPasswordMant;
-    public javax.swing.JPasswordField txtPasswordMantAc;
+    private javax.swing.JPasswordField txtPasswordMantAc;
     public javax.swing.JPasswordField txtPasswordMantConf;
-    public javax.swing.JPasswordField txtPasswordMantConfAc;
-    public javax.swing.JTextField txtUsuarioBus;
+    private javax.swing.JPasswordField txtPasswordMantConfAc;
+    private javax.swing.JTextField txtUsuarioBus;
     public javax.swing.JTextField txtUsuarioMant;
     // End of variables declaration//GEN-END:variables
 
