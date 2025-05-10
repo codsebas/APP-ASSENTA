@@ -8,6 +8,9 @@ import com.umg.sql.Sql;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -47,7 +50,7 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
         if (modelo != null) {
             DefaultTableModel tabla = new DefaultTableModel();
             tabla.setColumnIdentifiers(new Object[]{"DPI", "Sexo", "Estado Civil", "1er.Nombre", "2do.Nombre", "3er.Nombre", "1er.Apellido",
-                    "2do.Apellido","Apellido de Casada", "Fech-Nacimiento","Edad","Puesto","Email","1er.telefono", "2do.telefono","Hor-Entrada", "Hor-Salida", "Jefe"});
+                    "2do.Apellido","Apellido de Casada","Edad","Puesto","Email","telefono","Hor-Entrada", "Hor-Salida", "Jefe"});
 
             tabla.addRow(new Object[]{
                     modeloEmpleado.getDpi(),
@@ -59,12 +62,10 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
                     modeloEmpleado.getPrimerApellido(),
                     modeloEmpleado.getSegundoApellido(),
                     modeloEmpleado.getApellidoCasada(),
-                    modeloEmpleado.getFechaNacimiento(),
                     modeloEmpleado.getEdad(),
                     modeloEmpleado.getNombrePuesto(),
                     modeloEmpleado.getCorreoElectronico(),
                     modeloEmpleado.getNumeroTelefono1(),
-                    modeloEmpleado.getNumeroTelefono2(),
                     modeloEmpleado.getHorarioEntrada(),
                     modeloEmpleado.getHorarioSalida(),
                     modeloEmpleado.getNombreJefeInmediato()
@@ -81,55 +82,58 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
     }
 
     public void mostrarTodosLosEmpleados() {
-        Conector conector = new Conector();
-        Sql sql = new Sql();
-        PreparedStatement ps;
-        ResultSet rs;
 
-        try {
-            conector.conectar(); //
-            ps = conector.preparar(sql.getCONSULTA_TODOS_EMPLEADO());
-            rs = ps.executeQuery();
 
-            DefaultTableModel tabla = new DefaultTableModel();
-            tabla.setColumnIdentifiers(new Object[]{"DPI", "Sexo", "Estado Civil", "1er.Nombre", "2do.Nombre", "3er.Nombre", "1er.Apellido",
-                    "2do.Apellido","Apellido de Casada", "Fech-Nacimiento","Edad","Puesto","Email","1er.telefono", "2do.telefono","Hor-Entrada", "Hor-Salida", "Jefe"});
+        JTable tableEmpleados = new JTable(implementacion.modeloEmpleado());
+        ajustarTamañoTabla(tableEmpleados);
 
-            while (rs.next()) {
-                tabla.addRow(new Object[]{
-                        rs.getString("dpi_empleado"),
-                        rs.getString("sexo_empleado"),
-                        rs.getString("estado_civil"),
-                        rs.getString("nombre1_empleado"),
-                        rs.getString("nombre2_empleado"),
-                        rs.getString("nombre3_empleado"),
-                        rs.getString("apellido1_empleado"),
-                        rs.getString("apellido2_empleado"),
-                        rs.getString("apellidocasada_empleado"),
-                        rs.getString("fec_nacimiento"),
-                        rs.getInt("edad_empleado"),
-                        rs.getString("nombre_puesto"),
-                        rs.getString("email_empleado"),
-                        rs.getString("telefono1_empleado"),
-                        rs.getString("telefono2_empleado"),
-                        rs.getString("horario_entrada"),
-                        rs.getString("horario_salida"),
-                        rs.getString("jefe_inmediato_nombre")
-                });
+// Desactiva el ajuste automático de columnas
+        tableEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
+// Ajusta automáticamente el ancho de cada columna al contenido
+        for (int i = 0; i < tableEmpleados.getColumnCount(); i++) {
+            TableColumn column = tableEmpleados.getColumnModel().getColumn(i);
+            int ancho = 75; // ancho mínimo por defecto
+
+            // Ancho del encabezado
+            TableCellRenderer headerRenderer = tableEmpleados.getTableHeader().getDefaultRenderer();
+            Component headerComp = headerRenderer.getTableCellRendererComponent(
+                    tableEmpleados, column.getHeaderValue(), false, false, 0, i);
+            ancho = Math.max(headerComp.getPreferredSize().width, ancho);
+
+            // Ancho del contenido de las celdas
+            for (int fila = 0; fila < tableEmpleados.getRowCount(); fila++) {
+                TableCellRenderer cellRenderer = tableEmpleados.getCellRenderer(fila, i);
+                Component cellComp = tableEmpleados.prepareRenderer(cellRenderer, fila, i);
+                ancho = Math.max(cellComp.getPreferredSize().width, ancho);
             }
 
-            JTable tableEmpleados = new JTable(tabla);
-            JScrollPane scrollTabla = new JScrollPane(tableEmpleados);
-            modelo.getVistaMostrarEmpleados().panelTabla.add(scrollTabla);
-            modelo.getVistaMostrarEmpleados().panelTabla.revalidate();
-            modelo.getVistaMostrarEmpleados().panelTabla.repaint();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            column.setPreferredWidth(ancho + 10); // margen adicional
         }
+
+// Crea el JScrollPane SOLO con scroll vertical
+        JScrollPane scrollTabla = new JScrollPane(
+                tableEmpleados,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+        );
+
+// Usa BorderLayout para que el scroll se acomode bien
+        modelo.getVistaMostrarEmpleados().panelTabla.removeAll();
+        modelo.getVistaMostrarEmpleados().panelTabla.setLayout(new java.awt.BorderLayout());
+        modelo.getVistaMostrarEmpleados().panelTabla.add(scrollTabla, java.awt.BorderLayout.CENTER);
+        modelo.getVistaMostrarEmpleados().panelTabla.revalidate();
+        modelo.getVistaMostrarEmpleados().panelTabla.repaint();
     }
 
+        private void ajustarTamañoTabla(JTable tabla) {
+        int rowHeight = tabla.getRowHeight();
+        int rowCount = tabla.getRowCount();
+        int headerHeight = tabla.getTableHeader().getPreferredSize().height;
+
+        int alturaTotal = (rowHeight * rowCount) + headerHeight;
+        tabla.setPreferredScrollableViewportSize(new Dimension(tabla.getPreferredSize().width, alturaTotal));
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getComponent().equals(modelo.getVistaMostrarEmpleados().btnBuscarEmpleado)){
