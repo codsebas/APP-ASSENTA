@@ -6,6 +6,7 @@ public class ModeloUsuario {
     private int idUsuario;
     private String usuario;
     private String password;
+    private String empleado_dpi;
     private VistaMantenimientoUsuarios vista;
 
     public ModeloUsuario() {
@@ -45,5 +46,13 @@ public class ModeloUsuario {
 
     public void setVista(VistaMantenimientoUsuarios vista) {
         this.vista = vista;
+    }
+
+    public String getEmpleado_dpi() {
+        return empleado_dpi;
+    }
+
+    public void setEmpleado_dpi(String empleado_dpi) {
+        this.empleado_dpi = empleado_dpi;
     }
 }

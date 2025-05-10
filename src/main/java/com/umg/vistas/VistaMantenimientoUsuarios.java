@@ -51,6 +51,8 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         lblErrorUsuario = new javax.swing.JLabel();
         lblErrorContraVa = new javax.swing.JLabel();
         lblErrorContra = new javax.swing.JLabel();
+        txtDPI = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnEliminarUsuario = new javax.swing.JPanel();
@@ -125,7 +127,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         jLabel5.setText("Agregar Usuario");
         btnAgregarUsuario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
-        jPanel2.add(btnAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 140, 30));
+        jPanel2.add(btnAgregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, 140, 30));
 
         lblErrorContraVa1.setForeground(new java.awt.Color(153, 0, 0));
         lblErrorContraVa1.setText("*Debe ingresar una contraseña");
@@ -142,6 +144,18 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         lblErrorContra.setForeground(new java.awt.Color(153, 0, 0));
         lblErrorContra.setText("*La contraseña es diferente");
         jPanel2.add(lblErrorContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 40, 180, -1));
+
+        txtDPI.setBackground(new java.awt.Color(255, 255, 255));
+        txtDPI.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtDPI.setForeground(new java.awt.Color(26, 75, 54));
+        txtDPI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtDPI.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.add(txtDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 270, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 127, 75));
+        jLabel13.setText("DPI*");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-datos-usuarios.png"))); // NOI18N
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 190));
@@ -243,15 +257,16 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnActualizarUsuario;
+    public javax.swing.JPanel btnActualizarUsuario;
     public javax.swing.JPanel btnAgregarUsuario;
-    private javax.swing.JPanel btnEliminarUsuario;
+    public javax.swing.JPanel btnEliminarUsuario;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel fondoImagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -266,11 +281,12 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
     public javax.swing.JLabel lblErrorContraVa;
     public javax.swing.JLabel lblErrorContraVa1;
     public javax.swing.JLabel lblErrorUsuario;
+    public javax.swing.JTextField txtDPI;
     public javax.swing.JPasswordField txtPasswordMant;
-    private javax.swing.JPasswordField txtPasswordMantAc;
+    public javax.swing.JPasswordField txtPasswordMantAc;
     public javax.swing.JPasswordField txtPasswordMantConf;
-    private javax.swing.JPasswordField txtPasswordMantConfAc;
-    private javax.swing.JTextField txtUsuarioBus;
+    public javax.swing.JPasswordField txtPasswordMantConfAc;
+    public javax.swing.JTextField txtUsuarioBus;
     public javax.swing.JTextField txtUsuarioMant;
     // End of variables declaration//GEN-END:variables
 

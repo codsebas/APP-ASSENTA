@@ -35,7 +35,7 @@ public class EmpleadoImp implements IEmpleados {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
             ps.setString(1, modelo.getDpi());
             ps.setString(2, modelo.getSexo());
-            // ps.setString(3, modelo.getEstadoCivil());
+             ps.setString(3, "C");
             ps.setString(4, modelo.getPrimerNombre());
             ps.setString(5, modelo.getSegundoNombre());
 

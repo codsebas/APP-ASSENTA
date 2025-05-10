@@ -59,6 +59,7 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
                     ModeloUsuario modelousuario = new ModeloUsuario();
                     modelousuario.setUsuario(modelo.getVista().txtUsuarioMant.getText());
                     modelousuario.setPassword(String.valueOf(modelo.getVista().txtPasswordMant.getPassword()));
+                    modelousuario.setEmpleado_dpi(modelo.getVista().txtDPI.getText());
                     boolean resultado = this.implementacion.insertarUsuario(modelousuario);
                     if (!resultado) {
                         JOptionPane.showMessageDialog(null, "Usuario creado con exito", "Creación de Usuario", JOptionPane.INFORMATION_MESSAGE);

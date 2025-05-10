@@ -46,7 +46,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
           //  mostrarEmpleado();
             unirNombre();
-           //insertarEmpleado();
+           insertarEmpleado();
 
         }
         }
@@ -129,7 +129,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         if (!resultado) {
             JOptionPane.showMessageDialog(null, "empleado registrado con exito", "Exito", 1);
         }else {
-            JOptionPane.showMessageDialog(null, "empleado no registrado axel jodete","ERROR PUTO",0);
+            JOptionPane.showMessageDialog(null, "empleado no registrado","ERROR",0);
         }
     }
 

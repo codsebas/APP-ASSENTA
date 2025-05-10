@@ -29,7 +29,7 @@ public class UsuarioImp implements IUsuario {
         try {
             this.ps.setString(1, modeloUsuario.getUsuario());
             this.ps.setString(2, modeloUsuario.getPassword());
-            this.ps.setString(3, "2234567890127");
+            this.ps.setString(3, modeloUsuario.getEmpleado_dpi());
             resultado = this.ps.execute();
         }catch (SQLException ex){
             if(ex.getSQLState().equals("23505")){
