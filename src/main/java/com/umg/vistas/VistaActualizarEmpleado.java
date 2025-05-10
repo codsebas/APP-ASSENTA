@@ -4,8 +4,10 @@
  */
 package com.umg.vistas;
 
+import com.umg.controlador.ControladorActualizarEmpleado;
 import com.umg.controlador.ControladorRegistrarEmpleado;
 import com.umg.implementacion.PuestoImp;
+import com.umg.modelos.ModeloActualizarEmpleado;
 import com.umg.modelos.ModeloPuesto;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 import javax.swing.*;
@@ -15,16 +17,16 @@ import java.util.List;
  *
  * @author axels
  */
-public class VistaRegistrarEmpleado extends javax.swing.JPanel {
+public class VistaActualizarEmpleado extends javax.swing.JPanel {
 
     /**
      * Creates new form VistaRegistrarEmpleado
      */
-    public VistaRegistrarEmpleado() {
+    public VistaActualizarEmpleado() {
         initComponents();
         cargarPuestos();
-        ModeloVistaRegistrarEmpleado modelo = new ModeloVistaRegistrarEmpleado(this);
-        ControladorRegistrarEmpleado controlador = new ControladorRegistrarEmpleado(modelo);
+        ModeloActualizarEmpleado modelo = new ModeloActualizarEmpleado(this);
+        ControladorActualizarEmpleado controlador = new ControladorActualizarEmpleado(modelo);
         setControlador(controlador);
     }
 
@@ -82,6 +84,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         cbSexo = new javax.swing.JComboBox<>();
         jLabel40 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        btnRegistrarEmpleado1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         lblFondo1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -118,13 +122,10 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         panelH4 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
         btnRegistrarEmpleado = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setMinimumSize(new java.awt.Dimension(1230, 720));
         setPreferredSize(new java.awt.Dimension(1230, 720));
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(1210, 720));
         jPanel1.setPreferredSize(new java.awt.Dimension(1210, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -144,7 +145,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(0, 127, 75));
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel26.setText("Registrar Empleado");
+        jLabel26.setText("Actualizar Empleado");
         panelOpciones1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 70));
 
         panelInfoPersonal1.setBackground(new java.awt.Color(240, 253, 244));
@@ -155,161 +156,172 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         txtNom1.setForeground(new java.awt.Color(26, 75, 54));
         txtNom1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNom1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtNom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
+        panelInfoPersonal1.add(txtNom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 270, -1));
 
         txtNom2.setBackground(new java.awt.Color(255, 255, 255));
         txtNom2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNom2.setForeground(new java.awt.Color(26, 75, 54));
         txtNom2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNom2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtNom2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, -1));
+        panelInfoPersonal1.add(txtNom2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 270, -1));
 
         txtNom3.setBackground(new java.awt.Color(255, 255, 255));
         txtNom3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNom3.setForeground(new java.awt.Color(26, 75, 54));
         txtNom3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNom3.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtNom3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 270, -1));
+        panelInfoPersonal1.add(txtNom3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 270, -1));
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(0, 127, 75));
         jLabel27.setText("Tercer Nombre");
-        panelInfoPersonal1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 90, -1));
+        panelInfoPersonal1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 90, -1));
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(0, 127, 75));
         jLabel28.setText("Primer Nombre*");
-        panelInfoPersonal1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 100, -1));
+        panelInfoPersonal1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 100, -1));
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(0, 127, 75));
         jLabel29.setText("Segundo Nombre");
-        panelInfoPersonal1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 100, -1));
+        panelInfoPersonal1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 100, -1));
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(0, 127, 75));
         jLabel30.setText("Primer Apellido*");
-        panelInfoPersonal1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 100, -1));
+        panelInfoPersonal1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 100, -1));
 
         txtApe1.setBackground(new java.awt.Color(255, 255, 255));
         txtApe1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtApe1.setForeground(new java.awt.Color(26, 75, 54));
         txtApe1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtApe1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtApe1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 270, -1));
+        panelInfoPersonal1.add(txtApe1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 270, -1));
 
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(0, 127, 75));
         jLabel31.setText("Segundo Apellido*");
-        panelInfoPersonal1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 110, -1));
+        panelInfoPersonal1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 110, -1));
 
         txtApe2.setBackground(new java.awt.Color(255, 255, 255));
         txtApe2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtApe2.setForeground(new java.awt.Color(26, 75, 54));
         txtApe2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtApe2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtApe2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 270, -1));
+        panelInfoPersonal1.add(txtApe2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 270, -1));
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(0, 127, 75));
         jLabel32.setText("Apellido de Casada");
-        panelInfoPersonal1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 110, -1));
+        panelInfoPersonal1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 110, -1));
 
         txtApeC.setBackground(new java.awt.Color(255, 255, 255));
         txtApeC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtApeC.setForeground(new java.awt.Color(26, 75, 54));
         txtApeC.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtApeC.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtApeC, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 270, -1));
+        panelInfoPersonal1.add(txtApeC, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 270, -1));
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(0, 127, 75));
         jLabel33.setText("Fecha de Nacimiento*");
-        panelInfoPersonal1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 130, -1));
+        panelInfoPersonal1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 130, -1));
 
         txtFecha.setBackground(new java.awt.Color(255, 255, 255));
         txtFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(26, 75, 54));
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtFecha.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 270, -1));
+        panelInfoPersonal1.add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 270, -1));
 
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(0, 127, 75));
         jLabel34.setText("Estado Civil *");
-        panelInfoPersonal1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 80, -1));
+        panelInfoPersonal1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 80, -1));
 
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(0, 127, 75));
         jLabel35.setText("DPI*");
-        panelInfoPersonal1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 40, -1));
+        panelInfoPersonal1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 40, -1));
 
         txtDPI.setBackground(new java.awt.Color(255, 255, 255));
         txtDPI.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtDPI.setForeground(new java.awt.Color(26, 75, 54));
         txtDPI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDPI.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 270, -1));
+        panelInfoPersonal1.add(txtDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 270, -1));
 
         cbEstadoCivil.setBackground(new java.awt.Color(255, 255, 255));
         cbEstadoCivil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbEstadoCivil.setForeground(new java.awt.Color(26, 75, 54));
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Estado Civil", "Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a", "Unión de Hecho" }));
         cbEstadoCivil.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(cbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 270, -1));
+        panelInfoPersonal1.add(cbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 270, -1));
 
         txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
         txtCorreo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(26, 75, 54));
         txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCorreo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 270, -1));
+        panelInfoPersonal1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 270, -1));
 
         jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(0, 127, 75));
         jLabel37.setText("Correo Electronico");
-        panelInfoPersonal1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 110, -1));
+        panelInfoPersonal1.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 110, -1));
 
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel36.setForeground(new java.awt.Color(0, 127, 75));
         jLabel36.setText("Número de Teléfono 1*");
-        panelInfoPersonal1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
+        panelInfoPersonal1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         txtNum1.setBackground(new java.awt.Color(255, 255, 255));
         txtNum1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNum1.setForeground(new java.awt.Color(26, 75, 54));
         txtNum1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNum1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtNum1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 270, -1));
+        panelInfoPersonal1.add(txtNum1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 270, -1));
 
         jLabel39.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(0, 127, 75));
         jLabel39.setText("Número de Teléfono 2");
-        panelInfoPersonal1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, -1, -1));
+        panelInfoPersonal1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 310, -1, -1));
 
         txtNum2.setBackground(new java.awt.Color(255, 255, 255));
         txtNum2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNum2.setForeground(new java.awt.Color(26, 75, 54));
         txtNum2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNum2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(txtNum2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, 270, -1));
+        panelInfoPersonal1.add(txtNum2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 330, 270, -1));
 
         cbSexo.setBackground(new java.awt.Color(255, 255, 255));
         cbSexo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbSexo.setForeground(new java.awt.Color(26, 75, 54));
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Sexo", "Masculino", "Femenino" }));
         cbSexo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        panelInfoPersonal1.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 270, -1));
+        panelInfoPersonal1.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, 270, -1));
 
         jLabel40.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(0, 127, 75));
         jLabel40.setText("Sexo*");
-        panelInfoPersonal1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 40, -1));
+        panelInfoPersonal1.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, 40, -1));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 127, 75));
         jLabel19.setText("DATOS GENERALES");
-        panelInfoPersonal1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+        panelInfoPersonal1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        btnRegistrarEmpleado1.setBackground(new java.awt.Color(0, 127, 75));
+        btnRegistrarEmpleado1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Buscar Empleado");
+        btnRegistrarEmpleado1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+
+        panelInfoPersonal1.add(btnRegistrarEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 160, 30));
 
         lblFondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-datospersonales.png"))); // NOI18N
         panelInfoPersonal1.add(lblFondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 400));
@@ -536,17 +548,18 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel43.setText("Huella 4");
         jPanel3.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 100, -1));
 
-        btnRegistrarEmpleado.setBackground(new java.awt.Color(0, 127, 75));
-        btnRegistrarEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegistrarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        javax.swing.GroupLayout btnRegistrarEmpleadoLayout = new javax.swing.GroupLayout(btnRegistrarEmpleado);
+        btnRegistrarEmpleado.setLayout(btnRegistrarEmpleadoLayout);
+        btnRegistrarEmpleadoLayout.setHorizontalGroup(
+            btnRegistrarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 160, Short.MAX_VALUE)
+        );
+        btnRegistrarEmpleadoLayout.setVerticalGroup(
+            btnRegistrarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Registrar Empleado");
-        btnRegistrarEmpleado.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
-
-        jPanel3.add(btnRegistrarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 350, 160, 30));
+        jPanel3.add(btnRegistrarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 160, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-huellas.png"))); // NOI18N
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 430));
@@ -572,9 +585,9 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel btnRegistrarEmpleado;
+    private javax.swing.JPanel btnRegistrarEmpleado;
+    private javax.swing.JPanel btnRegistrarEmpleado1;
     public javax.swing.JComboBox<String> cbDepto;
     public javax.swing.JComboBox<String> cbEstadoCivil;
     public javax.swing.JComboBox<String> cbJefeInmediato;
@@ -647,7 +660,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JTextField txtNum2;
     // End of variables declaration//GEN-END:variables
 
-    public void setControlador(ControladorRegistrarEmpleado controlador){
+    public void setControlador(ControladorActualizarEmpleado controlador){
         btnRegistrarEmpleado.addMouseListener(controlador);
         cbDepto.addActionListener(controlador);
     }
