@@ -44,10 +44,10 @@ public class VistaMenu extends javax.swing.JPanel {
         btnMeMoEmple = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblIcono = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         btnGestionUsuarios = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        btnActuUsuario = new javax.swing.JPanel();
         contenedor = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(0, 720));
@@ -124,20 +124,7 @@ public class VistaMenu extends javax.swing.JPanel {
         lblIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/busempleadosIcono.png"))); // NOI18N
         btnMeMoEmple.add(lblIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        panelMenu.add(btnMeMoEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 200, 50));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        panelMenu.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
+        panelMenu.add(btnMeMoEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
 
         btnGestionUsuarios.setBackground(new java.awt.Color(0, 127, 75));
         btnGestionUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -169,6 +156,21 @@ public class VistaMenu extends javax.swing.JPanel {
 
         panelMenu.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 200, 50));
 
+        btnActuUsuario.setBackground(new java.awt.Color(0, 127, 75));
+
+        javax.swing.GroupLayout btnActuUsuarioLayout = new javax.swing.GroupLayout(btnActuUsuario);
+        btnActuUsuario.setLayout(btnActuUsuarioLayout);
+        btnActuUsuarioLayout.setHorizontalGroup(
+            btnActuUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+        btnActuUsuarioLayout.setVerticalGroup(
+            btnActuUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        panelMenu.add(btnActuUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 200, 50));
+
         PanelPrincipal.add(panelMenu, java.awt.BorderLayout.LINE_START);
 
         contenedor.setBackground(new java.awt.Color(240, 253, 244));
@@ -190,6 +192,7 @@ public class VistaMenu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
+    public javax.swing.JPanel btnActuUsuario;
     public javax.swing.JPanel btnExpandirMenu;
     public javax.swing.JPanel btnGestionUsuarios;
     public javax.swing.JPanel btnMeMoEmple;
@@ -200,7 +203,6 @@ public class VistaMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblIcono;

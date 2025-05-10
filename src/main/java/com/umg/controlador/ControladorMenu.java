@@ -6,12 +6,8 @@ package com.umg.controlador;
 
 import com.umg.modelos.ModeloLogin;
 import com.umg.modelos.ModeloMenu;
-import com.umg.vistas.VistaLogin;
-import com.umg.vistas.VistaMantenimientoUsuarios;
-import com.umg.vistas.VistaPrincipal;
-import com.umg.vistas.VistaMenu;
-import com.umg.vistas.VistaMostrarEmpleados;
-import com.umg.vistas.VistaRegistrarEmpleado;
+import com.umg.vistas.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -46,6 +42,7 @@ public class ControladorMenu implements ActionListener, MouseListener {
         vista.contenedor.addMouseListener(this);
         vista.btnGestionUsuarios.addMouseListener(this);
         vista.btnMeMoEmple.addMouseListener(this);
+        vista.btnActuUsuario.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -110,7 +107,10 @@ public class ControladorMenu implements ActionListener, MouseListener {
         } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
             VistaMostrarEmpleados panel = new VistaMostrarEmpleados();
             cambiarVista(panel);
-        } else if (e.getComponent().equals(vista.btnExpandirMenu)) {
+        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
+            VistaActualizarEmpleado panel = new VistaActualizarEmpleado();
+            cambiarVista(panel);
+        }else if (e.getComponent().equals(vista.btnExpandirMenu)) {
             if (estado) {
                 moverDerecha(vista.panelMenu, 1, 2, 200);
                 estado = false;
