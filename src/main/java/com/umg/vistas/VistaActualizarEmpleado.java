@@ -121,7 +121,8 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         jLabel25 = new javax.swing.JLabel();
         panelH4 = new javax.swing.JPanel();
         jLabel43 = new javax.swing.JLabel();
-        btnRegistrarEmpleado = new javax.swing.JPanel();
+        btnActualizarEmpleado = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1230, 720));
@@ -134,11 +135,12 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1226, 720));
 
         jPanel4.setMinimumSize(new java.awt.Dimension(1220, 720));
-        jPanel4.setPreferredSize(new java.awt.Dimension(1220, 1530));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1220, 1600));
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
 
         panelOpciones1.setBackground(new java.awt.Color(240, 253, 244));
         panelOpciones1.setMinimumSize(new java.awt.Dimension(1220, 720));
+        panelOpciones1.setName(""); // NOI18N
         panelOpciones1.setPreferredSize(new java.awt.Dimension(1220, 1530));
         panelOpciones1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -548,18 +550,16 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         jLabel43.setText("Huella 4");
         jPanel3.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 100, -1));
 
-        javax.swing.GroupLayout btnRegistrarEmpleadoLayout = new javax.swing.GroupLayout(btnRegistrarEmpleado);
-        btnRegistrarEmpleado.setLayout(btnRegistrarEmpleadoLayout);
-        btnRegistrarEmpleadoLayout.setHorizontalGroup(
-            btnRegistrarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-        btnRegistrarEmpleadoLayout.setVerticalGroup(
-            btnRegistrarEmpleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
+        btnActualizarEmpleado.setBackground(new java.awt.Color(0, 127, 75));
+        btnActualizarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.add(btnRegistrarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 160, 30));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Actualizar Empleado");
+        btnActualizarEmpleado.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+
+        jPanel3.add(btnActualizarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 350, 160, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-huellas.png"))); // NOI18N
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 430));
@@ -580,13 +580,15 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnRegistrarEmpleado;
+    private javax.swing.JPanel btnActualizarEmpleado;
     private javax.swing.JPanel btnRegistrarEmpleado1;
     public javax.swing.JComboBox<String> cbDepto;
     public javax.swing.JComboBox<String> cbEstadoCivil;
@@ -629,6 +631,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -661,7 +664,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void setControlador(ControladorActualizarEmpleado controlador){
-        btnRegistrarEmpleado.addMouseListener(controlador);
+        btnActualizarEmpleado.addMouseListener(controlador);
         cbDepto.addActionListener(controlador);
     }
 
