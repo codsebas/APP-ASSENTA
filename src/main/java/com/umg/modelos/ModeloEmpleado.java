@@ -25,6 +25,8 @@ public class ModeloEmpleado {
 
     // PUESTO EN LA EMPRESA
     private int idPuesto;
+    private String NombrePuesto;
+    private String NombreJefeInmediato;
 
     // JORNADA
     private String horarioEntrada;
@@ -46,6 +48,7 @@ public class ModeloEmpleado {
 
     //Vista
 private VistaMostrarEmpleados vista;
+
 
     public ModeloEmpleado() {
 
@@ -113,6 +116,26 @@ private VistaMostrarEmpleados vista;
 
         this.idHuella = idHuella;
         this.huella = huella;
+    }
+
+    public ModeloEmpleado(VistaMostrarEmpleados vistaMostrarEmpleados) {
+
+    }
+
+    public String getNombrePuesto() {
+        return NombrePuesto;
+    }
+
+    public void setNombrePuesto(String nombrePuesto) {
+        NombrePuesto = nombrePuesto;
+    }
+
+    public String getNombreJefeInmediato() {
+        return NombreJefeInmediato;
+    }
+
+    public void setNombreJefeInmediato(String nombreJefeInmediato) {
+        NombreJefeInmediato = nombreJefeInmediato;
     }
 
     public VistaMostrarEmpleados getVista() {

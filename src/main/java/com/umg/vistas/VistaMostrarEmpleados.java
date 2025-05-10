@@ -4,6 +4,10 @@
  */
 package com.umg.vistas;
 
+import com.umg.controlador.ControladorMostrarEmpleado;
+import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloVistaMostrarEmpleado;
+
 /**
  *
  * @author axels
@@ -15,6 +19,16 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
      */
     public VistaMostrarEmpleados() {
         initComponents();
+        ModeloVistaMostrarEmpleado modelo = new ModeloVistaMostrarEmpleado(this);
+        ControladorMostrarEmpleado controlador = new ControladorMostrarEmpleado(modelo);
+        setControlador(controlador);
+
+
+    }
+
+    private void setControlador(ControladorMostrarEmpleado controlador) {
+        btnBuscarEmpleado.addMouseListener(controlador);
+        jTable1.addMouseListener(controlador);
     }
 
     /**
@@ -127,7 +141,7 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnBuscarEmpleado;
+    public javax.swing.JPanel btnBuscarEmpleado;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
@@ -136,7 +150,7 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public javax.swing.JTable jTable1;
     private javax.swing.JLabel lblFondo1;
     private javax.swing.JPanel panelInfoPersonal1;
     public javax.swing.JTextField txtDPI;

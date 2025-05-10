@@ -137,31 +137,26 @@ public class EmpleadoImp implements IEmpleados {
             if (rs.next()) {
                 modelo = new ModeloEmpleado(); // Solo si encuentra resultado
 
-                modelo.setIdEmpleado(rs.getInt(1));
-                modelo.setDpi(rs.getString(2));
-                modelo.setSexo(rs.getString(3));
-                modelo.setPrimerNombre(rs.getString(4));
-                modelo.setSegundoNombre(rs.getString(5));
-                modelo.setTercerNombre(rs.getString(6));
-                modelo.setPrimerApellido(rs.getString(7));
-                modelo.setSegundoApellido(rs.getString(8));
-                modelo.setApellidoCasada(rs.getString(9));
+                modelo.setDpi(rs.getString(2));                           // dpi_empleado
+                modelo.setSexo(rs.getString(3));                          // sexo_empleado
+                modelo.setEstadoCivil(rs.getString(4));                   // estado_civil
+                modelo.setPrimerNombre(rs.getString(5));                  // nombre1_empleado
+                modelo.setSegundoNombre(rs.getString(6));                 // nombre2_empleado
+                modelo.setTercerNombre(rs.getString(7));                  // nombre3_empleado
+                modelo.setPrimerApellido(rs.getString(8));                // apellido1_empleado
+                modelo.setSegundoApellido(rs.getString(9));               // apellido2_empleado
+                modelo.setApellidoCasada(rs.getString(10));               // apellidocasada_empleado
+                modelo.setFechaNacimiento(rs.getString(11));              // fec_nacimiento
+                modelo.setEdad(rs.getInt(12));                            // edad_empleado
+                modelo.setNombrePuesto(rs.getString(13));                 // nombre_puesto (viene del JOIN)
+                modelo.setCorreoElectronico(rs.getString(14));            // email_empleado
+                modelo.setNumeroTelefono1(rs.getString(15));              // telefono1_empleado
+                modelo.setNumeroTelefono2(rs.getString(16));              // telefono2_empleado
+                modelo.setHorarioEntrada(rs.getString(17));               // horario_entrada
+                modelo.setHorarioSalida(rs.getString(18));                // horario_salida
+                modelo.setNombreJefeInmediato(rs.getString(19));          // nombre del jefe (concat del JOIN)
+     // jefe_inmediato_id
 
-                // Usamos índice en lugar de nombre por seguridad
-                modelo.setFechaNacimiento(rs.getString(10)); // columna 10 = fec_nacimiento
-
-                modelo.setEdad(rs.getInt(11));
-                modelo.setIdPuesto(rs.getInt(12));
-                modelo.setHorarioEntrada(rs.getString(13));
-                modelo.setHorarioSalida(rs.getString(14));
-                modelo.setIdJefeInmediato(rs.getInt(15));
-                modelo.setIdDireccion(rs.getInt(16));
-                modelo.setDepartamento(rs.getString(17));
-                modelo.setMunicipio(rs.getString(18));
-                modelo.setAldeaColonia(rs.getString(19));
-                modelo.setDireccionVivienda(rs.getString(20));
-                modelo.setIdHuella(rs.getInt(21));
-                modelo.setHuella(rs.getBytes(22));
             }
 
             conector.desconectar();

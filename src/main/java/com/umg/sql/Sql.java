@@ -2,7 +2,17 @@ package com.umg.sql;
 
 public class Sql {
     private final String CONSULTA_TODOS_EMPLEADO = "SELECT * FROM empleado";
-    private final String CONSULTA_EMPLEADO_DPI = "SELECT * FROM empleado WHERE dpi_empleado = ?";
+    private final String CONSULTA_EMPLEADO_DPI =  "SELECT " +
+            "e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
+            "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
+            "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
+            "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, e.email_empleado, " +
+            "e.telefono1_empleado, e.telefono2_empleado, e.horario_entrada, e.horario_salida, " +
+            "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS jefe_inmediato_nombre " +
+            "FROM empleado e " +
+            "INNER JOIN puesto p ON e.puesto_id = p.id_puesto " +
+            "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado " +
+            "WHERE e.dpi_empleado = ?";
     private final String INSERTAR_EMPLEADO = """
     INSERT INTO empleado (
         dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,

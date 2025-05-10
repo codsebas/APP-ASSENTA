@@ -2,29 +2,44 @@ package com.umg.controlador;
 
 import com.umg.implementacion.EmpleadoImp;
 import com.umg.modelos.ModeloEmpleado;
-import com.umg.modelos.ModeloVistaRegistrarEmpleado;
+import com.umg.modelos.ModeloVistaMostrarEmpleado;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class ControladorMostrarEmpleado {
+public class ControladorMostrarEmpleado implements ActionListener, MouseListener {
+
+   ModeloVistaMostrarEmpleado modelo;
+
+    public ControladorMostrarEmpleado(ModeloVistaMostrarEmpleado modelo) {
+        this.modelo= modelo;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 
     EmpleadoImp implementacion = new EmpleadoImp();
-    ModeloVistaRegistrarEmpleado modelo;
-    ModeloEmpleado modeloEmpleado;
+
+
 
 
 
     public void mostrarEmpleado(){
-        // String dpi = modelo.getVistaMostrarEmpleados().txtDPI.getText();
-        //ModeloEmpleado modeloEmpleado = implementacion.mostrarEmpleado(dpi);
+         String dpi = modelo.getVistaMostrarEmpleados().txtDPI.getText();
+        ModeloEmpleado modeloEmpleado = implementacion.mostrarEmpleado(dpi);
 
         if (modelo != null) {
             DefaultTableModel tabla = new DefaultTableModel();
             tabla.addColumn("dpi_empleado");
             tabla.addColumn("sexo_empleado");
             tabla.addColumn("estado_civil");
-            tabla.addColumn("nombre1_empleado ");
+            tabla.addColumn("nombre1_empleado");
             tabla.addColumn("nombre2_empleado");
             tabla.addColumn("nombre3_empleado");
             tabla.addColumn("apellido1_empleado");
@@ -32,16 +47,15 @@ public class ControladorMostrarEmpleado {
             tabla.addColumn("apellidocasada_empleado");
             tabla.addColumn("fec_nacimiento");
             tabla.addColumn("edad_empleado");
-            tabla.addColumn("puesto_id");
+            tabla.addColumn("nombre_puesto");
             tabla.addColumn("email_empleado");
             tabla.addColumn("telefono1_empleado");
             tabla.addColumn("telefono2_empleado");
             tabla.addColumn("horario_entrada");
             tabla.addColumn("horario_salida");
-            tabla.addColumn("jefe_inmediato_id");
+            tabla.addColumn("jefe_inmediato");
 
             Object[] fila = {
-
                     modeloEmpleado.getDpi(),
                     modeloEmpleado.getSexo(),
                     modeloEmpleado.getEstadoCivil(),
@@ -53,19 +67,46 @@ public class ControladorMostrarEmpleado {
                     modeloEmpleado.getApellidoCasada(),
                     modeloEmpleado.getFechaNacimiento(),
                     modeloEmpleado.getEdad(),
-                    modeloEmpleado.getIdPuesto(),
+                    modeloEmpleado.getNombrePuesto(),             // cambiado
                     modeloEmpleado.getCorreoElectronico(),
                     modeloEmpleado.getNumeroTelefono1(),
                     modeloEmpleado.getNumeroTelefono2(),
                     modeloEmpleado.getHorarioEntrada(),
                     modeloEmpleado.getHorarioSalida(),
-                    modeloEmpleado.getIdJefeInmediato()
+                    modeloEmpleado.getNombreJefeInmediato()       // cambiado
             };
-
             tabla.addRow(fila);
-            modeloEmpleado.getVista().jTable1.setModel(tabla);
+            modelo.getVistaMostrarEmpleados().jTable1.setModel(tabla);
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró el empleado con ese DPI.");
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getComponent().equals(modelo.getVistaMostrarEmpleados().btnBuscarEmpleado)){
+            mostrarEmpleado();
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
