@@ -36,7 +36,7 @@ public class EmpleadoImp implements IEmpleados {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
             ps.setString(1, modelo.getDpi());
             ps.setString(2, modelo.getSexo());
-           // ps.setString(3, modelo.getEstadoCivil());
+            // ps.setString(3, modelo.getEstadoCivil());
             ps.setString(4, modelo.getPrimerNombre());
             ps.setString(5, modelo.getSegundoNombre());
 
@@ -57,7 +57,7 @@ public class EmpleadoImp implements IEmpleados {
             ps.setInt(18, 1); // jefe_inmediato_id
 
 
-             this.rs = this.ps.executeQuery();
+            this.rs = this.ps.executeQuery();
             if (rs.next()) {
                 id_empleado = rs.getInt("id_empleado");
             } else {
@@ -102,22 +102,58 @@ public class EmpleadoImp implements IEmpleados {
     public boolean eliminarEmpleado(String dpi_empleado) {
         boolean resultado = true;
         conector.conectar();
-        try{
-            ps =    conector.preparar(sql.getELIMINAR_EMPLEADO());
+        try {
+            ps = conector.preparar(sql.getELIMINAR_EMPLEADO());
             ps.setInt(1, Integer.parseInt(dpi_empleado));
             return ps.execute();
 
         } catch (SQLException ex) {
-           conector.mensaje("No se pudo eliminar el empleado", "Error al eliminar", 0);
-        return resultado;
+            conector.mensaje("No se pudo eliminar el empleado", "Error al eliminar", 0);
+            return resultado;
         }
 
     }
 
     @Override
     public DefaultTableModel modeloEmpleado() {
-        return null;
-    }
+        DefaultTableModel tabla = new DefaultTableModel();
+
+        try {
+            conector.conectar(); //
+            ps = conector.preparar(sql.getCONSULTA_TODOS_EMPLEADO());
+            rs = ps.executeQuery();
+
+
+            tabla.setColumnIdentifiers(new Object[]{"DPI", "Sexo", "Estado Civil", "1er.Nombre", "2do.Nombre", "3er.Nombre", "1er.Apellido",
+                    "2do.Apellido", "Apellido de Casada", "Edad", "Puesto", "Email", "telefono", "Hor-Entrada", "Hor-Salida", "Jefe"});
+
+            while (rs.next()) {
+                tabla.addRow(new Object[]{
+                        rs.getString("dpi_empleado"),
+                        rs.getString("sexo_empleado"),
+                        rs.getString("estado_civil"),
+                        rs.getString("nombre1_empleado"),
+                        rs.getString("nombre2_empleado"),
+                        rs.getString("nombre3_empleado"),
+                        rs.getString("apellido1_empleado"),
+                        rs.getString("apellido2_empleado"),
+                        rs.getString("apellidocasada_empleado"),
+                        rs.getInt("edad_empleado"),
+                        rs.getString("nombre_puesto"),
+                        rs.getString("email_empleado"),
+                        rs.getString("telefono1_empleado"),
+                        rs.getString("horario_entrada"),
+                        rs.getString("horario_salida"),
+                        rs.getString("jefe_inmediato_nombre")
+                });
+
+            }
+
+
+        } catch (SQLException ex) {
+        }
+        return tabla;
+}
 
     @Override
     public DefaultTableModel modeloEmpleado(int dpi_empleado) {
@@ -167,6 +203,8 @@ public class EmpleadoImp implements IEmpleados {
 
         return modelo;
     }
+
+
 
     @Override
     public boolean actualizarEmpleado(ModeloEmpleado modelo) {

@@ -12,12 +12,10 @@ public class Sql {
             "e.apellido1_empleado, " +
             "e.apellido2_empleado, " +
             "e.apellidocasada_empleado, " +
-            "e.fec_nacimiento, " +
             "e.edad_empleado, " +
             "p.nombre_puesto, " +
             "e.email_empleado, " +
             "e.telefono1_empleado, " +
-            "e.telefono2_empleado, " +
             "e.horario_entrada, " +
             "e.horario_salida, " +
             "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS jefe_inmediato_nombre " +
