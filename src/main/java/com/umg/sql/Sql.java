@@ -79,7 +79,7 @@ public class Sql {
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";
     private final String CONSULTA_USUARIO = "SELECT * FROM usuarios WHERE usuario = ?";
     private final String CONSULTA_USUARIO_LOGIN = "SELECT * FROM usuarios WHERE usuario = ? AND password = crypt(?, password)";
-    private final String INSERTAR_USUARIO = "INSERT INTO usuarios (usuario, password) VALUES (?, crypt(?, gen_salt('bf')))";
+    private final String INSERTAR_USUARIO = "INSERT INTO usuarios (usuario, password, empleado_dpi) VALUES (?, crypt(?, gen_salt('bf')),?)";
     private final String ACTUALIZAR_USUARIO = "UPDATE usuarios SET password = crypt(?, gen_salt('bf')), usuario = ? WHERE id_usuario = ?";
     private final String ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE id_usuario = ?";
 
