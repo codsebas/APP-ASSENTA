@@ -212,6 +212,11 @@ public class EmpleadoImp implements IEmpleados {
         return null;
     }
 
+    @Override
+    public DefaultTableModel mostrarTodosLosEmpleados() {
+        return null;
+    }
+
    /* @Override
     public ModeloEmpleado mostrarEmpleado(String dpi) {
         return null;

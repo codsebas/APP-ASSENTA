@@ -17,4 +17,6 @@ public interface IEmpleados {
     DefaultTableModel modeloEmpleado(String dpi);
 
     //ModeloEmpleado mostrarEmpleado(String dpi);
+
+    public DefaultTableModel mostrarTodosLosEmpleados();
 }

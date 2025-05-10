@@ -5,7 +5,6 @@
 package com.umg.vistas;
 
 import com.umg.controlador.ControladorMostrarEmpleado;
-import com.umg.modelos.ModeloEmpleado;
 import com.umg.modelos.ModeloVistaMostrarEmpleado;
 
 /**
@@ -23,12 +22,6 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
         ControladorMostrarEmpleado controlador = new ControladorMostrarEmpleado(modelo);
         setControlador(controlador);
 
-
-    }
-
-    private void setControlador(ControladorMostrarEmpleado controlador) {
-        btnBuscarEmpleado.addMouseListener(controlador);
-        jTable1.addMouseListener(controlador);
     }
 
     /**
@@ -51,7 +44,7 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
         panelInfoPersonal1 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        panelTabla = new javax.swing.JPanel();
         lblFondo1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1230, 720));
@@ -106,19 +99,10 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
         jLabel19.setText("DATOS GENERALES");
         panelInfoPersonal1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        panelTabla.setLayout(new javax.swing.BoxLayout(panelTabla, javax.swing.BoxLayout.X_AXIS));
+        jScrollPane1.setViewportView(panelTabla);
 
         panelInfoPersonal1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 870, 280));
 
@@ -149,10 +133,13 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
+    public javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo1;
     private javax.swing.JPanel panelInfoPersonal1;
+    public javax.swing.JPanel panelTabla;
     public javax.swing.JTextField txtDPI;
     // End of variables declaration//GEN-END:variables
+    private void setControlador(ControladorMostrarEmpleado controlador) {
+        btnBuscarEmpleado.addMouseListener(controlador);
+    }
 }

@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,26 +46,10 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
 
         if (modelo != null) {
             DefaultTableModel tabla = new DefaultTableModel();
-            tabla.addColumn("DPI");
-            tabla.addColumn("Sexo");
-            tabla.addColumn("Estado Civil");
-            tabla.addColumn("1er.Nombre");
-            tabla.addColumn("2do.Nombre");
-            tabla.addColumn("3er.Nombre");
-            tabla.addColumn("1er.Apellido");
-            tabla.addColumn("2do.Apellido");
-            tabla.addColumn("Apellido de Casada");
-            tabla.addColumn("Fech-Nacimiento");
-            tabla.addColumn("Edad");
-            tabla.addColumn("Puesto");
-            tabla.addColumn("Email");
-            tabla.addColumn("1er.telefono");
-            tabla.addColumn("2do.telefono");
-            tabla.addColumn("Hor-Entrada");
-            tabla.addColumn("Hor-Salida");
-            tabla.addColumn("Jefe");
+            tabla.setColumnIdentifiers(new Object[]{"DPI", "Sexo", "Estado Civil", "1er.Nombre", "2do.Nombre", "3er.Nombre", "1er.Apellido",
+                    "2do.Apellido","Apellido de Casada", "Fech-Nacimiento","Edad","Puesto","Email","1er.telefono", "2do.telefono","Hor-Entrada", "Hor-Salida", "Jefe"});
 
-            Object[] fila = {
+            tabla.addRow(new Object[]{
                     modeloEmpleado.getDpi(),
                     modeloEmpleado.getSexo(),
                     modeloEmpleado.getEstadoCivil(),
@@ -85,10 +68,13 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
                     modeloEmpleado.getHorarioEntrada(),
                     modeloEmpleado.getHorarioSalida(),
                     modeloEmpleado.getNombreJefeInmediato()
-            };
+            });
 
-            tabla.addRow(fila);
-            modelo.getVistaMostrarEmpleados().jTable1.setModel(tabla);
+            JTable tableEmpleados = new JTable(tabla);
+            JScrollPane scrollTabla = new JScrollPane(tableEmpleados);
+            modelo.getVistaMostrarEmpleados().panelTabla.add(scrollTabla);
+            modelo.getVistaMostrarEmpleados().panelTabla.revalidate();
+            modelo.getVistaMostrarEmpleados().panelTabla.repaint();
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró el empleado con ese DPI.");
         }
@@ -106,27 +92,11 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
             rs = ps.executeQuery();
 
             DefaultTableModel tabla = new DefaultTableModel();
-            tabla.addColumn("DPI");
-            tabla.addColumn("Sexo");
-            tabla.addColumn("Estado Civil");
-            tabla.addColumn("1er. Nombre");
-            tabla.addColumn("2do. Nombre");
-            tabla.addColumn("3er. Nombre");
-            tabla.addColumn("1er. Apellido");
-            tabla.addColumn("2do. Apellido");
-            tabla.addColumn("Apellido de Casada");
-            tabla.addColumn("Fecha de Nacimiento");
-            tabla.addColumn("Edad");
-            tabla.addColumn("Puesto");
-            tabla.addColumn("Correo Electrónico");
-            tabla.addColumn("Teléfono 1");
-            tabla.addColumn("Teléfono 2");
-            tabla.addColumn("Horario Entrada");
-            tabla.addColumn("Horario Salida");
-            tabla.addColumn("Jefe Inmediato");
+            tabla.setColumnIdentifiers(new Object[]{"DPI", "Sexo", "Estado Civil", "1er.Nombre", "2do.Nombre", "3er.Nombre", "1er.Apellido",
+                    "2do.Apellido","Apellido de Casada", "Fech-Nacimiento","Edad","Puesto","Email","1er.telefono", "2do.telefono","Hor-Entrada", "Hor-Salida", "Jefe"});
 
             while (rs.next()) {
-                Object[] fila = {
+                tabla.addRow(new Object[]{
                         rs.getString("dpi_empleado"),
                         rs.getString("sexo_empleado"),
                         rs.getString("estado_civil"),
@@ -145,11 +115,15 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
                         rs.getString("horario_entrada"),
                         rs.getString("horario_salida"),
                         rs.getString("jefe_inmediato_nombre")
-                };
-                tabla.addRow(fila);
+                });
+
             }
 
-            modelo.getVistaMostrarEmpleados().jTable1.setModel(tabla);
+            JTable tableEmpleados = new JTable(tabla);
+            JScrollPane scrollTabla = new JScrollPane(tableEmpleados);
+            modelo.getVistaMostrarEmpleados().panelTabla.add(scrollTabla);
+            modelo.getVistaMostrarEmpleados().panelTabla.revalidate();
+            modelo.getVistaMostrarEmpleados().panelTabla.repaint();
 
         } catch (SQLException e) {
             e.printStackTrace();
