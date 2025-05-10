@@ -5,6 +5,7 @@
 package com.umg.vistas;
 
 import com.umg.controlador.ControladorActualizarEmpleado;
+import com.umg.controlador.ControladorMostrarEmpleado;
 import com.umg.controlador.ControladorRegistrarEmpleado;
 import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloActualizarEmpleado;
@@ -30,6 +31,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         setControlador(controlador);
     }
 
+
     public void cargarPuestos() {
         PuestoImp puesto = new PuestoImp();
         List<ModeloPuesto> puestos = puesto.obtenerPuestos();
@@ -40,6 +42,8 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         }
 
     }
+
+
 
 
     /**
@@ -588,8 +592,8 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnActualizarEmpleado;
-    private javax.swing.JPanel btnRegistrarEmpleado1;
+    public javax.swing.JPanel btnActualizarEmpleado;
+    public javax.swing.JPanel btnRegistrarEmpleado1;
     public javax.swing.JComboBox<String> cbDepto;
     public javax.swing.JComboBox<String> cbEstadoCivil;
     public javax.swing.JComboBox<String> cbJefeInmediato;

@@ -7,7 +7,6 @@ import com.umg.sql.Sql;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 
 public class EmpleadoImp implements IEmpleados {
 
@@ -198,6 +197,50 @@ public class EmpleadoImp implements IEmpleados {
             conector.desconectar();
         } catch (SQLException ex) {
             conector.mensaje(ex.getMessage(), "Error al mostrar", 0);
+            conector.desconectar();
+        }
+
+        return modelo;
+    }
+
+    @Override
+    public ModeloEmpleado mostrarEmpleadoPorDpi(String dpi_empleado) {
+        conector.conectar();
+        ModeloEmpleado modelo = null; // Empezamos como null
+
+        try {
+            // Usamos la consulta SQL definida en tu clase SQL
+            ps = conector.preparar(sql.getCONSULTA_EMPLEADO_DPIUPD()); // Selecciona el empleado con el DPI dado
+            ps.setString(1, dpi_empleado);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                modelo = new ModeloEmpleado(); // Solo si encuentra un resultado
+
+                // Llenamos el objeto modelo con los datos recuperados
+                modelo.setDpi(rs.getString("dpi_empleado"));              // dpi_empleado
+                modelo.setSexo(rs.getString("sexo_empleado"));            // sexo_empleado
+                modelo.setEstadoCivil(rs.getString("estado_civil"));     // estado_civil
+                modelo.setPrimerNombre(rs.getString("nombre1_empleado")); // nombre1_empleado
+                modelo.setSegundoNombre(rs.getString("nombre2_empleado")); // nombre2_empleado
+                modelo.setTercerNombre(rs.getString("nombre3_empleado")); // nombre3_empleado
+                modelo.setPrimerApellido(rs.getString("apellido1_empleado")); // apellido1_empleado
+                modelo.setSegundoApellido(rs.getString("apellido2_empleado")); // apellido2_empleado
+                modelo.setApellidoCasada(rs.getString("apellidocasada_empleado")); // apellidocasada_empleado
+                modelo.setFechaNacimiento(rs.getString("fec_nacimiento")); // fec_nacimiento
+                modelo.setEdad(rs.getInt("edad_empleado"));              // edad_empleado
+                modelo.setNombrePuesto(rs.getString("nombre_puesto"));   // nombre_puesto (viene del JOIN)
+                modelo.setCorreoElectronico(rs.getString("email_empleado")); // email_empleado
+                modelo.setNumeroTelefono1(rs.getString("telefono1_empleado")); // telefono1_empleado
+                modelo.setNumeroTelefono2(rs.getString("telefono2_empleado")); // telefono2_empleado
+                modelo.setHorarioEntrada(rs.getString("horario_entrada")); // horario_entrada
+                modelo.setHorarioSalida(rs.getString("horario_salida")); // horario_salida
+                modelo.setNombreJefeInmediato(rs.getString("nombre_jefe_inmediato")); // nombre_jefe_inmediato
+            }
+
+            conector.desconectar();
+        } catch (SQLException ex) {
+            conector.mensaje(ex.getMessage(), "Error al mostrar empleado", 0);
             conector.desconectar();
         }
 

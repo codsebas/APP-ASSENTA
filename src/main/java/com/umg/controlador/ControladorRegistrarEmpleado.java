@@ -46,7 +46,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
           //  mostrarEmpleado();
             unirNombre();
-           insertarEmpleado();
+           //insertarEmpleado();
 
         }
         }
@@ -280,5 +280,5 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             }
         }
     }
-    
+
 }

@@ -12,6 +12,8 @@ public interface IEmpleados {
     public DefaultTableModel modeloEmpleado(int dpi_empleado);
     ModeloEmpleado mostrarEmpleado(String dpi_empleado);
 
+    ModeloEmpleado mostrarEmpleadoPorDpi(String dpi_empleado);
+
     public boolean actualizarEmpleado(ModeloEmpleado modelo);
 
     DefaultTableModel modeloEmpleado(String dpi);
