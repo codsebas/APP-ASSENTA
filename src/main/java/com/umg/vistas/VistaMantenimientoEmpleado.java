@@ -32,8 +32,8 @@ public class VistaMantenimientoEmpleado extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtUsuarioMnt = new javax.swing.JTextField();
+        txtContraseñaMtn = new javax.swing.JPasswordField();
 
         setMinimumSize(new java.awt.Dimension(1230, 720));
         setPreferredSize(new java.awt.Dimension(1230, 720));
@@ -64,12 +64,12 @@ public class VistaMantenimientoEmpleado extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Contraseña");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        txtUsuarioMnt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtUsuarioMnt.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        txtContraseñaMtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtContraseñaMtn.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtContraseñaMtn.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -82,8 +82,8 @@ public class VistaMantenimientoEmpleado extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(117, 117, 117)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1))
+                    .addComponent(txtUsuarioMnt, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(txtContraseñaMtn))
                 .addContainerGap(537, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -92,14 +92,14 @@ public class VistaMantenimientoEmpleado extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuarioMnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(jLabel3))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtContraseñaMtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
@@ -127,7 +127,7 @@ public class VistaMantenimientoEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JPasswordField txtContraseñaMtn;
+    public javax.swing.JTextField txtUsuarioMnt;
     // End of variables declaration//GEN-END:variables
 }
