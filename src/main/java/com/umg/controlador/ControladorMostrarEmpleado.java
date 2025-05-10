@@ -20,10 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ControladorMostrarEmpleado implements ActionListener, MouseListener {
-    Conector conector = new Conector();
-    Sql sql = new Sql();
-    PreparedStatement ps;
-    ResultSet rs;
+
 
    ModeloVistaMostrarEmpleado modelo;
 
@@ -39,18 +36,29 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
 
     EmpleadoImp implementacion = new EmpleadoImp();
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(e.getComponent().equals(modelo.getVistaMostrarEmpleados().btnBuscarEmpleado)){
+            mostrarEmpleado();
+        }
+
+    }
 
 
 
 
-    public void mostrarEmpleado(){
-         String dpi = modelo.getVistaMostrarEmpleados().txtDPI.getText();
+
+    public void mostrarEmpleado() {
+        String dpi = modelo.getVistaMostrarEmpleados().txtDPI.getText();
         ModeloEmpleado modeloEmpleado = implementacion.mostrarEmpleado(dpi);
 
-        if (modelo != null) {
+        if (modeloEmpleado != null) {
             DefaultTableModel tabla = new DefaultTableModel();
-            tabla.setColumnIdentifiers(new Object[]{"DPI", "Sexo", "Estado Civil", "1er.Nombre", "2do.Nombre", "3er.Nombre", "1er.Apellido",
-                    "2do.Apellido","Apellido de Casada","Edad","Puesto","Email","telefono","Hor-Entrada", "Hor-Salida", "Jefe"});
+            tabla.setColumnIdentifiers(new Object[]{
+                    "DPI", "Sexo", "Estado Civil", "1er.Nombre", "2do.Nombre", "3er.Nombre", "1er.Apellido",
+                    "2do.Apellido", "Apellido de Casada", "Edad", "Puesto", "Email", "telefono",
+                    "Hor-Entrada", "Hor-Salida", "Jefe"
+            });
 
             tabla.addRow(new Object[]{
                     modeloEmpleado.getDpi(),
@@ -72,10 +80,37 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
             });
 
             JTable tableEmpleados = new JTable(tabla);
-            JScrollPane scrollTabla = new JScrollPane(tableEmpleados);
-            modelo.getVistaMostrarEmpleados().panelTabla.add(scrollTabla);
+            tableEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            ajustarTamañoTabla(tableEmpleados);
+
+            // Ajustar ancho de columnas automáticamente
+            for (int i = 0; i < tableEmpleados.getColumnCount(); i++) {
+                TableColumn column = tableEmpleados.getColumnModel().getColumn(i);
+                int ancho = 75;
+                TableCellRenderer headerRenderer = tableEmpleados.getTableHeader().getDefaultRenderer();
+                Component headerComp = headerRenderer.getTableCellRendererComponent(
+                        tableEmpleados, column.getHeaderValue(), false, false, 0, i);
+                ancho = Math.max(headerComp.getPreferredSize().width, ancho);
+                for (int fila = 0; fila < tableEmpleados.getRowCount(); fila++) {
+                    TableCellRenderer cellRenderer = tableEmpleados.getCellRenderer(fila, i);
+                    Component cellComp = tableEmpleados.prepareRenderer(cellRenderer, fila, i);
+                    ancho = Math.max(cellComp.getPreferredSize().width, ancho);
+                }
+                column.setPreferredWidth(ancho + 10);
+            }
+
+            JScrollPane scrollTabla = new JScrollPane(
+                    tableEmpleados,
+                    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                    JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+            );
+
+            modelo.getVistaMostrarEmpleados().panelTabla.removeAll();
+            modelo.getVistaMostrarEmpleados().panelTabla.setLayout(new java.awt.BorderLayout());
+            modelo.getVistaMostrarEmpleados().panelTabla.add(scrollTabla, java.awt.BorderLayout.CENTER);
             modelo.getVistaMostrarEmpleados().panelTabla.revalidate();
             modelo.getVistaMostrarEmpleados().panelTabla.repaint();
+
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró el empleado con ese DPI.");
         }
@@ -134,13 +169,7 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
         int alturaTotal = (rowHeight * rowCount) + headerHeight;
         tabla.setPreferredScrollableViewportSize(new Dimension(tabla.getPreferredSize().width, alturaTotal));
     }
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if(e.getComponent().equals(modelo.getVistaMostrarEmpleados().btnBuscarEmpleado)){
-            mostrarEmpleado();
-        }
 
-    }
 
     @Override
     public void mousePressed(MouseEvent e) {
