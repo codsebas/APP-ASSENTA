@@ -1,5 +1,6 @@
 package com.umg.interfaces;
 
+import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 
 import javax.swing.table.DefaultTableModel;
@@ -10,5 +11,6 @@ public interface IPuestos {
     boolean eliminarPuesto(int idPuesto);
     boolean actualizarPuesto(ModeloPuesto modelo);
     ModeloPuesto mostrarPuesto(int idPuesto);
+    ModeloJefeInmediato mostrarJefeInmediato(int idJefeInmediato);
     DefaultTableModel modeloPuesto();
 }

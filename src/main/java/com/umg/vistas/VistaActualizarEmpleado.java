@@ -6,9 +6,11 @@ package com.umg.vistas;
 
 import com.umg.controlador.ControladorActualizarEmpleado;
 import com.umg.controlador.ControladorMostrarEmpleado;
+import com.umg.controlador.ControladorPuesto;
 import com.umg.controlador.ControladorRegistrarEmpleado;
 import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloActualizarEmpleado;
+import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 import javax.swing.*;
@@ -25,23 +27,18 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
      */
     public VistaActualizarEmpleado() {
         initComponents();
-        cargarPuestos();
+        controladorPuesto.cargarPuestos(cbPuesto);
+        controladorPuesto.cargarJefes(cbJefeInmediato);
         ModeloActualizarEmpleado modelo = new ModeloActualizarEmpleado(this);
         ControladorActualizarEmpleado controlador = new ControladorActualizarEmpleado(modelo);
         setControlador(controlador);
     }
 
+    ControladorPuesto controladorPuesto = new ControladorPuesto();
 
-    public void cargarPuestos() {
-        PuestoImp puesto = new PuestoImp();
-        List<ModeloPuesto> puestos = puesto.obtenerPuestos();
-        cbPuesto.removeAllItems(); // Limpia si ya tenía datos
 
-        for (ModeloPuesto p : puestos) {
-            cbPuesto.addItem(String.valueOf(p));
-        }
 
-    }
+
 
 
 
