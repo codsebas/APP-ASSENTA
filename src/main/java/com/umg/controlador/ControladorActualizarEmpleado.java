@@ -5,14 +5,18 @@
 package com.umg.controlador;
 
 import com.umg.implementacion.EmpleadoImp;
+import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloActualizarEmpleado;
 import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloJefeInmediato;
+import com.umg.modelos.ModeloPuesto;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 /**
  *
@@ -20,12 +24,32 @@ import java.awt.event.MouseListener;
  */
 public class ControladorActualizarEmpleado implements MouseListener, ActionListener {
     ModeloActualizarEmpleado modelo;
+    PuestoImp implementacionPuesto = new PuestoImp();
+
 
     public ControladorActualizarEmpleado(ModeloActualizarEmpleado modelo) {
         this.modelo = modelo;
-        modelo.getvActualizarEmpleado().btnActualizarEmpleado.addMouseListener(this);
-        modelo.getvActualizarEmpleado().btnRegistrarEmpleado1.addMouseListener(this);
+    }
 
+    public void cargarJefes(JComboBox<String> comboBox) {
+
+        List<ModeloJefeInmediato> jefes = implementacionPuesto.obtenerJefesInmediatos();
+        comboBox.removeAllItems();
+
+        for (ModeloJefeInmediato j : jefes) {
+            comboBox.addItem("Elegir Jefe");
+            comboBox.addItem(String.valueOf(j));
+        }
+    }
+
+    public void cargarPuestos(JComboBox<String> comboBox) {
+        List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
+        comboBox.removeAllItems();
+
+        for (ModeloPuesto p : puestos) {
+            comboBox.addItem("Elegir Puesto");
+            comboBox.addItem(p.toString());
+        }
     }
 
 
