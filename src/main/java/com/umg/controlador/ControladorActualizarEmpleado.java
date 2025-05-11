@@ -36,8 +36,8 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         List<ModeloJefeInmediato> jefes = implementacionPuesto.obtenerJefesInmediatos();
         comboBox.removeAllItems();
 
+        comboBox.addItem("Elegir Jefe");
         for (ModeloJefeInmediato j : jefes) {
-            comboBox.addItem("Elegir Jefe");
             comboBox.addItem(String.valueOf(j));
         }
     }
@@ -46,8 +46,8 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
         comboBox.removeAllItems();
 
+        comboBox.addItem("Elegir Puesto");
         for (ModeloPuesto p : puestos) {
-            comboBox.addItem("Elegir Puesto");
             comboBox.addItem(p.toString());
         }
     }
