@@ -2,6 +2,8 @@ package com.umg.implementacion;
 import java.util.ArrayList;
 import java.util.List;
 import com.umg.interfaces.IPuestos;
+import com.umg.modelos.Modelo;
+import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 import com.umg.sql.Conector;
 import com.umg.sql.Sql;
@@ -16,6 +18,7 @@ public class PuestoImp implements IPuestos {
     Sql sql = new Sql();
     PreparedStatement ps;
     ResultSet rs;
+
 
     @Override
     public boolean insertarPuesto(ModeloPuesto modelo) {
@@ -89,6 +92,11 @@ public class PuestoImp implements IPuestos {
     }
 
     @Override
+    public ModeloJefeInmediato mostrarJefeInmediato(int idJefeInmediato) {
+        return null;
+    }
+
+    @Override
     public DefaultTableModel modeloPuesto() {
         DefaultTableModel modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("ID Puesto");
@@ -113,6 +121,7 @@ public class PuestoImp implements IPuestos {
 
         return modeloTabla;
     }
+
     public List<ModeloPuesto> obtenerPuestos() {
         List<ModeloPuesto> lista = new ArrayList<>();
         conector.conectar();
@@ -136,4 +145,27 @@ public class PuestoImp implements IPuestos {
         return lista;
     }
 
+    public List<ModeloJefeInmediato> obtenerJefesInmediatos() {
+        List<ModeloJefeInmediato> lista = new ArrayList<>();
+        conector.conectar();
+        try {
+            PreparedStatement stmt = conector.preparar(sql.getCONSULTAR_TODOS_JEFES_INMEDIATOS());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ModeloJefeInmediato jefe = new ModeloJefeInmediato(
+                        rs.getInt("id_empleado"),
+                        rs.getString("nombre_completo")
+                );
+                lista.add(jefe);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            conector.mensaje("Error al obtener jefes inmediatos: " + e.getMessage(), "Error", 0);
+        } finally {
+            conector.desconectar();
+        }
+        return lista;
+
+    }
 }

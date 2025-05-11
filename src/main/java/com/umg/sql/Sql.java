@@ -88,6 +88,7 @@ public class Sql {
     private final String INSERTAR_PUESTO = "INSERT INTO puesto (nombre_puesto) VALUES (?)";
     private final String ACTUALIZAR_PUESTO = "UPDATE puesto SET nombre_puesto = ? WHERE id_puesto = ?";
     private final String ELIMINAR_PUESTO = "DELETE FROM puesto WHERE id_puesto = ?";
+    private final String CONSULTAR_TODOS_JEFES_INMEDIATOS = "SELECT id_empleado, nombre1_empleado || ' ' || apellido1_empleado AS nombre_completo FROM empleado";
 
     public Sql() {
 
@@ -164,6 +165,10 @@ public String getCONSULTAR_PUESTO(){
 
     public String getCONSULTA_EMPLEADO_DPIUPD() {
         return CONSULTA_EMPLEADO_DPIUPD;
+    }
+
+    public String getCONSULTAR_TODOS_JEFES_INMEDIATOS() {
+        return CONSULTAR_TODOS_JEFES_INMEDIATOS;
     }
 }
 
