@@ -99,9 +99,23 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     private void insertarEmpleado(){
         String departamento = String.valueOf(modelo.getvRegistraEmpleado().cbDepto.getSelectedItem());
         String municipio = String.valueOf(modelo.getvRegistraEmpleado().cbMun.getSelectedItem());
-        //String estadoCivil = String.valueOf(modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedItem());
+
+        // === Conversión de estado civil ===
+        String estadoSeleccionado = String.valueOf(modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedItem());
+        String estadoCivil = "";
+
+        switch (estadoSeleccionado) {
+            case "Soltero/a": estadoCivil = "S"; break;
+            case "Casado/a": estadoCivil = "C"; break;
+            case "Divorciado/a": estadoCivil = "D"; break;
+            case "Viudo/a": estadoCivil = "V"; break;
+            case "Unión de Hecho": estadoCivil = "U"; break;
+            default: estadoCivil = ""; break;
+        }
+
         String sexo = String.valueOf(modelo.getvRegistraEmpleado().cbSexo.getSelectedItem());
         ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
+
         modeloEmpleado.setPrimerNombre(modelo.getvRegistraEmpleado().txtNom1.getText());
         modeloEmpleado.setSegundoNombre(modelo.getvRegistraEmpleado().txtNom2.getText());
         modeloEmpleado.setTercerNombre(modelo.getvRegistraEmpleado().txtNom3.getText());
@@ -111,27 +125,26 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setDepartamento(departamento);
         modeloEmpleado.setMunicipio(municipio);
         modeloEmpleado.setFechaNacimiento(modelo.getvRegistraEmpleado().txtFecha.getText());
-       // modeloEmpleado.setEstadoCivil(estadoCivil);
+        modeloEmpleado.setEstadoCivil(estadoCivil);
         modeloEmpleado.setSexo(sexo);
         modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
         modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum1.getText());
-        modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum2.getText());
+        modeloEmpleado.setNumeroTelefono2(modelo.getvRegistraEmpleado().txtNum2.getText()); // <-- Estabas repitiendo Num1
         modeloEmpleado.setDpi(modelo.getvRegistraEmpleado().txtDPI.getText());
-        modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
         modeloEmpleado.setHorarioEntrada(modelo.getvRegistraEmpleado().txtHoraEntrada.getText());
         modeloEmpleado.setHorarioSalida(modelo.getvRegistraEmpleado().txtHoraSalida.getText());
         modeloEmpleado.setAldeaColonia(modelo.getvRegistraEmpleado().txtAldea.getText());
         modeloEmpleado.setDireccionVivienda(modelo.getvRegistraEmpleado().txtDireccion.getText());
 
-
-
-        boolean resultado =  implementacion.insertarEmpleado(modeloEmpleado);
+        boolean resultado = implementacion.insertarEmpleado(modeloEmpleado);
         if (!resultado) {
-            JOptionPane.showMessageDialog(null, "empleado registrado con exito", "Exito", 1);
-        }else {
-            JOptionPane.showMessageDialog(null, "empleado no registrado","ERROR",0);
+            JOptionPane.showMessageDialog(null, "Empleado registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Empleado no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
 
 
 

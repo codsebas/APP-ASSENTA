@@ -23,7 +23,13 @@ public class EmpleadoImp implements IEmpleados {
             ps.setString(index, valor);
         }
     }
-
+    private void setNullableTime(PreparedStatement ps, int index, String timeStr) throws SQLException {
+        if (timeStr == null || timeStr.trim().isEmpty()) {
+            ps.setNull(index, java.sql.Types.TIME);
+        } else {
+            ps.setTime(index, Time.valueOf(timeStr));
+        }
+    }
 
     @Override
     public boolean insertarEmpleado(ModeloEmpleado modelo) {
@@ -35,26 +41,29 @@ public class EmpleadoImp implements IEmpleados {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
             ps.setString(1, modelo.getDpi());
             ps.setString(2, modelo.getSexo());
-             ps.setString(3, "C");
+            ps.setString(3, modelo.getEstadoCivil());
             ps.setString(4, modelo.getPrimerNombre());
-            ps.setString(5, modelo.getSegundoNombre());
 
-            setNullableString(ps, 6, modelo.getTercerNombre()); // opcional
+            setNullableString(ps, 5, modelo.getSegundoNombre()); // ← Segundo nombre opcional
+            setNullableString(ps, 6, modelo.getTercerNombre());  // ← Ya estaba bien
+
             ps.setString(7, modelo.getPrimerApellido());
             ps.setString(8, modelo.getSegundoApellido());
-
-            setNullableString(ps, 9, modelo.getApellidoCasada()); // opcional
+            setNullableString(ps, 9, modelo.getApellidoCasada()); // ← Ya estaba bien
 
             ps.setDate(10, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(11, modelo.getEdad());
             ps.setInt(12, 1); // puesto_id
-            ps.setString(13, modelo.getCorreoElectronico());
-            ps.setString(14, modelo.getNumeroTelefono1());
-            ps.setString(15, modelo.getNumeroTelefono2());
-            ps.setTime(16, Time.valueOf(modelo.getHorarioEntrada()));
-            ps.setTime(17, Time.valueOf(modelo.getHorarioSalida()));
-            ps.setInt(18, 1); // jefe_inmediato_id
 
+            setNullableString(ps, 13, modelo.getCorreoElectronico()); // ← Opcional
+            ps.setString(14, modelo.getNumeroTelefono1());
+            setNullableString(ps, 15, modelo.getNumeroTelefono2()); // ← Opcional
+
+            // Hora entrada/salida como opcionales:
+            setNullableTime(ps, 16, modelo.getHorarioEntrada());
+            setNullableTime(ps, 17, modelo.getHorarioSalida());
+
+            ps.setInt(18, 1);
 
             this.rs = this.ps.executeQuery();
             if (rs.next()) {
