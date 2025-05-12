@@ -116,9 +116,32 @@ actualizarEmpleado();
         }
 
         var vista = modelo.getvActualizarEmpleado();
+        // Aquí obtenemos el valor de estado civil de la base de datos (que ya viene como 'C', 'S', etc.)
+        String estadoCivilBD = empleado.getEstadoCivil();
 
+        // Convertir el estado civil de la base de datos a la forma que el JComboBox espera
+        String estadoCivil = "";
+        switch (estadoCivilBD) {
+            case "C":
+                estadoCivil = "Casado/a"; break;
+            case "S":
+                estadoCivil = "Soltero/a"; break;
+            case "D":
+                estadoCivil = "Divorciado/a"; break;
+            case "V":
+                estadoCivil = "Viudo/a"; break;
+            case "U":
+                estadoCivil = "Unión de Hecho"; break;
+            default:
+                estadoCivil = "Desconocido"; break;
+        }
+
+        // Ahora seleccionamos el item correcto en el combo box
+        vista.cbEstadoCivil.setSelectedItem(estadoCivil); // Aquí asignamos el estado civil al combo
         // Llenar campos con la información recuperada
         vista.cbSexo.setSelectedItem(empleado.getSexo());
+
+        System.out.println("Estado Civil: " + empleado.getEstadoCivil());
         vista.cbEstadoCivil.setSelectedItem(empleado.getEstadoCivil());
         vista.txtNom1.setText(empleado.getPrimerNombre());
         vista.txtNom2.setText(empleado.getSegundoNombre());
@@ -142,16 +165,17 @@ actualizarEmpleado();
 
         // Si tu vista también tiene los datos de dirección (esto dependerá de cómo llenes esos ComboBox)
 
-        System.out.println("Departamento: " + empleado.getDepartamento());
-        System.out.println("Municipio: " + empleado.getMunicipio());
-        System.out.println("Aldea: " + empleado.getAldeaColonia());
-        System.out.println("Dirección: " + empleado.getDireccionVivienda());
+
         vista.cbDepto.setSelectedItem(empleado.getDepartamento());
         vista.cbMun.setSelectedItem(empleado.getMunicipio());
         vista.txtAldea.setText(empleado.getAldeaColonia());
         vista.txtDireccion.setText(empleado.getDireccionVivienda());
 
         JOptionPane.showMessageDialog(null, "✅ Datos del empleado cargados.");
+    }
+
+    public void validarEstadoCivil(){
+
     }
 
     public void actualizarEmpleado(){
