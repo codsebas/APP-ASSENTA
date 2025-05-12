@@ -4,6 +4,9 @@
  */
 package com.umg.vistas;
 
+import com.umg.controlador.ControladorPuesto;
+import com.umg.modelos.ModeloPuesto;
+
 /**
  *
  * @author Keily Orellana
@@ -15,6 +18,9 @@ public class VistaMantenimientoPuestos extends javax.swing.JPanel {
      */
     public VistaMantenimientoPuestos() {
         initComponents();
+        ModeloPuesto modelo = new ModeloPuesto(this);
+        ControladorPuesto controlador = new ControladorPuesto(modelo);
+        setControlador(controlador);
     }
 
     /**
@@ -304,4 +310,8 @@ public class VistaMantenimientoPuestos extends javax.swing.JPanel {
     public javax.swing.JTextField txtDescripcion;
     public javax.swing.JTextField txtNombrePuesto;
     // End of variables declaration//GEN-END:variables
+
+    public void setControlador(ControladorPuesto controlador) {
+        btnAgregar.addMouseListener(controlador);
+    }
 }

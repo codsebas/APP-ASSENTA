@@ -1,41 +1,51 @@
 package com.umg.controlador;
 
+
 import com.umg.implementacion.PuestoImp;
-import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 
-import javax.swing.*;
-import java.util.List;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class ControladorPuesto {
+public class ControladorPuesto implements MouseListener {
+    ModeloPuesto modelo;
 
-    private PuestoImp puestoDao;
-
-    public ControladorPuesto() {
-        puestoDao = new PuestoImp();
+    public ControladorPuesto(ModeloPuesto modelo) {
+        this.modelo = modelo;
     }
 
-    public List<ModeloPuesto> obtenerListaPuestos() {
-        return puestoDao.obtenerPuestos();
-    }
-    public void cargarPuestos(JComboBox<String> comboBox) {
-        PuestoImp puesto = new PuestoImp();
-        List<ModeloPuesto> puestos = puesto.obtenerPuestos();
-        comboBox.removeAllItems();
+    PuestoImp implementacion = new PuestoImp();
 
-        for (ModeloPuesto p : puestos) {
-            comboBox.addItem(p.toString());
-        }
-    }
-    public void cargarJefes(JComboBox<String> comboBox) {
-        PuestoImp jefe = new PuestoImp();
-        List<ModeloJefeInmediato> jefes = jefe.obtenerJefesInmediatos();
-        comboBox.removeAllItems();
 
-        for (ModeloJefeInmediato j : jefes) {
-            comboBox.addItem(String.valueOf(j));
-        }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) {
 
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    public void agregarPuesto() {
+        ModeloPuesto modeloPuesto = new ModeloPuesto();
+        modeloPuesto.setNombrePuesto(modelo.getVistaPuestos().txtNombrePuesto.getText());
+        modeloPuesto.setDescripcionPuesto("hola soy el puesto");
+        implementacion.insertarPuesto(modeloPuesto);
+    }
 }
