@@ -111,15 +111,12 @@ actualizarEmpleado();
         ModeloEmpleado empleado = imp.mostrarEmpleadoPorDpi(dpi);
 
         if (empleado == null) {
-            JOptionPane.showMessageDialog(null, "❌ No se encontró un empleado con ese DPI.");
+            JOptionPane.showMessageDialog(null, "El dpi no esite BURRO.");
             return;
         }
 
         var vista = modelo.getvActualizarEmpleado();
-        // Aquí obtenemos el valor de estado civil de la base de datos (que ya viene como 'C', 'S', etc.)
         String estadoCivilBD = empleado.getEstadoCivil();
-
-        // Convertir el estado civil de la base de datos a la forma que el JComboBox espera
         String estadoCivil = "";
         switch (estadoCivilBD) {
             case "C":
@@ -136,9 +133,9 @@ actualizarEmpleado();
                 estadoCivil = "Desconocido"; break;
         }
 
-        // Ahora seleccionamos el item correcto en el combo box
-        vista.cbEstadoCivil.setSelectedItem(estadoCivil); // Aquí asignamos el estado civil al combo
-        // Llenar campos con la información recuperada
+
+        vista.cbEstadoCivil.setSelectedItem(estadoCivil);
+
         vista.cbSexo.setSelectedItem(empleado.getSexo());
 
         System.out.println("Estado Civil: " + empleado.getEstadoCivil());
@@ -157,26 +154,17 @@ actualizarEmpleado();
         vista.txtNum2.setText(empleado.getNumeroTelefono2());
         vista.txtHoraEntrada.setText(empleado.getHorarioEntrada());
         vista.txtHoraSalida.setText(empleado.getHorarioSalida());
-
-        // Si estás usando JComboBox con los nombres visibles, seleccionamos por nombre:
         vista.cbPuesto.setSelectedItem(empleado.getNombrePuesto());
         vista.cbJefeInmediato.setSelectedItem(empleado.getNombreJefeInmediato());
-
-
-        // Si tu vista también tiene los datos de dirección (esto dependerá de cómo llenes esos ComboBox)
-
-
         vista.cbDepto.setSelectedItem(empleado.getDepartamento());
         vista.cbMun.setSelectedItem(empleado.getMunicipio());
         vista.txtAldea.setText(empleado.getAldeaColonia());
         vista.txtDireccion.setText(empleado.getDireccionVivienda());
 
-        JOptionPane.showMessageDialog(null, "✅ Datos del empleado cargados.");
+        JOptionPane.showMessageDialog(null, "Datos cargados por completo MAQUINA.");
     }
 
-    public void validarEstadoCivil(){
 
-    }
 
     public void actualizarEmpleado(){
         EmpleadoImp imp = new EmpleadoImp();
@@ -196,19 +184,16 @@ actualizarEmpleado();
             empleado.setSegundoApellido(vista.txtApe2.getText());
             empleado.setApellidoCasada(vista.txtApeC.getText());
             empleado.setFechaNacimiento(vista.txtFecha.getText());
-            // La edad deberías calcularla automáticamente por fecha de nacimiento, pero si está en un campo:
             // empleado.setEdad(Integer.parseInt(vista.txtEdad.getText()));  // Si tienes txtEdad
             empleado.setCorreoElectronico(vista.txtCorreo.getText());
             empleado.setNumeroTelefono1(vista.txtNum1.getText());
             empleado.setNumeroTelefono2(vista.txtNum2.getText());
 
-            // Estos deberían venir de cbPuesto, cbJefeInmediato, etc.
             empleado.setIdPuesto(Integer.parseInt((String) vista.cbPuesto.getSelectedItem()));
             empleado.setHorarioEntrada(vista.txtHoraEntrada.getText());
             empleado.setHorarioSalida(vista.txtHoraSalida.getText());
             empleado.setIdJefeInmediato(Integer.parseInt((String) vista.cbJefeInmediato.getSelectedItem()));
 
-            // Dirección
             empleado.setDepartamento((String) vista.cbDepto.getSelectedItem());
             empleado.setMunicipio((String) vista.cbMun.getSelectedItem());
             empleado.setAldeaColonia(vista.txtAldea.getText());
