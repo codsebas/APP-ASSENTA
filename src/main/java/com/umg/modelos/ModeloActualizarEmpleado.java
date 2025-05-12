@@ -18,7 +18,10 @@ public class ModeloActualizarEmpleado {
 
     public ModeloActualizarEmpleado(VistaActualizarEmpleado vActualizarEmpleado) {
         this.vActualizarEmpleado = vActualizarEmpleado;
+
+
     }
+
 
     public VistaActualizarEmpleado getvActualizarEmpleado() {
         return vActualizarEmpleado;

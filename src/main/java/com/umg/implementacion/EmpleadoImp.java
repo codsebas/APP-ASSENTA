@@ -241,7 +241,12 @@ public class EmpleadoImp implements IEmpleados {
                 modelo.setSegundoApellido(rs.getString("apellido2_empleado")); // apellido2_empleado
                 modelo.setApellidoCasada(rs.getString("apellidocasada_empleado")); // apellidocasada_empleado
                 modelo.setFechaNacimiento(rs.getString("fec_nacimiento")); // fec_nacimiento
-                modelo.setEdad(rs.getInt("edad_empleado"));              // edad_empleado
+                modelo.setEdad(rs.getInt("edad_empleado"));
+
+                modelo.setDepartamento(rs.getString( "departamento" ));
+                modelo.setMunicipio(rs.getString("municipio"));
+                modelo.setAldeaColonia(rs.getString("aldea"));
+                modelo.setDireccionVivienda(rs.getString("direccion"));
                 modelo.setNombrePuesto(rs.getString("nombre_puesto"));   // nombre_puesto (viene del JOIN)
                 modelo.setCorreoElectronico(rs.getString("email_empleado")); // email_empleado
                 modelo.setNumeroTelefono1(rs.getString("telefono1_empleado")); // telefono1_empleado
