@@ -156,7 +156,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         Object selectedItem2 = modelo.getvRegistraEmpleado().cbPuesto.getSelectedItem();
         int idPuesto;
 
-        if (selectedItem2 instanceof ModeloJefeInmediato) {
+        if (selectedItem2 instanceof ModeloPuesto) {
             ModeloPuesto puesto = (ModeloPuesto) selectedItem2;
             idPuesto = puesto.getIdPuesto();
         } else {
@@ -179,6 +179,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         String fechaNacimientoTexto = modelo.getvRegistraEmpleado().txtFecha.getText().trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         modeloEmpleado.setIdJefeInmediato(idJefe);
+        System.out.println("El Puesto es: " + idPuesto);
         modeloEmpleado.setIdPuesto(idPuesto);
 
         try {
