@@ -70,11 +70,10 @@ public class Sql {
     private final String INSERTAR_HUELLA = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?);";
     private final String ACTUALIZAR_EMPLEADO =
             "UPDATE empleado SET " +
-                    "dpi_empleado = ?, sexo_empleado = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?, " +
-                    "apellido1_empleado = ?, apellido2_empleado = ?, apellido_casada = ?, fec_nacimiento = ?, edad_empleado = ?, " +
-                    "puesto_id = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ?, direccion_id = ?, " +
-                    "departamento = ?, municipio = ?, aldea_colonia = ?, direccion_vivienda = ?, huella_id = ?, huella = ? " +
-                    "WHERE id_empleado = ?";
+                    "sexo_empleado = ?, estado_civil = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?, " +
+                    "apellido1_empleado = ?, apellido2_empleado = ?, apellidocasada_empleado = ?, fec_nacimiento = ?, edad_empleado = ?, " +
+                    "email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ? " +
+                    "WHERE dpi_empleado = ?";
     private final String ELIMINAR_EMPLEADO = "DELETE FROM cliente WHERE dpi_empleado = ?";
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";
     private final String CONSULTA_USUARIO = "SELECT * FROM usuarios WHERE usuario = ?";
