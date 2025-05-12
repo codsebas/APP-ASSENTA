@@ -29,6 +29,15 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
     PuestoImp implementacionPuesto = new PuestoImp();
     private Map<String, String[]> municipiosPorDepartamento;
 
+    int id_emple;
+
+    public int getId_emple() {
+        return id_emple;
+    }
+
+    public void setId_emple(int id_emple) {
+        this.id_emple = id_emple;
+    }
 
     public ControladorActualizarEmpleado(ModeloActualizarEmpleado modelo) {
         this.modelo = modelo;
@@ -140,6 +149,8 @@ actualizarEmpleado();
 
         vista.cbSexo.setSelectedItem(empleado.getSexo());
 
+        setId_emple(empleado.getIdEmpleado());
+        System.out.println("id empleado desde mostrar: " + empleado.getIdEmpleado());
         System.out.println("Estado Civil: " + empleado.getEstadoCivil());
         vista.cbEstadoCivil.setSelectedItem(empleado.getEstadoCivil());
         vista.txtNom1.setText(empleado.getPrimerNombre());
@@ -186,7 +197,8 @@ actualizarEmpleado();
         try {
             var vista = modelo.getvActualizarEmpleado();
 
-            empleado.setIdEmpleado(Integer.parseInt(vista.txtDPI.getText())); // Suponiendo que ID está en txtDPI (¿seguro? suele ser otro campo)
+            System.out.println("id empleado: " + getId_emple());
+            empleado.setIdEmpleado(id_emple); // Suponiendo que ID está en txtDPI (¿seguro? suele ser otro campo)
             empleado.setDpi(vista.txtDPI.getText());
             empleado.setSexo((String) vista.cbSexo.getSelectedItem());
             empleado.setEstadoCivil((String) vista.cbEstadoCivil.getSelectedItem());
@@ -205,6 +217,7 @@ actualizarEmpleado();
             empleado.setIdPuesto(1);
             empleado.setHorarioEntrada(vista.txtHoraEntrada.getText());
             empleado.setHorarioSalida(vista.txtHoraSalida.getText());
+            System.out.println("idJefe: " + idJefe);
             empleado.setIdJefeInmediato(idJefe);
 
             empleado.setDepartamento((String) vista.cbDepto.getSelectedItem());
@@ -222,9 +235,9 @@ actualizarEmpleado();
             boolean resultado = imp.actualizarEmpleado(empleado);
 
             if (resultado) {
-                JOptionPane.showMessageDialog(null, "✅ Empleado actualizado correctamente.");
+                JOptionPane.showMessageDialog(null, "Empleado actualizado correctamente.","Actualización", 1);
             } else {
-                JOptionPane.showMessageDialog(null, "❌ No se pudo actualizar el empleado.");
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar el empleado.","Error", 0);
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "⚠️ Error de formato numérico: " + ex.getMessage());

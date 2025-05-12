@@ -231,6 +231,7 @@ public class EmpleadoImp implements IEmpleados {
                 modelo = new ModeloEmpleado(); // Solo si encuentra un resultado
 
                 // Llenamos el objeto modelo con los datos recuperados
+                modelo.setIdEmpleado(rs.getInt("id_empleado"));
                 modelo.setDpi(rs.getString("dpi_empleado"));              // dpi_empleado
                 modelo.setSexo(rs.getString("sexo_empleado"));            // sexo_empleado
                 modelo.setEstadoCivil(rs.getString("estado_civil"));     // estado_civil
@@ -274,32 +275,35 @@ public class EmpleadoImp implements IEmpleados {
 
         try {
             ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
-            ps.setString(16, modelo.getDpi());
+            ps.setInt(17, modelo.getIdEmpleado());
             ps.setString(1, modelo.getSexo());
-            ps.setString(2, modelo.getPrimerNombre());
-            ps.setString(3, modelo.getSegundoNombre());
-            ps.setString(4, modelo.getTercerNombre());
-            ps.setString(5, modelo.getPrimerApellido());
-            ps.setString(6, modelo.getSegundoApellido());
+            ps.setString(2, "C");
+            ps.setString(3, modelo.getPrimerNombre());
+            ps.setString(4, modelo.getSegundoNombre());
+            ps.setString(5, modelo.getTercerNombre());
+            ps.setString(6, modelo.getPrimerApellido());
+            ps.setString(7, modelo.getSegundoApellido());
             ps.setString(8, modelo.getApellidoCasada());
-            ps.setString(9, modelo.getFechaNacimiento());
+            ps.setDate(9, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(10, modelo.getEdad());
-            ps.setInt(11, modelo.getIdPuesto());
-            ps.setString(12, modelo.getHorarioEntrada());
-            ps.setString(13, modelo.getHorarioSalida());
-            ps.setInt(14, modelo.getIdJefeInmediato());
-            ps.setInt(15, modelo.getIdDireccion());
-            ps.setString(16, modelo.getDepartamento());
-            ps.setString(17, modelo.getMunicipio());
-            ps.setString(18, modelo.getAldeaColonia());
-            ps.setString(19, modelo.getDireccionVivienda());
+            ps.setString(11, modelo.getCorreoElectronico());
+            ps.setString(12, modelo.getNumeroTelefono1());
+            ps.setString(13, modelo.getNumeroTelefono2());
+            ps.setTime(14, Time.valueOf(modelo.getHorarioEntrada()));
+            ps.setTime(15, Time.valueOf(modelo.getHorarioSalida()));
+//            ps.setInt(14, modelo.getIdJefeInmediato());
+//            ps.setInt(15, modelo.getIdDireccion());
+//            ps.setString(16, modelo.getDepartamento());
+//            ps.setString(17, modelo.getMunicipio());
+//            ps.setString(18, modelo.getAldeaColonia());
+//            ps.setString(19, modelo.getDireccionVivienda());
 //            ps.setInt(20, modelo.getIdHuella());
 //            ps.setBytes(21, modelo.getHuella());
-            ps.setInt(22, modelo.getIdEmpleado()); //
+            ps.setInt(16, modelo.getIdJefeInmediato()); //
             ps.executeUpdate();
             resultado = true;
         } catch (SQLException ex) {
-            conector.mensaje("No se pudo actualizar el empleado", "Error al actualizar", 0);
+            conector.mensaje("No se pudo actualizar el empleado " + ex.getMessage(), "Error al actualizar", 0);
         } finally {
             conector.desconectar();
         }
