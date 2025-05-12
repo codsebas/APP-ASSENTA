@@ -57,13 +57,13 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
 
 
 
-    public void cargarPuestos(JComboBox<String> comboBox) {
+    public void cargarPuestos(JComboBox<Object> comboBox) {
         List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
         comboBox.removeAllItems();
 
         comboBox.addItem("Elegir Puesto");
         for (ModeloPuesto p : puestos) {
-            comboBox.addItem(p.toString());
+            comboBox.addItem(p);
         }
     }
 
