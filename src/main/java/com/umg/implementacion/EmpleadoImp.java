@@ -2,11 +2,15 @@ package com.umg.implementacion;
 
 import com.umg.interfaces.IEmpleados;
 import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloJefeInmediato;
+import com.umg.modelos.ModeloPuesto;
 import com.umg.sql.Conector;
 import com.umg.sql.Sql;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmpleadoImp implements IEmpleados {
 
@@ -23,7 +27,13 @@ public class EmpleadoImp implements IEmpleados {
             ps.setString(index, valor);
         }
     }
-
+    private void setNullableTime(PreparedStatement ps, int index, String timeStr) throws SQLException {
+        if (timeStr == null || timeStr.trim().isEmpty()) {
+            ps.setNull(index, java.sql.Types.TIME);
+        } else {
+            ps.setTime(index, Time.valueOf(timeStr));
+        }
+    }
 
     @Override
     public boolean insertarEmpleado(ModeloEmpleado modelo) {
@@ -35,26 +45,29 @@ public class EmpleadoImp implements IEmpleados {
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
             ps.setString(1, modelo.getDpi());
             ps.setString(2, modelo.getSexo());
-            // ps.setString(3, modelo.getEstadoCivil());
+            ps.setString(3, modelo.getEstadoCivil());
             ps.setString(4, modelo.getPrimerNombre());
-            ps.setString(5, modelo.getSegundoNombre());
 
-            setNullableString(ps, 6, modelo.getTercerNombre()); // opcional
+            setNullableString(ps, 5, modelo.getSegundoNombre()); // ← Segundo nombre opcional
+            setNullableString(ps, 6, modelo.getTercerNombre());  // ← Ya estaba bien
+
             ps.setString(7, modelo.getPrimerApellido());
             ps.setString(8, modelo.getSegundoApellido());
-
-            setNullableString(ps, 9, modelo.getApellidoCasada()); // opcional
+            setNullableString(ps, 9, modelo.getApellidoCasada()); // ← Ya estaba bien
 
             ps.setDate(10, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(11, modelo.getEdad());
-            ps.setInt(12, 1); // puesto_id
-            ps.setString(13, modelo.getCorreoElectronico());
-            ps.setString(14, modelo.getNumeroTelefono1());
-            ps.setString(15, modelo.getNumeroTelefono2());
-            ps.setTime(16, Time.valueOf(modelo.getHorarioEntrada()));
-            ps.setTime(17, Time.valueOf(modelo.getHorarioSalida()));
-            ps.setInt(18, 1); // jefe_inmediato_id
+            ps.setInt(12, modelo.getIdPuesto()); // puesto_id
 
+            setNullableString(ps, 13, modelo.getCorreoElectronico()); // ← Opcional
+            ps.setString(14, modelo.getNumeroTelefono1());
+            setNullableString(ps, 15, modelo.getNumeroTelefono2()); // ← Opcional
+
+            // Hora entrada/salida como opcionales:
+            setNullableTime(ps, 16, modelo.getHorarioEntrada());
+            setNullableTime(ps, 17, modelo.getHorarioSalida());
+
+            ps.setInt(18, modelo.getIdJefeInmediato());
 
             this.rs = this.ps.executeQuery();
             if (rs.next()) {
@@ -218,6 +231,7 @@ public class EmpleadoImp implements IEmpleados {
                 modelo = new ModeloEmpleado(); // Solo si encuentra un resultado
 
                 // Llenamos el objeto modelo con los datos recuperados
+                modelo.setIdEmpleado(rs.getInt("id_empleado"));
                 modelo.setDpi(rs.getString("dpi_empleado"));              // dpi_empleado
                 modelo.setSexo(rs.getString("sexo_empleado"));            // sexo_empleado
                 modelo.setEstadoCivil(rs.getString("estado_civil"));     // estado_civil
@@ -228,7 +242,14 @@ public class EmpleadoImp implements IEmpleados {
                 modelo.setSegundoApellido(rs.getString("apellido2_empleado")); // apellido2_empleado
                 modelo.setApellidoCasada(rs.getString("apellidocasada_empleado")); // apellidocasada_empleado
                 modelo.setFechaNacimiento(rs.getString("fec_nacimiento")); // fec_nacimiento
-                modelo.setEdad(rs.getInt("edad_empleado"));              // edad_empleado
+                modelo.setEdad(rs.getInt("edad_empleado"));
+
+                modelo.setDepartamento(rs.getString( "departamento" ));
+                modelo.setMunicipio(rs.getString("municipio"));
+                modelo.setAldeaColonia(rs.getString("aldea"));
+                modelo.setDireccionVivienda(rs.getString("direccion"));
+                modelo.setIdPuesto(rs.getInt("id_puesto"));
+                modelo.setIdJefeInmediato(rs.getInt("id_jefe_inmediato"));
                 modelo.setNombrePuesto(rs.getString("nombre_puesto"));   // nombre_puesto (viene del JOIN)
                 modelo.setCorreoElectronico(rs.getString("email_empleado")); // email_empleado
                 modelo.setNumeroTelefono1(rs.getString("telefono1_empleado")); // telefono1_empleado
@@ -256,37 +277,87 @@ public class EmpleadoImp implements IEmpleados {
 
         try {
             ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
-            ps.setString(1, modelo.getDpi());
-            ps.setString(2, modelo.getSexo());
+            ps.setInt(17, modelo.getIdEmpleado());
+            ps.setString(1, modelo.getSexo());
+            ps.setString(2, "C");
             ps.setString(3, modelo.getPrimerNombre());
             ps.setString(4, modelo.getSegundoNombre());
             ps.setString(5, modelo.getTercerNombre());
             ps.setString(6, modelo.getPrimerApellido());
             ps.setString(7, modelo.getSegundoApellido());
             ps.setString(8, modelo.getApellidoCasada());
-            ps.setString(9, modelo.getFechaNacimiento());
+            ps.setDate(9, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(10, modelo.getEdad());
-            ps.setInt(11, modelo.getIdPuesto());
-            ps.setString(12, modelo.getHorarioEntrada());
-            ps.setString(13, modelo.getHorarioSalida());
-            ps.setInt(14, modelo.getIdJefeInmediato());
-            ps.setInt(15, modelo.getIdDireccion());
-            ps.setString(16, modelo.getDepartamento());
-            ps.setString(17, modelo.getMunicipio());
-            ps.setString(18, modelo.getAldeaColonia());
-            ps.setString(19, modelo.getDireccionVivienda());
-            ps.setInt(20, modelo.getIdHuella());
-            ps.setBytes(21, modelo.getHuella());
-            ps.setInt(22, modelo.getIdEmpleado()); //
+            ps.setString(11, modelo.getCorreoElectronico());
+            ps.setString(12, modelo.getNumeroTelefono1());
+            ps.setString(13, modelo.getNumeroTelefono2());
+            ps.setTime(14, Time.valueOf(modelo.getHorarioEntrada()));
+            ps.setTime(15, Time.valueOf(modelo.getHorarioSalida()));
+//            ps.setInt(14, modelo.getIdJefeInmediato());
+//            ps.setInt(15, modelo.getIdDireccion());
+//            ps.setString(16, modelo.getDepartamento());
+//            ps.setString(17, modelo.getMunicipio());
+//            ps.setString(18, modelo.getAldeaColonia());
+//            ps.setString(19, modelo.getDireccionVivienda());
+//            ps.setInt(20, modelo.getIdHuella());
+//            ps.setBytes(21, modelo.getHuella());
+            ps.setInt(16, modelo.getIdJefeInmediato()); //
             ps.executeUpdate();
             resultado = true;
         } catch (SQLException ex) {
-            conector.mensaje("No se pudo actualizar el empleado", "Error al actualizar", 0);
+            conector.mensaje("No se pudo actualizar el empleado " + ex.getMessage(), "Error al actualizar", 0);
         } finally {
             conector.desconectar();
         }
 
         return resultado;
+    }
+
+    public List<ModeloPuesto> obtenerPuestos() {
+        List<ModeloPuesto> lista = new ArrayList<>();
+        conector.conectar();
+        try {
+            PreparedStatement stmt = conector.preparar(sql.getCONSULTA_TODOS_PUESTOS());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ModeloPuesto puesto = new ModeloPuesto(
+                        rs.getInt("id_puesto"),
+                        rs.getString("nombre_puesto")
+                );
+                lista.add(puesto);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            conector.mensaje("Error al obtener puestos: " + e.getMessage(), "Error", 0);
+        } finally {
+            conector.desconectar();
+        }
+        return lista;
+    }
+
+    public List<ModeloJefeInmediato> obtenerJefesInmediatos() {
+        List<ModeloJefeInmediato> lista = new ArrayList<>();
+        conector.conectar();
+        try {
+            PreparedStatement stmt = conector.preparar(sql.getCONSULTAR_TODOS_JEFES_INMEDIATOS());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ModeloJefeInmediato jefe = new ModeloJefeInmediato(
+                        rs.getInt("id_empleado"),
+                        rs.getString("nombre_completo")
+                );
+                lista.add(jefe);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            conector.mensaje("Error al obtener jefes inmediatos: " + e.getMessage(), "Error", 0);
+        } finally {
+            conector.desconectar();
+        }
+        return lista;
+
     }
     @Override
     public DefaultTableModel modeloEmpleado(String dpi) {

@@ -5,14 +5,8 @@
 package com.umg.vistas;
 
 import com.umg.controlador.ControladorActualizarEmpleado;
-import com.umg.controlador.ControladorMostrarEmpleado;
-import com.umg.controlador.ControladorRegistrarEmpleado;
-import com.umg.implementacion.PuestoImp;
+
 import com.umg.modelos.ModeloActualizarEmpleado;
-import com.umg.modelos.ModeloPuesto;
-import com.umg.modelos.ModeloVistaRegistrarEmpleado;
-import javax.swing.*;
-import java.util.List;
 
 /**
  *
@@ -25,23 +19,16 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
      */
     public VistaActualizarEmpleado() {
         initComponents();
-        cargarPuestos();
         ModeloActualizarEmpleado modelo = new ModeloActualizarEmpleado(this);
         ControladorActualizarEmpleado controlador = new ControladorActualizarEmpleado(modelo);
         setControlador(controlador);
+        controlador.cargarPuestos(cbPuesto);
+        controlador.cargarJefes(cbJefeInmediato);
     }
 
 
-    public void cargarPuestos() {
-        PuestoImp puesto = new PuestoImp();
-        List<ModeloPuesto> puestos = puesto.obtenerPuestos();
-        cbPuesto.removeAllItems(); // Limpia si ya tenía datos
 
-        for (ModeloPuesto p : puestos) {
-            cbPuesto.addItem(String.valueOf(p));
-        }
 
-    }
 
 
 
@@ -88,7 +75,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         cbSexo = new javax.swing.JComboBox<>();
         jLabel40 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        btnRegistrarEmpleado1 = new javax.swing.JPanel();
+        btnBuscarEmpleado = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblFondo1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -318,16 +305,16 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         jLabel19.setText("DATOS GENERALES");
         panelInfoPersonal1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
-        btnRegistrarEmpleado1.setBackground(new java.awt.Color(0, 127, 75));
-        btnRegistrarEmpleado1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnBuscarEmpleado.setBackground(new java.awt.Color(0, 127, 75));
+        btnBuscarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Buscar Empleado");
-        btnRegistrarEmpleado1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+        btnBuscarEmpleado.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
 
-        panelInfoPersonal1.add(btnRegistrarEmpleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 160, 30));
+        panelInfoPersonal1.add(btnBuscarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 160, 30));
 
         lblFondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-datospersonales.png"))); // NOI18N
         panelInfoPersonal1.add(lblFondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 400));
@@ -593,12 +580,12 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel btnActualizarEmpleado;
-    public javax.swing.JPanel btnRegistrarEmpleado1;
+    public javax.swing.JPanel btnBuscarEmpleado;
     public javax.swing.JComboBox<String> cbDepto;
     public javax.swing.JComboBox<String> cbEstadoCivil;
-    public javax.swing.JComboBox<String> cbJefeInmediato;
+    public javax.swing.JComboBox<Object> cbJefeInmediato;
     public javax.swing.JComboBox<String> cbMun;
-    public javax.swing.JComboBox<String> cbPuesto;
+    public javax.swing.JComboBox<Object> cbPuesto;
     public javax.swing.JComboBox<String> cbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -669,6 +656,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
 
     public void setControlador(ControladorActualizarEmpleado controlador){
         btnActualizarEmpleado.addMouseListener(controlador);
+        btnBuscarEmpleado.addMouseListener(controlador);
         cbDepto.addActionListener(controlador);
     }
 

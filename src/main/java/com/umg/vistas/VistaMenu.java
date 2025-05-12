@@ -112,6 +112,7 @@ public class VistaMenu extends javax.swing.JPanel {
         panelMenu.add(btnMeReUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 50));
 
         btnMeMoEmple.setBackground(new java.awt.Color(0, 127, 75));
+        btnMeMoEmple.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMeMoEmple.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -127,6 +128,7 @@ public class VistaMenu extends javax.swing.JPanel {
         panelMenu.add(btnMeMoEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
 
         btnGestionUsuarios.setBackground(new java.awt.Color(0, 127, 75));
+        btnGestionUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGestionUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelMenu.add(btnGestionUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 50));
 
@@ -157,6 +159,7 @@ public class VistaMenu extends javax.swing.JPanel {
         panelMenu.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 200, 50));
 
         btnActuUsuario.setBackground(new java.awt.Color(0, 127, 75));
+        btnActuUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout btnActuUsuarioLayout = new javax.swing.GroupLayout(btnActuUsuario);
         btnActuUsuario.setLayout(btnActuUsuarioLayout);

@@ -1,7 +1,10 @@
 package com.umg.controlador;
 
 import com.umg.implementacion.EmpleadoImp;
+import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloJefeInmediato;
+import com.umg.modelos.ModeloPuesto;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 
 import javax.swing.*;
@@ -13,14 +16,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ControladorRegistrarEmpleado implements MouseListener, ActionListener {
     EmpleadoImp implementacion = new EmpleadoImp();
     ModeloVistaRegistrarEmpleado modelo;
-    ModeloEmpleado modeloEmpleado;
+    PuestoImp implementacionPuesto = new PuestoImp();
 
     private Map<String, String[]> municipiosPorDepartamento;
 
@@ -31,6 +38,29 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
 
 
         agregarMunicipios();
+    }
+
+    public void cargarJefes(JComboBox<Object> comboBox) {
+
+        List<ModeloJefeInmediato> jefes = implementacionPuesto.obtenerJefesInmediatos();
+        comboBox.removeAllItems();
+
+        comboBox.addItem("Elegir Jefe");
+        for (ModeloJefeInmediato j : jefes) {
+            comboBox.addItem(j);
+        }
+    }
+
+
+
+    public void cargarPuestos(JComboBox<Object> comboBox) {
+        List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
+        comboBox.removeAllItems();
+
+        comboBox.addItem("Elegir Puesto");
+        for (ModeloPuesto p : puestos) {
+            comboBox.addItem(p);
+        }
     }
 
     @Override
@@ -45,8 +75,8 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     public void mouseClicked(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
           //  mostrarEmpleado();
-            unirNombre();
-           //insertarEmpleado();
+            validarCampos();
+//           insertarEmpleado();
 
         }
         }
@@ -99,9 +129,44 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     private void insertarEmpleado(){
         String departamento = String.valueOf(modelo.getvRegistraEmpleado().cbDepto.getSelectedItem());
         String municipio = String.valueOf(modelo.getvRegistraEmpleado().cbMun.getSelectedItem());
-        //String estadoCivil = String.valueOf(modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedItem());
+
+        // === Conversión de estado civil ===
+        String estadoSeleccionado = String.valueOf(modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedItem());
+        String estadoCivil = "";
+
+        switch (estadoSeleccionado) {
+            case "Soltero/a": estadoCivil = "S"; break;
+            case "Casado/a": estadoCivil = "C"; break;
+            case "Divorciado/a": estadoCivil = "D"; break;
+            case "Viudo/a": estadoCivil = "V"; break;
+            case "Unión de Hecho": estadoCivil = "U"; break;
+            default: estadoCivil = ""; break;
+        }
+
+        Object selectedItem = modelo.getvRegistraEmpleado().cbJefeInmediato.getSelectedItem();
+        int idJefe;
+
+        if (selectedItem instanceof ModeloJefeInmediato) {
+            ModeloJefeInmediato jefe = (ModeloJefeInmediato) selectedItem;
+            idJefe = jefe.getIdEmpleado();
+        } else {
+            // Si seleccionaron "Elegir Jefe"
+            idJefe = 0;
+        }
+        Object selectedItem2 = modelo.getvRegistraEmpleado().cbPuesto.getSelectedItem();
+        int idPuesto;
+
+        if (selectedItem2 instanceof ModeloPuesto) {
+            ModeloPuesto puesto = (ModeloPuesto) selectedItem2;
+            idPuesto = puesto.getIdPuesto();
+        } else {
+            // Si seleccionaron "Elegir Puesto"
+            idPuesto = 0;
+        }
+
         String sexo = String.valueOf(modelo.getvRegistraEmpleado().cbSexo.getSelectedItem());
         ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
+
         modeloEmpleado.setPrimerNombre(modelo.getvRegistraEmpleado().txtNom1.getText());
         modeloEmpleado.setSegundoNombre(modelo.getvRegistraEmpleado().txtNom2.getText());
         modeloEmpleado.setTercerNombre(modelo.getvRegistraEmpleado().txtNom3.getText());
@@ -111,28 +176,107 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setDepartamento(departamento);
         modeloEmpleado.setMunicipio(municipio);
         modeloEmpleado.setFechaNacimiento(modelo.getvRegistraEmpleado().txtFecha.getText());
-       // modeloEmpleado.setEstadoCivil(estadoCivil);
+        String fechaNacimientoTexto = modelo.getvRegistraEmpleado().txtFecha.getText().trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        modeloEmpleado.setIdJefeInmediato(idJefe);
+        System.out.println("El Puesto es: " + idPuesto);
+        modeloEmpleado.setIdPuesto(idPuesto);
+
+        try {
+            LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoTexto, formatter);
+            LocalDate hoy = LocalDate.now();
+            int edad = Period.between(fechaNacimiento, hoy).getYears();
+
+            modeloEmpleado.setFechaNacimiento(fechaNacimientoTexto);
+            modeloEmpleado.setEdad(edad);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato yyyy-MM-dd (ej: 2000-12-25)");
+            return;
+        }
+
+        modeloEmpleado.setEstadoCivil(estadoCivil);
         modeloEmpleado.setSexo(sexo);
         modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
         modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum1.getText());
-        modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum2.getText());
+        modeloEmpleado.setNumeroTelefono2(modelo.getvRegistraEmpleado().txtNum2.getText()); // <-- Estabas repitiendo Num1
         modeloEmpleado.setDpi(modelo.getvRegistraEmpleado().txtDPI.getText());
-        modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
         modeloEmpleado.setHorarioEntrada(modelo.getvRegistraEmpleado().txtHoraEntrada.getText());
         modeloEmpleado.setHorarioSalida(modelo.getvRegistraEmpleado().txtHoraSalida.getText());
         modeloEmpleado.setAldeaColonia(modelo.getvRegistraEmpleado().txtAldea.getText());
         modeloEmpleado.setDireccionVivienda(modelo.getvRegistraEmpleado().txtDireccion.getText());
 
-
-
-        boolean resultado =  implementacion.insertarEmpleado(modeloEmpleado);
+        boolean resultado = implementacion.insertarEmpleado(modeloEmpleado);
         if (!resultado) {
-            JOptionPane.showMessageDialog(null, "empleado registrado con exito", "Exito", 1);
-        }else {
-            JOptionPane.showMessageDialog(null, "empleado no registrado axel jodete","ERROR PUTO",0);
+            JOptionPane.showMessageDialog(null, "Empleado registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Empleado no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+
+    private void validarCampos() {
+        if(modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtApe2.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtFecha.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedIndex() == 0 ||
+                modelo.getvRegistraEmpleado().cbSexo.getSelectedIndex() == 0 ||
+                modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtDPI.getText().trim().isEmpty()||
+                modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() == 0||
+                modelo.getvRegistraEmpleado().cbMun.getSelectedIndex() == 0||
+                modelo.getvRegistraEmpleado().cbPuesto.getSelectedIndex() == 0||
+                modelo.getvRegistraEmpleado().txtHoraEntrada.getText().trim().isEmpty()||
+                modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
+
+            if (modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblErrorPrimerNombre.setText("*Este campo es obligatorio");
+            }
+
+            if (modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblError1erApellido.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().txtApe2.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblError2doApellido.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().txtFecha.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblErrorFechaNacimiento.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedIndex() == 0) {
+                modelo.getvRegistraEmpleado().lblErrorEstado.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().cbSexo.getSelectedIndex() == 0) {
+                modelo.getvRegistraEmpleado().lblErrorSexo.setText("*Este campo es obligatorio");
+            }
+
+
+            if (modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblError1erTel.setText("*Este campo es obligatorio");
+            }
+
+            if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().length() != 13) {
+                modelo.getvRegistraEmpleado().lblErrorDpi.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() == 0) {
+                modelo.getvRegistraEmpleado().lblErrorDepartamento.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().cbMun.getSelectedIndex() == 0) {
+                modelo.getvRegistraEmpleado().lblErrorMunicipio.setText("*Este campo es obligatorio");;
+            }
+
+            if (modelo.getvRegistraEmpleado().cbPuesto.getSelectedIndex() == 0) {
+                modelo.getvRegistraEmpleado().lblErrorpuesto.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().txtHoraEntrada.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblErrorHorarioEntrada.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblErrorHorarioSalida.setText("*Este campo es obligatorio");
+            }
+        }else{
+            insertarEmpleado();
+        }
+    }
 
 
 

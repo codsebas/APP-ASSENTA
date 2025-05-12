@@ -142,6 +142,10 @@ public class ControladorMenu implements ActionListener, MouseListener {
             }
         } else if (e.getComponent().equals(vista.btnMeReUser)) {
             vista.btnMeReUser.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
+            vista.btnActuUsuario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
+            vista.btnGestionUsuarios.setBackground(new Color(0, 127, 75));
         }
     }
 
@@ -152,6 +156,10 @@ public class ControladorMenu implements ActionListener, MouseListener {
             vista.btnExpandirMenu.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(vista.btnMeReUser)) {
             vista.btnMeReUser.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
+            vista.btnActuUsuario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
+            vista.btnGestionUsuarios.setBackground(new Color(0, 127, 75));
         }
 
     }

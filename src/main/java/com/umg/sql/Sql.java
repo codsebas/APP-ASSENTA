@@ -35,12 +35,13 @@ public class Sql {
             "WHERE e.dpi_empleado = ?";
 
 
-    private final String CONSULTA_EMPLEADO_DPIUPD  = "SELECT e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
+    private final String CONSULTA_EMPLEADO_DPIUPD  =   "SELECT e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
             "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
             "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
-            "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, " +
+            "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, e.puesto_id AS id_puesto, " +
             "e.email_empleado, e.telefono1_empleado, e.telefono2_empleado, " +
             "e.horario_entrada, e.horario_salida, " +
+            "e.jefe_inmediato_id AS id_jefeinmediato, " +
             "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS nombre_jefe_inmediato, " +
             "d.departamento, d.municipio, d.aldea, d.direccion " +
             "FROM empleado e " +
@@ -70,24 +71,24 @@ public class Sql {
     private final String INSERTAR_HUELLA = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?);";
     private final String ACTUALIZAR_EMPLEADO =
             "UPDATE empleado SET " +
-                    "dpi_empleado = ?, sexo_empleado = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?, " +
-                    "apellido1_empleado = ?, apellido2_empleado = ?, apellido_casada = ?, fec_nacimiento = ?, edad_empleado = ?, " +
-                    "puesto_id = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ?, direccion_id = ?, " +
-                    "departamento = ?, municipio = ?, aldea_colonia = ?, direccion_vivienda = ?, huella_id = ?, huella = ? " +
+                    "sexo_empleado = ?, estado_civil = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?, " +
+                    "apellido1_empleado = ?, apellido2_empleado = ?, apellidocasada_empleado = ?, fec_nacimiento = ?, edad_empleado = ?, " +
+                    "email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ? " +
                     "WHERE id_empleado = ?";
     private final String ELIMINAR_EMPLEADO = "DELETE FROM cliente WHERE dpi_empleado = ?";
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";
     private final String CONSULTA_USUARIO = "SELECT * FROM usuarios WHERE usuario = ?";
     private final String CONSULTA_USUARIO_LOGIN = "SELECT * FROM usuarios WHERE usuario = ? AND password = crypt(?, password)";
-    private final String INSERTAR_USUARIO = "INSERT INTO usuarios (usuario, password) VALUES (?, crypt(?, gen_salt('bf')))";
+    private final String INSERTAR_USUARIO = "INSERT INTO usuarios (usuario, password, empleado_dpi) VALUES (?, crypt(?, gen_salt('bf')),?)";
     private final String ACTUALIZAR_USUARIO = "UPDATE usuarios SET password = crypt(?, gen_salt('bf')), usuario = ? WHERE id_usuario = ?";
     private final String ELIMINAR_USUARIO = "DELETE FROM usuarios WHERE id_usuario = ?";
 
     private final String CONSULTAR_PUESTO = "SELECT * FROM empleado WHERE id_empleado = ?";
     private final String CONSULTA_TODOS_PUESTOS = "SELECT id_puesto, nombre_puesto FROM puesto";
-    private final String INSERTAR_PUESTO = "INSERT INTO puesto (nombre_puesto) VALUES (?)";
+    private final String INSERTAR_PUESTO = "INSERT INTO puesto (nombre_puesto, desc_puesto) VALUES (?, ?)";
     private final String ACTUALIZAR_PUESTO = "UPDATE puesto SET nombre_puesto = ? WHERE id_puesto = ?";
     private final String ELIMINAR_PUESTO = "DELETE FROM puesto WHERE id_puesto = ?";
+    private final String CONSULTAR_TODOS_JEFES_INMEDIATOS = "SELECT id_empleado, nombre1_empleado || ' ' || apellido1_empleado AS nombre_completo FROM empleado";
 
     public Sql() {
 
@@ -164,6 +165,10 @@ public String getCONSULTAR_PUESTO(){
 
     public String getCONSULTA_EMPLEADO_DPIUPD() {
         return CONSULTA_EMPLEADO_DPIUPD;
+    }
+
+    public String getCONSULTAR_TODOS_JEFES_INMEDIATOS() {
+        return CONSULTAR_TODOS_JEFES_INMEDIATOS;
     }
 }
 

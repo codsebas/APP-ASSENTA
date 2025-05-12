@@ -59,6 +59,7 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
                     ModeloUsuario modelousuario = new ModeloUsuario();
                     modelousuario.setUsuario(modelo.getVista().txtUsuarioMant.getText());
                     modelousuario.setPassword(String.valueOf(modelo.getVista().txtPasswordMant.getPassword()));
+                    modelousuario.setEmpleado_dpi(modelo.getVista().txtDPI.getText());
                     boolean resultado = this.implementacion.insertarUsuario(modelousuario);
                     if (!resultado) {
                         JOptionPane.showMessageDialog(null, "Usuario creado con exito", "Creación de Usuario", JOptionPane.INFORMATION_MESSAGE);
@@ -122,7 +123,7 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
     }
 
     private void usuarioNoMas15(){
-        ((AbstractDocument) modelo.getVista().txtUsuarioMant.getDocument()).setDocumentFilter(new LimiteCaracteres(15));
+        ((AbstractDocument) modelo.getVista().txtUsuarioMant.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
         ((AbstractDocument) modelo.getVista().txtPasswordMant.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
         ((AbstractDocument) modelo.getVista().txtPasswordMantConf.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
     }
