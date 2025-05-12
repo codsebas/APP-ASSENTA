@@ -16,6 +16,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -110,6 +114,15 @@ actualizarEmpleado();
 
 
     }
+    private boolean existeEnComboBox(JComboBox<Object> comboBox, String valor) {
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            if (comboBox.getItemAt(i).toString().equals(valor)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void mostrarEmpleado() { String dpi = modelo.getvActualizarEmpleado().txtDPI.getText();
 
@@ -148,6 +161,30 @@ actualizarEmpleado();
         vista.cbEstadoCivil.setSelectedItem(estadoCivil);
 
         vista.cbSexo.setSelectedItem(empleado.getSexo());
+        //vista.cbPuesto.setSelectedItem(empleado.getIdJefeInmediato());
+        //vista.cbJefeInmediato.setSelectedItem(empleado.getNombreJefeInmediato());
+       // vista.cbPuesto.setSelectedItem(imp.obtenerNombrePuestoDesdeBD(empleado.getIdPuesto()));
+        // Primero obtengo el nombre del puesto con el ID
+        String nombrePuesto = imp.obtenerNombrePuestoDesdeBD(empleado.getIdPuesto());
+
+        for (int i = 0; i < vista.cbPuesto.getItemCount(); i++) {
+            if (vista.cbPuesto.getItemAt(i).toString().equals(nombrePuesto)) {
+                vista.cbPuesto.setSelectedIndex(i); // Fuerza la selección
+                break;
+            }
+        }
+
+        String nombreJefe = imp.obtenerNombreJefeDesdeBD(empleado.getIdJefeInmediato());
+
+// Recorrer el ComboBox para forzar la selección
+        for (int i = 0; i < vista.cbJefeInmediato.getItemCount(); i++) {
+            if (vista.cbJefeInmediato.getItemAt(i).toString().equals(nombreJefe)) {
+                vista.cbJefeInmediato.setSelectedIndex(i);
+                break;
+            }
+        }
+
+
 
         setId_emple(empleado.getIdEmpleado());
         System.out.println("id empleado desde mostrar: " + empleado.getIdEmpleado());
@@ -167,8 +204,12 @@ actualizarEmpleado();
         vista.txtNum2.setText(empleado.getNumeroTelefono2());
         vista.txtHoraEntrada.setText(empleado.getHorarioEntrada());
         vista.txtHoraSalida.setText(empleado.getHorarioSalida());
-        vista.cbPuesto.setSelectedItem(empleado.getIdPuesto());
-        vista.cbJefeInmediato.setSelectedItem(empleado.getIdJefeInmediato());
+        //vista.cbPuesto.setSelectedItem(empleado.getNombrePuesto());//posible error
+        //vista.cbJefeInmediato.setSelectedItem(empleado.getNombreJefeInmediato());
+
+
+
+
         vista.cbDepto.setSelectedItem(empleado.getDepartamento());
         vista.cbMun.setSelectedItem(empleado.getMunicipio());
         vista.txtAldea.setText(empleado.getAldeaColonia());

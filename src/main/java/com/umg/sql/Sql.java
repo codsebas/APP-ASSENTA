@@ -35,20 +35,22 @@ public class Sql {
             "WHERE e.dpi_empleado = ?";
 
 
-    private final String CONSULTA_EMPLEADO_DPIUPD  =   "SELECT e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
-            "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
-            "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
-            "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, e.puesto_id AS id_puesto, " +
-            "e.email_empleado, e.telefono1_empleado, e.telefono2_empleado, " +
-            "e.horario_entrada, e.horario_salida, " +
-            "e.jefe_inmediato_id AS id_jefeinmediato, " +
-            "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS nombre_jefe_inmediato, " +
-            "d.departamento, d.municipio, d.aldea, d.direccion " +
-            "FROM empleado e " +
-            "LEFT JOIN puesto p ON e.puesto_id = p.id_puesto " +
-            "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado " +
-            "LEFT JOIN direccion_empleado d ON e.id_empleado = d.empleado_id " +
-            "WHERE e.dpi_empleado = ?";
+    private final String CONSULTA_EMPLEADO_DPIUPD  =
+            "SELECT e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
+                    "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
+                    "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
+                    "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, e.puesto_id AS id_puesto, " +
+                    "e.email_empleado, e.telefono1_empleado, e.telefono2_empleado, " +
+                    "e.horario_entrada, e.horario_salida, " +
+                    "e.jefe_inmediato_id AS id_jefe_inmediato, " +
+                    "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS nombre_jefe_inmediato, " +
+                    "d.departamento, d.municipio, d.aldea, d.direccion " +
+                    "FROM empleado e " +
+                    "LEFT JOIN puesto p ON e.puesto_id = p.id_puesto " +
+                    "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado " +
+                    "LEFT JOIN direccion_empleado d ON e.id_empleado = d.empleado_id " +
+                    "WHERE e.dpi_empleado = ?";
+
     private final String INSERTAR_EMPLEADO = """
     INSERT INTO empleado (
         dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,

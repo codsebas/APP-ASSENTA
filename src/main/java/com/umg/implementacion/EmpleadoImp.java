@@ -215,6 +215,56 @@ public class EmpleadoImp implements IEmpleados {
 
         return modelo;
     }
+    public String obtenerNombrePuestoDesdeBD(int idPuesto) {
+        String nombrePuesto = "No encontrado"; // Para detectar si no devuelve datos
+        conector.conectar();
+
+        try {
+            String sql = "SELECT nombre_puesto FROM puesto WHERE id_puesto = ?";
+            PreparedStatement stmt = conector.preparar(sql);
+            stmt.setInt(1, idPuesto);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nombrePuesto = rs.getString("nombre_puesto");
+            } else {
+                System.out.println("❌ No se encontró el puesto para ID: " + idPuesto);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener el nombre del puesto: " + ex.getMessage());
+        } finally {
+            conector.desconectar();
+        }
+
+        return nombrePuesto;
+    }
+
+    public String obtenerNombreJefeDesdeBD(int idJefe) {
+        String nombreJefe = "No encontrado"; // Valor predeterminado en caso de que no exista
+        conector.conectar();
+
+        try {
+            String sql = "SELECT CONCAT(nombre1_empleado, ' ', apellido1_empleado) AS nombre_jefe " +
+                    "FROM empleado WHERE id_empleado = ?";
+            PreparedStatement stmt = conector.preparar(sql);
+            stmt.setInt(1, idJefe);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nombreJefe = rs.getString("nombre_jefe");
+            } else {
+                System.out.println("❌ No se encontró un jefe con ID: " + idJefe);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener el nombre del jefe: " + ex.getMessage());
+        } finally {
+            conector.desconectar();
+        }
+
+        return nombreJefe;
+    }
+
+
 
     @Override
     public ModeloEmpleado mostrarEmpleadoPorDpi(String dpi_empleado) {
@@ -223,7 +273,7 @@ public class EmpleadoImp implements IEmpleados {
 
         try {
             // Usamos la consulta SQL definida en tu clase SQL
-            ps = conector.preparar(sql.getCONSULTA_EMPLEADO_DPIUPD()); // Selecciona el empleado con el DPI dado
+            ps = conector.preparar(sql.getCONSULTA_EMPLEADO_DPIUPD() ); // Selecciona el empleado con el DPI dado
             ps.setString(1, dpi_empleado);
             rs = ps.executeQuery();
 
@@ -243,13 +293,12 @@ public class EmpleadoImp implements IEmpleados {
                 modelo.setApellidoCasada(rs.getString("apellidocasada_empleado")); // apellidocasada_empleado
                 modelo.setFechaNacimiento(rs.getString("fec_nacimiento")); // fec_nacimiento
                 modelo.setEdad(rs.getInt("edad_empleado"));
-
                 modelo.setDepartamento(rs.getString( "departamento" ));
                 modelo.setMunicipio(rs.getString("municipio"));
                 modelo.setAldeaColonia(rs.getString("aldea"));
                 modelo.setDireccionVivienda(rs.getString("direccion"));
                 modelo.setIdPuesto(rs.getInt("id_puesto"));
-                modelo.setIdJefeInmediato(rs.getInt("id_jefe_inmediato"));
+                modelo.setIdJefeInmediato(rs.getInt("id_jefe_inmediato")); // posible error aqui
                 modelo.setNombrePuesto(rs.getString("nombre_puesto"));   // nombre_puesto (viene del JOIN)
                 modelo.setCorreoElectronico(rs.getString("email_empleado")); // email_empleado
                 modelo.setNumeroTelefono1(rs.getString("telefono1_empleado")); // telefono1_empleado
@@ -257,6 +306,8 @@ public class EmpleadoImp implements IEmpleados {
                 modelo.setHorarioEntrada(rs.getString("horario_entrada")); // horario_entrada
                 modelo.setHorarioSalida(rs.getString("horario_salida")); // horario_salida
                 modelo.setNombreJefeInmediato(rs.getString("nombre_jefe_inmediato")); // nombre_jefe_inmediato
+                System.out.println("Nombre del puesto desde BD: " + rs.getString("nombre_puesto"));
+                System.out.println("Nombre del jefe inmediato desde BD: " + rs.getString("nombre_jefe_inmediato"));
             }
 
             conector.desconectar();
