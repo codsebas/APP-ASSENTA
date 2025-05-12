@@ -193,6 +193,16 @@ actualizarEmpleado();
             // Si seleccionaron "Elegir Jefe"
             idJefe = 0;
         }
+        Object selectedItem2 = modelo.getvActualizarEmpleado().cbPuesto.getSelectedItem();
+        int idPuesto;
+
+        if (selectedItem2 instanceof ModeloJefeInmediato) {
+            ModeloPuesto puesto = (ModeloPuesto) selectedItem2;
+            idPuesto = puesto.getIdPuesto();
+        } else {
+            // Si seleccionaron "Elegir Puesto"
+            idPuesto = 0;
+        }
 
         try {
             var vista = modelo.getvActualizarEmpleado();
@@ -214,7 +224,7 @@ actualizarEmpleado();
             empleado.setNumeroTelefono1(vista.txtNum1.getText());
             empleado.setNumeroTelefono2(vista.txtNum2.getText());
 
-            empleado.setIdPuesto(1);
+            empleado.setIdPuesto(idPuesto);
             empleado.setHorarioEntrada(vista.txtHoraEntrada.getText());
             empleado.setHorarioSalida(vista.txtHoraSalida.getText());
             System.out.println("idJefe: " + idJefe);

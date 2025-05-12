@@ -1,6 +1,7 @@
 package com.umg.controlador;
 
 import com.umg.implementacion.EmpleadoImp;
+import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloEmpleado;
 import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
@@ -26,7 +27,7 @@ import java.util.Scanner;
 public class ControladorRegistrarEmpleado implements MouseListener, ActionListener {
     EmpleadoImp implementacion = new EmpleadoImp();
     ModeloVistaRegistrarEmpleado modelo;
-    ModeloEmpleado modeloEmpleado;
+    PuestoImp implementacionPuesto = new PuestoImp();
 
     private Map<String, String[]> municipiosPorDepartamento;
 
@@ -39,24 +40,26 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         agregarMunicipios();
     }
 
-    public void cargarJefes(JComboBox<String> comboBox) {
+    public void cargarJefes(JComboBox<Object> comboBox) {
 
-        List<ModeloJefeInmediato> jefes = implementacion.obtenerJefesInmediatos();
+        List<ModeloJefeInmediato> jefes = implementacionPuesto.obtenerJefesInmediatos();
         comboBox.removeAllItems();
 
         comboBox.addItem("Elegir Jefe");
         for (ModeloJefeInmediato j : jefes) {
-            comboBox.addItem(String.valueOf(j));
+            comboBox.addItem(j);
         }
     }
 
-    public void cargarPuestos(JComboBox<String> comboBox) {
-        List<ModeloPuesto> puestos = implementacion.obtenerPuestos();
+
+
+    public void cargarPuestos(JComboBox<Object> comboBox) {
+        List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
         comboBox.removeAllItems();
 
         comboBox.addItem("Elegir Puesto");
         for (ModeloPuesto p : puestos) {
-            comboBox.addItem(p.toString());
+            comboBox.addItem(p);
         }
     }
 
@@ -140,6 +143,27 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             default: estadoCivil = ""; break;
         }
 
+        Object selectedItem = modelo.getvRegistraEmpleado().cbJefeInmediato.getSelectedItem();
+        int idJefe;
+
+        if (selectedItem instanceof ModeloJefeInmediato) {
+            ModeloJefeInmediato jefe = (ModeloJefeInmediato) selectedItem;
+            idJefe = jefe.getIdEmpleado();
+        } else {
+            // Si seleccionaron "Elegir Jefe"
+            idJefe = 0;
+        }
+        Object selectedItem2 = modelo.getvRegistraEmpleado().cbPuesto.getSelectedItem();
+        int idPuesto;
+
+        if (selectedItem2 instanceof ModeloJefeInmediato) {
+            ModeloPuesto puesto = (ModeloPuesto) selectedItem2;
+            idPuesto = puesto.getIdPuesto();
+        } else {
+            // Si seleccionaron "Elegir Puesto"
+            idPuesto = 0;
+        }
+
         String sexo = String.valueOf(modelo.getvRegistraEmpleado().cbSexo.getSelectedItem());
         ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
 
@@ -154,6 +178,8 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setFechaNacimiento(modelo.getvRegistraEmpleado().txtFecha.getText());
         String fechaNacimientoTexto = modelo.getvRegistraEmpleado().txtFecha.getText().trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        modeloEmpleado.setIdJefeInmediato(idJefe);
+        modeloEmpleado.setIdPuesto(idPuesto);
 
         try {
             LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoTexto, formatter);

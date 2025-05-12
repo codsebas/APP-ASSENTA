@@ -57,7 +57,7 @@ public class EmpleadoImp implements IEmpleados {
 
             ps.setDate(10, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(11, modelo.getEdad());
-            ps.setInt(12, 1); // puesto_id
+            ps.setInt(12, modelo.getIdPuesto()); // puesto_id
 
             setNullableString(ps, 13, modelo.getCorreoElectronico()); // ← Opcional
             ps.setString(14, modelo.getNumeroTelefono1());
@@ -67,7 +67,7 @@ public class EmpleadoImp implements IEmpleados {
             setNullableTime(ps, 16, modelo.getHorarioEntrada());
             setNullableTime(ps, 17, modelo.getHorarioSalida());
 
-            ps.setInt(18, 1);
+            ps.setInt(18, modelo.getIdJefeInmediato());
 
             this.rs = this.ps.executeQuery();
             if (rs.next()) {
