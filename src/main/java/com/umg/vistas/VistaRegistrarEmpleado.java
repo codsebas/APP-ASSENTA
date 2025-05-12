@@ -88,8 +88,13 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         lblErrorFechaNacimiento = new javax.swing.JLabel();
         lblError2doApellido = new javax.swing.JLabel();
         lblError1erApellido = new javax.swing.JLabel();
-        lblError1erNombre = new javax.swing.JLabel();
-        lblFondo1 = new javax.swing.JLabel();
+        lblError1erApellido1 = new javax.swing.JLabel();
+        lblError1erTel = new javax.swing.JLabel();
+        lblErrorPrimerNombre = new javax.swing.JLabel();
+        lblErrorDpi = new javax.swing.JLabel();
+        lblErrorEstado = new javax.swing.JLabel();
+        lblErrorSexo = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -100,6 +105,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         cbMun = new javax.swing.JComboBox<>();
         txtAldea = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
+        lblErrorDepartamento = new javax.swing.JLabel();
+        lblErrorMunicipio = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -111,6 +118,10 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel41 = new javax.swing.JLabel();
         txtHoraSalida = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
+        lblErrorpuesto = new javax.swing.JLabel();
+        lblErrorJefe = new javax.swing.JLabel();
+        lblErrorHorarioEntrada = new javax.swing.JLabel();
+        lblErrorHorarioSalida = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -157,21 +168,18 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         panelInfoPersonal1.setBackground(new java.awt.Color(240, 253, 244));
         panelInfoPersonal1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtNom1.setBackground(new java.awt.Color(255, 255, 255));
         txtNom1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNom1.setForeground(new java.awt.Color(26, 75, 54));
         txtNom1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNom1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelInfoPersonal1.add(txtNom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
 
-        txtNom2.setBackground(new java.awt.Color(255, 255, 255));
         txtNom2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNom2.setForeground(new java.awt.Color(26, 75, 54));
         txtNom2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNom2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelInfoPersonal1.add(txtNom2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, -1));
 
-        txtNom3.setBackground(new java.awt.Color(255, 255, 255));
         txtNom3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNom3.setForeground(new java.awt.Color(26, 75, 54));
         txtNom3.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -198,7 +206,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel30.setText("Primer Apellido*");
         panelInfoPersonal1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 100, -1));
 
-        txtApe1.setBackground(new java.awt.Color(255, 255, 255));
         txtApe1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtApe1.setForeground(new java.awt.Color(26, 75, 54));
         txtApe1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -210,7 +217,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel31.setText("Segundo Apellido*");
         panelInfoPersonal1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 110, -1));
 
-        txtApe2.setBackground(new java.awt.Color(255, 255, 255));
         txtApe2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtApe2.setForeground(new java.awt.Color(26, 75, 54));
         txtApe2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -222,7 +228,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel32.setText("Apellido de Casada");
         panelInfoPersonal1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, 110, -1));
 
-        txtApeC.setBackground(new java.awt.Color(255, 255, 255));
         txtApeC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtApeC.setForeground(new java.awt.Color(26, 75, 54));
         txtApeC.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -234,7 +239,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel33.setText("Fecha de Nacimiento*");
         panelInfoPersonal1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 130, -1));
 
-        txtFecha.setBackground(new java.awt.Color(255, 255, 255));
         txtFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(26, 75, 54));
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -251,21 +255,18 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel35.setText("DPI*");
         panelInfoPersonal1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 40, -1));
 
-        txtDPI.setBackground(new java.awt.Color(255, 255, 255));
         txtDPI.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtDPI.setForeground(new java.awt.Color(26, 75, 54));
         txtDPI.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDPI.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelInfoPersonal1.add(txtDPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 270, -1));
 
-        cbEstadoCivil.setBackground(new java.awt.Color(255, 255, 255));
         cbEstadoCivil.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbEstadoCivil.setForeground(new java.awt.Color(26, 75, 54));
         cbEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Estado Civil", "Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a", "Unión de Hecho" }));
         cbEstadoCivil.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelInfoPersonal1.add(cbEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 270, -1));
 
-        txtCorreo.setBackground(new java.awt.Color(255, 255, 255));
         txtCorreo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtCorreo.setForeground(new java.awt.Color(26, 75, 54));
         txtCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -282,7 +283,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel36.setText("Número de Teléfono 1*");
         panelInfoPersonal1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, -1, -1));
 
-        txtNum1.setBackground(new java.awt.Color(255, 255, 255));
         txtNum1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNum1.setForeground(new java.awt.Color(26, 75, 54));
         txtNum1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -294,14 +294,12 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel39.setText("Número de Teléfono 2");
         panelInfoPersonal1.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, -1, -1));
 
-        txtNum2.setBackground(new java.awt.Color(255, 255, 255));
         txtNum2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtNum2.setForeground(new java.awt.Color(26, 75, 54));
         txtNum2.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNum2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         panelInfoPersonal1.add(txtNum2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, 270, -1));
 
-        cbSexo.setBackground(new java.awt.Color(255, 255, 255));
         cbSexo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbSexo.setForeground(new java.awt.Color(26, 75, 54));
         cbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Sexo", "Masculino", "Femenino" }));
@@ -327,11 +325,26 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         lblError1erApellido.setForeground(new java.awt.Color(153, 0, 0));
         panelInfoPersonal1.add(lblError1erApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 170, 20));
 
-        lblError1erNombre.setForeground(new java.awt.Color(153, 0, 0));
-        panelInfoPersonal1.add(lblError1erNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 170, 20));
+        lblError1erApellido1.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblError1erApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 170, 20));
 
-        lblFondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-datospersonales.png"))); // NOI18N
-        panelInfoPersonal1.add(lblFondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 400));
+        lblError1erTel.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblError1erTel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 120, 20));
+
+        lblErrorPrimerNombre.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblErrorPrimerNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 170, 20));
+
+        lblErrorDpi.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblErrorDpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 170, 20));
+
+        lblErrorEstado.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblErrorEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 170, 20));
+
+        lblErrorSexo.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblErrorSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 190, 170, 20));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-datospersonales.png"))); // NOI18N
+        panelInfoPersonal1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 400));
 
         panelOpciones1.add(panelInfoPersonal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 970, 400));
 
@@ -363,33 +376,35 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel18.setText("Dirección de Vivienda");
         jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
-        cbDepto.setBackground(new java.awt.Color(255, 255, 255));
         cbDepto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbDepto.setForeground(new java.awt.Color(26, 75, 54));
         cbDepto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Departamento", "Alta Verapaz", "Baja Verapaz", "Chimaltenango", "Chiquimula", "El Progreso", "Escuintla", "Guatemala", "Huehuetenango", "Izabal", "Jalapa", "Jutiapa", "Petén", "Quetzaltenango", "Quiché", "Retalhuleu", "Sacatepéquez", "San Marcos", "Santa Rosa", "Sololá", "Suchitepéquez", "Totonicapán", "Zacapa" }));
         cbDepto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel6.add(cbDepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
 
-        cbMun.setBackground(new java.awt.Color(255, 255, 255));
         cbMun.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbMun.setForeground(new java.awt.Color(26, 75, 54));
         cbMun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Municipio" }));
         cbMun.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel6.add(cbMun, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, -1));
 
-        txtAldea.setBackground(new java.awt.Color(255, 255, 255));
         txtAldea.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtAldea.setForeground(new java.awt.Color(26, 75, 54));
         txtAldea.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtAldea.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel6.add(txtAldea, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 270, -1));
 
-        txtDireccion.setBackground(new java.awt.Color(255, 255, 255));
         txtDireccion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtDireccion.setForeground(new java.awt.Color(26, 75, 54));
         txtDireccion.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDireccion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel6.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 270, -1));
+
+        lblErrorDepartamento.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel6.add(lblErrorDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 170, 20));
+
+        lblErrorMunicipio.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel6.add(lblErrorMunicipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 170, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-direccion.png"))); // NOI18N
         jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 230));
@@ -409,19 +424,16 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel21.setText("Hora de Entrada");
         jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 100, -1));
 
-        txtHoraEntrada.setBackground(new java.awt.Color(255, 255, 255));
         txtHoraEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtHoraEntrada.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel7.add(txtHoraEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 270, -1));
 
-        cbJefeInmediato.setBackground(new java.awt.Color(255, 255, 255));
         cbJefeInmediato.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbJefeInmediato.setForeground(new java.awt.Color(26, 75, 54));
         cbJefeInmediato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Jefe Inmediato" }));
         cbJefeInmediato.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel7.add(cbJefeInmediato, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 270, -1));
 
-        cbPuesto.setBackground(new java.awt.Color(255, 255, 255));
         cbPuesto.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbPuesto.setForeground(new java.awt.Color(26, 75, 54));
         cbPuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Puesto" }));
@@ -438,7 +450,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel41.setText("Jefe Inmediato");
         jPanel7.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
-        txtHoraSalida.setBackground(new java.awt.Color(255, 255, 255));
         txtHoraSalida.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtHoraSalida.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel7.add(txtHoraSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 270, -1));
@@ -447,6 +458,18 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel42.setForeground(new java.awt.Color(0, 127, 75));
         jLabel42.setText("Hora de Salida");
         jPanel7.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 100, -1));
+
+        lblErrorpuesto.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel7.add(lblErrorpuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 170, 20));
+
+        lblErrorJefe.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel7.add(lblErrorJefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 170, 20));
+
+        lblErrorHorarioEntrada.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel7.add(lblErrorHorarioEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 170, 20));
+
+        lblErrorHorarioSalida.setForeground(new java.awt.Color(153, 0, 0));
+        jPanel7.add(lblErrorHorarioSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, 170, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-direccion.png"))); // NOI18N
         jPanel7.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 230));
@@ -643,10 +666,21 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblError1erApellido;
-    public javax.swing.JLabel lblError1erNombre;
+    public javax.swing.JLabel lblError1erApellido1;
+    public javax.swing.JLabel lblError1erTel;
     public javax.swing.JLabel lblError2doApellido;
+    public javax.swing.JLabel lblErrorDepartamento;
+    public javax.swing.JLabel lblErrorDpi;
+    public javax.swing.JLabel lblErrorEstado;
     public javax.swing.JLabel lblErrorFechaNacimiento;
-    private javax.swing.JLabel lblFondo1;
+    public javax.swing.JLabel lblErrorHorarioEntrada;
+    public javax.swing.JLabel lblErrorHorarioSalida;
+    public javax.swing.JLabel lblErrorJefe;
+    public javax.swing.JLabel lblErrorMunicipio;
+    public javax.swing.JLabel lblErrorPrimerNombre;
+    public javax.swing.JLabel lblErrorSexo;
+    public javax.swing.JLabel lblErrorpuesto;
+    private javax.swing.JLabel lblFondo;
     private javax.swing.JPanel panelH1;
     private javax.swing.JPanel panelH2;
     private javax.swing.JPanel panelH3;
