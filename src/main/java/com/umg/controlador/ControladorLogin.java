@@ -155,7 +155,7 @@ public class ControladorLogin implements ActionListener, MouseListener, Document
     }
 
     private void camposNoMayores(){
-        ((AbstractDocument) this.vista.getTxtUsuario().getDocument()).setDocumentFilter(new LimiteCaracteres(15));
+        ((AbstractDocument) this.vista.getTxtUsuario().getDocument()).setDocumentFilter(new LimiteCaracteres(13));
         ((AbstractDocument) this.vista.getTxtPassword().getDocument()).setDocumentFilter(new LimiteCaracteres(30));
     }
 

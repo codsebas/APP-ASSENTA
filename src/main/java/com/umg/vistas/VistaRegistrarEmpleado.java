@@ -51,7 +51,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        this.lblErrorPrimerNombre.setVisible(false);
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -86,6 +85,10 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         cbSexo = new javax.swing.JComboBox<>();
         jLabel40 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        lblErrorFechaNacimiento = new javax.swing.JLabel();
+        lblError2doApellido = new javax.swing.JLabel();
+        lblError1erApellido = new javax.swing.JLabel();
+        lblError1erNombre = new javax.swing.JLabel();
         lblFondo1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -124,7 +127,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         btnRegistrarEmpleado = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-
 
         setMinimumSize(new java.awt.Dimension(1230, 720));
         setPreferredSize(new java.awt.Dimension(1230, 720));
@@ -315,6 +317,18 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel19.setForeground(new java.awt.Color(0, 127, 75));
         jLabel19.setText("DATOS GENERALES");
         panelInfoPersonal1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        lblErrorFechaNacimiento.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblErrorFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 140, 20));
+
+        lblError2doApellido.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblError2doApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 160, 20));
+
+        lblError1erApellido.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblError1erApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 170, 20));
+
+        lblError1erNombre.setForeground(new java.awt.Color(153, 0, 0));
+        panelInfoPersonal1.add(lblError1erNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 170, 20));
 
         lblFondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-datospersonales.png"))); // NOI18N
         panelInfoPersonal1.add(lblFondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 400));
@@ -628,6 +642,10 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblError1erApellido;
+    public javax.swing.JLabel lblError1erNombre;
+    public javax.swing.JLabel lblError2doApellido;
+    public javax.swing.JLabel lblErrorFechaNacimiento;
     private javax.swing.JLabel lblFondo1;
     private javax.swing.JPanel panelH1;
     private javax.swing.JPanel panelH2;
@@ -650,9 +668,6 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JTextField txtNom3;
     public javax.swing.JTextField txtNum1;
     public javax.swing.JTextField txtNum2;
-    public javax.swing.JLabel lblErrorPrimerNombre;
-    public javax.swing.JLabel lblErrorContraVa;
-    public javax.swing.JLabel lblErrorContraVa1;
     // End of variables declaration//GEN-END:variables
 
     public void setControlador(ControladorRegistrarEmpleado controlador){

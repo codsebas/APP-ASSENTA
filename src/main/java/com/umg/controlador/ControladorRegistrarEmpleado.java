@@ -72,8 +72,8 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     public void mouseClicked(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
           //  mostrarEmpleado();
-            unirNombre();
-           insertarEmpleado();
+            validarCampos();
+//           insertarEmpleado();
 
         }
         }
@@ -178,67 +178,6 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setAldeaColonia(modelo.getvRegistraEmpleado().txtAldea.getText());
         modeloEmpleado.setDireccionVivienda(modelo.getvRegistraEmpleado().txtDireccion.getText());
 
-        if (modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El primer nombre es obligatorio.");
-            return;
-        }
-
-        if (modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El primer apellido es obligatorio.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().txtApe2.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El Segundo apellido es obligatorio.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().txtFecha.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Su fecha de nacimiento es obligatorio.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el estado civil.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().cbSexo.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el sexo.");
-            return;
-        }
-
-        if (modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El primer Numero es obligatorio.");
-            return;
-        }
-
-        if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().length() != 13) {
-            JOptionPane.showMessageDialog(null, "El DPI debe tener 13 dígitos.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el Departamento.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().cbMun.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el Municipio.");
-            return;
-        }
-
-        if (modelo.getvRegistraEmpleado().cbPuesto.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un puesto.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().txtHoraEntrada.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El horario de entrada es obligatorio.");
-            return;
-        }
-        if (modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El horario de salida es obligatorio.");
-            return;
-        }
-
-
-
-
-
         boolean resultado = implementacion.insertarEmpleado(modeloEmpleado);
         if (!resultado) {
             JOptionPane.showMessageDialog(null, "Empleado registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -248,7 +187,68 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     }
 
 
+    private void validarCampos() {
+        if(modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtApe2.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtFecha.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedIndex() == 0 ||
+                modelo.getvRegistraEmpleado().cbSexo.getSelectedIndex() == 0 ||
+                modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty() ||
+                modelo.getvRegistraEmpleado().txtDPI.getText().trim().isEmpty()||
+                modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() == 0||
+                modelo.getvRegistraEmpleado().cbMun.getSelectedIndex() == 0||
+                modelo.getvRegistraEmpleado().cbPuesto.getSelectedIndex() == 0||
+                modelo.getvRegistraEmpleado().txtHoraEntrada.getText().trim().isEmpty()||
+                modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
 
+            if (modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblError1erNombre.setText("*Este campo es obligatorio");
+            }
+
+            if (modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblError1erApellido.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().txtApe2.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblError2doApellido.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().txtFecha.getText().trim().isEmpty()) {
+                modelo.getvRegistraEmpleado().lblErrorFechaNacimiento.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el estado civil.");
+            }
+            if (modelo.getvRegistraEmpleado().cbSexo.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el sexo.");
+            }
+
+            if (modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El primer Numero es obligatorio.");
+            }
+
+            if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().length() != 13) {
+                JOptionPane.showMessageDialog(null, "El DPI debe tener 13 dígitos.");
+            }
+            if (modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el Departamento.");
+            }
+            if (modelo.getvRegistraEmpleado().cbMun.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el Municipio.");
+            }
+
+            if (modelo.getvRegistraEmpleado().cbPuesto.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un puesto.");
+            }
+            if (modelo.getvRegistraEmpleado().txtHoraEntrada.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El horario de entrada es obligatorio.");
+            }
+            if (modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El horario de salida es obligatorio.");
+            }
+        }else{
+            insertarEmpleado();
+        }
+    }
 
 
 
