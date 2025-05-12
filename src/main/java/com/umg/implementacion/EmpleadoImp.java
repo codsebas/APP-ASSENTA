@@ -248,6 +248,8 @@ public class EmpleadoImp implements IEmpleados {
                 modelo.setMunicipio(rs.getString("municipio"));
                 modelo.setAldeaColonia(rs.getString("aldea"));
                 modelo.setDireccionVivienda(rs.getString("direccion"));
+                modelo.setIdPuesto(rs.getInt("id_puesto"));
+                modelo.setIdJefeInmediato(rs.getInt("id_jefe_inmediato"));
                 modelo.setNombrePuesto(rs.getString("nombre_puesto"));   // nombre_puesto (viene del JOIN)
                 modelo.setCorreoElectronico(rs.getString("email_empleado")); // email_empleado
                 modelo.setNumeroTelefono1(rs.getString("telefono1_empleado")); // telefono1_empleado

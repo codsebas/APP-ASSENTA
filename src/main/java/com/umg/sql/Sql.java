@@ -35,12 +35,13 @@ public class Sql {
             "WHERE e.dpi_empleado = ?";
 
 
-    private final String CONSULTA_EMPLEADO_DPIUPD  = "SELECT e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
+    private final String CONSULTA_EMPLEADO_DPIUPD  =   "SELECT e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
             "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
             "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
-            "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, " +
+            "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, e.puesto_id AS id_puesto, " +
             "e.email_empleado, e.telefono1_empleado, e.telefono2_empleado, " +
             "e.horario_entrada, e.horario_salida, " +
+            "e.jefe_inmediato_id AS id_jefeinmediato, " +
             "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS nombre_jefe_inmediato, " +
             "d.departamento, d.municipio, d.aldea, d.direccion " +
             "FROM empleado e " +
