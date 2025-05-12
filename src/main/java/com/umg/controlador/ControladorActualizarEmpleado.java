@@ -35,16 +35,18 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         agregarMunicipios();
     }
 
-    public void cargarJefes(JComboBox<String> comboBox) {
+    public void cargarJefes(JComboBox<Object> comboBox) {
 
         List<ModeloJefeInmediato> jefes = implementacionPuesto.obtenerJefesInmediatos();
         comboBox.removeAllItems();
 
         comboBox.addItem("Elegir Jefe");
         for (ModeloJefeInmediato j : jefes) {
-            comboBox.addItem(String.valueOf(j));
+            comboBox.addItem(j);
         }
     }
+
+
 
     public void cargarPuestos(JComboBox<String> comboBox) {
         List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
@@ -170,6 +172,17 @@ actualizarEmpleado();
         EmpleadoImp imp = new EmpleadoImp();
         ModeloEmpleado empleado = new ModeloEmpleado();
 
+        Object selectedItem = modelo.getvActualizarEmpleado().cbJefeInmediato.getSelectedItem();
+        int idJefe;
+
+        if (selectedItem instanceof ModeloJefeInmediato) {
+            ModeloJefeInmediato jefe = (ModeloJefeInmediato) selectedItem;
+            idJefe = jefe.getIdEmpleado();
+        } else {
+            // Si seleccionaron "Elegir Jefe"
+            idJefe = 0;
+        }
+
         try {
             var vista = modelo.getvActualizarEmpleado();
 
@@ -189,10 +202,10 @@ actualizarEmpleado();
             empleado.setNumeroTelefono1(vista.txtNum1.getText());
             empleado.setNumeroTelefono2(vista.txtNum2.getText());
 
-            empleado.setIdPuesto(Integer.parseInt((String) vista.cbPuesto.getSelectedItem()));
+            empleado.setIdPuesto(1);
             empleado.setHorarioEntrada(vista.txtHoraEntrada.getText());
             empleado.setHorarioSalida(vista.txtHoraSalida.getText());
-            empleado.setIdJefeInmediato(Integer.parseInt((String) vista.cbJefeInmediato.getSelectedItem()));
+            empleado.setIdJefeInmediato(idJefe);
 
             empleado.setDepartamento((String) vista.cbDepto.getSelectedItem());
             empleado.setMunicipio((String) vista.cbMun.getSelectedItem());

@@ -274,13 +274,13 @@ public class EmpleadoImp implements IEmpleados {
 
         try {
             ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
-            ps.setString(1, modelo.getDpi());
-            ps.setString(2, modelo.getSexo());
-            ps.setString(3, modelo.getPrimerNombre());
-            ps.setString(4, modelo.getSegundoNombre());
-            ps.setString(5, modelo.getTercerNombre());
-            ps.setString(6, modelo.getPrimerApellido());
-            ps.setString(7, modelo.getSegundoApellido());
+            ps.setString(16, modelo.getDpi());
+            ps.setString(1, modelo.getSexo());
+            ps.setString(2, modelo.getPrimerNombre());
+            ps.setString(3, modelo.getSegundoNombre());
+            ps.setString(4, modelo.getTercerNombre());
+            ps.setString(5, modelo.getPrimerApellido());
+            ps.setString(6, modelo.getSegundoApellido());
             ps.setString(8, modelo.getApellidoCasada());
             ps.setString(9, modelo.getFechaNacimiento());
             ps.setInt(10, modelo.getEdad());
@@ -293,8 +293,8 @@ public class EmpleadoImp implements IEmpleados {
             ps.setString(17, modelo.getMunicipio());
             ps.setString(18, modelo.getAldeaColonia());
             ps.setString(19, modelo.getDireccionVivienda());
-            ps.setInt(20, modelo.getIdHuella());
-            ps.setBytes(21, modelo.getHuella());
+//            ps.setInt(20, modelo.getIdHuella());
+//            ps.setBytes(21, modelo.getHuella());
             ps.setInt(22, modelo.getIdEmpleado()); //
             ps.executeUpdate();
             resultado = true;

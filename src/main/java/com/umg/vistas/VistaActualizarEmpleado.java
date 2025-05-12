@@ -583,7 +583,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
     public javax.swing.JPanel btnBuscarEmpleado;
     public javax.swing.JComboBox<String> cbDepto;
     public javax.swing.JComboBox<String> cbEstadoCivil;
-    public javax.swing.JComboBox<String> cbJefeInmediato;
+    public javax.swing.JComboBox<Object> cbJefeInmediato;
     public javax.swing.JComboBox<String> cbMun;
     public javax.swing.JComboBox<String> cbPuesto;
     public javax.swing.JComboBox<String> cbSexo;
