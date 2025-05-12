@@ -51,6 +51,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        this.lblErrorPrimerNombre.setVisible(false);
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -123,6 +124,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         btnRegistrarEmpleado = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+
 
         setMinimumSize(new java.awt.Dimension(1230, 720));
         setPreferredSize(new java.awt.Dimension(1230, 720));
@@ -648,6 +650,9 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JTextField txtNom3;
     public javax.swing.JTextField txtNum1;
     public javax.swing.JTextField txtNum2;
+    public javax.swing.JLabel lblErrorPrimerNombre;
+    public javax.swing.JLabel lblErrorContraVa;
+    public javax.swing.JLabel lblErrorContraVa1;
     // End of variables declaration//GEN-END:variables
 
     public void setControlador(ControladorRegistrarEmpleado controlador){
