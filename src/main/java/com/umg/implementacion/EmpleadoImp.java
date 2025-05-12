@@ -2,11 +2,15 @@ package com.umg.implementacion;
 
 import com.umg.interfaces.IEmpleados;
 import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloJefeInmediato;
+import com.umg.modelos.ModeloPuesto;
 import com.umg.sql.Conector;
 import com.umg.sql.Sql;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmpleadoImp implements IEmpleados {
 
@@ -296,6 +300,53 @@ public class EmpleadoImp implements IEmpleados {
         }
 
         return resultado;
+    }
+
+    public List<ModeloPuesto> obtenerPuestos() {
+        List<ModeloPuesto> lista = new ArrayList<>();
+        conector.conectar();
+        try {
+            PreparedStatement stmt = conector.preparar(sql.getCONSULTA_TODOS_PUESTOS());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ModeloPuesto puesto = new ModeloPuesto(
+                        rs.getInt("id_puesto"),
+                        rs.getString("nombre_puesto")
+                );
+                lista.add(puesto);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            conector.mensaje("Error al obtener puestos: " + e.getMessage(), "Error", 0);
+        } finally {
+            conector.desconectar();
+        }
+        return lista;
+    }
+
+    public List<ModeloJefeInmediato> obtenerJefesInmediatos() {
+        List<ModeloJefeInmediato> lista = new ArrayList<>();
+        conector.conectar();
+        try {
+            PreparedStatement stmt = conector.preparar(sql.getCONSULTAR_TODOS_JEFES_INMEDIATOS());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ModeloJefeInmediato jefe = new ModeloJefeInmediato(
+                        rs.getInt("id_empleado"),
+                        rs.getString("nombre_completo")
+                );
+                lista.add(jefe);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            conector.mensaje("Error al obtener jefes inmediatos: " + e.getMessage(), "Error", 0);
+        } finally {
+            conector.desconectar();
+        }
+        return lista;
+
     }
     @Override
     public DefaultTableModel modeloEmpleado(String dpi) {

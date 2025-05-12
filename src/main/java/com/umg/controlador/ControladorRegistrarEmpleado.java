@@ -2,6 +2,8 @@ package com.umg.controlador;
 
 import com.umg.implementacion.EmpleadoImp;
 import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloJefeInmediato;
+import com.umg.modelos.ModeloPuesto;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 
 import javax.swing.*;
@@ -13,7 +15,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -31,6 +37,27 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
 
 
         agregarMunicipios();
+    }
+
+    public void cargarJefes(JComboBox<String> comboBox) {
+
+        List<ModeloJefeInmediato> jefes = implementacion.obtenerJefesInmediatos();
+        comboBox.removeAllItems();
+
+        comboBox.addItem("Elegir Jefe");
+        for (ModeloJefeInmediato j : jefes) {
+            comboBox.addItem(String.valueOf(j));
+        }
+    }
+
+    public void cargarPuestos(JComboBox<String> comboBox) {
+        List<ModeloPuesto> puestos = implementacion.obtenerPuestos();
+        comboBox.removeAllItems();
+
+        comboBox.addItem("Elegir Puesto");
+        for (ModeloPuesto p : puestos) {
+            comboBox.addItem(p.toString());
+        }
     }
 
     @Override
@@ -125,6 +152,21 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setDepartamento(departamento);
         modeloEmpleado.setMunicipio(municipio);
         modeloEmpleado.setFechaNacimiento(modelo.getvRegistraEmpleado().txtFecha.getText());
+        String fechaNacimientoTexto = modelo.getvRegistraEmpleado().txtFecha.getText().trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try {
+            LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoTexto, formatter);
+            LocalDate hoy = LocalDate.now();
+            int edad = Period.between(fechaNacimiento, hoy).getYears();
+
+            modeloEmpleado.setFechaNacimiento(fechaNacimientoTexto);
+            modeloEmpleado.setEdad(edad);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato yyyy-MM-dd (ej: 2000-12-25)");
+            return;
+        }
+
         modeloEmpleado.setEstadoCivil(estadoCivil);
         modeloEmpleado.setSexo(sexo);
         modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
@@ -135,6 +177,67 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setHorarioSalida(modelo.getvRegistraEmpleado().txtHoraSalida.getText());
         modeloEmpleado.setAldeaColonia(modelo.getvRegistraEmpleado().txtAldea.getText());
         modeloEmpleado.setDireccionVivienda(modelo.getvRegistraEmpleado().txtDireccion.getText());
+
+        if (modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El primer nombre es obligatorio.");
+            return;
+        }
+
+        if (modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El primer apellido es obligatorio.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().txtApe2.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El Segundo apellido es obligatorio.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().txtFecha.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Su fecha de nacimiento es obligatorio.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el estado civil.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().cbSexo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el sexo.");
+            return;
+        }
+
+        if (modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El primer Numero es obligatorio.");
+            return;
+        }
+
+        if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().length() != 13) {
+            JOptionPane.showMessageDialog(null, "El DPI debe tener 13 dígitos.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el Departamento.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().cbMun.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el Municipio.");
+            return;
+        }
+
+        if (modelo.getvRegistraEmpleado().cbPuesto.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un puesto.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().txtHoraEntrada.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El horario de entrada es obligatorio.");
+            return;
+        }
+        if (modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El horario de salida es obligatorio.");
+            return;
+        }
+
+
+
+
 
         boolean resultado = implementacion.insertarEmpleado(modeloEmpleado);
         if (!resultado) {

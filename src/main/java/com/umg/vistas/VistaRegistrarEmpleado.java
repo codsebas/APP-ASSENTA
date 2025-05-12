@@ -26,12 +26,15 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         ModeloVistaRegistrarEmpleado modelo = new ModeloVistaRegistrarEmpleado(this);
         ControladorRegistrarEmpleado controlador = new ControladorRegistrarEmpleado(modelo);
         setControlador(controlador);
+        controlador.cargarPuestos(cbPuesto);
+        controlador.cargarJefes(cbJefeInmediato);
     }
 
     public void cargarPuestos() {
         PuestoImp puesto = new PuestoImp();
         List<ModeloPuesto> puestos = puesto.obtenerPuestos();
         cbPuesto.removeAllItems(); // Limpia si ya tenía datos
+
 
         for (ModeloPuesto p : puestos) {
             cbPuesto.addItem(String.valueOf(p));
