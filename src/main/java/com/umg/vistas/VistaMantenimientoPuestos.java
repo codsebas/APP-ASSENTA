@@ -53,7 +53,7 @@ public class VistaMantenimientoPuestos extends javax.swing.JPanel {
         btnBuscar = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPuestos = new javax.swing.JTable();
 
         setMinimumSize(new java.awt.Dimension(1230, 720));
         setPreferredSize(new java.awt.Dimension(1230, 720));
@@ -256,7 +256,7 @@ public class VistaMantenimientoPuestos extends javax.swing.JPanel {
 
         jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 400, -1, 36));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPuestos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -267,7 +267,7 @@ public class VistaMantenimientoPuestos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblPuestos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 630, 200));
 
@@ -306,7 +306,7 @@ public class VistaMantenimientoPuestos extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
+    public javax.swing.JTable tblPuestos;
     public javax.swing.JTextField txtDescripcion;
     public javax.swing.JTextField txtNombrePuesto;
     // End of variables declaration//GEN-END:variables

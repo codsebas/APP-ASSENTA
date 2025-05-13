@@ -27,6 +27,7 @@ public class PuestoImp implements IPuestos {
         try {
             ps = conector.preparar(sql.getINSERTAR_PUESTO());
             ps.setString(1, modelo.getNombrePuesto());
+            ps.setString(2, modelo.getDescripcionPuesto());
             ps.executeUpdate();
             resultado = true;
         } catch (SQLException e) {
@@ -60,9 +61,11 @@ public class PuestoImp implements IPuestos {
         try {
             ps = conector.preparar(sql.getACTUALIZAR_PUESTO());
             ps.setString(1, modelo.getNombrePuesto());
-            ps.setInt(2, modelo.getIdPuesto());
+            ps.setString(2, modelo.getDescripcionPuesto());
+            ps.setInt(3, modelo.getIdPuesto());
             resultado = ps.executeUpdate() > 0;
         } catch (SQLException e) {
+            e.printStackTrace();
             conector.mensaje("No se pudo actualizar el puesto", "Error al actualizar", 0);
         } finally {
             conector.desconectar();
@@ -101,15 +104,17 @@ public class PuestoImp implements IPuestos {
         DefaultTableModel modeloTabla = new DefaultTableModel();
         modeloTabla.addColumn("ID Puesto");
         modeloTabla.addColumn("Nombre Puesto");
+        modeloTabla.addColumn("Descripcion");
 
         conector.conectar();
         try {
-            ps = conector.preparar(sql.getCONSULTA_TODOS_PUESTOS());
+            ps = conector.preparar(sql.getCONSULTA_TABLA_PUESTO());
             rs = ps.executeQuery();
             while (rs.next()) {
                 Object[] fila = {
                         rs.getInt("id_puesto"),
-                        rs.getString("nombre_puesto")
+                        rs.getString("nombre_puesto"),
+                        rs.getString("desc_puesto")
                 };
                 modeloTabla.addRow(fila);
             }

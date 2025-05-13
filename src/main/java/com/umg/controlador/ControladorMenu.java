@@ -108,9 +108,13 @@ public class ControladorMenu implements ActionListener, MouseListener {
             VistaMostrarEmpleados panel = new VistaMostrarEmpleados();
             cambiarVista(panel);
         } else if (e.getComponent().equals(vista.btnActuUsuario)) {
-            VistaActualizarEmpleado panel = new VistaActualizarEmpleado();
+            VistaMantenimientoPuestos panel = new VistaMantenimientoPuestos();
+
             cambiarVista(panel);
+
+
         }else if (e.getComponent().equals(vista.btnExpandirMenu)) {
+
             if (estado) {
                 moverDerecha(vista.panelMenu, 1, 2, 200);
                 estado = false;
