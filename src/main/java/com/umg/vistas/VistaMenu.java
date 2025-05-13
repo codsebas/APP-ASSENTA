@@ -19,8 +19,8 @@ public class VistaMenu extends javax.swing.JPanel {
      */
     public VistaMenu() {
         initComponents();
-//        ModeloMenu modelo = new ModeloMenu(this);
-//        ControladorMenu controlador = new ControladorMenu(modelo);
+        ControladorMenu controladorMenu = new ControladorMenu();
+        controladorMenu.animacionLabel(lblTitulo1);
     }
 
     /**
@@ -58,6 +58,8 @@ public class VistaMenu extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
+        panelFondoMenu = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(0, 720));
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -221,6 +223,18 @@ public class VistaMenu extends javax.swing.JPanel {
 
         contenedor.setBackground(new java.awt.Color(240, 253, 244));
         contenedor.setLayout(new javax.swing.BoxLayout(contenedor, javax.swing.BoxLayout.LINE_AXIS));
+
+        panelFondoMenu.setBackground(new java.awt.Color(240, 253, 244));
+        panelFondoMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 100)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(0, 127, 75));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Bienvenido");
+        panelFondoMenu.add(lblTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 1220, 710));
+
+        contenedor.add(panelFondoMenu);
+
         PanelPrincipal.add(contenedor, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -262,6 +276,8 @@ public class VistaMenu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblImagen;
+    public javax.swing.JLabel lblTitulo1;
+    public javax.swing.JPanel panelFondoMenu;
     public javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 
