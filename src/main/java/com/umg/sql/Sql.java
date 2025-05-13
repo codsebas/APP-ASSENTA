@@ -52,14 +52,15 @@ public class Sql {
                     "WHERE e.dpi_empleado = ?";
 
     private final String INSERTAR_EMPLEADO = """
-    INSERT INTO empleado (
-        dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,
-        nombre2_empleado, nombre3_empleado, apellido1_empleado, apellido2_empleado,
-        apellidocasada_empleado, fec_nacimiento, edad_empleado, puesto_id,
-        email_empleado, telefono1_empleado, telefono2_empleado,
-        horario_entrada, horario_salida, jefe_inmediato_id
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    RETURNING id_empleado;
+            INSERT INTO empleado (
+                dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,
+                nombre2_empleado, nombre3_empleado, apellido1_empleado, apellido2_empleado,
+                apellidocasada_empleado, fec_nacimiento, edad_empleado, puesto_id,
+                email_empleado, telefono1_empleado, telefono2_empleado,
+                horario_entrada, horario_salida, jefe_inmediato_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULLIF(?, 0))
+            RETURNING id_empleado;
+            
     """;
 
 

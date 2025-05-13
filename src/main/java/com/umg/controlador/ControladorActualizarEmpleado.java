@@ -161,10 +161,7 @@ actualizarEmpleado();
         vista.cbEstadoCivil.setSelectedItem(estadoCivil);
 
         vista.cbSexo.setSelectedItem(empleado.getSexo());
-        //vista.cbPuesto.setSelectedItem(empleado.getIdJefeInmediato());
-        //vista.cbJefeInmediato.setSelectedItem(empleado.getNombreJefeInmediato());
-       // vista.cbPuesto.setSelectedItem(imp.obtenerNombrePuestoDesdeBD(empleado.getIdPuesto()));
-        // Primero obtengo el nombre del puesto con el ID
+
         String nombrePuesto = imp.obtenerNombrePuestoDesdeBD(empleado.getIdPuesto());
 
         for (int i = 0; i < vista.cbPuesto.getItemCount(); i++) {

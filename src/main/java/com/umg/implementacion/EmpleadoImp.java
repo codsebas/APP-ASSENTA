@@ -228,7 +228,7 @@ public class EmpleadoImp implements IEmpleados {
             if (rs.next()) {
                 nombrePuesto = rs.getString("nombre_puesto");
             } else {
-                System.out.println("❌ No se encontró el puesto para ID: " + idPuesto);
+                System.out.println(" No se encontró el puesto para ID: " + idPuesto);
             }
         } catch (SQLException ex) {
             System.out.println("Error al obtener el nombre del puesto: " + ex.getMessage());
@@ -253,7 +253,7 @@ public class EmpleadoImp implements IEmpleados {
             if (rs.next()) {
                 nombreJefe = rs.getString("nombre_jefe");
             } else {
-                System.out.println("❌ No se encontró un jefe con ID: " + idJefe);
+                System.out.println(" No se encontró un jefe con ID: " + idJefe);
             }
         } catch (SQLException ex) {
             System.out.println("Error al obtener el nombre del jefe: " + ex.getMessage());
@@ -332,16 +332,17 @@ public class EmpleadoImp implements IEmpleados {
             ps.setString(1, modelo.getSexo());
             ps.setString(2, "C");
             ps.setString(3, modelo.getPrimerNombre());
-            ps.setString(4, modelo.getSegundoNombre());
-            ps.setString(5, modelo.getTercerNombre());
+            // setNullableString(ps, 9, modelo.getApellidoCasada());
+            setNullableString(ps,4, modelo.getSegundoNombre());
+            setNullableString(ps,5, modelo.getTercerNombre());
             ps.setString(6, modelo.getPrimerApellido());
             ps.setString(7, modelo.getSegundoApellido());
-            ps.setString(8, modelo.getApellidoCasada());
+            setNullableString(ps,8, modelo.getApellidoCasada());
             ps.setDate(9, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(10, modelo.getEdad());
-            ps.setString(11, modelo.getCorreoElectronico());
+            setNullableString(ps,11, modelo.getCorreoElectronico());
             ps.setString(12, modelo.getNumeroTelefono1());
-            ps.setString(13, modelo.getNumeroTelefono2());
+            setNullableString(ps,3, modelo.getNumeroTelefono2());
             ps.setTime(14, Time.valueOf(modelo.getHorarioEntrada()));
             ps.setTime(15, Time.valueOf(modelo.getHorarioSalida()));
 //            ps.setInt(14, modelo.getIdJefeInmediato());
@@ -352,8 +353,8 @@ public class EmpleadoImp implements IEmpleados {
 //            ps.setString(19, modelo.getDireccionVivienda());
 //            ps.setInt(20, modelo.getIdHuella());
 //            ps.setBytes(21, modelo.getHuella());
-            ps.setInt(16, modelo.getIdJefeInmediato()); //
-            ps.executeUpdate();
+            //ps.setInt(16, modelo.getIdJefeInmediato()); //
+            //ps.executeUpdate();
             resultado = true;
         } catch (SQLException ex) {
             conector.mensaje("No se pudo actualizar el empleado " + ex.getMessage(), "Error al actualizar", 0);
