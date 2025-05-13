@@ -42,7 +42,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
         vista.contenedor.addMouseListener(this);
         vista.btnGestionUsuarios.addMouseListener(this);
         vista.btnMeMoEmple.addMouseListener(this);
-        vista.btnActuUsuario.addMouseListener(this);
+        vista.btnActuEmpleado.addMouseListener(this);
+        vista.btnRegresarLogin.addMouseListener(this);
+        vista.btnMantePuestos.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -107,13 +109,19 @@ public class ControladorMenu implements ActionListener, MouseListener {
         } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
             VistaMostrarEmpleados panel = new VistaMostrarEmpleados();
             cambiarVista(panel);
-        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
-            VistaMantenimientoPuestos panel = new VistaMantenimientoPuestos();
-
+        } else if (e.getComponent().equals(vista.btnActuEmpleado)) {
+            VistaActualizarEmpleado panel = new VistaActualizarEmpleado();
             cambiarVista(panel);
+        } else if (e.getComponent().equals(vista.btnMantePuestos)) {
+            VistaMantenimientoPuestos panel = new VistaMantenimientoPuestos();
+            cambiarVista(panel);
+        } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
+            ModeloLogin modelo2 = new ModeloLogin();
 
-
-        }else if (e.getComponent().equals(vista.btnExpandirMenu)) {
+            VistaLogin vista2 = new VistaLogin();
+            new ControladorLogin(modelo2, vista2, vistsaPrincipal);
+            vistsaPrincipal.cambiarPanel(vista2);
+        } else if (e.getComponent().equals(vista.btnExpandirMenu)) {
 
             if (estado) {
                 moverDerecha(vista.panelMenu, 1, 2, 200);
@@ -146,10 +154,16 @@ public class ControladorMenu implements ActionListener, MouseListener {
             }
         } else if (e.getComponent().equals(vista.btnMeReUser)) {
             vista.btnMeReUser.setBackground(new Color(38, 163, 106));
-        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
-            vista.btnActuUsuario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnActuEmpleado)) {
+            vista.btnActuEmpleado.setBackground(new Color(38, 163, 106));
         } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
-            vista.btnGestionUsuarios.setBackground(new Color(0, 127, 75));
+            vista.btnGestionUsuarios.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
+            vista.btnRegresarLogin.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnMantePuestos)) {
+            vista.btnMantePuestos.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
+            vista.btnMeMoEmple.setBackground(new Color(38, 163, 106));
         }
     }
 
@@ -160,10 +174,16 @@ public class ControladorMenu implements ActionListener, MouseListener {
             vista.btnExpandirMenu.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(vista.btnMeReUser)) {
             vista.btnMeReUser.setBackground(new Color(0, 127, 75));
-        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
-            vista.btnActuUsuario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnActuEmpleado)) {
+            vista.btnActuEmpleado.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
             vista.btnGestionUsuarios.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
+            vista.btnRegresarLogin.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnMantePuestos)) {
+            vista.btnMantePuestos.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
+            vista.btnMeMoEmple.setBackground(new Color(0, 127, 75));
         }
 
     }
