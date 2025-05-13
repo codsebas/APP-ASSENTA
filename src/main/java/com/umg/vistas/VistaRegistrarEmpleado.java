@@ -4,6 +4,7 @@
  */
 package com.umg.vistas;
 
+import com.digitalpersona.uareu.*;
 import com.umg.controlador.ControladorRegistrarEmpleado;
 import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloPuesto;
@@ -20,8 +21,12 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form VistaRegistrarEmpleado
      */
+
+    private Reader reader;
+
     public VistaRegistrarEmpleado() {
         initComponents();
+        reader = obtenerReader();
         cargarPuestos();
         ModeloVistaRegistrarEmpleado modelo = new ModeloVistaRegistrarEmpleado(this);
         ControladorRegistrarEmpleado controlador = new ControladorRegistrarEmpleado(modelo);
@@ -707,6 +712,25 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public void setControlador(ControladorRegistrarEmpleado controlador){
         btnRegistrarEmpleado.addMouseListener(controlador);
         cbDepto.addActionListener(controlador);
+    }
+
+    public Reader obtenerReader() {
+        Reader reader = null;
+        try {
+            ReaderCollection readers = UareUGlobal.GetReaderCollection();
+            readers.GetReaders(); // Refrescar la lista de dispositivos conectados
+            if (readers.size() == 0) {
+                System.out.println("❌ No se detectaron lectores de huella.");
+                return null;
+            }
+
+            reader = readers.get(0); // Selecciona automáticamente el primer lector encontrado
+            System.out.println("✅ Lector seleccionado automáticamente: " + reader.GetDescription().name);
+
+        } catch (UareUException e) {
+            System.err.println("❌ Error inicializando el lector: " + e.getMessage());
+        }
+        return reader;
     }
 
 }
