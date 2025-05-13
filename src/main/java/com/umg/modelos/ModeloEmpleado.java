@@ -50,6 +50,8 @@ public class ModeloEmpleado {
 private VistaMostrarEmpleados vista;
 
 
+
+
     public ModeloEmpleado() {
 
     }

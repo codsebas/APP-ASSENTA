@@ -69,15 +69,24 @@ public class Sql {
         empleado_id, departamento, municipio, aldea, direccion
     ) VALUES (?, ?, ?, ?, ?);
     """;
+    private final String ACTUALIZAR_DIRECCION = """
+    UPDATE direccion_empleado
+    SET departamento = ?,
+        municipio = ?,
+        aldea = ?,
+        direccion = ?
+    WHERE empleado_id = ?;
+    """;
 
 
     private final String INSERTAR_HUELLA = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?);";
     private final String ACTUALIZAR_EMPLEADO =
-            "UPDATE empleado SET " +
-                    "sexo_empleado = ?, estado_civil = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?, " +
-                    "apellido1_empleado = ?, apellido2_empleado = ?, apellidocasada_empleado = ?, fec_nacimiento = ?, edad_empleado = ?, " +
-                    "email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ? " +
-                    "WHERE id_empleado = ?";
+            "UPDATE empleado SET\n" +
+                    "    sexo_empleado = ?, estado_civil = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?,\n" +
+                    "    apellido1_empleado = ?, apellido2_empleado = ?, apellidocasada_empleado = ?, fec_nacimiento = ?, edad_empleado = ?,\n" +
+                    "    puesto_id = ?, email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ?\n" +
+                    "WHERE dpi_empleado = ?\n";
+
     private final String ELIMINAR_EMPLEADO = "DELETE FROM cliente WHERE dpi_empleado = ?";
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";
     private final String CONSULTA_USUARIO = "SELECT * FROM usuarios WHERE usuario = ?";
@@ -96,10 +105,15 @@ public class Sql {
     public Sql() {
 
     }
+
     public String getACTUALIZAR_EMPLEADO(){ return ACTUALIZAR_EMPLEADO; }
 
     public String getCONSULTA_TODOS_EMPLEADO() {
         return CONSULTA_TODOS_EMPLEADO;
+    }
+
+    public String getACTUALIZAR_DIRECCION() {
+        return ACTUALIZAR_DIRECCION;
     }
 
     public String getCONSULTA_EMPLEADO_DPI() {
