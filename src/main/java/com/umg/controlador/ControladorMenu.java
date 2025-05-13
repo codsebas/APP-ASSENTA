@@ -15,9 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import java.sql.Time;
+import javax.swing.*;
 
 /**
  *
@@ -31,6 +30,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
 
     private boolean estado = true;
 
+    public ControladorMenu() {
+    }
+
     public ControladorMenu(ModeloMenu modelo, VistaMenu vista, VistaPrincipal vistsaPrincipal) {
         this.modelo = modelo;
         this.vista = vista;
@@ -42,7 +44,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
         vista.contenedor.addMouseListener(this);
         vista.btnGestionUsuarios.addMouseListener(this);
         vista.btnMeMoEmple.addMouseListener(this);
-        vista.btnActuUsuario.addMouseListener(this);
+        vista.btnActuEmpleado.addMouseListener(this);
+        vista.btnRegresarLogin.addMouseListener(this);
+        vista.btnMantePuestos.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -107,10 +111,20 @@ public class ControladorMenu implements ActionListener, MouseListener {
         } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
             VistaMostrarEmpleados panel = new VistaMostrarEmpleados();
             cambiarVista(panel);
-        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
+        } else if (e.getComponent().equals(vista.btnActuEmpleado)) {
             VistaActualizarEmpleado panel = new VistaActualizarEmpleado();
             cambiarVista(panel);
-        }else if (e.getComponent().equals(vista.btnExpandirMenu)) {
+        } else if (e.getComponent().equals(vista.btnMantePuestos)) {
+            VistaMantenimientoPuestos panel = new VistaMantenimientoPuestos();
+            cambiarVista(panel);
+        } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
+            ModeloLogin modelo2 = new ModeloLogin();
+
+            VistaLogin vista2 = new VistaLogin();
+            new ControladorLogin(modelo2, vista2, vistsaPrincipal);
+            vistsaPrincipal.cambiarPanel(vista2);
+        } else if (e.getComponent().equals(vista.btnExpandirMenu)) {
+
             if (estado) {
                 moverDerecha(vista.panelMenu, 1, 2, 200);
                 estado = false;
@@ -142,10 +156,16 @@ public class ControladorMenu implements ActionListener, MouseListener {
             }
         } else if (e.getComponent().equals(vista.btnMeReUser)) {
             vista.btnMeReUser.setBackground(new Color(38, 163, 106));
-        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
-            vista.btnActuUsuario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnActuEmpleado)) {
+            vista.btnActuEmpleado.setBackground(new Color(38, 163, 106));
         } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
-            vista.btnGestionUsuarios.setBackground(new Color(0, 127, 75));
+            vista.btnGestionUsuarios.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
+            vista.btnRegresarLogin.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnMantePuestos)) {
+            vista.btnMantePuestos.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
+            vista.btnMeMoEmple.setBackground(new Color(38, 163, 106));
         }
     }
 
@@ -156,12 +176,42 @@ public class ControladorMenu implements ActionListener, MouseListener {
             vista.btnExpandirMenu.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(vista.btnMeReUser)) {
             vista.btnMeReUser.setBackground(new Color(0, 127, 75));
-        } else if (e.getComponent().equals(vista.btnActuUsuario)) {
-            vista.btnActuUsuario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnActuEmpleado)) {
+            vista.btnActuEmpleado.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(vista.btnGestionUsuarios)) {
             vista.btnGestionUsuarios.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
+            vista.btnRegresarLogin.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnMantePuestos)) {
+            vista.btnMantePuestos.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
+            vista.btnMeMoEmple.setBackground(new Color(0, 127, 75));
         }
 
+    }
+    Timer timer;
+    int pasosRealizados = 0;
+    public void animacionLabel(JLabel label){
+
+        int alturaInicial = 720;
+        int alturaFinal = 150;
+        int ancho = 1220;
+        int duracion = 250;
+        int pasos = 50;
+        int retardo = duracion / pasos;
+
+        timer = new Timer(retardo,(ActionEvent e) -> {
+            pasosRealizados++;
+            float fraccion = (float) pasosRealizados / pasos;
+            int nuevaAltura = alturaInicial + Math.round((alturaFinal - alturaInicial) * fraccion);
+            label.setBounds(50, 50, ancho, nuevaAltura);
+
+            if (pasosRealizados >= pasos){
+                timer.stop();
+            }
+        });
+
+        timer.start();
     }
 
 }

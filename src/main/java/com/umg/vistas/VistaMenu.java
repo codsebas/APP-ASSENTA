@@ -19,8 +19,8 @@ public class VistaMenu extends javax.swing.JPanel {
      */
     public VistaMenu() {
         initComponents();
-//        ModeloMenu modelo = new ModeloMenu(this);
-//        ControladorMenu controlador = new ControladorMenu(modelo);
+        ControladorMenu controladorMenu = new ControladorMenu();
+        controladorMenu.animacionLabel(lblTitulo1);
     }
 
     /**
@@ -45,10 +45,21 @@ public class VistaMenu extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         lblIcono = new javax.swing.JLabel();
         btnGestionUsuarios = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        btnActuUsuario = new javax.swing.JPanel();
+        btnRegresarLogin = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        btnActuEmpleado = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        btnMantePuestos = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
+        panelFondoMenu = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(0, 720));
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -56,7 +67,7 @@ public class VistaMenu extends javax.swing.JPanel {
         PanelPrincipal.setBackground(new java.awt.Color(204, 204, 204));
         PanelPrincipal.setLayout(new java.awt.BorderLayout());
 
-        panelMenu.setBackground(new java.awt.Color(153, 153, 153));
+        panelMenu.setBackground(new java.awt.Color(0, 127, 75));
         panelMenu.setPreferredSize(new java.awt.Dimension(50, 720));
         panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -96,7 +107,7 @@ public class VistaMenu extends javax.swing.JPanel {
 
         panelMenu.add(btnExpandirMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 50));
 
-        btnMeReUser1.setBackground(new java.awt.Color(204, 204, 255));
+        btnMeReUser1.setBackground(new java.awt.Color(0, 127, 75));
 
         javax.swing.GroupLayout btnMeReUser1Layout = new javax.swing.GroupLayout(btnMeReUser1);
         btnMeReUser1.setLayout(btnMeReUser1Layout);
@@ -109,7 +120,7 @@ public class VistaMenu extends javax.swing.JPanel {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        panelMenu.add(btnMeReUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 200, 50));
+        panelMenu.add(btnMeReUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 200, 50));
 
         btnMeMoEmple.setBackground(new java.awt.Color(0, 127, 75));
         btnMeMoEmple.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -130,7 +141,20 @@ public class VistaMenu extends javax.swing.JPanel {
         btnGestionUsuarios.setBackground(new java.awt.Color(0, 127, 75));
         btnGestionUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGestionUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Gestión Usuarios");
+        jLabel7.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
+        btnGestionUsuarios.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/usuariosIcono.png"))); // NOI18N
+        btnGestionUsuarios.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
         panelMenu.add(btnGestionUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 50));
+
+        jPanel4.setBackground(new java.awt.Color(0, 127, 75));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -140,44 +164,77 @@ public class VistaMenu extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
 
-        panelMenu.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 420));
+        panelMenu.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 200, 270));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
+        btnRegresarLogin.setBackground(new java.awt.Color(0, 127, 75));
+        btnRegresarLogin.setForeground(new java.awt.Color(0, 127, 75));
+        btnRegresarLogin.setToolTipText("");
+        btnRegresarLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresarLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelMenu.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 200, 50));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Salir");
+        jLabel11.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
+        btnRegresarLogin.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
 
-        btnActuUsuario.setBackground(new java.awt.Color(0, 127, 75));
-        btnActuUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/saliricono.png"))); // NOI18N
+        btnRegresarLogin.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        javax.swing.GroupLayout btnActuUsuarioLayout = new javax.swing.GroupLayout(btnActuUsuario);
-        btnActuUsuario.setLayout(btnActuUsuarioLayout);
-        btnActuUsuarioLayout.setHorizontalGroup(
-            btnActuUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        btnActuUsuarioLayout.setVerticalGroup(
-            btnActuUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
+        panelMenu.add(btnRegresarLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 200, 50));
 
-        panelMenu.add(btnActuUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 200, 50));
+        btnActuEmpleado.setBackground(new java.awt.Color(0, 127, 75));
+        btnActuEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActuEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Actualizar Empleado");
+        jLabel9.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
+        btnActuEmpleado.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/empleadoactualizaricono.png"))); // NOI18N
+        btnActuEmpleado.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        panelMenu.add(btnActuEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 200, 50));
+
+        btnMantePuestos.setBackground(new java.awt.Color(0, 127, 75));
+        btnMantePuestos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMantePuestos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Gestión de Puestos");
+        jLabel5.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
+        btnMantePuestos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/puestoIcono.png"))); // NOI18N
+        btnMantePuestos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        panelMenu.add(btnMantePuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 50));
 
         PanelPrincipal.add(panelMenu, java.awt.BorderLayout.LINE_START);
 
         contenedor.setBackground(new java.awt.Color(240, 253, 244));
         contenedor.setLayout(new javax.swing.BoxLayout(contenedor, javax.swing.BoxLayout.LINE_AXIS));
+
+        panelFondoMenu.setBackground(new java.awt.Color(240, 253, 244));
+        panelFondoMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 100)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(0, 127, 75));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Bienvenido");
+        panelFondoMenu.add(lblTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 1220, 710));
+
+        contenedor.add(panelFondoMenu);
+
         PanelPrincipal.add(contenedor, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -195,21 +252,32 @@ public class VistaMenu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
-    public javax.swing.JPanel btnActuUsuario;
+    public javax.swing.JPanel btnActuEmpleado;
     public javax.swing.JPanel btnExpandirMenu;
     public javax.swing.JPanel btnGestionUsuarios;
+    public javax.swing.JPanel btnMantePuestos;
     public javax.swing.JPanel btnMeMoEmple;
     public javax.swing.JPanel btnMeReUser;
     public javax.swing.JPanel btnMeReUser1;
+    public javax.swing.JPanel btnRegresarLogin;
     public javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblImagen;
+    public javax.swing.JLabel lblTitulo1;
+    public javax.swing.JPanel panelFondoMenu;
     public javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 
