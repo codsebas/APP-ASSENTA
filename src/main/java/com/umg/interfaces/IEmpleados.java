@@ -1,8 +1,10 @@
 package com.umg.interfaces;
 
 import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloHuella;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public interface IEmpleados {
 
@@ -21,4 +23,6 @@ public interface IEmpleados {
     //ModeloEmpleado mostrarEmpleado(String dpi);
 
     public DefaultTableModel mostrarTodosLosEmpleados();
+
+    public boolean guardarHuella(List<ModeloHuella> modelo);
 }

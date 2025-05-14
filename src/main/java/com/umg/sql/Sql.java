@@ -93,6 +93,7 @@ public class Sql {
     private final String ELIMINAR_PUESTO = "DELETE FROM puesto WHERE id_puesto = ?";
     private final String CONSULTAR_TODOS_JEFES_INMEDIATOS = "SELECT id_empleado, nombre1_empleado || ' ' || apellido1_empleado AS nombre_completo FROM empleado";
     private final String CONSULTA_TABLA_PUESTO = "SELECT * FROM puesto";
+    private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?)";
     public Sql() {
 
     }
@@ -175,6 +176,10 @@ public String getCONSULTAR_PUESTO(){
     }
 
     public String getCONSULTA_TABLA_PUESTO() { return CONSULTA_TABLA_PUESTO; }
+
+    public String getINSERTAR_HUELLA_EMPLEADO() {
+        return INSERTAR_HUELLA_EMPLEADO;
+    }
 }
 
 

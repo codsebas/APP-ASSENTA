@@ -1,11 +1,14 @@
 package com.umg.controlador;
 
+import com.digitalpersona.uareu.*;
+import com.umg.biometrics.Enrollment;
 import com.umg.implementacion.EmpleadoImp;
 import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloEmpleado;
 import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
+import com.umg.modelos.ModeloHuella;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +31,13 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     EmpleadoImp implementacion = new EmpleadoImp();
     ModeloVistaRegistrarEmpleado modelo;
     PuestoImp implementacionPuesto = new PuestoImp();
+    Reader lector = obtenerReader();
+
+    //Para las plantillas
+    Fmd plantillaH1 = null;
+    Fmd plantillaH2 = null;
+    Fmd plantillaH3 = null;
+    Fmd plantillaH4 = null;
 
     private Map<String, String[]> municipiosPorDepartamento;
 
@@ -78,8 +88,44 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             validarCampos();
 //           insertarEmpleado();
 
+        } else if(e.getComponent().equals(modelo.getvRegistraEmpleado().panelH1)){
+            if (plantillaH1 == null) {
+                plantillaH1 = Enrollment.Run(lector);
+            } else {
+                boolean confirmar = confirmarSiHuella();
+                if (confirmar) {
+                    plantillaH1 = Enrollment.Run(lector);
+                }
+            }
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH2)){
+            if (plantillaH2 == null) {
+                plantillaH2 = Enrollment.Run(lector);
+            } else {
+                boolean confirmar = confirmarSiHuella();
+                if (confirmar) {
+                    plantillaH2 = Enrollment.Run(lector);
+                }
+            }
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH3)){
+            if (plantillaH3 == null) {
+                plantillaH3 = Enrollment.Run(lector);
+            } else {
+                boolean confirmar = confirmarSiHuella();
+                if (confirmar) {
+                    plantillaH3 = Enrollment.Run(lector);
+                }
+            }
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH4)){
+            if (plantillaH4 == null) {
+                plantillaH4 = Enrollment.Run(lector);
+            } else {
+                boolean confirmar = confirmarSiHuella();
+                if (confirmar) {
+                    plantillaH4 = Enrollment.Run(lector);
+                }
+            }
         }
-        }
+    }
 
 
 
@@ -213,7 +259,6 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         }
     }
 
-
     private void validarCampos() {
         if(modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty() ||
                 modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty() ||
@@ -277,13 +322,6 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             insertarEmpleado();
         }
     }
-
-
-
-
-
-
-
 
     private void agregarMunicipios() {
         municipiosPorDepartamento = new HashMap<>();
@@ -423,6 +461,37 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
                 modelo.getvRegistraEmpleado().cbMun.addItem(municipio);
             }
         }
+    }
+
+    public Reader obtenerReader() {
+        Reader reader = null;
+        try {
+            ReaderCollection readers = UareUGlobal.GetReaderCollection();
+            readers.GetReaders(); // Refrescar la lista de dispositivos conectados
+            if (readers.size() == 0) {
+                System.out.println("❌ No se detectaron lectores de huella.");
+                return null;
+            }
+
+            reader = readers.get(0); // Selecciona automáticamente el primer lector encontrado
+            System.out.println("✅ Lector seleccionado automáticamente: " + reader.GetDescription().name);
+
+        } catch (UareUException e) {
+            System.err.println("❌ Error inicializando el lector: " + e.getMessage());
+        }
+        return reader;
+    }
+
+    public boolean confirmarSiHuella(){
+        int opcion = JOptionPane.showConfirmDialog(
+                null,
+                "¿Desea volver a capturar la huella?",
+                "Confirmar nueva captura",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        return (opcion == JOptionPane.YES_OPTION);
     }
 
 }

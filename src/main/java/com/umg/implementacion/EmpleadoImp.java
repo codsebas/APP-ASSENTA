@@ -2,6 +2,7 @@ package com.umg.implementacion;
 
 import com.umg.interfaces.IEmpleados;
 import com.umg.modelos.ModeloEmpleado;
+import com.umg.modelos.ModeloHuella;
 import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 import com.umg.sql.Conector;
@@ -419,6 +420,30 @@ public class EmpleadoImp implements IEmpleados {
     @Override
     public DefaultTableModel mostrarTodosLosEmpleados() {
         return null;
+    }
+
+    @Override
+    public boolean guardarHuella(List<ModeloHuella> modelo) {
+        conector.conectar();
+        boolean resultado = false;
+        try{
+            for(ModeloHuella huella : modelo){
+                ps = conector.preparar(sql.getINSERTAR_HUELLA_EMPLEADO());
+                ps.setInt(1, huella.getId());
+                ps.setBytes(2,huella.getFmd().getData());
+                int filas = ps.executeUpdate();
+                if(filas > 0){
+                    resultado = true;
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            conector.mensaje("Error al guardar huella: " + e.getMessage(), "Error", 0);
+            resultado = false;
+        } finally {
+            conector.desconectar();
+        }
+        return resultado;
     }
 
    /* @Override

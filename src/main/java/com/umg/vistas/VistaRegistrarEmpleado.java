@@ -26,6 +26,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
 
     public VistaRegistrarEmpleado() {
         initComponents();
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
         reader = obtenerReader();
         cargarPuestos();
         ModeloVistaRegistrarEmpleado modelo = new ModeloVistaRegistrarEmpleado(this);
@@ -511,6 +512,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel22.setText("HUELLAS");
         jPanel3.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 120, -1));
 
+        panelH1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout panelH1Layout = new javax.swing.GroupLayout(panelH1);
         panelH1.setLayout(panelH1Layout);
         panelH1Layout.setHorizontalGroup(
@@ -528,6 +531,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel23.setForeground(new java.awt.Color(0, 127, 75));
         jLabel23.setText("Huella 1");
         jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 100, -1));
+
+        panelH2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout panelH2Layout = new javax.swing.GroupLayout(panelH2);
         panelH2.setLayout(panelH2Layout);
@@ -547,6 +552,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel24.setText("Huella 2");
         jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 100, -1));
 
+        panelH3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout panelH3Layout = new javax.swing.GroupLayout(panelH3);
         panelH3.setLayout(panelH3Layout);
         panelH3Layout.setHorizontalGroup(
@@ -564,6 +571,8 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         jLabel25.setForeground(new java.awt.Color(0, 127, 75));
         jLabel25.setText("Huella 3");
         jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 100, -1));
+
+        panelH4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout panelH4Layout = new javax.swing.GroupLayout(panelH4);
         panelH4.setLayout(panelH4Layout);
@@ -686,10 +695,10 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public javax.swing.JLabel lblErrorSexo;
     public javax.swing.JLabel lblErrorpuesto;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JPanel panelH1;
-    private javax.swing.JPanel panelH2;
-    private javax.swing.JPanel panelH3;
-    private javax.swing.JPanel panelH4;
+    public javax.swing.JPanel panelH1;
+    public javax.swing.JPanel panelH2;
+    public javax.swing.JPanel panelH3;
+    public javax.swing.JPanel panelH4;
     private javax.swing.JPanel panelInfoPersonal1;
     public javax.swing.JPanel panelOpciones1;
     public javax.swing.JTextField txtAldea;
@@ -712,6 +721,10 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
     public void setControlador(ControladorRegistrarEmpleado controlador){
         btnRegistrarEmpleado.addMouseListener(controlador);
         cbDepto.addActionListener(controlador);
+        panelH1.addMouseListener(controlador);
+        panelH2.addMouseListener(controlador);
+        panelH3.addMouseListener(controlador);
+        panelH4.addMouseListener(controlador);
     }
 
     public Reader obtenerReader() {
