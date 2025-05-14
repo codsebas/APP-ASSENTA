@@ -171,6 +171,52 @@ public class EmpleadoImp implements IEmpleados {
     public DefaultTableModel modeloEmpleado(int dpi_empleado) {
         return null;
     }
+    public boolean eliminarEmpleadoPorDPI(String dpi) {
+        boolean eliminado = false;
+        conector.conectar();
+
+        try {
+            // 1. Obtener id_empleado
+            ps = conector.preparar(sql.getOBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR());
+            ps.setString(1, dpi);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int idEmpleado = rs.getInt("id_empleado");
+
+                // 2. Eliminar de huella
+                ps = conector.preparar(sql.getELIMINAR_HUELLA_ELIMINAR());
+                ps.setInt(1, idEmpleado);
+                ps.executeUpdate();
+
+                // 3. Eliminar de direccion_empleado
+                ps = conector.preparar(sql.getELIMINAR_DIRECCION_ELIMINAR());
+                ps.setInt(1, idEmpleado);
+                ps.executeUpdate();
+
+                // 4. Eliminar de usuarios
+                ps = conector.preparar(sql.getELIMINAR_USUARIO_ELIMINAR());
+                ps.setString(1, dpi);
+                ps.executeUpdate();
+
+                // 5. Eliminar de empleado
+                ps = conector.preparar(sql.getELIMINAR_EMPLEADO_ELIMINAR());
+                ps.setString(1, dpi);
+                ps.executeUpdate();
+
+                eliminado = true;
+            } else {
+                conector.mensaje("No se encontró un empleado con ese DPI.", "Error", 0);
+            }
+
+            conector.desconectar();
+        } catch (SQLException ex) {
+            conector.mensaje("Error al eliminar empleado: " + ex.getMessage(), "Error SQL", 0);
+            conector.desconectar();
+        }
+
+        return eliminado;
+    }
 
     @Override
     public ModeloEmpleado mostrarEmpleado(String dpi_empleado) {
@@ -408,6 +454,37 @@ public class EmpleadoImp implements IEmpleados {
 
         return resultado;
     }
+
+    @Override
+    public boolean eliminarEmpleado(ModeloEmpleado modelo) {
+        return false;
+    }
+
+    public ModeloEmpleado mostrarNombreApellidoPuestoPorDPI(String dpi_empleado) {
+        conector.conectar();
+        ModeloEmpleado modelo = null;
+
+        try {
+            ps = conector.preparar(sql.getCONSULTA_EMPLEADO_DPI_ELIMINAR());
+            ps.setString(1, dpi_empleado);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                modelo = new ModeloEmpleado();
+                modelo.setPrimerNombre(rs.getString("nombre1_empleado"));
+                modelo.setPrimerApellido(rs.getString("apellido1_empleado"));
+                modelo.setNombrePuesto(rs.getString("nombre_puesto"));
+            }
+
+        } catch (SQLException ex) {
+            conector.mensaje(ex.getMessage(), "Error al mostrar empleado", 0);
+        } finally {
+            conector.desconectar();
+        }
+
+        return modelo; // Devuelve el modelo con los datos del empleado
+    }
+
     public List<ModeloPuesto> obtenerPuestos() {
         List<ModeloPuesto> lista = new ArrayList<>();
         conector.conectar();

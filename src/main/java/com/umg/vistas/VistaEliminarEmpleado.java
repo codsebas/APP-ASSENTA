@@ -176,5 +176,6 @@ public class VistaEliminarEmpleado extends javax.swing.JPanel {
 
     public void setControaldor(ControladorEliminarEmpleado controlador){
         btnEliminarEmpleado.addMouseListener(controlador);
+        btnBuscarEmpleado.addMouseListener(controlador);
     }
 }
