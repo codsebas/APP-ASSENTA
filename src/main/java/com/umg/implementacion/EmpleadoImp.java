@@ -1,5 +1,6 @@
 package com.umg.implementacion;
 
+import com.digitalpersona.uareu.Fmd;
 import com.umg.interfaces.IEmpleados;
 import com.umg.modelos.ModeloEmpleado;
 import com.umg.modelos.ModeloHuella;
@@ -37,78 +38,66 @@ public class EmpleadoImp implements IEmpleados {
     }
 
     @Override
-    public boolean insertarEmpleado(ModeloEmpleado modelo) {
-        boolean resultado = true;
+    public boolean insertarEmpleado(ModeloEmpleado modelo, List<Fmd> listaFmd) {
+        boolean resultado = false;
         conector.conectar();
-        int id_empleado;
+        int id_empleado = -1;
 
         try {
+            // Insertar empleado
             ps = conector.preparar(sql.getINSERTAR_EMPLEADO());
             ps.setString(1, modelo.getDpi());
             ps.setString(2, modelo.getSexo());
             ps.setString(3, modelo.getEstadoCivil());
             ps.setString(4, modelo.getPrimerNombre());
-
-            setNullableString(ps, 5, modelo.getSegundoNombre()); // ← Segundo nombre opcional
-            setNullableString(ps, 6, modelo.getTercerNombre());  // ← Ya estaba bien
-
+            setNullableString(ps, 5, modelo.getSegundoNombre());
+            setNullableString(ps, 6, modelo.getTercerNombre());
             ps.setString(7, modelo.getPrimerApellido());
             ps.setString(8, modelo.getSegundoApellido());
-            setNullableString(ps, 9, modelo.getApellidoCasada()); // ← Ya estaba bien
-
+            setNullableString(ps, 9, modelo.getApellidoCasada());
             ps.setDate(10, Date.valueOf(modelo.getFechaNacimiento()));
             ps.setInt(11, modelo.getEdad());
-            ps.setInt(12, modelo.getIdPuesto()); // puesto_id
-
-            setNullableString(ps, 13, modelo.getCorreoElectronico()); // ← Opcional
+            ps.setInt(12, modelo.getIdPuesto());
+            setNullableString(ps, 13, modelo.getCorreoElectronico());
             ps.setString(14, modelo.getNumeroTelefono1());
-            setNullableString(ps, 15, modelo.getNumeroTelefono2()); // ← Opcional
-
-            // Hora entrada/salida como opcionales:
+            setNullableString(ps, 15, modelo.getNumeroTelefono2());
             setNullableTime(ps, 16, modelo.getHorarioEntrada());
             setNullableTime(ps, 17, modelo.getHorarioSalida());
-
             ps.setInt(18, modelo.getIdJefeInmediato());
 
-            this.rs = this.ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 id_empleado = rs.getInt("id_empleado");
             } else {
                 throw new SQLException("No se pudo obtener el ID del empleado insertado.");
             }
-            try {
-                ps = conector.preparar(sql.getINSERTAR_DIRECCION());
-                ps.setInt(1, id_empleado);
-                ps.setString(2, modelo.getDepartamento());
-                ps.setString(3, modelo.getMunicipio());
-                ps.setString(4, modelo.getAldeaColonia());
-                ps.setString(5, modelo.getDireccionVivienda());
-                ps.executeUpdate();
-            } catch (Exception e) {
-                conector.mensaje(e.getMessage(), "Error al ingresar direccion", 0);
-            }
-            /*
-            try {
-                ps = conector.preparar(sql.getINSERTAR_HUELLA());
-                for (int i = 1; i <= 4; i++) {
-                    ps.setInt(1, id_empleado);
-                    ps.setBytes(2, generarHuellaFicticia(i)); // Función para generar huellas
-                    ps.executeUpdate();
-                }
-                }
-                */
 
-            resultado = true;
+            // Insertar dirección
+            ps = conector.preparar(sql.getINSERTAR_DIRECCION());
+            ps.setInt(1, id_empleado);
+            ps.setString(2, modelo.getDepartamento());
+            ps.setString(3, modelo.getMunicipio());
+            ps.setString(4, modelo.getAldeaColonia());
+            ps.setString(5, modelo.getDireccionVivienda());
+            ps.executeUpdate();
 
+            // Insertar huellas
+            resultado = guardarHuella(armarModelo(id_empleado, listaFmd));
 
-            // Ejecutar y procesar resultado...
         } catch (SQLException ex) {
-            conector.mensaje(ex.getMessage(), "Error al ingresar", 0);
-            return resultado;
+            conector.mensaje("Error: " + ex.getMessage(), "Error al ingresar", 0);
+            resultado = false;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                conector.desconectar();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar recursos: " + e.getMessage());
+            }
         }
 
-
-        return false;
+        return resultado;
     }
 
     @Override
@@ -566,10 +555,14 @@ public class EmpleadoImp implements IEmpleados {
         return resultado;
     }
 
-   /* @Override
-    public ModeloEmpleado mostrarEmpleado(String dpi) {
-        return null;
-    */}
-//}
-//NITIDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-//gerson te odio vv ojala don diablo ame mas aaxel
+    public List<ModeloHuella> armarModelo(int id_empleado, List<Fmd> huellas) {
+        List<ModeloHuella> listaModelo = new ArrayList<>();
+
+        for (Fmd huella : huellas) {
+            ModeloHuella modelo = new ModeloHuella(id_empleado, huella);
+            listaModelo.add(modelo);
+        }
+
+        return listaModelo;
+    }
+}

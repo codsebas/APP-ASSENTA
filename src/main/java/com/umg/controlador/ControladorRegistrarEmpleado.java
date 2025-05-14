@@ -22,10 +22,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class ControladorRegistrarEmpleado implements MouseListener, ActionListener {
     EmpleadoImp implementacion = new EmpleadoImp();
@@ -38,15 +35,16 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     Fmd plantillaH2 = null;
     Fmd plantillaH3 = null;
     Fmd plantillaH4 = null;
+    List<Fmd> listaPlantillas = new ArrayList<>();
 
     private Map<String, String[]> municipiosPorDepartamento;
 
-
     public ControladorRegistrarEmpleado(ModeloVistaRegistrarEmpleado modelo) {
         this.modelo = modelo;
-
-
-
+        listaPlantillas.add(null);
+        listaPlantillas.add(null);
+        listaPlantillas.add(null);
+        listaPlantillas.add(null);
         agregarMunicipios();
     }
 
@@ -60,8 +58,6 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             comboBox.addItem(j);
         }
     }
-
-
 
     public void cargarPuestos(JComboBox<Object> comboBox) {
         List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
@@ -91,43 +87,49 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         } else if(e.getComponent().equals(modelo.getvRegistraEmpleado().panelH1)){
             if (plantillaH1 == null) {
                 plantillaH1 = Enrollment.Run(lector);
+                listaPlantillas.set(0,plantillaH1);
             } else {
                 boolean confirmar = confirmarSiHuella();
                 if (confirmar) {
                     plantillaH1 = Enrollment.Run(lector);
+                    listaPlantillas.set(0,plantillaH1);
                 }
             }
         } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH2)){
             if (plantillaH2 == null) {
                 plantillaH2 = Enrollment.Run(lector);
+                listaPlantillas.set(1,plantillaH2);
             } else {
                 boolean confirmar = confirmarSiHuella();
                 if (confirmar) {
                     plantillaH2 = Enrollment.Run(lector);
+                    listaPlantillas.set(1,plantillaH2);
                 }
             }
         } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH3)){
             if (plantillaH3 == null) {
                 plantillaH3 = Enrollment.Run(lector);
+                listaPlantillas.set(2,plantillaH3);
             } else {
                 boolean confirmar = confirmarSiHuella();
                 if (confirmar) {
                     plantillaH3 = Enrollment.Run(lector);
+                    listaPlantillas.set(2,plantillaH3);
                 }
             }
         } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH4)){
             if (plantillaH4 == null) {
                 plantillaH4 = Enrollment.Run(lector);
+                listaPlantillas.set(3,plantillaH4);
             } else {
                 boolean confirmar = confirmarSiHuella();
                 if (confirmar) {
                     plantillaH4 = Enrollment.Run(lector);
+                    listaPlantillas.set(3,plantillaH4);
                 }
             }
         }
     }
-
-
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -251,8 +253,8 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setAldeaColonia(modelo.getvRegistraEmpleado().txtAldea.getText());
         modeloEmpleado.setDireccionVivienda(modelo.getvRegistraEmpleado().txtDireccion.getText());
 
-        boolean resultado = implementacion.insertarEmpleado(modeloEmpleado);
-        if (!resultado) {
+        boolean resultado = implementacion.insertarEmpleado(modeloEmpleado, listaPlantillas);
+        if (resultado) {
             JOptionPane.showMessageDialog(null, "Empleado registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Empleado no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -318,7 +320,14 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             if (modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
                 modelo.getvRegistraEmpleado().lblErrorHorarioSalida.setText("*Este campo es obligatorio");
             }
-        }else{
+        } else if(listaPlantillas.isEmpty()){
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Debe registrar mínimo una huella para poder ingresar un cliente.",
+                    "No se registraron huellas",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        } else {
             insertarEmpleado();
         }
     }

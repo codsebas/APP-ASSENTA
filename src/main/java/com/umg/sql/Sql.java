@@ -111,7 +111,7 @@ public class Sql {
     private final String ELIMINAR_DIRECCION_ELIMINAR = "DELETE FROM direccion_empleado WHERE empleado_id = ?";
     private final String ELIMINAR_USUARIO_ELIMINAR = "DELETE FROM usuarios WHERE empleado_dpi = ?";
     private final String ELIMINAR_EMPLEADO_ELIMINAR = "DELETE FROM empleado WHERE dpi_empleado = ?";
-    private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO asistencia_huella (empleado_id, huella_template) VALUES (?, ?)";
+    private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO huella (empleado_id, huella_template) VALUES (?, ?)";
 
     public Sql() {
     }

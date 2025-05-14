@@ -2,13 +2,14 @@ package com.umg.interfaces;
 
 import com.umg.modelos.ModeloEmpleado;
 import com.umg.modelos.ModeloHuella;
+import com.digitalpersona.uareu.*;
 
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 public interface IEmpleados {
 
-    public boolean insertarEmpleado(ModeloEmpleado modelo);
+    public boolean insertarEmpleado(ModeloEmpleado modelo, List<Fmd> listaFmd);
     public boolean eliminarEmpleado(String dpi_empleado);
     public DefaultTableModel modeloEmpleado();
     public DefaultTableModel modeloEmpleado(int dpi_empleado);
