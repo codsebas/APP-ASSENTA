@@ -509,22 +509,22 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         limpiarPanelHuella(modelo.getvRegistraEmpleado().panelH3);
         limpiarPanelHuella(modelo.getvRegistraEmpleado().panelH4);
 
-        modelo.getvRegistraEmpleado().txtDPI.setText(" ");
-        modelo.getvRegistraEmpleado().txtNom1.setText(" ");
-        modelo.getvRegistraEmpleado().txtNom2.setText(" ");
-        modelo.getvRegistraEmpleado().txtNom3.setText(" ");
-        modelo.getvRegistraEmpleado().txtApe1.setText(" ");
-        modelo.getvRegistraEmpleado().txtApe2.setText(" ");
-        modelo.getvRegistraEmpleado().txtApeC.setText(" ");
-        modelo.getvRegistraEmpleado().txtFecha.setText(" ");
-        modelo.getvRegistraEmpleado().txtCorreo.setText(" ");
-        modelo.getvRegistraEmpleado().txtNum1.setText(" ");
-        modelo.getvRegistraEmpleado().txtNum2.setText(" ");
-        modelo.getvRegistraEmpleado().txtDPI.setText(" ");
-        modelo.getvRegistraEmpleado().txtHoraEntrada.setText(" ");
-        modelo.getvRegistraEmpleado().txtHoraSalida.setText(" ");
-        modelo.getvRegistraEmpleado().txtAldea.setText(" ");
-        modelo.getvRegistraEmpleado().txtDireccion.setText(" ");
+        modelo.getvRegistraEmpleado().txtDPI.setText("");
+        modelo.getvRegistraEmpleado().txtNom1.setText("");
+        modelo.getvRegistraEmpleado().txtNom2.setText("");
+        modelo.getvRegistraEmpleado().txtNom3.setText("");
+        modelo.getvRegistraEmpleado().txtApe1.setText("");
+        modelo.getvRegistraEmpleado().txtApe2.setText("");
+        modelo.getvRegistraEmpleado().txtApeC.setText("");
+        modelo.getvRegistraEmpleado().txtFecha.setText("");
+        modelo.getvRegistraEmpleado().txtCorreo.setText("");
+        modelo.getvRegistraEmpleado().txtNum1.setText("");
+        modelo.getvRegistraEmpleado().txtNum2.setText("");
+        modelo.getvRegistraEmpleado().txtDPI.setText("");
+        modelo.getvRegistraEmpleado().txtHoraEntrada.setText("");
+        modelo.getvRegistraEmpleado().txtHoraSalida.setText("");
+        modelo.getvRegistraEmpleado().txtAldea.setText("");
+        modelo.getvRegistraEmpleado().txtDireccion.setText("");
 
         modelo.getvRegistraEmpleado().cbDepto.setSelectedIndex(0);
         modelo.getvRegistraEmpleado().cbMun.setSelectedIndex(0);
