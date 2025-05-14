@@ -111,11 +111,9 @@ public class Sql {
     private final String ELIMINAR_DIRECCION_ELIMINAR = "DELETE FROM direccion_empleado WHERE empleado_id = ?";
     private final String ELIMINAR_USUARIO_ELIMINAR = "DELETE FROM usuarios WHERE empleado_dpi = ?";
     private final String ELIMINAR_EMPLEADO_ELIMINAR = "DELETE FROM empleado WHERE dpi_empleado = ?";
-
-
+    private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO asistencia_huella (empleado_id, huella_template) VALUES (?, ?)";
 
     public Sql() {
-
     }
 
     public String getACTUALIZAR_EMPLEADO() {
@@ -211,14 +209,15 @@ public class Sql {
     }
 
     public String getOBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR() { return OBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR; }
+
     public String getELIMINAR_HUELLA_ELIMINAR() { return ELIMINAR_HUELLA_ELIMINAR; }
+
     public String getELIMINAR_DIRECCION_ELIMINAR() { return ELIMINAR_DIRECCION_ELIMINAR; }
+
     public String getELIMINAR_USUARIO_ELIMINAR() { return ELIMINAR_USUARIO_ELIMINAR; }
+
     public String getELIMINAR_EMPLEADO_ELIMINAR() { return ELIMINAR_EMPLEADO_ELIMINAR; }
 
+    public String getINSERTAR_HUELLA_EMPLEADO(){ return INSERTAR_HUELLA_EMPLEADO; }
+
 }
-
-
-
-//axel and hichos forever because your love is the best esto fue escrito por axel con any desk mientras javier se fue uwu dayane te amo
-
