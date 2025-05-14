@@ -46,6 +46,8 @@ public class VistaEliminarEmpleado extends javax.swing.JPanel {
         txtPuestoEmp = new javax.swing.JTextField();
         btnEliminarEmpleado = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        btnBuscarEmpleado = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(1230, 720));
@@ -124,6 +126,17 @@ public class VistaEliminarEmpleado extends javax.swing.JPanel {
 
         jPanel2.add(btnEliminarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 140, 30));
 
+        btnBuscarEmpleado.setBackground(new java.awt.Color(0, 127, 75));
+        btnBuscarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Buscar Empleado");
+        btnBuscarEmpleado.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
+
+        jPanel2.add(btnBuscarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 160, 30));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 138, 830, 280));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -143,6 +156,7 @@ public class VistaEliminarEmpleado extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel btnBuscarEmpleado;
     public javax.swing.JPanel btnEliminarEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -150,6 +164,7 @@ public class VistaEliminarEmpleado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

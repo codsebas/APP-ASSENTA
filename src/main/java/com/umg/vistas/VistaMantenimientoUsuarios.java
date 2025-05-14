@@ -64,9 +64,9 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         txtPasswordMantConfAc = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         txtPasswordMantAc = new javax.swing.JPasswordField();
-        fondoImagen = new javax.swing.JLabel();
-        btnActualizarUsuario = new javax.swing.JPanel();
+        btnActualizarContrasenia = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        fondoImagen = new javax.swing.JLabel();
 
         fondo.setBackground(new java.awt.Color(240, 253, 244));
         fondo.setMinimumSize(new java.awt.Dimension(1230, 720));
@@ -223,19 +223,19 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
             }
         });
         jPanel3.add(txtPasswordMantAc, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 270, -1));
-        jPanel3.add(fondoImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 240));
 
-        btnActualizarUsuario.setBackground(new java.awt.Color(0, 127, 75));
-        btnActualizarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnActualizarUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnActualizarContrasenia.setBackground(new java.awt.Color(0, 127, 75));
+        btnActualizarContrasenia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizarContrasenia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Actualizar Usuario");
-        btnActualizarUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
+        jLabel7.setText("Actualizar Contraseña");
+        btnActualizarContrasenia.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 30));
 
-        jPanel3.add(btnActualizarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, -1));
+        jPanel3.add(btnActualizarContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 160, -1));
+        jPanel3.add(fondoImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 240));
 
         fondo.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 970, 240));
 
@@ -257,7 +257,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel btnActualizarUsuario;
+    public javax.swing.JPanel btnActualizarContrasenia;
     public javax.swing.JPanel btnAgregarUsuario;
     public javax.swing.JPanel btnEliminarUsuario;
     private javax.swing.JPanel fondo;
@@ -292,7 +292,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
 
     public void setControlador(ControladorUsuario controlador) {
         this.btnAgregarUsuario.addMouseListener(controlador);
-        this.btnActualizarUsuario.addMouseListener(controlador);
+        this.btnActualizarContrasenia.addMouseListener(controlador);
         this.btnEliminarUsuario.addMouseListener(controlador);
         this.txtPasswordMantConf.getDocument().addDocumentListener(controlador);
         this.txtPasswordMant.getDocument().addDocumentListener(controlador);
