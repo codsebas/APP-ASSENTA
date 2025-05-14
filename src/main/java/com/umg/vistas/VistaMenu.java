@@ -19,8 +19,8 @@ public class VistaMenu extends javax.swing.JPanel {
      */
     public VistaMenu() {
         initComponents();
-//        ModeloMenu modelo = new ModeloMenu(this);
-//        ControladorMenu controlador = new ControladorMenu(modelo);
+        ControladorMenu controladorMenu = new ControladorMenu();
+        controladorMenu.animacionLabel(lblTitulo1);
     }
 
     /**
@@ -40,7 +40,6 @@ public class VistaMenu extends javax.swing.JPanel {
         btnExpandirMenu = new javax.swing.JPanel();
         lblImagen = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnMeReUser1 = new javax.swing.JPanel();
         btnMeMoEmple = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblIcono = new javax.swing.JLabel();
@@ -57,7 +56,12 @@ public class VistaMenu extends javax.swing.JPanel {
         btnMantePuestos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnEliminarEmpleado = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
+        panelFondoMenu = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(0, 720));
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -105,21 +109,6 @@ public class VistaMenu extends javax.swing.JPanel {
 
         panelMenu.add(btnExpandirMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 50));
 
-        btnMeReUser1.setBackground(new java.awt.Color(0, 127, 75));
-
-        javax.swing.GroupLayout btnMeReUser1Layout = new javax.swing.GroupLayout(btnMeReUser1);
-        btnMeReUser1.setLayout(btnMeReUser1Layout);
-        btnMeReUser1Layout.setHorizontalGroup(
-            btnMeReUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        btnMeReUser1Layout.setVerticalGroup(
-            btnMeReUser1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        panelMenu.add(btnMeReUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 200, 50));
-
         btnMeMoEmple.setBackground(new java.awt.Color(0, 127, 75));
         btnMeMoEmple.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMeMoEmple.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -134,7 +123,7 @@ public class VistaMenu extends javax.swing.JPanel {
         lblIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/busempleadosIcono.png"))); // NOI18N
         btnMeMoEmple.add(lblIcono, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        panelMenu.add(btnMeMoEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
+        panelMenu.add(btnMeMoEmple, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 50));
 
         btnGestionUsuarios.setBackground(new java.awt.Color(0, 127, 75));
         btnGestionUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -150,7 +139,7 @@ public class VistaMenu extends javax.swing.JPanel {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/usuariosIcono.png"))); // NOI18N
         btnGestionUsuarios.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        panelMenu.add(btnGestionUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, 50));
+        panelMenu.add(btnGestionUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 50));
 
         jPanel4.setBackground(new java.awt.Color(0, 127, 75));
 
@@ -215,12 +204,40 @@ public class VistaMenu extends javax.swing.JPanel {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/puestoIcono.png"))); // NOI18N
         btnMantePuestos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        panelMenu.add(btnMantePuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 50));
+        panelMenu.add(btnMantePuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 200, 50));
+
+        btnEliminarEmpleado.setBackground(new java.awt.Color(0, 127, 75));
+        btnEliminarEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Eliminar Empleado");
+        jLabel13.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
+        btnEliminarEmpleado.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/eliminarEmpleadoIcono.png"))); // NOI18N
+        btnEliminarEmpleado.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        panelMenu.add(btnEliminarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
 
         PanelPrincipal.add(panelMenu, java.awt.BorderLayout.LINE_START);
 
         contenedor.setBackground(new java.awt.Color(240, 253, 244));
         contenedor.setLayout(new javax.swing.BoxLayout(contenedor, javax.swing.BoxLayout.LINE_AXIS));
+
+        panelFondoMenu.setBackground(new java.awt.Color(240, 253, 244));
+        panelFondoMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo1.setFont(new java.awt.Font("Segoe UI", 1, 100)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(0, 127, 75));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Bienvenido");
+        panelFondoMenu.add(lblTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 1220, 710));
+
+        contenedor.add(panelFondoMenu);
+
         PanelPrincipal.add(contenedor, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -239,18 +256,20 @@ public class VistaMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
     public javax.swing.JPanel btnActuEmpleado;
+    public javax.swing.JPanel btnEliminarEmpleado;
     public javax.swing.JPanel btnExpandirMenu;
     public javax.swing.JPanel btnGestionUsuarios;
     public javax.swing.JPanel btnMantePuestos;
     public javax.swing.JPanel btnMeMoEmple;
     public javax.swing.JPanel btnMeReUser;
-    public javax.swing.JPanel btnMeReUser1;
     public javax.swing.JPanel btnRegresarLogin;
     public javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -262,6 +281,8 @@ public class VistaMenu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblImagen;
+    public javax.swing.JLabel lblTitulo1;
+    public javax.swing.JPanel panelFondoMenu;
     public javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 

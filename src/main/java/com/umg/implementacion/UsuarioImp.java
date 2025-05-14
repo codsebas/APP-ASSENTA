@@ -42,6 +42,24 @@ public class UsuarioImp implements IUsuario {
     }
 
     @Override
+    public boolean actualizarUsuario(ModeloUsuario modeloUsuario){
+        boolean resultado = true;
+        this.conector.conectar();
+        this.ps = this.conector.preparar(this.sql.getACTUALIZAR_USUARIO());
+        try {
+            this.ps.setString(1, modeloUsuario.getPassword()); // Nueva contraseña
+            this.ps.setString(2, modeloUsuario.getUsuario()); // Nuevo nombre de usuario
+            this.ps.setString(3, modeloUsuario.getEmpleado_dpi()); // ID del usuario a actualizar
+            resultado = this.ps.executeUpdate() > 0; // Devuelve true si se actualizó al menos una fila
+        } catch (SQLException e) {
+            this.conector.mensaje(e.getMessage(), "Error en la actualización", 0);
+        } finally {
+            this.conector.desconectar();
+        }
+        return resultado;
+    }
+
+    @Override
     public boolean eliminarUsuario(int idUsuario) {
         boolean resultado = true;
         this.conector.conectar();

@@ -172,6 +172,52 @@ public class EmpleadoImp implements IEmpleados {
     public DefaultTableModel modeloEmpleado(int dpi_empleado) {
         return null;
     }
+    public boolean eliminarEmpleadoPorDPI(String dpi) {
+        boolean eliminado = false;
+        conector.conectar();
+
+        try {
+            // 1. Obtener id_empleado
+            ps = conector.preparar(sql.getOBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR());
+            ps.setString(1, dpi);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int idEmpleado = rs.getInt("id_empleado");
+
+                // 2. Eliminar de huella
+                ps = conector.preparar(sql.getELIMINAR_HUELLA_ELIMINAR());
+                ps.setInt(1, idEmpleado);
+                ps.executeUpdate();
+
+                // 3. Eliminar de direccion_empleado
+                ps = conector.preparar(sql.getELIMINAR_DIRECCION_ELIMINAR());
+                ps.setInt(1, idEmpleado);
+                ps.executeUpdate();
+
+                // 4. Eliminar de usuarios
+                ps = conector.preparar(sql.getELIMINAR_USUARIO_ELIMINAR());
+                ps.setString(1, dpi);
+                ps.executeUpdate();
+
+                // 5. Eliminar de empleado
+                ps = conector.preparar(sql.getELIMINAR_EMPLEADO_ELIMINAR());
+                ps.setString(1, dpi);
+                ps.executeUpdate();
+
+                eliminado = true;
+            } else {
+                conector.mensaje("No se encontró un empleado con ese DPI.", "Error", 0);
+            }
+
+            conector.desconectar();
+        } catch (SQLException ex) {
+            conector.mensaje("Error al eliminar empleado: " + ex.getMessage(), "Error SQL", 0);
+            conector.desconectar();
+        }
+
+        return eliminado;
+    }
 
     @Override
     public ModeloEmpleado mostrarEmpleado(String dpi_empleado) {
@@ -320,6 +366,15 @@ public class EmpleadoImp implements IEmpleados {
         return modelo;
     }
 
+    private void setNullableInt(PreparedStatement ps, int index, int valor) throws SQLException {
+        if (valor == 0) {
+            ps.setNull(index, java.sql.Types.INTEGER);
+        } else {
+            ps.setInt(index, valor);
+        }
+    }
+
+
 
 
     @Override
@@ -328,42 +383,107 @@ public class EmpleadoImp implements IEmpleados {
         conector.conectar();
 
         try {
-            ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
-            ps.setInt(17, modelo.getIdEmpleado());
+            // Actualizar datos del empleado (se actualiza mediante el DPI)
+            PreparedStatement ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
+
             ps.setString(1, modelo.getSexo());
-            ps.setString(2, "C");
+            ps.setString(2, modelo.getEstadoCivil());
             ps.setString(3, modelo.getPrimerNombre());
-            // setNullableString(ps, 9, modelo.getApellidoCasada());
-            setNullableString(ps,4, modelo.getSegundoNombre());
-            setNullableString(ps,5, modelo.getTercerNombre());
+            setNullableString(ps, 4, modelo.getSegundoNombre());
+            setNullableString(ps, 5, modelo.getTercerNombre());
             ps.setString(6, modelo.getPrimerApellido());
             ps.setString(7, modelo.getSegundoApellido());
-            setNullableString(ps,8, modelo.getApellidoCasada());
-            ps.setDate(9, Date.valueOf(modelo.getFechaNacimiento()));
+            setNullableString(ps, 8, modelo.getApellidoCasada());
+
+            // Convertir el String a Date (formato "yyyy-MM-dd")
+            try {
+                Date fecha = Date.valueOf(modelo.getFechaNacimiento().trim());
+                ps.setDate(9, fecha);
+            } catch (IllegalArgumentException e) {
+                conector.mensaje("Fecha inválida. Usa el formato yyyy-MM-dd", "Error de Fecha", 0);
+                return false;
+            }
+
             ps.setInt(10, modelo.getEdad());
-            setNullableString(ps,11, modelo.getCorreoElectronico());
-            ps.setString(12, modelo.getNumeroTelefono1());
-            setNullableString(ps,3, modelo.getNumeroTelefono2());
-            ps.setTime(14, Time.valueOf(modelo.getHorarioEntrada()));
-            ps.setTime(15, Time.valueOf(modelo.getHorarioSalida()));
-//            ps.setInt(14, modelo.getIdJefeInmediato());
-//            ps.setInt(15, modelo.getIdDireccion());
-//            ps.setString(16, modelo.getDepartamento());
-//            ps.setString(17, modelo.getMunicipio());
-//            ps.setString(18, modelo.getAldeaColonia());
-//            ps.setString(19, modelo.getDireccionVivienda());
-//            ps.setInt(20, modelo.getIdHuella());
-//            ps.setBytes(21, modelo.getHuella());
-            //ps.setInt(16, modelo.getIdJefeInmediato()); //
-            //ps.executeUpdate();
-            resultado = true;
+            // Si es 0 se podría enviar NULL usando un método auxiliar
+            setNullableInt(ps, 11, modelo.getIdPuesto());
+            setNullableString(ps, 12, modelo.getCorreoElectronico());
+            ps.setString(13, modelo.getNumeroTelefono1());
+            setNullableString(ps, 14, modelo.getNumeroTelefono2());
+            setNullableTime(ps, 15, modelo.getHorarioEntrada());
+            setNullableTime(ps, 16, modelo.getHorarioSalida());
+            setNullableInt(ps, 17, modelo.getIdJefeInmediato());
+
+            // El DPI es de tipo VARCHAR, se asigna como String; se actualiza usando el DPI
+            ps.setString(18, modelo.getDpi());
+
+            int filasAfectadas = ps.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                // Obtener el id_empleado real (si en el objeto viene 0, se consulta por DPI)
+                int id_empleado = modelo.getIdEmpleado();
+                if (id_empleado == 0) {
+                    PreparedStatement psId = conector.preparar("SELECT id_empleado FROM empleado WHERE dpi_empleado = ?");
+                    psId.setString(1, modelo.getDpi());
+                    ResultSet rs = psId.executeQuery();
+                    if (rs.next()) {
+                        id_empleado = rs.getInt("id_empleado");
+                    }
+                    rs.close();
+                }
+
+                // Actualizar la dirección usando el query ACTUALIZAR_DIRECCION
+                // El orden de parámetros es:
+                // 1 - departamento, 2 - municipio, 3 - aldea, 4 - direccion, 5 - empleado_id
+                ps = conector.preparar(sql.getACTUALIZAR_DIRECCION());
+                ps.setString(1, modelo.getDepartamento());
+                ps.setString(2, modelo.getMunicipio());
+                setNullableString(ps, 3, modelo.getAldeaColonia());
+                setNullableString(ps, 4, modelo.getDireccionVivienda());
+                ps.setInt(5, id_empleado);
+                ps.executeUpdate();
+
+                resultado = true;
+            } else {
+                conector.mensaje("No se encontró el empleado para actualizar.", "Error", 0);
+            }
         } catch (SQLException ex) {
-            conector.mensaje("No se pudo actualizar el empleado " + ex.getMessage(), "Error al actualizar", 0);
+            conector.mensaje("Error al actualizar empleado: " + ex.getMessage(), "Error SQL", 0);
         } finally {
             conector.desconectar();
         }
 
         return resultado;
+    }
+
+    @Override
+    public boolean eliminarEmpleado(ModeloEmpleado modelo) {
+        return false;
+    }
+
+    public ModeloEmpleado mostrarNombreApellidoPuestoPorDPI(String dpi_empleado) {
+        conector.conectar();
+        ModeloEmpleado modelo = null;
+
+        try {
+            ps = conector.preparar(sql.getCONSULTA_EMPLEADO_DPI_ELIMINAR());
+            ps.setString(1, dpi_empleado);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                modelo = new ModeloEmpleado();
+                modelo.setPrimerNombre(rs.getString("nombre1_empleado"));
+                modelo.setPrimerApellido(rs.getString("apellido1_empleado"));
+                modelo.setNombrePuesto(rs.getString("nombre_puesto"));
+            }
+
+        } catch (SQLException ex) {
+            conector.mensaje(ex.getMessage(), "Error al mostrar empleado", 0);
+        } finally {
+            conector.desconectar();
+        }
+
+        return modelo; // Devuelve el modelo con los datos del empleado
     }
 
     public List<ModeloPuesto> obtenerPuestos() {

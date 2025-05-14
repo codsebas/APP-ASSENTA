@@ -7,8 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.DocumentFilter;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -25,8 +24,16 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
     public void mouseClicked(MouseEvent e) {
         if(e.getComponent().equals(modelo.getVista().btnAgregarUsuario)) {
             insertarUsuario();
+
+        }else if(e.getComponent().equals(modelo.getVista().btnEliminarUsuario)) {
+            eliminarUsuario();
+        }else if ( e.getComponent().equals(modelo.getVista().btnActualizarContrasenia)){
+            actualizarUsuario();
+
         }
-    }
+        }
+
+
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -40,12 +47,28 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVista().btnAgregarUsuario)) {
+            modelo.getVista().btnAgregarUsuario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVista().btnBuscarUsuario)) {
+            modelo.getVista().btnBuscarUsuario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVista().btnActualizarContrasenia)) {
+            modelo.getVista().btnActualizarContrasenia.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVista().btnEliminarUsuario)) {
+            modelo.getVista().btnEliminarUsuario.setBackground(new Color(38, 163, 106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVista().btnAgregarUsuario)) {
+            modelo.getVista().btnAgregarUsuario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getVista().btnBuscarUsuario)) {
+            modelo.getVista().btnBuscarUsuario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getVista().btnActualizarContrasenia)) {
+            modelo.getVista().btnActualizarContrasenia.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getVista().btnEliminarUsuario)) {
+            modelo.getVista().btnEliminarUsuario.setBackground(new Color(0, 127, 75));
+        }
     }
 
     private void insertarUsuario () {
@@ -87,6 +110,38 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
 
     }
 
+    private void actualizarUsuario() {
+        String password1 = String.valueOf(modelo.getVista().txtPasswordMant.getPassword());
+        String password2 = String.valueOf(modelo.getVista().txtPasswordMantConf.getPassword());
+        if (!password1.trim().isEmpty() || !password2.trim().isEmpty()) {
+            if (!modelo.getVista().txtUsuarioMant.getText().trim().isEmpty()) {
+                if (password1.equals(password2)) {
+                    ModeloUsuario modelousuario = new ModeloUsuario();
+                    modelousuario.setUsuario(modelo.getVista().txtUsuarioMant.getText());
+                    modelousuario.setPassword(password1); // Usar la contraseña ingresada
+                    modelousuario.setEmpleado_dpi(modelo.getVista().txtDPI.getText());
+                    boolean resultado = this.implementacion.actualizarUsuario(modelousuario);
+                    if (resultado) {
+                        JOptionPane.showMessageDialog(null, "Usuario actualizado con éxito", "Actualización de Usuario", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Hubo un error al actualizar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Las contraseñas ingresadas son diferentes.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                modelo.getVista().lblErrorUsuario.setVisible(true);
+            }
+        } else {
+            if (modelo.getVista().txtUsuarioMant.getText().trim().isEmpty()) {
+                modelo.getVista().lblErrorUsuario.setVisible(true);
+                modelo.getVista().txtUsuarioMant.setText("");
+            }
+            modelo.getVista().lblErrorContraVa.setVisible(true);
+            modelo.getVista().lblErrorContraVa1.setVisible(true);
+        }
+    }
+
     private void consultarUsuarios() {
         
     }
@@ -126,6 +181,11 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
         ((AbstractDocument) modelo.getVista().txtUsuarioMant.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
         ((AbstractDocument) modelo.getVista().txtPasswordMant.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
         ((AbstractDocument) modelo.getVista().txtPasswordMantConf.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtPasswordMantAntConf.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtPasswordMantNueva.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtPasswordMantConNueva.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtDPI.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
+        ((AbstractDocument) modelo.getVista().txtDPIBuscar.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
     }
 
     @Override

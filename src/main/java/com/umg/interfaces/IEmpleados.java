@@ -18,6 +18,8 @@ public interface IEmpleados {
 
     public boolean actualizarEmpleado(ModeloEmpleado modelo);
 
+    public boolean eliminarEmpleado(ModeloEmpleado modelo);
+
     DefaultTableModel modeloEmpleado(String dpi);
 
     //ModeloEmpleado mostrarEmpleado(String dpi);

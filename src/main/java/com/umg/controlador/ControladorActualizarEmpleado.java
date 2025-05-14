@@ -20,6 +20,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -216,83 +220,83 @@ actualizarEmpleado();
     }
 
 
+    private void actualizarEmpleado() {
+        EmpleadoImp implementacion = new EmpleadoImp();
+        String departamento = String.valueOf(modelo.getvActualizarEmpleado().cbDepto.getSelectedItem());
+        String municipio = String.valueOf(modelo.getvActualizarEmpleado().cbMun.getSelectedItem());
 
-    public void actualizarEmpleado(){
-        EmpleadoImp imp = new EmpleadoImp();
-        ModeloEmpleado empleado = new ModeloEmpleado();
+        String estadoSeleccionado = String.valueOf(modelo.getvActualizarEmpleado().cbEstadoCivil.getSelectedItem());
+        String estadoCivil = switch (estadoSeleccionado) {
+            case "Soltero/a" -> "S";
+            case "Casado/a" -> "C";
+            case "Divorciado/a" -> "D";
+            case "Viudo/a" -> "V";
+            case "Unión de Hecho" -> "U";
+            default -> "";
+        };
 
         Object selectedItem = modelo.getvActualizarEmpleado().cbJefeInmediato.getSelectedItem();
-        int idJefe;
+        int idJefe = (selectedItem instanceof ModeloJefeInmediato jefe) ? jefe.getIdEmpleado() : 0;
 
-        if (selectedItem instanceof ModeloJefeInmediato) {
-            ModeloJefeInmediato jefe = (ModeloJefeInmediato) selectedItem;
-            idJefe = jefe.getIdEmpleado();
-        } else {
-            // Si seleccionaron "Elegir Jefe"
-            idJefe = 0;
-        }
         Object selectedItem2 = modelo.getvActualizarEmpleado().cbPuesto.getSelectedItem();
-        int idPuesto;
+        int idPuesto = (selectedItem2 instanceof ModeloPuesto puesto) ? puesto.getIdPuesto() : 0;
 
-        if (selectedItem2 instanceof ModeloJefeInmediato) {
-            ModeloPuesto puesto = (ModeloPuesto) selectedItem2;
-            idPuesto = puesto.getIdPuesto();
-        } else {
-            // Si seleccionaron "Elegir Puesto"
-            idPuesto = 0;
+        String sexo = String.valueOf(modelo.getvActualizarEmpleado().cbSexo.getSelectedItem());
+
+        ModeloEmpleado modeloEmpleado = new ModeloEmpleado();
+
+        // Aquí cambiamos a buscar por DPI
+        String dpi = modelo.getvActualizarEmpleado().txtDPI.getText().trim();
+        if (dpi.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El DPI no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
+        modeloEmpleado.setDpi(dpi); // Establecemos el DPI
+
+        modeloEmpleado.setPrimerNombre(modelo.getvActualizarEmpleado().txtNom1.getText());
+        modeloEmpleado.setSegundoNombre(modelo.getvActualizarEmpleado().txtNom2.getText());
+        modeloEmpleado.setTercerNombre(modelo.getvActualizarEmpleado().txtNom3.getText());
+        modeloEmpleado.setPrimerApellido(modelo.getvActualizarEmpleado().txtApe1.getText());
+        modeloEmpleado.setSegundoApellido(modelo.getvActualizarEmpleado().txtApe2.getText());
+        modeloEmpleado.setApellidoCasada(modelo.getvActualizarEmpleado().txtApeC.getText());
+        modeloEmpleado.setDepartamento(departamento);
+        modeloEmpleado.setMunicipio(municipio);
+        modeloEmpleado.setIdJefeInmediato(idJefe);
+        modeloEmpleado.setIdPuesto(idPuesto);
+        modeloEmpleado.setEstadoCivil(estadoCivil);
+        modeloEmpleado.setSexo(sexo);
+        modeloEmpleado.setCorreoElectronico(modelo.getvActualizarEmpleado().txtCorreo.getText());
+        modeloEmpleado.setNumeroTelefono1(modelo.getvActualizarEmpleado().txtNum1.getText());
+        modeloEmpleado.setNumeroTelefono2(modelo.getvActualizarEmpleado().txtNum2.getText());
+        modeloEmpleado.setHorarioEntrada(modelo.getvActualizarEmpleado().txtHoraEntrada.getText());
+        modeloEmpleado.setHorarioSalida(modelo.getvActualizarEmpleado().txtHoraSalida.getText());
+        modeloEmpleado.setAldeaColonia(modelo.getvActualizarEmpleado().txtAldea.getText());
+        modeloEmpleado.setDireccionVivienda(modelo.getvActualizarEmpleado().txtDireccion.getText());
+
+        // 🟢 Conversión de fecha
+        String fechaTexto = modelo.getvActualizarEmpleado().txtFecha.getText().trim();
         try {
-            var vista = modelo.getvActualizarEmpleado();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fechaNacimiento = LocalDate.parse(fechaTexto, formatter);
 
-            System.out.println("id empleado: " + getId_emple());
-            empleado.setIdEmpleado(id_emple); // Suponiendo que ID está en txtDPI (¿seguro? suele ser otro campo)
-            empleado.setDpi(vista.txtDPI.getText());
-            empleado.setSexo((String) vista.cbSexo.getSelectedItem());
-            empleado.setEstadoCivil((String) vista.cbEstadoCivil.getSelectedItem());
-            empleado.setPrimerNombre(vista.txtNom1.getText());
-            empleado.setSegundoNombre(vista.txtNom2.getText());
-            empleado.setTercerNombre(vista.txtNom3.getText());
-            empleado.setPrimerApellido(vista.txtApe1.getText());
-            empleado.setSegundoApellido(vista.txtApe2.getText());
-            empleado.setApellidoCasada(vista.txtApeC.getText());
-            empleado.setFechaNacimiento(vista.txtFecha.getText());
-            // empleado.setEdad(Integer.parseInt(vista.txtEdad.getText()));  // Si tienes txtEdad
-            empleado.setCorreoElectronico(vista.txtCorreo.getText());
-            empleado.setNumeroTelefono1(vista.txtNum1.getText());
-            empleado.setNumeroTelefono2(vista.txtNum2.getText());
+            modeloEmpleado.setFechaNacimiento(fechaNacimiento.toString());
+            modeloEmpleado.setEdad(Period.between(fechaNacimiento, LocalDate.now()).getYears());
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato yyyy-MM-dd (ej: 2000-12-25)");
+            return;
+        }
 
-            empleado.setIdPuesto(idPuesto);
-            empleado.setHorarioEntrada(vista.txtHoraEntrada.getText());
-            empleado.setHorarioSalida(vista.txtHoraSalida.getText());
-            System.out.println("idJefe: " + idJefe);
-            empleado.setIdJefeInmediato(idJefe);
-
-            empleado.setDepartamento((String) vista.cbDepto.getSelectedItem());
-            empleado.setMunicipio((String) vista.cbMun.getSelectedItem());
-            empleado.setAldeaColonia(vista.txtAldea.getText());
-            empleado.setDireccionVivienda(vista.txtDireccion.getText());
-
-            // Datos de huella (placeholder)
-            empleado.setIdHuella(1);
-            empleado.setHuella(new byte[0]);
-
-            // El ID de dirección parece faltar: podrías obtenerlo desde algún campo oculto si lo tienes
-            empleado.setIdDireccion(0); // cambiar si tienes un campo para esto
-
-            boolean resultado = imp.actualizarEmpleado(empleado);
-
-            if (resultado) {
-                JOptionPane.showMessageDialog(null, "Empleado actualizado correctamente.","Actualización", 1);
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar el empleado.","Error", 0);
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "⚠️ Error de formato numérico: " + ex.getMessage());
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "⚠️ Error al actualizar empleado: " + ex.getMessage());
+        //  Llamada al DAO para actualizar por DPI
+        boolean resultado = implementacion.actualizarEmpleado(modeloEmpleado);
+        if (resultado) {
+            JOptionPane.showMessageDialog(null, "Empleado actualizado con éxito", "Actualización", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el empleado", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
 
     private void agregarMunicipios() {
         municipiosPorDepartamento = new HashMap<>();

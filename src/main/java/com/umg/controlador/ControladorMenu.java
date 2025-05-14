@@ -15,9 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 /**
  *
@@ -30,6 +28,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
     VistaPrincipal vistsaPrincipal;
 
     private boolean estado = true;
+
+    public ControladorMenu() {
+    }
 
     public ControladorMenu(ModeloMenu modelo, VistaMenu vista, VistaPrincipal vistsaPrincipal) {
         this.modelo = modelo;
@@ -45,6 +46,7 @@ public class ControladorMenu implements ActionListener, MouseListener {
         vista.btnActuEmpleado.addMouseListener(this);
         vista.btnRegresarLogin.addMouseListener(this);
         vista.btnMantePuestos.addMouseListener(this);
+        vista.btnEliminarEmpleado.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -115,6 +117,9 @@ public class ControladorMenu implements ActionListener, MouseListener {
         } else if (e.getComponent().equals(vista.btnMantePuestos)) {
             VistaMantenimientoPuestos panel = new VistaMantenimientoPuestos();
             cambiarVista(panel);
+        } else if (e.getComponent().equals(vista.btnEliminarEmpleado)) {
+            VistaEliminarEmpleado panel = new VistaEliminarEmpleado();
+            cambiarVista(panel);
         } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
             ModeloLogin modelo2 = new ModeloLogin();
 
@@ -164,6 +169,8 @@ public class ControladorMenu implements ActionListener, MouseListener {
             vista.btnMantePuestos.setBackground(new Color(38, 163, 106));
         } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
             vista.btnMeMoEmple.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnEliminarEmpleado)) {
+            vista.btnEliminarEmpleado.setBackground(new Color(38, 163, 106));
         }
     }
 
@@ -184,8 +191,34 @@ public class ControladorMenu implements ActionListener, MouseListener {
             vista.btnMantePuestos.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(vista.btnMeMoEmple)) {
             vista.btnMeMoEmple.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnEliminarEmpleado)) {
+            vista.btnEliminarEmpleado.setBackground(new Color(0, 127, 75));
         }
 
+    }
+    Timer timer;
+    int pasosRealizados = 0;
+    public void animacionLabel(JLabel label){
+
+        int alturaInicial = 720;
+        int alturaFinal = 150;
+        int ancho = 1220;
+        int duracion = 250;
+        int pasos = 50;
+        int retardo = duracion / pasos;
+
+        timer = new Timer(retardo,(ActionEvent e) -> {
+            pasosRealizados++;
+            float fraccion = (float) pasosRealizados / pasos;
+            int nuevaAltura = alturaInicial + Math.round((alturaFinal - alturaInicial) * fraccion);
+            label.setBounds(50, 50, ancho, nuevaAltura);
+
+            if (pasosRealizados >= pasos){
+                timer.stop();
+            }
+        });
+
+        timer.start();
     }
 
 }

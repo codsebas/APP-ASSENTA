@@ -1,7 +1,7 @@
 package com.umg.sql;
 
 public class Sql {
-    private final String CONSULTA_TODOS_EMPLEADO =   "SELECT " +
+    private final String CONSULTA_TODOS_EMPLEADO = "SELECT " +
             "e.id_empleado, " +
             "e.dpi_empleado, " +
             "e.sexo_empleado, " +
@@ -22,7 +22,7 @@ public class Sql {
             "FROM empleado e " +
             "INNER JOIN puesto p ON e.puesto_id = p.id_puesto " +
             "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado";
-    private final String CONSULTA_EMPLEADO_DPI =  "SELECT " +
+    private final String CONSULTA_EMPLEADO_DPI = "SELECT " +
             "e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
             "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
             "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
@@ -35,7 +35,7 @@ public class Sql {
             "WHERE e.dpi_empleado = ?";
 
 
-    private final String CONSULTA_EMPLEADO_DPIUPD  =
+    private final String CONSULTA_EMPLEADO_DPIUPD =
             "SELECT e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
                     "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
                     "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
@@ -52,32 +52,44 @@ public class Sql {
                     "WHERE e.dpi_empleado = ?";
 
     private final String INSERTAR_EMPLEADO = """
-            INSERT INTO empleado (
-                dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,
-                nombre2_empleado, nombre3_empleado, apellido1_empleado, apellido2_empleado,
-                apellidocasada_empleado, fec_nacimiento, edad_empleado, puesto_id,
-                email_empleado, telefono1_empleado, telefono2_empleado,
-                horario_entrada, horario_salida, jefe_inmediato_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULLIF(?, 0))
-            RETURNING id_empleado;
+                    INSERT INTO empleado (
+                        dpi_empleado, sexo_empleado, estado_civil, nombre1_empleado,
+                        nombre2_empleado, nombre3_empleado, apellido1_empleado, apellido2_empleado,
+                        apellidocasada_empleado, fec_nacimiento, edad_empleado, puesto_id,
+                        email_empleado, telefono1_empleado, telefono2_empleado,
+                        horario_entrada, horario_salida, jefe_inmediato_id
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULLIF(?, 0))
+                    RETURNING id_empleado;
             
-    """;
+            """;
 
 
     private final String INSERTAR_DIRECCION = """
-    INSERT INTO direccion_empleado (
-        empleado_id, departamento, municipio, aldea, direccion
-    ) VALUES (?, ?, ?, ?, ?);
-    """;
+            INSERT INTO direccion_empleado (
+                empleado_id, departamento, municipio, aldea, direccion
+            ) VALUES (?, ?, ?, ?, ?);
+            """;
+    private final String ACTUALIZAR_DIRECCION = """
+            UPDATE direccion_empleado
+            SET departamento = ?,
+                municipio = ?,
+                aldea = ?,
+                direccion = ?
+            WHERE empleado_id = ?;
+            """;
 
-
+    private final String CONSULTA_EMPLEADO_DPI_ELIMINAR =  "SELECT e.nombre1_empleado, e.apellido1_empleado, p.nombre_puesto " +
+            "FROM empleado e " +
+            "INNER JOIN puesto p ON e.puesto_id = p.id_puesto " +
+            "WHERE e.dpi_empleado = ?";
     private final String INSERTAR_HUELLA = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?);";
     private final String ACTUALIZAR_EMPLEADO =
-            "UPDATE empleado SET " +
-                    "sexo_empleado = ?, estado_civil = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?, " +
-                    "apellido1_empleado = ?, apellido2_empleado = ?, apellidocasada_empleado = ?, fec_nacimiento = ?, edad_empleado = ?, " +
-                    "email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ? " +
-                    "WHERE id_empleado = ?";
+            "UPDATE empleado SET\n" +
+                    "    sexo_empleado = ?, estado_civil = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?,\n" +
+                    "    apellido1_empleado = ?, apellido2_empleado = ?, apellidocasada_empleado = ?, fec_nacimiento = ?, edad_empleado = ?,\n" +
+                    "    puesto_id = ?, email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ?\n" +
+                    "WHERE dpi_empleado = ?\n";
+
     private final String ELIMINAR_EMPLEADO = "DELETE FROM cliente WHERE dpi_empleado = ?";
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";
     private final String CONSULTA_USUARIO = "SELECT * FROM usuarios WHERE usuario = ?";
@@ -93,14 +105,29 @@ public class Sql {
     private final String ELIMINAR_PUESTO = "DELETE FROM puesto WHERE id_puesto = ?";
     private final String CONSULTAR_TODOS_JEFES_INMEDIATOS = "SELECT id_empleado, nombre1_empleado || ' ' || apellido1_empleado AS nombre_completo FROM empleado";
     private final String CONSULTA_TABLA_PUESTO = "SELECT * FROM puesto";
-    private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?)";
+
+    private final String OBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR = "SELECT id_empleado FROM empleado WHERE dpi_empleado = ?";
+    private final String ELIMINAR_HUELLA_ELIMINAR = "DELETE FROM huella WHERE empleado_id = ?";
+    private final String ELIMINAR_DIRECCION_ELIMINAR = "DELETE FROM direccion_empleado WHERE empleado_id = ?";
+    private final String ELIMINAR_USUARIO_ELIMINAR = "DELETE FROM usuarios WHERE empleado_dpi = ?";
+    private final String ELIMINAR_EMPLEADO_ELIMINAR = "DELETE FROM empleado WHERE dpi_empleado = ?";
+
+
+
     public Sql() {
 
     }
-    public String getACTUALIZAR_EMPLEADO(){ return ACTUALIZAR_EMPLEADO; }
+
+    public String getACTUALIZAR_EMPLEADO() {
+        return ACTUALIZAR_EMPLEADO;
+    }
 
     public String getCONSULTA_TODOS_EMPLEADO() {
         return CONSULTA_TODOS_EMPLEADO;
+    }
+
+    public String getACTUALIZAR_DIRECCION() {
+        return ACTUALIZAR_DIRECCION;
     }
 
     public String getCONSULTA_EMPLEADO_DPI() {
@@ -163,9 +190,9 @@ public class Sql {
         return ELIMINAR_PUESTO;
     }
 
-public String getCONSULTAR_PUESTO(){
-    return CONSULTAR_PUESTO;
-}
+    public String getCONSULTAR_PUESTO() {
+        return CONSULTAR_PUESTO;
+    }
 
     public String getCONSULTA_EMPLEADO_DPIUPD() {
         return CONSULTA_EMPLEADO_DPIUPD;
@@ -175,12 +202,22 @@ public String getCONSULTAR_PUESTO(){
         return CONSULTAR_TODOS_JEFES_INMEDIATOS;
     }
 
-    public String getCONSULTA_TABLA_PUESTO() { return CONSULTA_TABLA_PUESTO; }
-
-    public String getINSERTAR_HUELLA_EMPLEADO() {
-        return INSERTAR_HUELLA_EMPLEADO;
+    public String getCONSULTA_TABLA_PUESTO() {
+        return CONSULTA_TABLA_PUESTO;
     }
+
+    public String getCONSULTA_EMPLEADO_DPI_ELIMINAR() {
+        return CONSULTA_EMPLEADO_DPI_ELIMINAR;
+    }
+
+    public String getOBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR() { return OBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR; }
+    public String getELIMINAR_HUELLA_ELIMINAR() { return ELIMINAR_HUELLA_ELIMINAR; }
+    public String getELIMINAR_DIRECCION_ELIMINAR() { return ELIMINAR_DIRECCION_ELIMINAR; }
+    public String getELIMINAR_USUARIO_ELIMINAR() { return ELIMINAR_USUARIO_ELIMINAR; }
+    public String getELIMINAR_EMPLEADO_ELIMINAR() { return ELIMINAR_EMPLEADO_ELIMINAR; }
+
 }
+
 
 
 //axel and hichos forever because your love is the best esto fue escrito por axel con any desk mientras javier se fue uwu dayane te amo
