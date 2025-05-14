@@ -18,6 +18,7 @@ import java.awt.event.MouseListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 public class ControladorMostrarEmpleado implements ActionListener, MouseListener {
 
@@ -83,7 +84,23 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
             tableEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             ajustarTamañoTabla(tableEmpleados);
 
-            // Ajustar ancho de columnas automáticamente
+            DefaultTableModel modeloTablaEmp = (DefaultTableModel) tableEmpleados.getModel();
+            Vector<Vector> datos = modeloTablaEmp.getDataVector();
+            Vector<String> columnas = new Vector<>();
+
+            for(int i = 0; i < modeloTablaEmp.getColumnCount(); i++){
+                columnas.add(modeloTablaEmp.getColumnName(i));
+            }
+
+            DefaultTableModel modeloNoEdit = new DefaultTableModel(datos, columnas){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+
+            tableEmpleados.setModel(modeloNoEdit);
+
             for (int i = 0; i < tableEmpleados.getColumnCount(); i++) {
                 TableColumn column = tableEmpleados.getColumnModel().getColumn(i);
                 int ancho = 75;
@@ -99,6 +116,8 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
                 column.setPreferredWidth(ancho + 10);
             }
 
+            tableEmpleados.getTableHeader().setReorderingAllowed(false);
+            tableEmpleados.getTableHeader().setResizingAllowed(false);
             JScrollPane scrollTabla = new JScrollPane(
                     tableEmpleados,
                     JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -122,38 +141,51 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
         JTable tableEmpleados = new JTable(implementacion.modeloEmpleado());
         ajustarTamañoTabla(tableEmpleados);
 
-// Desactiva el ajuste automático de columnas
+        DefaultTableModel modeloTablaEmp = (DefaultTableModel) tableEmpleados.getModel();
+        Vector<Vector> datos = modeloTablaEmp.getDataVector();
+        Vector<String> columnas = new Vector<>();
+
+        for(int i = 0; i < modeloTablaEmp.getColumnCount(); i++){
+            columnas.add(modeloTablaEmp.getColumnName(i));
+        }
+
+        DefaultTableModel modeloNoEdit = new DefaultTableModel(datos, columnas){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        tableEmpleados.setModel(modeloNoEdit);
+
         tableEmpleados.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-// Ajusta automáticamente el ancho de cada columna al contenido
         for (int i = 0; i < tableEmpleados.getColumnCount(); i++) {
             TableColumn column = tableEmpleados.getColumnModel().getColumn(i);
-            int ancho = 75; // ancho mínimo por defecto
+            int ancho = 75; //
 
-            // Ancho del encabezado
             TableCellRenderer headerRenderer = tableEmpleados.getTableHeader().getDefaultRenderer();
             Component headerComp = headerRenderer.getTableCellRendererComponent(
                     tableEmpleados, column.getHeaderValue(), false, false, 0, i);
             ancho = Math.max(headerComp.getPreferredSize().width, ancho);
 
-            // Ancho del contenido de las celdas
             for (int fila = 0; fila < tableEmpleados.getRowCount(); fila++) {
                 TableCellRenderer cellRenderer = tableEmpleados.getCellRenderer(fila, i);
                 Component cellComp = tableEmpleados.prepareRenderer(cellRenderer, fila, i);
                 ancho = Math.max(cellComp.getPreferredSize().width, ancho);
             }
 
-            column.setPreferredWidth(ancho + 10); // margen adicional
+            column.setPreferredWidth(ancho + 10);
         }
 
-// Crea el JScrollPane SOLO con scroll vertical
+        tableEmpleados.getTableHeader().setReorderingAllowed(false);
+        tableEmpleados.getTableHeader().setResizingAllowed(false);
         JScrollPane scrollTabla = new JScrollPane(
                 tableEmpleados,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
 
-// Usa BorderLayout para que el scroll se acomode bien
         modelo.getVistaMostrarEmpleados().panelTabla.removeAll();
         modelo.getVistaMostrarEmpleados().panelTabla.setLayout(new java.awt.BorderLayout());
         modelo.getVistaMostrarEmpleados().panelTabla.add(scrollTabla, java.awt.BorderLayout.CENTER);

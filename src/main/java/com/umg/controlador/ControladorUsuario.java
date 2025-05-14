@@ -7,8 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
-import javax.swing.text.DocumentFilter;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -40,12 +39,28 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVista().btnAgregarUsuario)) {
+            modelo.getVista().btnAgregarUsuario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVista().btnBuscarUsuario)) {
+            modelo.getVista().btnBuscarUsuario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVista().btnActualizarContrasenia)) {
+            modelo.getVista().btnActualizarContrasenia.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVista().btnEliminarUsuario)) {
+            modelo.getVista().btnEliminarUsuario.setBackground(new Color(38, 163, 106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVista().btnAgregarUsuario)) {
+            modelo.getVista().btnAgregarUsuario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getVista().btnBuscarUsuario)) {
+            modelo.getVista().btnBuscarUsuario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getVista().btnActualizarContrasenia)) {
+            modelo.getVista().btnActualizarContrasenia.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getVista().btnEliminarUsuario)) {
+            modelo.getVista().btnEliminarUsuario.setBackground(new Color(0, 127, 75));
+        }
     }
 
     private void insertarUsuario () {
@@ -126,6 +141,11 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
         ((AbstractDocument) modelo.getVista().txtUsuarioMant.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
         ((AbstractDocument) modelo.getVista().txtPasswordMant.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
         ((AbstractDocument) modelo.getVista().txtPasswordMantConf.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtPasswordMantAntConf.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtPasswordMantNueva.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtPasswordMantConNueva.getDocument()).setDocumentFilter(new LimiteCaracteres(30));
+        ((AbstractDocument) modelo.getVista().txtDPI.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
+        ((AbstractDocument) modelo.getVista().txtDPIBuscar.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
     }
 
     @Override
