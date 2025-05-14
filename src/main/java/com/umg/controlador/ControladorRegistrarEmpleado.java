@@ -2,6 +2,8 @@ package com.umg.controlador;
 
 import com.digitalpersona.uareu.*;
 import com.umg.biometrics.Enrollment;
+import com.umg.biometrics.ImagePanel;
+import com.umg.biometrics.ResultadoCapturaHuella;
 import com.umg.implementacion.EmpleadoImp;
 import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloEmpleado;
@@ -12,7 +14,7 @@ import com.umg.modelos.ModeloHuella;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -23,6 +25,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.List;
 
 public class ControladorRegistrarEmpleado implements MouseListener, ActionListener {
     EmpleadoImp implementacion = new EmpleadoImp();
@@ -80,56 +83,18 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvRegistraEmpleado().btnRegistrarEmpleado)) {
-          //  mostrarEmpleado();
             validarCampos();
-//           insertarEmpleado();
-
-        } else if(e.getComponent().equals(modelo.getvRegistraEmpleado().panelH1)){
-            if (plantillaH1 == null) {
-                plantillaH1 = Enrollment.Run(lector);
-                listaPlantillas.set(0,plantillaH1);
-            } else {
-                boolean confirmar = confirmarSiHuella();
-                if (confirmar) {
-                    plantillaH1 = Enrollment.Run(lector);
-                    listaPlantillas.set(0,plantillaH1);
-                }
-            }
-        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH2)){
-            if (plantillaH2 == null) {
-                plantillaH2 = Enrollment.Run(lector);
-                listaPlantillas.set(1,plantillaH2);
-            } else {
-                boolean confirmar = confirmarSiHuella();
-                if (confirmar) {
-                    plantillaH2 = Enrollment.Run(lector);
-                    listaPlantillas.set(1,plantillaH2);
-                }
-            }
-        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH3)){
-            if (plantillaH3 == null) {
-                plantillaH3 = Enrollment.Run(lector);
-                listaPlantillas.set(2,plantillaH3);
-            } else {
-                boolean confirmar = confirmarSiHuella();
-                if (confirmar) {
-                    plantillaH3 = Enrollment.Run(lector);
-                    listaPlantillas.set(2,plantillaH3);
-                }
-            }
-        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH4)){
-            if (plantillaH4 == null) {
-                plantillaH4 = Enrollment.Run(lector);
-                listaPlantillas.set(3,plantillaH4);
-            } else {
-                boolean confirmar = confirmarSiHuella();
-                if (confirmar) {
-                    plantillaH4 = Enrollment.Run(lector);
-                    listaPlantillas.set(3,plantillaH4);
-                }
-            }
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH1)) {
+            capturarHuella(0, modelo.getvRegistraEmpleado().panelH1);
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH2)) {
+            capturarHuella(1, modelo.getvRegistraEmpleado().panelH2);
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH3)) {
+            capturarHuella(2, modelo.getvRegistraEmpleado().panelH3);
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().panelH4)) {
+            capturarHuella(3, modelo.getvRegistraEmpleado().panelH4);
         }
     }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -501,6 +466,26 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         );
 
         return (opcion == JOptionPane.YES_OPTION);
+    }
+
+    private void capturarHuella(int indice, JPanel panel) {
+        ResultadoCapturaHuella resultado = Enrollment.Run(lector);
+
+        if (resultado != null && resultado.getPlantilla() != null) {
+            listaPlantillas.set(indice, resultado.getPlantilla());
+
+            // Mostrar la imagen de la huella en el panel
+            Graphics g = panel.getGraphics();
+            if (g != null) {
+                ImagePanel imagePanel = new ImagePanel();
+                imagePanel.showImage(resultado.getImagen());
+                imagePanel.setSize(panel.getWidth(), panel.getHeight());
+                panel.removeAll();
+                panel.add(imagePanel);
+                panel.revalidate();
+                panel.repaint();
+            }
+        }
     }
 
 }

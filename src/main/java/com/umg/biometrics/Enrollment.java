@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,8 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
 import com.digitalpersona.uareu.*;
+import com.umg.biometrics.ResultadoCapturaHuella; // Asegúrate de importar esta clase auxiliar que hicimos
 
 public class Enrollment extends JPanel implements ActionListener {
 
@@ -65,6 +64,9 @@ public class Enrollment extends JPanel implements ActionListener {
                     if (Reader.CaptureQuality.CANCELED == evt.capture_result.quality) {
                         break;
                     } else if (null != evt.capture_result.image && Reader.CaptureQuality.GOOD == evt.capture_result.quality) {
+                        // GUARDAMOS la última imagen buena capturada
+                        ultimaImagenCapturada = evt.capture_result.image;
+
                         Engine engine = UareUGlobal.GetEngine();
                         try {
                             Fmd fmd = engine.CreateFmd(evt.capture_result.image, Fmd.Format.ANSI_378_2004);
@@ -130,7 +132,9 @@ public class Enrollment extends JPanel implements ActionListener {
     private JDialog m_dlgParent;
     private JTextArea m_text;
     private boolean m_bJustStarted;
-    private Fmd plantillaCapturada;
+
+    private ResultadoCapturaHuella resultadoCapturaHuella;
+    private Fid ultimaImagenCapturada;
 
     private Enrollment(Reader reader) {
         m_reader = reader;
@@ -197,7 +201,9 @@ public class Enrollment extends JPanel implements ActionListener {
                     String str = String.format("    plantilla de registro creada, tamaño: %d\n\n\n", evt.enrollment_fmd.getData().length);
                     m_text.append(str);
 
-                    plantillaCapturada = evt.enrollment_fmd;
+                    // Cuando terminamos, guardamos el resultado completo
+                    resultadoCapturaHuella = new ResultadoCapturaHuella(evt.enrollment_fmd, ultimaImagenCapturada);
+
                     m_dlgParent.setVisible(false);
                 } else {
                     System.out.println(evt.exception);
@@ -239,10 +245,10 @@ public class Enrollment extends JPanel implements ActionListener {
         }
     }
 
-    public static Fmd Run(Reader reader) {
+    public static ResultadoCapturaHuella Run(Reader reader) {
         JDialog dlg = new JDialog((JDialog) null, "Captura de huella", true);
         Enrollment enrollment = new Enrollment(reader);
         enrollment.doModal(dlg);
-        return enrollment.plantillaCapturada;
+        return enrollment.resultadoCapturaHuella;
     }
 }
