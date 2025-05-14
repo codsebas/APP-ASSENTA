@@ -4,17 +4,24 @@
  */
 package com.umg.vistas;
 
+import com.umg.controlador.ControladorEliminarEmpleado;
+import com.umg.modelos.ModeloEliminarEmpleado;
+import com.umg.modelos.ModeloEmpleado;
+
 /**
  *
  * @author Keily Orellana
  */
-public class VistaEliminarEmpleados extends javax.swing.JPanel {
+public class VistaEliminarEmpleado extends javax.swing.JPanel {
 
     /**
      * Creates new form VistaEliminarEmpleados
      */
-    public VistaEliminarEmpleados() {
+    public VistaEliminarEmpleado() {
         initComponents();
+        ModeloEliminarEmpleado modelo = new ModeloEliminarEmpleado(this);
+        ControladorEliminarEmpleado controlador = new ControladorEliminarEmpleado(modelo);
+        setControaldor(controlador);
     }
 
     /**
@@ -37,13 +44,15 @@ public class VistaEliminarEmpleados extends javax.swing.JPanel {
         txtNombresEmp = new javax.swing.JTextField();
         txtApellidosEmp = new javax.swing.JTextField();
         txtPuestoEmp = new javax.swing.JTextField();
+        btnEliminarEmpleado = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(1230, 720));
 
         jPanel1.setBackground(new java.awt.Color(240, 253, 244));
         jPanel1.setMinimumSize(new java.awt.Dimension(1220, 720));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1220, 720));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1230, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -53,82 +62,69 @@ public class VistaEliminarEmpleados extends javax.swing.JPanel {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(543, 42, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 127, 75));
         jLabel2.setText("Buscar empleado por DPI");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 32, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 127, 75));
         jLabel3.setText("Nombres");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 94, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 127, 75));
         jLabel4.setText("Puesto");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 217, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 127, 75));
         jLabel5.setText("Apellidos");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 153, -1, -1));
 
+        txtDpiEmp.setBackground(new java.awt.Color(255, 255, 255));
         txtDpiEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtDpiEmp.setForeground(new java.awt.Color(26, 75, 54));
         txtDpiEmp.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDpiEmp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.add(txtDpiEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 29, 270, -1));
 
+        txtNombresEmp.setBackground(new java.awt.Color(255, 255, 255));
         txtNombresEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtNombresEmp.setForeground(new java.awt.Color(26, 75, 54));
         txtNombresEmp.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNombresEmp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.add(txtNombresEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 88, 270, -1));
 
+        txtApellidosEmp.setBackground(new java.awt.Color(255, 255, 255));
         txtApellidosEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtApellidosEmp.setForeground(new java.awt.Color(26, 75, 54));
         txtApellidosEmp.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtApellidosEmp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.add(txtApellidosEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 150, 270, -1));
 
+        txtPuestoEmp.setBackground(new java.awt.Color(255, 255, 255));
         txtPuestoEmp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtPuestoEmp.setForeground(new java.awt.Color(26, 75, 54));
         txtPuestoEmp.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtPuestoEmp.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        jPanel2.add(txtPuestoEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 211, 270, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addGap(89, 89, 89)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDpiEmp, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(txtNombresEmp)
-                    .addComponent(txtApellidosEmp)
-                    .addComponent(txtPuestoEmp))
-                .addContainerGap(595, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtDpiEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel3))
-                    .addComponent(txtNombresEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtApellidosEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtPuestoEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
+        btnEliminarEmpleado.setBackground(new java.awt.Color(0, 127, 75));
+        btnEliminarEmpleado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminarEmpleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 138, -1, 280));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Eliminar Empleado");
+        btnEliminarEmpleado.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
+
+        jPanel2.add(btnEliminarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 140, 30));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 138, 830, 280));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, -1, -1));
@@ -137,27 +133,23 @@ public class VistaEliminarEmpleados extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JPanel btnEliminarEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -166,4 +158,8 @@ public class VistaEliminarEmpleados extends javax.swing.JPanel {
     public javax.swing.JTextField txtNombresEmp;
     public javax.swing.JTextField txtPuestoEmp;
     // End of variables declaration//GEN-END:variables
+
+    public void setControaldor(ControladorEliminarEmpleado controlador){
+        btnEliminarEmpleado.addMouseListener(controlador);
+    }
 }
