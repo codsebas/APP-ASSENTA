@@ -543,6 +543,8 @@ public class EmpleadoImp implements IEmpleados {
                 int filas = ps.executeUpdate();
                 if(filas > 0){
                     resultado = true;
+                } else {
+                    resultado = false;
                     break;
                 }
             }
@@ -559,8 +561,10 @@ public class EmpleadoImp implements IEmpleados {
         List<ModeloHuella> listaModelo = new ArrayList<>();
 
         for (Fmd huella : huellas) {
-            ModeloHuella modelo = new ModeloHuella(id_empleado, huella);
-            listaModelo.add(modelo);
+            if(huella != null){
+                ModeloHuella modelo = new ModeloHuella(id_empleado, huella);
+                listaModelo.add(modelo);
+            }
         }
 
         return listaModelo;

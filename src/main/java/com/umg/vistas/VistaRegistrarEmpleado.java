@@ -10,6 +10,7 @@ import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloPuesto;
 import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 /**

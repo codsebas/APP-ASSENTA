@@ -4,6 +4,8 @@
  */
 package com.umg.vistas;
 
+import com.digitalpersona.uareu.UareUException;
+import com.digitalpersona.uareu.UareUGlobal;
 import com.umg.controlador.ControladorLogin;
 import com.umg.modelos.ModeloLogin;
 import com.umg.modelos.ModeloMenu;
@@ -28,6 +30,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
         VistaLogin vista = new VistaLogin();
         new ControladorLogin(modelo, vista, this);
         this.cambiarPanel(vista);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                cerrarAplicacion();
+            }
+        });
     }
 
     public void cambiarPanel(JPanel nuevoPanel){
@@ -101,4 +109,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel contenedor;
     // End of variables declaration//GEN-END:variables
+
+    private void cerrarAplicacion() {
+        try {
+            UareUGlobal.DestroyReaderCollection();
+            System.out.println("Colección de lectores destruida correctamente.");
+        } catch (UareUException e) {
+            //MessageBox.DpError("UareUGlobal.DestroyReaderCollection()", e);
+            System.out.println("UareUGlobal.DestroyReaderCollection() error: " + e.getMessage());
+        }
+        System.exit(0); // Finalmente, cierra la aplicación
+    }
 }
