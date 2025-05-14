@@ -220,6 +220,7 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
 
         boolean resultado = implementacion.insertarEmpleado(modeloEmpleado, listaPlantillas);
         if (resultado) {
+            limpiarCampos();
             JOptionPane.showMessageDialog(null, "Empleado registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Empleado no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -486,6 +487,59 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
                 panel.repaint();
             }
         }
+    }
+
+    private void limpiarCampos(){
+        plantillaH1 = null;
+        plantillaH2 = null;
+        plantillaH3 = null;
+        plantillaH4 = null;
+
+        if (listaPlantillas != null) {
+            listaPlantillas.clear();
+            listaPlantillas = new ArrayList<>();
+            listaPlantillas.add(null);
+            listaPlantillas.add(null);
+            listaPlantillas.add(null);
+            listaPlantillas.add(null);
+        }
+
+        limpiarPanelHuella(modelo.getvRegistraEmpleado().panelH1);
+        limpiarPanelHuella(modelo.getvRegistraEmpleado().panelH2);
+        limpiarPanelHuella(modelo.getvRegistraEmpleado().panelH3);
+        limpiarPanelHuella(modelo.getvRegistraEmpleado().panelH4);
+
+        modelo.getvRegistraEmpleado().txtDPI.setText(" ");
+        modelo.getvRegistraEmpleado().txtNom1.setText(" ");
+        modelo.getvRegistraEmpleado().txtNom2.setText(" ");
+        modelo.getvRegistraEmpleado().txtNom3.setText(" ");
+        modelo.getvRegistraEmpleado().txtApe1.setText(" ");
+        modelo.getvRegistraEmpleado().txtApe2.setText(" ");
+        modelo.getvRegistraEmpleado().txtApeC.setText(" ");
+        modelo.getvRegistraEmpleado().txtFecha.setText(" ");
+        modelo.getvRegistraEmpleado().txtCorreo.setText(" ");
+        modelo.getvRegistraEmpleado().txtNum1.setText(" ");
+        modelo.getvRegistraEmpleado().txtNum2.setText(" ");
+        modelo.getvRegistraEmpleado().txtDPI.setText(" ");
+        modelo.getvRegistraEmpleado().txtHoraEntrada.setText(" ");
+        modelo.getvRegistraEmpleado().txtHoraSalida.setText(" ");
+        modelo.getvRegistraEmpleado().txtAldea.setText(" ");
+        modelo.getvRegistraEmpleado().txtDireccion.setText(" ");
+
+        modelo.getvRegistraEmpleado().cbDepto.setSelectedIndex(0);
+        modelo.getvRegistraEmpleado().cbMun.setSelectedIndex(0);
+        modelo.getvRegistraEmpleado().cbEstadoCivil.setSelectedIndex(0);
+        modelo.getvRegistraEmpleado().cbSexo.setSelectedIndex(0);
+        modelo.getvRegistraEmpleado().cbJefeInmediato.setSelectedIndex(0);
+        modelo.getvRegistraEmpleado().cbPuesto.setSelectedIndex(0);
+
+    }
+
+
+    private void limpiarPanelHuella(JPanel panel) {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
     }
 
 }
