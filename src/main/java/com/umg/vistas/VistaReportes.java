@@ -144,17 +144,17 @@ public class VistaReportes extends javax.swing.JPanel {
         TablaReportes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         TablaReportes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Empleado", "Fecha", "Entrada", "Salida", "Estado", "Puesto"
+                "Dpi", "Nombre", "Fecha", "Entrada", "Salida", "Estado", "Puesto"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
