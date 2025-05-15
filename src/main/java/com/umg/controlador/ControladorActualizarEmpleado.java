@@ -314,6 +314,7 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         //  Llamada al DAO para actualizar por DPI
         boolean resultado = implementacion.actualizarEmpleado(modeloEmpleado, listaPlantillas);
         if (resultado) {
+            limpiarCampos();
             JOptionPane.showMessageDialog(null, "Empleado actualizado con éxito", "Actualización", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el empleado", "ERROR", JOptionPane.ERROR_MESSAGE);

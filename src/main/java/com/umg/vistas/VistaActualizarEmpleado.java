@@ -631,10 +631,10 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo1;
-    private javax.swing.JPanel panelH1;
-    private javax.swing.JPanel panelH2;
-    private javax.swing.JPanel panelH3;
-    private javax.swing.JPanel panelH4;
+    public javax.swing.JPanel panelH1;
+    public javax.swing.JPanel panelH2;
+    public javax.swing.JPanel panelH3;
+    public javax.swing.JPanel panelH4;
     private javax.swing.JPanel panelInfoPersonal1;
     public javax.swing.JPanel panelOpciones1;
     public javax.swing.JTextField txtAldea;
@@ -658,6 +658,10 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         btnActualizarEmpleado.addMouseListener(controlador);
         btnBuscarEmpleado.addMouseListener(controlador);
         cbDepto.addActionListener(controlador);
+        panelH1.addMouseListener(controlador);
+        panelH2.addMouseListener(controlador);
+        panelH3.addMouseListener(controlador);
+        panelH4.addMouseListener(controlador);
     }
 
 }
