@@ -29,6 +29,7 @@ public class EmpleadoImp implements IEmpleados {
             ps.setString(index, valor);
         }
     }
+
     private void setNullableTime(PreparedStatement ps, int index, String timeStr) throws SQLException {
         if (timeStr == null || timeStr.trim().isEmpty()) {
             ps.setNull(index, java.sql.Types.TIME);
@@ -164,10 +165,12 @@ public class EmpleadoImp implements IEmpleados {
 
     public boolean eliminarEmpleadoPorDPI(String dpi) {
         boolean eliminado = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         conector.conectar();
 
         try {
-            // 1. Obtener id_empleado
+            // 1. Obtener id_empleado por DPI
             ps = conector.preparar(sql.getOBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR());
             ps.setString(1, dpi);
             rs = ps.executeQuery();
@@ -175,35 +178,57 @@ public class EmpleadoImp implements IEmpleados {
             if (rs.next()) {
                 int idEmpleado = rs.getInt("id_empleado");
 
-                // 2. Eliminar de huella
+                rs.close();
+                ps.close();
+
+                ps = conector.preparar(sql.getACTUALIZAR_ID_JEFE_EMPLEADO());
+                ps.setInt(1, idEmpleado);
+                ps.executeUpdate();
+                ps.close();
+
+                ps = conector.preparar(sql.getELIMINAR_REGISTRO_ASISTENCIA());
+                ps.setInt(1, idEmpleado);
+                ps.executeUpdate();
+                ps.close();
+
+                // 🔵 Ahora sí, elimino huellas
                 ps = conector.preparar(sql.getELIMINAR_HUELLA_ELIMINAR());
                 ps.setInt(1, idEmpleado);
                 ps.executeUpdate();
+                ps.close();
 
-                // 3. Eliminar de direccion_empleado
+                // 🔵 Luego dirección
                 ps = conector.preparar(sql.getELIMINAR_DIRECCION_ELIMINAR());
                 ps.setInt(1, idEmpleado);
                 ps.executeUpdate();
+                ps.close();
 
-                // 4. Eliminar de usuarios
+                // 🔵 Luego usuarios
                 ps = conector.preparar(sql.getELIMINAR_USUARIO_ELIMINAR());
                 ps.setString(1, dpi);
                 ps.executeUpdate();
+                ps.close();
 
-                // 5. Eliminar de empleado
+                // 🔵 Finalmente empleado
                 ps = conector.preparar(sql.getELIMINAR_EMPLEADO_ELIMINAR());
                 ps.setString(1, dpi);
                 ps.executeUpdate();
+                ps.close();
 
                 eliminado = true;
             } else {
                 conector.mensaje("No se encontró un empleado con ese DPI.", "Error", 0);
             }
-
-            conector.desconectar();
         } catch (SQLException ex) {
             conector.mensaje("Error al eliminar empleado: " + ex.getMessage(), "Error SQL", 0);
-            conector.desconectar();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                conector.desconectar();
+            } catch (SQLException e) {
+                System.err.println("Error cerrando recursos: " + e.getMessage());
+            }
         }
 
         return eliminado;
@@ -302,8 +327,6 @@ public class EmpleadoImp implements IEmpleados {
         return nombreJefe;
     }
 
-
-
     @Override
     public ModeloEmpleado mostrarEmpleadoPorDpi(String dpi_empleado) {
         conector.conectar();
@@ -364,9 +387,6 @@ public class EmpleadoImp implements IEmpleados {
             ps.setInt(index, valor);
         }
     }
-
-
-
 
     @Override
     public boolean actualizarEmpleado(ModeloEmpleado modelo, List<Fmd> listaFmd) {
@@ -456,7 +476,6 @@ public class EmpleadoImp implements IEmpleados {
         }
         return resultado;
     }
-
 
     @Override
     public boolean eliminarEmpleado(ModeloEmpleado modelo) {

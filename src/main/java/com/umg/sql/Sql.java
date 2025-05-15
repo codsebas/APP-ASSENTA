@@ -113,6 +113,9 @@ public class Sql {
     private final String ELIMINAR_EMPLEADO_ELIMINAR = "DELETE FROM empleado WHERE dpi_empleado = ?";
     private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO huella (empleado_id, huella_template) VALUES (?, ?)";
 
+    private final String ACTUALIZAR_ID_JEFE_EMPLEADO = "UPDATE empleado SET jefe_inmediato_id = NULL WHERE jefe_inmediato_id = ?";
+    private final String ELIMINAR_REGISTRO_ASISTENCIA = "DELETE FROM asistencia_diaria WHERE empleado_id = ?";
+
     public Sql() {
     }
 
@@ -219,5 +222,9 @@ public class Sql {
     public String getELIMINAR_EMPLEADO_ELIMINAR() { return ELIMINAR_EMPLEADO_ELIMINAR; }
 
     public String getINSERTAR_HUELLA_EMPLEADO(){ return INSERTAR_HUELLA_EMPLEADO; }
+
+    public String getACTUALIZAR_ID_JEFE_EMPLEADO(){ return ACTUALIZAR_ID_JEFE_EMPLEADO; }
+
+    public String getELIMINAR_REGISTRO_ASISTENCIA(){ return ELIMINAR_REGISTRO_ASISTENCIA; }
 
 }
