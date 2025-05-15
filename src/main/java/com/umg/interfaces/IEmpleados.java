@@ -17,7 +17,7 @@ public interface IEmpleados {
 
     ModeloEmpleado mostrarEmpleadoPorDpi(String dpi_empleado);
 
-    public boolean actualizarEmpleado(ModeloEmpleado modelo);
+    public boolean actualizarEmpleado(ModeloEmpleado modelo, List<Fmd> listaFmd);
 
     public boolean eliminarEmpleado(ModeloEmpleado modelo);
 

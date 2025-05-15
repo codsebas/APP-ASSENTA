@@ -4,6 +4,10 @@
  */
 package com.umg.controlador;
 
+import com.digitalpersona.uareu.*;
+import com.umg.biometrics.Enrollment;
+import com.umg.biometrics.ImagePanel;
+import com.umg.biometrics.ResultadoCapturaHuella;
 import com.umg.implementacion.EmpleadoImp;
 import com.umg.implementacion.PuestoImp;
 import com.umg.modelos.ModeloActualizarEmpleado;
@@ -12,6 +16,7 @@ import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -24,24 +29,32 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author axels
  */
 public class ControladorActualizarEmpleado implements MouseListener, ActionListener {
     ModeloActualizarEmpleado modelo;
     PuestoImp implementacionPuesto = new PuestoImp();
+    EmpleadoImp implementacion = new EmpleadoImp();
     private Map<String, String[]> municipiosPorDepartamento;
+    Reader lector = obtenerReader();
 
     int id_emple;
-
     public int getId_emple() {
         return id_emple;
     }
+
+    //Para las plantillas
+    Fmd plantillaH1 = null;
+    Fmd plantillaH2 = null;
+    Fmd plantillaH3 = null;
+    Fmd plantillaH4 = null;
+    List<Fmd> listaPlantillas = new ArrayList<>();
 
     public void setId_emple(int id_emple) {
         this.id_emple = id_emple;
@@ -49,6 +62,10 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
 
     public ControladorActualizarEmpleado(ModeloActualizarEmpleado modelo) {
         this.modelo = modelo;
+        listaPlantillas.add(null);
+        listaPlantillas.add(null);
+        listaPlantillas.add(null);
+        listaPlantillas.add(null);
         agregarMunicipios();
     }
 
@@ -64,7 +81,6 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
     }
 
 
-
     public void cargarPuestos(JComboBox<Object> comboBox) {
         List<ModeloPuesto> puestos = implementacionPuesto.obtenerPuestos();
         comboBox.removeAllItems();
@@ -78,16 +94,20 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
 
     @Override
     public void mouseClicked(MouseEvent e) {
-    if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnActualizarEmpleado)){
-actualizarEmpleado();
-    } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnBuscarEmpleado)){
-        mostrarEmpleado();
+        if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnActualizarEmpleado)) {
+            actualizarEmpleado();
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnBuscarEmpleado)) {
+            mostrarEmpleado();
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().panelH1)) {
+            capturarHuella(0, modelo.getvActualizarEmpleado().panelH1);
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().panelH2)) {
+            capturarHuella(1, modelo.getvActualizarEmpleado().panelH2);
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().panelH3)) {
+            capturarHuella(2, modelo.getvActualizarEmpleado().panelH3);
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().panelH4)) {
+            capturarHuella(3, modelo.getvActualizarEmpleado().panelH4);
+        }
     }
-
-
-
-    }
-
 
 
     @Override
@@ -118,6 +138,7 @@ actualizarEmpleado();
 
 
     }
+
     private boolean existeEnComboBox(JComboBox<Object> comboBox, String valor) {
         for (int i = 0; i < comboBox.getItemCount(); i++) {
             if (comboBox.getItemAt(i).toString().equals(valor)) {
@@ -128,7 +149,8 @@ actualizarEmpleado();
     }
 
 
-    public void mostrarEmpleado() { String dpi = modelo.getvActualizarEmpleado().txtDPI.getText();
+    public void mostrarEmpleado() {
+        String dpi = modelo.getvActualizarEmpleado().txtDPI.getText();
 
         if (dpi == null || dpi.isEmpty()) {
             JOptionPane.showMessageDialog(null, "⚠️ Por favor, ingresa un DPI.");
@@ -148,17 +170,23 @@ actualizarEmpleado();
         String estadoCivil = "";
         switch (estadoCivilBD) {
             case "C":
-                estadoCivil = "Casado/a"; break;
+                estadoCivil = "Casado/a";
+                break;
             case "S":
-                estadoCivil = "Soltero/a"; break;
+                estadoCivil = "Soltero/a";
+                break;
             case "D":
-                estadoCivil = "Divorciado/a"; break;
+                estadoCivil = "Divorciado/a";
+                break;
             case "V":
-                estadoCivil = "Viudo/a"; break;
+                estadoCivil = "Viudo/a";
+                break;
             case "U":
-                estadoCivil = "Unión de Hecho"; break;
+                estadoCivil = "Unión de Hecho";
+                break;
             default:
-                estadoCivil = "Desconocido"; break;
+                estadoCivil = "Desconocido";
+                break;
         }
 
 
@@ -186,7 +214,6 @@ actualizarEmpleado();
         }
 
 
-
         setId_emple(empleado.getIdEmpleado());
         System.out.println("id empleado desde mostrar: " + empleado.getIdEmpleado());
         System.out.println("Estado Civil: " + empleado.getEstadoCivil());
@@ -209,8 +236,6 @@ actualizarEmpleado();
         //vista.cbJefeInmediato.setSelectedItem(empleado.getNombreJefeInmediato());
 
 
-
-
         vista.cbDepto.setSelectedItem(empleado.getDepartamento());
         vista.cbMun.setSelectedItem(empleado.getMunicipio());
         vista.txtAldea.setText(empleado.getAldeaColonia());
@@ -221,7 +246,6 @@ actualizarEmpleado();
 
 
     private void actualizarEmpleado() {
-        EmpleadoImp implementacion = new EmpleadoImp();
         String departamento = String.valueOf(modelo.getvActualizarEmpleado().cbDepto.getSelectedItem());
         String municipio = String.valueOf(modelo.getvActualizarEmpleado().cbMun.getSelectedItem());
 
@@ -288,15 +312,13 @@ actualizarEmpleado();
         }
 
         //  Llamada al DAO para actualizar por DPI
-        boolean resultado = implementacion.actualizarEmpleado(modeloEmpleado);
+        boolean resultado = implementacion.actualizarEmpleado(modeloEmpleado, listaPlantillas);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Empleado actualizado con éxito", "Actualización", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el empleado", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
 
     private void agregarMunicipios() {
         municipiosPorDepartamento = new HashMap<>();
@@ -434,6 +456,97 @@ actualizarEmpleado();
         if (municipiosPorDepartamento.containsKey(seleccionado)) {
             for (String municipio : municipiosPorDepartamento.get(seleccionado)) {
                 modelo.getvActualizarEmpleado().cbMun.addItem(municipio);
+            }
+        }
+    }
+
+    private void limpiarCampos(){
+        plantillaH1 = null;
+        plantillaH2 = null;
+        plantillaH3 = null;
+        plantillaH4 = null;
+
+        if (listaPlantillas != null) {
+            listaPlantillas.clear();
+            listaPlantillas = new ArrayList<>();
+            listaPlantillas.add(null);
+            listaPlantillas.add(null);
+            listaPlantillas.add(null);
+            listaPlantillas.add(null);
+        }
+
+        limpiarPanelHuella(modelo.getvActualizarEmpleado().panelH1);
+        limpiarPanelHuella(modelo.getvActualizarEmpleado().panelH2);
+        limpiarPanelHuella(modelo.getvActualizarEmpleado().panelH3);
+        limpiarPanelHuella(modelo.getvActualizarEmpleado().panelH4);
+
+        modelo.getvActualizarEmpleado().txtDPI.setText("");
+        modelo.getvActualizarEmpleado().txtNom1.setText("");
+        modelo.getvActualizarEmpleado().txtNom2.setText("");
+        modelo.getvActualizarEmpleado().txtNom3.setText("");
+        modelo.getvActualizarEmpleado().txtApe1.setText("");
+        modelo.getvActualizarEmpleado().txtApe2.setText("");
+        modelo.getvActualizarEmpleado().txtApeC.setText("");
+        modelo.getvActualizarEmpleado().txtFecha.setText("");
+        modelo.getvActualizarEmpleado().txtCorreo.setText("");
+        modelo.getvActualizarEmpleado().txtNum1.setText("");
+        modelo.getvActualizarEmpleado().txtNum2.setText("");
+        modelo.getvActualizarEmpleado().txtDPI.setText("");
+        modelo.getvActualizarEmpleado().txtHoraEntrada.setText("");
+        modelo.getvActualizarEmpleado().txtHoraSalida.setText("");
+        modelo.getvActualizarEmpleado().txtAldea.setText("");
+        modelo.getvActualizarEmpleado().txtDireccion.setText("");
+
+        modelo.getvActualizarEmpleado().cbDepto.setSelectedIndex(0);
+        modelo.getvActualizarEmpleado().cbMun.setSelectedIndex(0);
+        modelo.getvActualizarEmpleado().cbEstadoCivil.setSelectedIndex(0);
+        modelo.getvActualizarEmpleado().cbSexo.setSelectedIndex(0);
+        modelo.getvActualizarEmpleado().cbJefeInmediato.setSelectedIndex(0);
+        modelo.getvActualizarEmpleado().cbPuesto.setSelectedIndex(0);
+
+    }
+
+    private void limpiarPanelHuella(JPanel panel) {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    public Reader obtenerReader() {
+        Reader reader = null;
+        try {
+            ReaderCollection readers = UareUGlobal.GetReaderCollection();
+            readers.GetReaders(); // Refrescar la lista de dispositivos conectados
+            if (readers.size() == 0) {
+                System.out.println("❌ No se detectaron lectores de huella.");
+                return null;
+            }
+
+            reader = readers.get(0); // Selecciona automáticamente el primer lector encontrado
+            System.out.println("✅ Lector seleccionado automáticamente: " + reader.GetDescription().name);
+
+        } catch (UareUException e) {
+            System.err.println("❌ Error inicializando el lector: " + e.getMessage());
+        }
+        return reader;
+    }
+
+    private void capturarHuella(int indice, JPanel panel) {
+        ResultadoCapturaHuella resultado = Enrollment.Run(lector);
+
+        if (resultado != null && resultado.getPlantilla() != null) {
+            listaPlantillas.set(indice, resultado.getPlantilla());
+
+            // Mostrar la imagen de la huella en el panel
+            Graphics g = panel.getGraphics();
+            if (g != null) {
+                ImagePanel imagePanel = new ImagePanel();
+                imagePanel.showImage(resultado.getImagen());
+                imagePanel.setSize(panel.getWidth(), panel.getHeight());
+                panel.removeAll();
+                panel.add(imagePanel);
+                panel.revalidate();
+                panel.repaint();
             }
         }
     }

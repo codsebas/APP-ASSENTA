@@ -161,6 +161,7 @@ public class EmpleadoImp implements IEmpleados {
     public DefaultTableModel modeloEmpleado(int dpi_empleado) {
         return null;
     }
+
     public boolean eliminarEmpleadoPorDPI(String dpi) {
         boolean eliminado = false;
         conector.conectar();
@@ -251,6 +252,7 @@ public class EmpleadoImp implements IEmpleados {
 
         return modelo;
     }
+
     public String obtenerNombrePuestoDesdeBD(int idPuesto) {
         String nombrePuesto = "No encontrado"; // Para detectar si no devuelve datos
         conector.conectar();
@@ -367,13 +369,15 @@ public class EmpleadoImp implements IEmpleados {
 
 
     @Override
-    public boolean actualizarEmpleado(ModeloEmpleado modelo) {
+    public boolean actualizarEmpleado(ModeloEmpleado modelo, List<Fmd> listaFmd) {
         boolean resultado = false;
         conector.conectar();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
-            // Actualizar datos del empleado (se actualiza mediante el DPI)
-            PreparedStatement ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
+            // Actualizar datos del empleado
+            ps = conector.preparar(sql.getACTUALIZAR_EMPLEADO());
 
             ps.setString(1, modelo.getSexo());
             ps.setString(2, modelo.getEstadoCivil());
@@ -384,7 +388,6 @@ public class EmpleadoImp implements IEmpleados {
             ps.setString(7, modelo.getSegundoApellido());
             setNullableString(ps, 8, modelo.getApellidoCasada());
 
-            // Convertir el String a Date (formato "yyyy-MM-dd")
             try {
                 Date fecha = Date.valueOf(modelo.getFechaNacimiento().trim());
                 ps.setDate(9, fecha);
@@ -394,7 +397,6 @@ public class EmpleadoImp implements IEmpleados {
             }
 
             ps.setInt(10, modelo.getEdad());
-            // Si es 0 se podría enviar NULL usando un método auxiliar
             setNullableInt(ps, 11, modelo.getIdPuesto());
             setNullableString(ps, 12, modelo.getCorreoElectronico());
             ps.setString(13, modelo.getNumeroTelefono1());
@@ -402,28 +404,25 @@ public class EmpleadoImp implements IEmpleados {
             setNullableTime(ps, 15, modelo.getHorarioEntrada());
             setNullableTime(ps, 16, modelo.getHorarioSalida());
             setNullableInt(ps, 17, modelo.getIdJefeInmediato());
-
-            // El DPI es de tipo VARCHAR, se asigna como String; se actualiza usando el DPI
             ps.setString(18, modelo.getDpi());
 
             int filasAfectadas = ps.executeUpdate();
+            ps.close(); // <-- cierro después de usarlo
 
             if (filasAfectadas > 0) {
-                // Obtener el id_empleado real (si en el objeto viene 0, se consulta por DPI)
                 int id_empleado = modelo.getIdEmpleado();
                 if (id_empleado == 0) {
-                    PreparedStatement psId = conector.preparar("SELECT id_empleado FROM empleado WHERE dpi_empleado = ?");
-                    psId.setString(1, modelo.getDpi());
-                    ResultSet rs = psId.executeQuery();
+                    ps = conector.preparar("SELECT id_empleado FROM empleado WHERE dpi_empleado = ?");
+                    ps.setString(1, modelo.getDpi());
+                    rs = ps.executeQuery();
                     if (rs.next()) {
                         id_empleado = rs.getInt("id_empleado");
                     }
                     rs.close();
+                    ps.close();
                 }
 
-                // Actualizar la dirección usando el query ACTUALIZAR_DIRECCION
-                // El orden de parámetros es:
-                // 1 - departamento, 2 - municipio, 3 - aldea, 4 - direccion, 5 - empleado_id
+                // Actualizar dirección
                 ps = conector.preparar(sql.getACTUALIZAR_DIRECCION());
                 ps.setString(1, modelo.getDepartamento());
                 ps.setString(2, modelo.getMunicipio());
@@ -431,19 +430,33 @@ public class EmpleadoImp implements IEmpleados {
                 setNullableString(ps, 4, modelo.getDireccionVivienda());
                 ps.setInt(5, id_empleado);
                 ps.executeUpdate();
+                ps.close();
 
-                resultado = true;
+                // Eliminar huellas anteriores
+                ps = conector.preparar(sql.getELIMINAR_HUELLA_ELIMINAR());
+                ps.setInt(1, id_empleado);
+                ps.executeUpdate();
+                ps.close();
+
+                // Guardar nuevas huellas
+                resultado = guardarHuella(armarModelo(id_empleado, listaFmd));
             } else {
                 conector.mensaje("No se encontró el empleado para actualizar.", "Error", 0);
             }
         } catch (SQLException ex) {
             conector.mensaje("Error al actualizar empleado: " + ex.getMessage(), "Error SQL", 0);
         } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (SQLException e) {
+                System.err.println("Error cerrando recursos: " + e.getMessage());
+            }
             conector.desconectar();
         }
-
         return resultado;
     }
+
 
     @Override
     public boolean eliminarEmpleado(ModeloEmpleado modelo) {
