@@ -389,6 +389,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         cbDepto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         jPanel6.add(cbDepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 270, -1));
 
+        cbMun.setBackground(new java.awt.Color(255, 255, 255));
         cbMun.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbMun.setForeground(new java.awt.Color(26, 75, 54));
         cbMun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elegir Municipio" }));
