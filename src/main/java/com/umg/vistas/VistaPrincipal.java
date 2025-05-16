@@ -25,7 +25,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.setTitle("Mantenimineto Empleados");
         setSize(1280, 720);
         this.setLocationRelativeTo(null);
-        
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                UareUGlobal.DestroyReaderCollection();
+            } catch (UareUException e) {
+            }
+        }));
+
         ModeloLogin modelo = new ModeloLogin();
         VistaLogin vista = new VistaLogin();
         new ControladorLogin(modelo, vista, this);
