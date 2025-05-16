@@ -393,7 +393,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 127, 75));
-        jLabel21.setText("Hora de Entrada");
+        jLabel21.setText("Hora de Entrada*");
         jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 100, -1));
 
         txtHoraEntrada.setBackground(new java.awt.Color(255, 255, 255));
@@ -432,7 +432,7 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
 
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(0, 127, 75));
-        jLabel42.setText("Hora de Salida");
+        jLabel42.setText("Hora de Salida*");
         jPanel7.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 100, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-direccion.png"))); // NOI18N

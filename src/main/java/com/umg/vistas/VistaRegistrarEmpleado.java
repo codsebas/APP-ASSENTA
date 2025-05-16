@@ -429,7 +429,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 127, 75));
-        jLabel21.setText("Hora de Entrada");
+        jLabel21.setText("Hora de Entrada*");
         jPanel7.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 100, -1));
 
         txtHoraEntrada.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -464,7 +464,7 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
 
         jLabel42.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(0, 127, 75));
-        jLabel42.setText("Hora de Salida");
+        jLabel42.setText("Hora de Salida*");
         jPanel7.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 100, -1));
 
         lblErrorpuesto.setForeground(new java.awt.Color(153, 0, 0));
@@ -727,6 +727,21 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         panelH2.addMouseListener(controlador);
         panelH3.addMouseListener(controlador);
         panelH4.addMouseListener(controlador);
+        txtNom1.getDocument().addDocumentListener(controlador);
+        txtNom2.getDocument().addDocumentListener(controlador);
+        txtNom3.getDocument().addDocumentListener(controlador);
+        txtApe1.getDocument().addDocumentListener(controlador);
+        txtApe2.getDocument().addDocumentListener(controlador);
+        txtApeC.getDocument().addDocumentListener(controlador);
+        txtFecha.getDocument().addDocumentListener(controlador);
+        txtCorreo.getDocument().addDocumentListener(controlador);
+        txtNum1.getDocument().addDocumentListener(controlador);
+        txtNum2.getDocument().addDocumentListener(controlador);
+        txtDPI.getDocument().addDocumentListener(controlador);
+        txtDireccion.getDocument().addDocumentListener(controlador);
+        txtAldea.getDocument().addDocumentListener(controlador);
+        txtHoraEntrada.getDocument().addDocumentListener(controlador);
+        txtHoraSalida.getDocument().addDocumentListener(controlador);
     }
 
     public Reader obtenerReader() {

@@ -13,7 +13,10 @@ import com.umg.modelos.ModeloVistaRegistrarEmpleado;
 import com.umg.modelos.ModeloHuella;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
-public class ControladorRegistrarEmpleado implements MouseListener, ActionListener {
+public class ControladorRegistrarEmpleado implements MouseListener, ActionListener, DocumentListener {
     EmpleadoImp implementacion = new EmpleadoImp();
     ModeloVistaRegistrarEmpleado modelo;
     PuestoImp implementacionPuesto = new PuestoImp();
@@ -190,31 +193,45 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modeloEmpleado.setMunicipio(municipio);
         modeloEmpleado.setFechaNacimiento(modelo.getvRegistraEmpleado().txtFecha.getText());
         String fechaNacimientoTexto = modelo.getvRegistraEmpleado().txtFecha.getText().trim();
+
+        String fechaFormateada;
+        try {
+            DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            LocalDate fecha = LocalDate.parse(fechaNacimientoTexto, formatoEntrada);
+            fechaFormateada = fecha.format(formatoSalida);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato dd/mm/yyyy (ej: 25/12/2000)");
+            return;
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         modeloEmpleado.setIdJefeInmediato(idJefe);
         System.out.println("El Puesto es: " + idPuesto);
         modeloEmpleado.setIdPuesto(idPuesto);
 
         try {
-            LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoTexto, formatter);
+            LocalDate fechaNacimiento = LocalDate.parse(fechaFormateada, formatter);
             LocalDate hoy = LocalDate.now();
             int edad = Period.between(fechaNacimiento, hoy).getYears();
 
-            modeloEmpleado.setFechaNacimiento(fechaNacimientoTexto);
+            modeloEmpleado.setFechaNacimiento(fechaFormateada);
             modeloEmpleado.setEdad(edad);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato yyyy-MM-dd (ej: 2000-12-25)");
+            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato dd/mm/yyyy (ej: 25/12/2000)");
             return;
         }
 
+        String horaEntrada = modelo.getvRegistraEmpleado().txtHoraEntrada.getText() + ":00";
+        String horaSalida = modelo.getvRegistraEmpleado().txtHoraSalida.getText() + ":00";
         modeloEmpleado.setEstadoCivil(estadoCivil);
         modeloEmpleado.setSexo(sexo);
         modeloEmpleado.setCorreoElectronico(modelo.getvRegistraEmpleado().txtCorreo.getText());
         modeloEmpleado.setNumeroTelefono1(modelo.getvRegistraEmpleado().txtNum1.getText());
         modeloEmpleado.setNumeroTelefono2(modelo.getvRegistraEmpleado().txtNum2.getText()); // <-- Estabas repitiendo Num1
         modeloEmpleado.setDpi(modelo.getvRegistraEmpleado().txtDPI.getText());
-        modeloEmpleado.setHorarioEntrada(modelo.getvRegistraEmpleado().txtHoraEntrada.getText());
-        modeloEmpleado.setHorarioSalida(modelo.getvRegistraEmpleado().txtHoraSalida.getText());
+        modeloEmpleado.setHorarioEntrada(horaEntrada);
+        modeloEmpleado.setHorarioSalida(horaSalida);
         modeloEmpleado.setAldeaColonia(modelo.getvRegistraEmpleado().txtAldea.getText());
         modeloEmpleado.setDireccionVivienda(modelo.getvRegistraEmpleado().txtDireccion.getText());
 
@@ -224,6 +241,22 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             JOptionPane.showMessageDialog(null, "Empleado registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Empleado no registrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void fechas(DocumentEvent e) {
+        try {
+            SwingUtilities.invokeLater(() ->{
+                String fechaA = modelo.getvRegistraEmpleado().txtFecha.getText();
+                if (fechaA.length() == 2 && !fechaA.endsWith("/")) {
+                    modelo.getvRegistraEmpleado().txtFecha.setText(fechaA + "/");
+                }
+                if (fechaA.length() == 5 && fechaA.charAt(4) != '/') {
+                    modelo.getvRegistraEmpleado().txtFecha.setText(fechaA + "/");
+                }
+            });
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Erro fecha: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -266,9 +299,11 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             if (modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty()) {
                 modelo.getvRegistraEmpleado().lblError1erTel.setText("*Este campo es obligatorio");
             }
-
-            if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().length() != 13) {
+            if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().isEmpty()) {
                 modelo.getvRegistraEmpleado().lblErrorDpi.setText("*Este campo es obligatorio");
+            }
+            if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().length() != 13) {
+                modelo.getvRegistraEmpleado().lblErrorDpi.setText("*Debe tener 13 digitos");
             }
             if (modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() == 0) {
                 modelo.getvRegistraEmpleado().lblErrorDepartamento.setText("*Este campo es obligatorio");
@@ -295,6 +330,74 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
             );
         } else {
             insertarEmpleado();
+        }
+    }
+
+    private void tamaniMaxCampos(){
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtNom1.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtNom2.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtNom3.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtApe1.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtApe2.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtApeC.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtFecha.getDocument()).setDocumentFilter(new LimiteCaracteres(10));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtDPI.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtCorreo.getDocument()).setDocumentFilter(new LimiteCaracteres(100));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtNum1.getDocument()).setDocumentFilter(new LimiteCaracteres(15));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtNum2.getDocument()).setDocumentFilter(new LimiteCaracteres(15));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtAldea.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtDireccion.getDocument()).setDocumentFilter(new LimiteCaracteres(100));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtHoraEntrada.getDocument()).setDocumentFilter(new LimiteCaracteres(5));
+        ((AbstractDocument) modelo.getvRegistraEmpleado().txtHoraSalida.getDocument()).setDocumentFilter(new LimiteCaracteres(5));
+
+    }
+
+    private void verificarBlancos(){
+        if (!modelo.getvRegistraEmpleado().txtNom1.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblErrorPrimerNombre.setText("");
+        }
+
+        if (!modelo.getvRegistraEmpleado().txtApe1.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblError1erApellido.setText("");
+        }
+        if (!modelo.getvRegistraEmpleado().txtApe2.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblError2doApellido.setText("");
+        }
+        if (!modelo.getvRegistraEmpleado().txtFecha.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblErrorFechaNacimiento.setText("");
+        }
+        if (modelo.getvRegistraEmpleado().cbEstadoCivil.getSelectedIndex() != 0) {
+            modelo.getvRegistraEmpleado().lblErrorEstado.setText("");
+        }
+        if (modelo.getvRegistraEmpleado().cbSexo.getSelectedIndex() != 0) {
+            modelo.getvRegistraEmpleado().lblErrorSexo.setText("");
+        }
+
+
+        if (!modelo.getvRegistraEmpleado().txtNum1.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblError1erTel.setText("");
+        }
+        if (modelo.getvRegistraEmpleado().txtDPI.getText().trim().length() == 13) {
+            modelo.getvRegistraEmpleado().lblErrorDpi.setText("");
+        }
+        if (!modelo.getvRegistraEmpleado().txtDPI.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblErrorDpi.setText("");
+        }
+        if (modelo.getvRegistraEmpleado().cbDepto.getSelectedIndex() != 0) {
+            modelo.getvRegistraEmpleado().lblErrorDepartamento.setText("");
+        }
+        if (modelo.getvRegistraEmpleado().cbMun.getSelectedIndex() != 0) {
+            modelo.getvRegistraEmpleado().lblErrorMunicipio.setText("");;
+        }
+
+        if (modelo.getvRegistraEmpleado().cbPuesto.getSelectedIndex() != 0) {
+            modelo.getvRegistraEmpleado().lblErrorpuesto.setText("");
+        }
+        if (!modelo.getvRegistraEmpleado().txtHoraEntrada.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblErrorHorarioEntrada.setText("");
+        }
+        if (!modelo.getvRegistraEmpleado().txtHoraSalida.getText().trim().isEmpty()) {
+            modelo.getvRegistraEmpleado().lblErrorHorarioSalida.setText("");
         }
     }
 
@@ -542,4 +645,24 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         panel.repaint();
     }
 
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        verificarBlancos();
+        tamaniMaxCampos();
+        fechas(e);
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        verificarBlancos();
+        tamaniMaxCampos();
+
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        verificarBlancos();
+        tamaniMaxCampos();
+
+    }
 }
