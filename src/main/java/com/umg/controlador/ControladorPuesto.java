@@ -6,6 +6,7 @@ import com.umg.modelos.ModeloPuesto;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -60,12 +61,24 @@ public class ControladorPuesto implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVistaPuestos().btnAgregar)) {
+            modelo.getVistaPuestos().btnAgregar.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVistaPuestos().btnEditar)) {
+            modelo.getVistaPuestos().btnEditar.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVistaPuestos().btnEliminar)) {
+            modelo.getVistaPuestos().btnEliminar.setBackground(new Color(38, 163, 106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVistaPuestos().btnAgregar)) {
+            modelo.getVistaPuestos().btnAgregar.setBackground(new Color(0,127,75));
+        } else if (e.getComponent().equals(modelo.getVistaPuestos().btnEditar)) {
+            modelo.getVistaPuestos().btnEditar.setBackground(new Color(0,127,75));
+        } else if (e.getComponent().equals(modelo.getVistaPuestos().btnEliminar)) {
+            modelo.getVistaPuestos().btnEliminar.setBackground(new Color(0,127,75));
+        }
     }
 
     public void agregarPuesto() {

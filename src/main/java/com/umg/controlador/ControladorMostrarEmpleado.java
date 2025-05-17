@@ -215,11 +215,15 @@ public class ControladorMostrarEmpleado implements ActionListener, MouseListener
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVistaMostrarEmpleados().btnBuscarEmpleado)) {
+            modelo.getVistaMostrarEmpleados().btnBuscarEmpleado.setBackground(new Color(38, 163, 106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVistaMostrarEmpleados().btnBuscarEmpleado)) {
+            modelo.getVistaMostrarEmpleados().btnBuscarEmpleado.setBackground(new Color(0,127,75));
+        }
     }
 }

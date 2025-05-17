@@ -196,6 +196,7 @@ public class ControladorMenu implements ActionListener, MouseListener {
         }
 
     }
+
     Timer timer;
     int pasosRealizados = 0;
     public void animacionLabel(JLabel label){

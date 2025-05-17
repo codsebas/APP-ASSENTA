@@ -166,7 +166,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-datos-usuarios.png"))); // NOI18N
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 190));
 
-        fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 970, 190));
+        fondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 970, 190));
 
         jPanel3.setBackground(new java.awt.Color(240, 253, 244));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -283,7 +283,7 @@ public class VistaMantenimientoUsuarios extends javax.swing.JPanel {
         fondoImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/img-cuadro-actuelimiusuario.png"))); // NOI18N
         jPanel3.add(fondoImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 280));
 
-        fondo.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 970, 280));
+        fondo.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 970, 280));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

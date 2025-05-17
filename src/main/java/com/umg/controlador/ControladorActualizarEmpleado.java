@@ -122,12 +122,20 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnActualizarEmpleado)){
+            modelo.getvActualizarEmpleado().btnActualizarEmpleado.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnBuscarEmpleado)){
+            modelo.getvActualizarEmpleado().btnBuscarEmpleado.setBackground(new Color(38, 163, 106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnActualizarEmpleado)){
+            modelo.getvActualizarEmpleado().btnActualizarEmpleado.setBackground(new Color(0,127,75));
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().btnBuscarEmpleado)){
+            modelo.getvActualizarEmpleado().btnBuscarEmpleado.setBackground(new Color(0,127,75));
+        }
     }
 
     @Override

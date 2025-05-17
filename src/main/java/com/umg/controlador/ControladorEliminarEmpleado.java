@@ -5,6 +5,7 @@ import com.umg.modelos.ModeloEliminarEmpleado;
 import com.umg.modelos.ModeloEmpleado;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -40,12 +41,20 @@ public class ControladorEliminarEmpleado implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVistaEliminarEmpleados().btnBuscarEmpleado)) {
+            modelo.getVistaEliminarEmpleados().btnBuscarEmpleado.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getVistaEliminarEmpleados().btnEliminarEmpleado)) {
+            modelo.getVistaEliminarEmpleados().btnEliminarEmpleado.setBackground(new Color(38, 163, 106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getVistaEliminarEmpleados().btnBuscarEmpleado)) {
+            modelo.getVistaEliminarEmpleados().btnBuscarEmpleado.setBackground(new Color(0,127,75));
+        } else if (e.getComponent().equals(modelo.getVistaEliminarEmpleados().btnEliminarEmpleado)) {
+            modelo.getVistaEliminarEmpleados().btnEliminarEmpleado.setBackground(new Color(0,127,75));
+        }
     }
 
     private void buscarEmpleadoPorDPI() {

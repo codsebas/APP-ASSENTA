@@ -133,6 +133,7 @@ public class VistaMostrarEmpleados extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     public javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo1;
     private javax.swing.JPanel panelInfoPersonal1;
