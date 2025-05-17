@@ -109,12 +109,14 @@ public class Sql {
     private final String OBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR = "SELECT id_empleado FROM empleado WHERE dpi_empleado = ?";
     private final String ELIMINAR_HUELLA_ELIMINAR = "DELETE FROM huella WHERE empleado_id = ?";
     private final String ELIMINAR_DIRECCION_ELIMINAR = "DELETE FROM direccion_empleado WHERE empleado_id = ?";
-    private final String ELIMINAR_USUARIO_ELIMINAR = "DELETE FROM usuarios WHERE empleado_dpi = ?";
+    private final String ELIMINAR_USUARIO_ELIMINAR = "DELETE FROM usuarios WHERE empleado_id = ?";
     private final String ELIMINAR_EMPLEADO_ELIMINAR = "DELETE FROM empleado WHERE dpi_empleado = ?";
     private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO huella (empleado_id, huella_template) VALUES (?, ?)";
 
     private final String ACTUALIZAR_ID_JEFE_EMPLEADO = "UPDATE empleado SET jefe_inmediato_id = NULL WHERE jefe_inmediato_id = ?";
     private final String ELIMINAR_REGISTRO_ASISTENCIA = "DELETE FROM asistencia_diaria WHERE empleado_id = ?";
+
+    private final String CONSULTAR_USUARIO_POR_DPI ="SELECT usuario FROM usuarios WHERE empleado_dpi = ?";
 
     public Sql() {
     }
@@ -227,4 +229,7 @@ public class Sql {
 
     public String getELIMINAR_REGISTRO_ASISTENCIA(){ return ELIMINAR_REGISTRO_ASISTENCIA; }
 
+    public String getCONSULTAR_USUARIO_POR_DPI() {
+        return CONSULTAR_USUARIO_POR_DPI;
+    }
 }

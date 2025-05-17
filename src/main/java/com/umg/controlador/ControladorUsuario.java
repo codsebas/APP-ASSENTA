@@ -29,8 +29,9 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
             eliminarUsuario();
         }else if ( e.getComponent().equals(modelo.getVista().btnActualizarContrasenia)){
             actualizarUsuario();
-
-        }
+        } else if (e.getComponent().equals(modelo.getVista().btnBuscarUsuario)) { // Agregar esta línea
+        consultarUsuario(); // Llama al método para consultar el usuario
+    }
         }
 
 
@@ -106,9 +107,7 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
 
     }
 
-    private void eliminarUsuario() {
 
-    }
 
     private void actualizarUsuario() {
         String password1 = String.valueOf(modelo.getVista().txtPasswordMant.getPassword());
@@ -142,12 +141,35 @@ public class ControladorUsuario implements MouseListener, DocumentListener {
         }
     }
 
-    private void consultarUsuarios() {
-        
+    private void consultarUsuario() {
+        String dpi = modelo.getVista().txtDPIBuscar.getText().trim(); // Obtener el DPI del campo de texto
+        if (!dpi.isEmpty()) {
+            String usuario = implementacion.mostrarUsuarioPorDPI(dpi);
+            if (usuario != null) {
+
+                modelo.getVista().txtUsuarioBus.setText(usuario);
+                JOptionPane.showMessageDialog(null, "Usuario encontrado: " , "Consulta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró un usuario con ese DPI.", "Consulta de Usuario", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un DPI.", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
-    private void consultarUsuario() {
-        
+    private void eliminarUsuario() {
+        String dpi = modelo.getVista().txtDPI.getText().trim(); // Obtener el DPI del campo de texto
+        String password = String.valueOf(modelo.getVista().txtPasswordMant.getPassword()).trim(); // Obtener la contraseña
+        if (!dpi.isEmpty() && !password.isEmpty()) {
+            boolean eliminado = this.implementacion.eliminarUsuarioConValidacion(dpi, password); // Llama al método de implementación
+            if (eliminado) {
+                JOptionPane.showMessageDialog(null, "Usuario eliminado con éxito", "Eliminar Usuario", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Contraseña incorrecta o no se encontró el usuario", "Error al eliminar usuario", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un DPI y una contraseña.", "Error", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void verificarCoincidencia(){

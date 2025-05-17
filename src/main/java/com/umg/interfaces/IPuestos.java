@@ -13,4 +13,6 @@ public interface IPuestos {
     ModeloPuesto mostrarPuesto(int idPuesto);
     ModeloJefeInmediato mostrarJefeInmediato(int idJefeInmediato);
     DefaultTableModel modeloPuesto();
+
+
 }
