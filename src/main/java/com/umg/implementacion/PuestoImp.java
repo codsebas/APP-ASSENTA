@@ -2,7 +2,6 @@ package com.umg.implementacion;
 import java.util.ArrayList;
 import java.util.List;
 import com.umg.interfaces.IPuestos;
-import com.umg.modelos.Modelo;
 import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 import com.umg.sql.Conector;
@@ -173,4 +172,7 @@ public class PuestoImp implements IPuestos {
         return lista;
 
     }
+
+
+
 }
