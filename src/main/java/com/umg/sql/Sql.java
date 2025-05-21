@@ -1,6 +1,29 @@
 package com.umg.sql;
 
 public class Sql {
+
+    private final String ReporteDiarioGeneral= """
+    SELECT 
+        e.id_empleado,
+        e.nombre1_empleado || ' ' || COALESCE(e.nombre2_empleado, '') || ' ' || 
+        e.apellido1_empleado || ' ' || COALESCE(e.apellido2_empleado, '') AS nombre_completo,
+        a.fecha_asistencia,
+        a.hora_entrada,
+        a.hora_salida
+    FROM asistencia_diaria a
+    JOIN empleado e ON a.empleado_id = e.id_empleado
+    ORDER BY a.fecha_asistencia, e.id_empleado
+""";
+
+    private final  String getReporteAsistenciaTardios =
+         "SELECT e.id_empleado, e.nombre, a.fecha_asistencia, a.hora_entrada, a.hora_salida " +
+                "FROM asistencia_diaria a " +
+                "JOIN empleado e ON e.id_empleado = a.empleado_id " +
+                "WHERE a.hora_entrada IS NULL OR a.hora_entrada > '08:00:00' " +
+                "ORDER BY a.fecha_asistencia DESC, a.hora_entrada ASC;";
+
+
+
     private final String CONSULTA_TODOS_EMPLEADO = "SELECT " +
             "e.id_empleado, " +
             "e.dpi_empleado, " +
@@ -120,6 +143,15 @@ public class Sql {
 
     public Sql() {
     }
+
+    public String getGetReporteAsistenciaTardios() {
+        return getReporteAsistenciaTardios;
+    }
+
+    public String getReporteDiarioGeneral() {
+        return ReporteDiarioGeneral;
+    }
+
 
     public String getACTUALIZAR_EMPLEADO() {
         return ACTUALIZAR_EMPLEADO;

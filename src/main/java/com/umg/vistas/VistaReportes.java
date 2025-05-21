@@ -4,6 +4,9 @@
  */
 package com.umg.vistas;
 
+import com.umg.controlador.ControladorReportes;
+import com.umg.modelos.ModeloVistaReportes;
+
 /**
  *
  * @author Keily Orellana
@@ -14,8 +17,13 @@ public class VistaReportes extends javax.swing.JPanel {
      * Creates new form VistaReportes
      */
     public VistaReportes() {
+        ModeloVistaReportes modelo = new ModeloVistaReportes(this);
+        ControladorReportes controlador = new ControladorReportes(modelo);
+        setControlador(controlador);
         initComponents();
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -295,4 +303,11 @@ public class VistaReportes extends javax.swing.JPanel {
     public javax.swing.JTextField txtFechaDesde;
     public javax.swing.JTextField txtFechaHasta;
     // End of variables declaration//GEN-END:variables
+
+    private void setControlador(ControladorReportes controlador) {
+
+        btnReporteDiario.addMouseListener(controlador);
+        btnReporteEmpleado.addMouseListener(controlador);
+        btnSinMarca.addMouseListener(controlador);
+    }
 }
