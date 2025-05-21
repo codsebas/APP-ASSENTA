@@ -43,8 +43,8 @@ public class VistaReportes extends javax.swing.JPanel {
         TablaReportes = new javax.swing.JTable();
         btnReporteDiario = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        btnGenerarAut = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        btnSinMarca = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         btnReporteEmpleado = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -191,31 +191,31 @@ public class VistaReportes extends javax.swing.JPanel {
 
         jPanel3.add(btnReporteDiario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, -1, 30));
 
-        btnGenerarAut.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSinMarca.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 127, 75));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Generar Automatico");
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 127, 75));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Reporte sin marcar");
 
-        javax.swing.GroupLayout btnGenerarAutLayout = new javax.swing.GroupLayout(btnGenerarAut);
-        btnGenerarAut.setLayout(btnGenerarAutLayout);
-        btnGenerarAutLayout.setHorizontalGroup(
-            btnGenerarAutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnGenerarAutLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(14, 14, 14))
+        javax.swing.GroupLayout btnSinMarcaLayout = new javax.swing.GroupLayout(btnSinMarca);
+        btnSinMarca.setLayout(btnSinMarcaLayout);
+        btnSinMarcaLayout.setHorizontalGroup(
+            btnSinMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnSinMarcaLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel9)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
-        btnGenerarAutLayout.setVerticalGroup(
-            btnGenerarAutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnGenerarAutLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        btnSinMarcaLayout.setVerticalGroup(
+            btnSinMarcaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSinMarcaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addContainerGap())
         );
 
-        jPanel3.add(btnGenerarAut, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, -1, 30));
+        jPanel3.add(btnSinMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, -1, 30));
 
         btnReporteEmpleado.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -241,7 +241,7 @@ public class VistaReportes extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(btnReporteEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, -1, 30));
+        jPanel3.add(btnReporteEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, -1, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, 510));
 
@@ -275,17 +275,17 @@ public class VistaReportes extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TablaReportes;
     public javax.swing.JPanel btnBuscar;
-    public javax.swing.JPanel btnGenerarAut;
     public javax.swing.JPanel btnReporteDiario;
     public javax.swing.JPanel btnReporteEmpleado;
+    public javax.swing.JPanel btnSinMarca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
