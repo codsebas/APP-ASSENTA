@@ -61,6 +61,9 @@ public class VistaMenu extends javax.swing.JPanel {
         btnEliminarEmpleado = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        btnReportes = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         contenedor = new javax.swing.JPanel();
         panelFondoMenu = new javax.swing.JPanel();
         lblTitulo1 = new javax.swing.JLabel();
@@ -224,6 +227,19 @@ public class VistaMenu extends javax.swing.JPanel {
 
         panelMenu.add(btnEliminarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 200, 50));
 
+        btnReportes.setBackground(new java.awt.Color(0, 127, 75));
+        btnReportes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Reportes");
+        btnReportes.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
+
+        jLabel16.setText("R");
+        btnReportes.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        panelMenu.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 200, 50));
+
         PanelPrincipal.add(panelMenu, java.awt.BorderLayout.LINE_START);
 
         contenedor.setBackground(new java.awt.Color(240, 253, 244));
@@ -265,6 +281,7 @@ public class VistaMenu extends javax.swing.JPanel {
     public javax.swing.JPanel btnMeMoEmple;
     public javax.swing.JPanel btnMeReUser;
     public javax.swing.JPanel btnRegresarLogin;
+    public javax.swing.JPanel btnReportes;
     public javax.swing.JPanel contenedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -272,6 +289,8 @@ public class VistaMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

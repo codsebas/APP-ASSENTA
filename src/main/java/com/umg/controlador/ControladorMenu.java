@@ -47,6 +47,7 @@ public class ControladorMenu implements ActionListener, MouseListener {
         vista.btnRegresarLogin.addMouseListener(this);
         vista.btnMantePuestos.addMouseListener(this);
         vista.btnEliminarEmpleado.addMouseListener(this);
+        vista.btnReportes.addMouseListener(this);
     }
 
     private void cambiarVista(JPanel panel) {
@@ -120,7 +121,10 @@ public class ControladorMenu implements ActionListener, MouseListener {
         } else if (e.getComponent().equals(vista.btnEliminarEmpleado)) {
             VistaEliminarEmpleado panel = new VistaEliminarEmpleado();
             cambiarVista(panel);
-        } else if (e.getComponent().equals(vista.btnRegresarLogin)) {
+        } else if (e.getComponent().equals(vista.btnReportes)) {
+            VistaReportes panel = new VistaReportes();
+            cambiarVista(panel);
+        }  else if (e.getComponent().equals(vista.btnRegresarLogin)) {
             ModeloLogin modelo2 = new ModeloLogin();
 
             VistaLogin vista2 = new VistaLogin();
