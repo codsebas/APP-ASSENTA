@@ -17,14 +17,19 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 
 public class ControladorReportes implements ActionListener, MouseListener {
     public ControladorReportes(ModeloVistaReportes modelo) {
+
+        this.modelo = modelo;
     }
 
     ModeloVistaReportes modelo;
@@ -37,14 +42,45 @@ ReportesImp reportes = new ReportesImp();
         reportes.generarExcelTardios();
     }
 
-    public void generarReporteFecha(){
-        int id = Integer.parseInt(modelo.getvReportes().txtDpi.getText());
-        LocalDate inicio = LocalDate.parse(modelo.getvReportes().txtFechaDesde.getText()); // Formato: yyyy-MM-dd
-        LocalDate fin = LocalDate.parse(modelo.getvReportes().txtFechaHasta.getText());
+    public void generarReporteFecha() {
+        try {
+            String dpiTexto = modelo.getvReportes().txtDpi.getText().trim();
 
-        reportes.generarExcelPorEmpleadoYRango(id, inicio, fin);
+            // Validar que solo contiene dígitos
+            if (!dpiTexto.matches("\\d{13}")) {
+                throw new NumberFormatException("El DPI debe tener 13 dígitos numéricos.");
+            }
 
+            // No convertir a número, se pasa como String
+            String dpi = dpiTexto;
+
+            LocalDate inicio = LocalDate.parse(modelo.getvReportes().txtFechaDesde.getText());
+            LocalDate fin = LocalDate.parse(modelo.getvReportes().txtFechaHasta.getText());
+
+            // Validar que la fecha de inicio no sea posterior a la de fin
+            if (inicio.isAfter(fin)) {
+                JOptionPane.showMessageDialog(null,
+                        "La fecha de inicio no puede ser posterior a la fecha de fin.",
+                        "Rango de fechas inválido",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            reportes.generarExcelPorEmpleadoYRango(dpi, inicio, fin);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El DPI debe ser un número de 13 dígitos.", "Formato inválido", JOptionPane.ERROR_MESSAGE);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Usa: yyyy-MM-dd", "Error de fecha", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
+
+
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -54,7 +90,7 @@ ReportesImp reportes = new ReportesImp();
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvReportes().btnReporteDiario)) {
-            generarReportesDiarios();
+           generarReportesDiarios();
 
         }else if (e.getComponent().equals(modelo.getvReportes().btnSinMarca)) {
             generarReportesTardios();

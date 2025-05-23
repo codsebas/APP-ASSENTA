@@ -17,10 +17,11 @@ public class VistaReportes extends javax.swing.JPanel {
      * Creates new form VistaReportes
      */
     public VistaReportes() {
+        initComponents();
         ModeloVistaReportes modelo = new ModeloVistaReportes(this);
         ControladorReportes controlador = new ControladorReportes(modelo);
         setControlador(controlador);
-        initComponents();
+
     }
 
 

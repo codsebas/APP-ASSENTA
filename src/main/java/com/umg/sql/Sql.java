@@ -15,12 +15,31 @@ public class Sql {
     ORDER BY a.fecha_asistencia, e.id_empleado
 """;
 
-    private final  String getReporteAsistenciaTardios =
-         "SELECT e.id_empleado, e.nombre, a.fecha_asistencia, a.hora_entrada, a.hora_salida " +
-                "FROM asistencia_diaria a " +
-                "JOIN empleado e ON e.id_empleado = a.empleado_id " +
-                "WHERE a.hora_entrada IS NULL OR a.hora_entrada > '08:00:00' " +
-                "ORDER BY a.fecha_asistencia DESC, a.hora_entrada ASC;";
+    private final String ReportePorRango =
+            "SELECT " +
+                    "e.id_empleado, " +
+                    "e.dpi_empleado, " +
+                    "e.nombre1_empleado, " +
+                    "e.apellido1_empleado, " +
+                    "a.fecha_asistencia, " +
+                    "a.hora_entrada, " +
+                    "a.hora_salida " +
+                    "FROM empleado e " +
+                    "JOIN asistencia_diaria a ON e.id_empleado = a.empleado_id " +
+                    "WHERE e.dpi_empleado = ? " +
+                    "AND a.fecha_asistencia BETWEEN ? AND ? " +
+                    "ORDER BY a.fecha_asistencia";
+
+
+    private final String getReporteAsistenciaTardios =
+            "SELECT e.id_empleado, " +
+                    "CONCAT_WS(' ', e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
+                    "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado) AS nombre_completo, " +
+                    "a.fecha_asistencia, a.hora_entrada, a.hora_salida " +
+                    "FROM asistencia_diaria a " +
+                    "JOIN empleado e ON e.id_empleado = a.empleado_id " +
+                    "WHERE a.hora_entrada IS NULL OR a.hora_entrada > '08:00:00' " +
+                    "ORDER BY a.fecha_asistencia DESC, a.hora_entrada ASC;";
 
 
 
@@ -142,6 +161,10 @@ public class Sql {
     private final String CONSULTAR_USUARIO_POR_DPI ="SELECT usuario FROM usuarios WHERE empleado_dpi = ?";
 
     public Sql() {
+    }
+
+    public String getReportePorRango() {
+        return ReportePorRango;
     }
 
     public String getGetReporteAsistenciaTardios() {
