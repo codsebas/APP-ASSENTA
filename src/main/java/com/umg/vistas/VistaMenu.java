@@ -20,7 +20,7 @@ public class VistaMenu extends javax.swing.JPanel {
     public VistaMenu() {
         initComponents();
         ControladorMenu controladorMenu = new ControladorMenu();
-        controladorMenu.animacionLabel(lblTitulo1);
+//        controladorMenu.animacionLabel(lblTitulo1);
     }
 
 
@@ -232,10 +232,12 @@ public class VistaMenu extends javax.swing.JPanel {
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Reportes");
+        jLabel15.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 2, 0, 0, new java.awt.Color(0, 127, 75)));
         btnReportes.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 150, 50));
 
-        jLabel16.setText("R");
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/umg/imagenes/iconoreportes.png"))); // NOI18N
         btnReportes.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
         panelMenu.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 200, 50));

@@ -36,7 +36,6 @@ public class VistaReportes extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -56,6 +55,7 @@ public class VistaReportes extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         btnReporteEmpleado = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1230, 720));
 
@@ -63,12 +63,6 @@ public class VistaReportes extends javax.swing.JPanel {
         jPanel1.setMinimumSize(new java.awt.Dimension(1220, 720));
         jPanel1.setPreferredSize(new java.awt.Dimension(1220, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 127, 75));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Reportes");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 43, -1, -1));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 24, -1, -1));
@@ -92,6 +86,7 @@ public class VistaReportes extends javax.swing.JPanel {
         jLabel4.setText("Dpi");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
 
+        txtFechaDesde.setBackground(new java.awt.Color(255, 255, 255));
         txtFechaDesde.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtFechaDesde.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtFechaDesde.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
@@ -100,8 +95,9 @@ public class VistaReportes extends javax.swing.JPanel {
                 txtFechaDesdeActionPerformed(evt);
             }
         });
-        jPanel3.add(txtFechaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 140, -1));
+        jPanel3.add(txtFechaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 270, -1));
 
+        txtDpi.setBackground(new java.awt.Color(255, 255, 255));
         txtDpi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtDpi.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtDpi.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
@@ -110,8 +106,9 @@ public class VistaReportes extends javax.swing.JPanel {
                 txtDpiActionPerformed(evt);
             }
         });
-        jPanel3.add(txtDpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 140, -1));
+        jPanel3.add(txtDpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 270, -1));
 
+        txtFechaHasta.setBackground(new java.awt.Color(255, 255, 255));
         txtFechaHasta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtFechaHasta.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtFechaHasta.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
@@ -120,7 +117,7 @@ public class VistaReportes extends javax.swing.JPanel {
                 txtFechaHastaActionPerformed(evt);
             }
         });
-        jPanel3.add(txtFechaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 140, -1));
+        jPanel3.add(txtFechaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 270, -1));
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(816, 143, -1, -1));
@@ -252,7 +249,13 @@ public class VistaReportes extends javax.swing.JPanel {
 
         jPanel3.add(btnReporteEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, -1, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, 510));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 970, 510));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 127, 75));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Reportes");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 400, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
