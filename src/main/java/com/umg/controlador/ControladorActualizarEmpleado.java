@@ -169,7 +169,7 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         ModeloEmpleado empleado = imp.mostrarEmpleadoPorDpi(dpi);
 
         if (empleado == null) {
-            JOptionPane.showMessageDialog(null, "El dpi no esite BURRO.");
+            JOptionPane.showMessageDialog(null, "El dpi no existe.");
             return;
         }
 
@@ -249,7 +249,7 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         vista.txtAldea.setText(empleado.getAldeaColonia());
         vista.txtDireccion.setText(empleado.getDireccionVivienda());
 
-        JOptionPane.showMessageDialog(null, "Datos cargados por completo MAQUINA.");
+        JOptionPane.showMessageDialog(null, "Datos cargados por completo.");
     }
 
 
