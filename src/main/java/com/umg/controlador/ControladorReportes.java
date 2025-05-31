@@ -11,6 +11,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -111,11 +112,27 @@ public class ControladorReportes implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getvReportes().btnReporteDiario)) {
+            modelo.getvReportes().btnReporteDiario.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getvReportes().btnBuscar)) {
+            modelo.getvReportes().btnBuscar.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getvReportes().btnReporteEmpleado)) {
+            modelo.getvReportes().btnReporteEmpleado.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(modelo.getvReportes().btnSinMarca)) {
+            modelo.getvReportes().btnSinMarca.setBackground(new Color(38, 163, 106));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (e.getComponent().equals(modelo.getvReportes().btnReporteDiario)) {
+            modelo.getvReportes().btnReporteDiario.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getvReportes().btnBuscar)) {
+            modelo.getvReportes().btnBuscar.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getvReportes().btnReporteEmpleado)) {
+            modelo.getvReportes().btnReporteEmpleado.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(modelo.getvReportes().btnSinMarca)) {
+            modelo.getvReportes().btnSinMarca.setBackground(new Color(0, 127, 75));
+        }
     }
 }
