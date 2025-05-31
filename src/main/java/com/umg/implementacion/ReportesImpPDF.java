@@ -20,7 +20,7 @@ public class ReportesImpPDF {
     // Método para encabezado profesional
     private void agregarEncabezado(Document document, String tituloReporte) throws Exception {
         try {
-            Image logo = Image.getInstance("src/main/resources/logo.png");
+            Image logo = Image.getInstance("/com/umg/imagenes/logo.jpg");
             logo.scaleAbsolute(60, 60);
             logo.setAlignment(Image.ALIGN_LEFT);
             document.add(logo);
