@@ -175,6 +175,8 @@ public class ControladorMenu implements ActionListener, MouseListener {
             vista.btnMeMoEmple.setBackground(new Color(38, 163, 106));
         } else if (e.getComponent().equals(vista.btnEliminarEmpleado)) {
             vista.btnEliminarEmpleado.setBackground(new Color(38, 163, 106));
+        } else if (e.getComponent().equals(vista.btnReportes)) {
+            vista.btnReportes.setBackground(new Color(38, 163, 106));
         }
     }
 
@@ -197,6 +199,8 @@ public class ControladorMenu implements ActionListener, MouseListener {
             vista.btnMeMoEmple.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(vista.btnEliminarEmpleado)) {
             vista.btnEliminarEmpleado.setBackground(new Color(0, 127, 75));
+        } else if (e.getComponent().equals(vista.btnReportes)) {
+            vista.btnReportes.setBackground(new Color(0, 127, 75));
         }
 
     }
