@@ -114,8 +114,6 @@ public class ControladorReportes implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvReportes().btnReporteDiario)) {
             modelo.getvReportes().btnReporteDiario.setBackground(new Color(38, 163, 106));
-        } else if (e.getComponent().equals(modelo.getvReportes().btnBuscar)) {
-            modelo.getvReportes().btnBuscar.setBackground(new Color(38, 163, 106));
         } else if (e.getComponent().equals(modelo.getvReportes().btnReporteEmpleado)) {
             modelo.getvReportes().btnReporteEmpleado.setBackground(new Color(38, 163, 106));
         } else if (e.getComponent().equals(modelo.getvReportes().btnSinMarca)) {
@@ -127,8 +125,6 @@ public class ControladorReportes implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
         if (e.getComponent().equals(modelo.getvReportes().btnReporteDiario)) {
             modelo.getvReportes().btnReporteDiario.setBackground(new Color(0, 127, 75));
-        } else if (e.getComponent().equals(modelo.getvReportes().btnBuscar)) {
-            modelo.getvReportes().btnBuscar.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(modelo.getvReportes().btnReporteEmpleado)) {
             modelo.getvReportes().btnReporteEmpleado.setBackground(new Color(0, 127, 75));
         } else if (e.getComponent().equals(modelo.getvReportes().btnSinMarca)) {
