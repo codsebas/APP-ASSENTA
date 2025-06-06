@@ -20,12 +20,12 @@ public class ReportesImpPDF {
     // Método para encabezado profesional
     private void agregarEncabezado(Document document, String tituloReporte) throws Exception {
         try {
-            Image logo = Image.getInstance("/com/umg/imagenes/logo.jpg");
+            Image logo = Image.getInstance("src/main/resources/logo.png"); // Ajusta la ruta si tu logo está en otro lugar
             logo.scaleAbsolute(60, 60);
             logo.setAlignment(Image.ALIGN_LEFT);
             document.add(logo);
         } catch (Exception e) {
-            // Si no hay logo, sigue sin error
+            // Si no hay logo, se omite sin interrumpir
         }
         Font fontEmpresa = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, new BaseColor(40, 70, 130));
         Paragraph empresa = new Paragraph("ASSENTA", fontEmpresa);
@@ -86,9 +86,17 @@ public class ReportesImpPDF {
             table.setSpacingAfter(10f);
             table.setWidths(new float[]{1.2f, 3.8f, 2.2f, 2.2f, 2.2f, 2.5f});
 
+            // Encabezados
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
             BaseColor azul = new BaseColor(40, 70, 130);
-            String[] headers = {"DPI Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
+            String[] headers = {
+                    "DPI Empleado",
+                    "Nombre",
+                    "Fecha Asistencia",
+                    "Hora Entrada",
+                    "Hora Salida",
+                    "Estatus"
+            };
             for (String header : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
                 cell.setBackgroundColor(azul);
@@ -102,18 +110,32 @@ public class ReportesImpPDF {
             SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm:ss");
             Font cellFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
 
+            // Contenido
             while (rs.next()) {
-                table.addCell(new PdfPCell(new Phrase(rs.getString("dpi_empleado"), cellFont)));
-                table.addCell(new PdfPCell(new Phrase(rs.getString("nombre_completo"), cellFont)));
+                // Columna 0: DPI Empleado
+                table.addCell(new PdfPCell(new Phrase(
+                        String.valueOf(rs.getString("dpi_empleado")), cellFont)));
 
+                // Columna 1: Nombre completo
+                table.addCell(new PdfPCell(new Phrase(
+                        rs.getString("nombre_completo"), cellFont)));
+
+                // Columna 2: Fecha Asistencia
                 java.sql.Date fecha = rs.getDate("fecha_asistencia");
-                table.addCell(new PdfPCell(new Phrase(fecha != null ? fechaFormat.format(fecha) : "Sin fecha", cellFont)));
+                table.addCell(new PdfPCell(new Phrase(
+                        (fecha != null ? fechaFormat.format(fecha) : "Sin fecha"), cellFont)));
 
+                // Columna 3: Hora Entrada
                 Time horaEntrada = rs.getTime("hora_entrada");
-                table.addCell(new PdfPCell(new Phrase(horaEntrada != null ? horaFormat.format(horaEntrada) : "", cellFont)));
-                Time horaSalida = rs.getTime("hora_salida");
-                table.addCell(new PdfPCell(new Phrase(horaSalida != null ? horaFormat.format(horaSalida) : "", cellFont)));
+                table.addCell(new PdfPCell(new Phrase(
+                        (horaEntrada != null ? horaFormat.format(horaEntrada) : ""), cellFont)));
 
+                // Columna 4: Hora Salida
+                Time horaSalida = rs.getTime("hora_salida");
+                table.addCell(new PdfPCell(new Phrase(
+                        (horaSalida != null ? horaFormat.format(horaSalida) : ""), cellFont)));
+
+                // Columna 5: Estatus
                 String estatus;
                 if (horaEntrada != null && horaSalida != null) {
                     estatus = "Asistencia";
@@ -131,11 +153,21 @@ public class ReportesImpPDF {
             document.close();
             conector.desconectar();
 
-            JOptionPane.showMessageDialog(null, "Guardado en: " + nombreArchivo, "Reporte PDF generado exitosamente", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Guardado en: " + nombreArchivo,
+                    "Reporte PDF generado exitosamente",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Ocurrió un error al generar el PDF: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 
@@ -165,9 +197,17 @@ public class ReportesImpPDF {
             table.setSpacingAfter(10f);
             table.setWidths(new float[]{1.2f, 3.8f, 2.2f, 2.2f, 2.2f, 2.5f});
 
+            // Encabezados
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
             BaseColor azul = new BaseColor(40, 70, 130);
-            String[] headers = {"DPI Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
+            String[] headers = {
+                    "DPI Empleado",
+                    "Nombre",
+                    "Fecha Asistencia",
+                    "Hora Entrada",
+                    "Hora Salida",
+                    "Estatus"
+            };
             for (String header : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
                 cell.setBackgroundColor(azul);
@@ -181,19 +221,38 @@ public class ReportesImpPDF {
             SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm:ss");
             Font cellFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
 
+            // Contenido
             while (rs.next()) {
-                table.addCell(new PdfPCell(new Phrase(rs.getString("dpi_empleado"), cellFont)));
-                table.addCell(new PdfPCell(new Phrase(rs.getString("nombre_completo"), cellFont)));
+                // Columna 0: DPI Empleado
+                table.addCell(new PdfPCell(new Phrase(
+                        rs.getString("dpi_empleado"), cellFont)));
 
+                // Columna 1: Nombre completo
+                table.addCell(new PdfPCell(new Phrase(
+                        rs.getString("nombre_completo"), cellFont)));
+
+                // Columna 2: Fecha Asistencia
                 java.sql.Date fecha = rs.getDate("fecha_asistencia");
-                table.addCell(new PdfPCell(new Phrase(fecha != null ? fechaFormat.format(fecha) : "Sin fecha", cellFont)));
+                table.addCell(new PdfPCell(new Phrase(
+                        (fecha != null ? fechaFormat.format(fecha) : "Sin fecha"),
+                        cellFont
+                )));
 
+                // Columna 3: Hora Entrada
                 Time horaEntrada = rs.getTime("hora_entrada");
+                table.addCell(new PdfPCell(new Phrase(
+                        (horaEntrada != null ? horaFormat.format(horaEntrada) : "Sin registro"),
+                        cellFont
+                )));
+
+                // Columna 4: Hora Salida
                 Time horaSalida = rs.getTime("hora_salida");
+                table.addCell(new PdfPCell(new Phrase(
+                        (horaSalida != null ? horaFormat.format(horaSalida) : "Sin registro"),
+                        cellFont
+                )));
 
-                table.addCell(new PdfPCell(new Phrase(horaEntrada != null ? horaFormat.format(horaEntrada) : "Sin registro", cellFont)));
-                table.addCell(new PdfPCell(new Phrase(horaSalida != null ? horaFormat.format(horaSalida) : "Sin registro", cellFont)));
-
+                // Columna 5: Estatus
                 String estatus;
                 if (horaEntrada == null) {
                     estatus = "No marcó entrada";
@@ -214,11 +273,21 @@ public class ReportesImpPDF {
             document.close();
             conector.desconectar();
 
-            JOptionPane.showMessageDialog(null, "Guardado en: " + nombreArchivo, "Reporte PDF generado exitosamente", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Guardado en: " + nombreArchivo,
+                    "Reporte PDF generado exitosamente",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Ocurrió un error al generar el PDF: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 
@@ -251,9 +320,17 @@ public class ReportesImpPDF {
             table.setSpacingAfter(10f);
             table.setWidths(new float[]{1.2f, 3.8f, 2.2f, 2.2f, 2.2f, 2.5f});
 
+            // *** Aquí se cambió "ID Empleado" por "DPI Empleado" ***
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
             BaseColor azul = new BaseColor(40, 70, 130);
-            String[] headers = {"ID Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
+            String[] headers = {
+                    "DPI Empleado",   // ← Igual que en Excel
+                    "Nombre",
+                    "Fecha Asistencia",
+                    "Hora Entrada",
+                    "Hora Salida",
+                    "Estatus"
+            };
             for (String header : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
                 cell.setBackgroundColor(azul);
@@ -267,20 +344,41 @@ public class ReportesImpPDF {
             SimpleDateFormat horaFormat = new SimpleDateFormat("HH:mm:ss");
             Font cellFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
 
+            // Recorre el ResultSet
             while (rs.next()) {
-                table.addCell(new PdfPCell(new Phrase(rs.getString("id_empleado"), cellFont)));
-                String nombreCompleto = rs.getString("nombre1_empleado") + " " + rs.getString("apellido1_empleado");
+                // *** Aquí se lee "dpi_empleado" en lugar de "id_empleado" ***
+                table.addCell(new PdfPCell(new Phrase(
+                        rs.getString("dpi_empleado"),
+                        cellFont
+                )));
+
+                // Nombre completo (igual que en Excel)
+                String nombreCompleto = rs.getString("nombre1_empleado")
+                        + " " + rs.getString("apellido1_empleado");
                 table.addCell(new PdfPCell(new Phrase(nombreCompleto, cellFont)));
 
+                // Fecha Asistencia
                 java.sql.Date fecha = rs.getDate("fecha_asistencia");
-                table.addCell(new PdfPCell(new Phrase(fecha != null ? fechaFormat.format(fecha) : "Sin fecha", cellFont)));
+                table.addCell(new PdfPCell(new Phrase(
+                        (fecha != null ? fechaFormat.format(fecha) : "Sin fecha"),
+                        cellFont
+                )));
 
+                // Hora Entrada
                 Time horaEntrada = rs.getTime("hora_entrada");
+                table.addCell(new PdfPCell(new Phrase(
+                        (horaEntrada != null ? horaFormat.format(horaEntrada) : "Sin registro"),
+                        cellFont
+                )));
+
+                // Hora Salida
                 Time horaSalida = rs.getTime("hora_salida");
+                table.addCell(new PdfPCell(new Phrase(
+                        (horaSalida != null ? horaFormat.format(horaSalida) : "Sin registro"),
+                        cellFont
+                )));
 
-                table.addCell(new PdfPCell(new Phrase(horaEntrada != null ? horaFormat.format(horaEntrada) : "Sin registro", cellFont)));
-                table.addCell(new PdfPCell(new Phrase(horaSalida != null ? horaFormat.format(horaSalida) : "Sin registro", cellFont)));
-
+                // Estatus
                 String estatus;
                 if (horaEntrada == null) {
                     estatus = "No marcó entrada";
@@ -290,18 +388,27 @@ public class ReportesImpPDF {
                 }
                 table.addCell(new PdfPCell(new Phrase(estatus, cellFont)));
             }
+
             document.add(table);
-
             agregarPie(document);
-
             document.close();
             conector.desconectar();
 
-            JOptionPane.showMessageDialog(null, "Guardado en: " + nombreArchivo, "Reporte PDF generado exitosamente", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Guardado en: " + nombreArchivo,
+                    "Reporte PDF generado exitosamente",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
 
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Ocurrió un error al generar el PDF: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 }
