@@ -52,22 +52,25 @@ public class ControladorReportes implements ActionListener, MouseListener, Docum
     }
 
     public void generarReporteFecha() {
-        String fechaNacimientoTexto = modelo.getvReportes().txtFechaDesde.getText().trim();
-      try {
+        try {
             String dpiTexto = modelo.getvReportes().txtDpi.getText().trim();
+            String fechaInicioTexto = modelo.getvReportes().txtFechaDesde.getText().trim();
+            String fechaFinTexto = modelo.getvReportes().txtFechaHasta.getText().trim();
 
-            // Validar que solo contiene dígitos
+            // Validar que el DPI contiene solo 13 dígitos
             if (!dpiTexto.matches("\\d{13}")) {
                 throw new NumberFormatException("El DPI debe tener 13 dígitos numéricos.");
             }
 
-            // No convertir a número, se pasa como String
             String dpi = dpiTexto;
 
-            LocalDate inicio = LocalDate.parse(modelo.getvReportes().txtFechaDesde.getText());
-            LocalDate fin = LocalDate.parse(modelo.getvReportes().txtFechaHasta.getText());
+            // Formateador para dd/MM/yyyy
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            // Validar que la fecha de inicio no sea posterior a la de fin
+            // Parsear fechas con el nuevo formato
+            LocalDate inicio = LocalDate.parse(fechaInicioTexto, formatter);
+            LocalDate fin = LocalDate.parse(fechaFinTexto, formatter);
+
             if (inicio.isAfter(fin)) {
                 JOptionPane.showMessageDialog(null,
                         "La fecha de inicio no puede ser posterior a la fecha de fin.",
@@ -76,19 +79,19 @@ public class ControladorReportes implements ActionListener, MouseListener, Docum
                 return;
             }
 
-
             reportes.generarExcelPorEmpleadoYRango(dpi, inicio, fin);
-            reportesPDF.generarReportePorEmpleadoYRangoPDF(dpi, inicio, fin); // <--- Genera también PDF
+            reportesPDF.generarReportePorEmpleadoYRangoPDF(dpi, inicio, fin);
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "El DPI debe ser un número de 13 dígitos.", "Formato inválido", JOptionPane.ERROR_MESSAGE);
         } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Usa: yyyy-MM-dd", "Error de fecha", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Usa: dd/MM/yyyy", "Error de fecha", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
+
 
     private void fechas(DocumentEvent e) {
         try {

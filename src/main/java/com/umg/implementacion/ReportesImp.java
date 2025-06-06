@@ -97,7 +97,7 @@ public class ReportesImp {
                 Row row = sheet.createRow(rowNum++);
 
                 Cell cell0 = row.createCell(0);
-                cell0.setCellValue(rs.getInt("id_empleado"));
+                cell0.setCellValue(rs.getInt("dpi_empleado"));
                 cell0.setCellStyle(cellStyle);
 
                 Cell cell1 = row.createCell(1);
@@ -375,7 +375,7 @@ public class ReportesImp {
             sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 5));
 
             Row headerRow = sheet.createRow(2);
-            String[] headers = {"ID Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
+            String[] headers = {"DPI Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
@@ -387,7 +387,7 @@ public class ReportesImp {
                 Row row = sheet.createRow(rowNum++);
 
                 Cell cell0 = row.createCell(0);
-                cell0.setCellValue(rs.getInt("id_empleado"));
+                cell0.setCellValue(rs.getString("dpi_empleado"));
                 cell0.setCellStyle(cellStyle);
 
                 Cell cell1 = row.createCell(1);

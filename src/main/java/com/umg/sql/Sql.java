@@ -18,7 +18,7 @@ public class Sql {
 
     private final String ReportePorRango =
             "SELECT " +
-                    "e.id_empleado, " +
+                    "e.dpi_empleado, " +
                     "e.dpi_empleado, " +
                     "e.nombre1_empleado, " +
                     "e.apellido1_empleado, " +
