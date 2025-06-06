@@ -18,10 +18,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -30,7 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
-public class ControladorRegistrarEmpleado implements MouseListener, ActionListener, DocumentListener {
+public class ControladorRegistrarEmpleado implements MouseListener, ActionListener, DocumentListener, KeyListener {
     EmpleadoImp implementacion = new EmpleadoImp();
     ModeloVistaRegistrarEmpleado modelo;
     PuestoImp implementacionPuesto = new PuestoImp();
@@ -637,7 +634,31 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         modelo.getvRegistraEmpleado().cbPuesto.setSelectedIndex(0);
 
     }
+    private void horasEntrada(DocumentEvent e) {
+        try {
+            SwingUtilities.invokeLater(() ->{
+                String hora = modelo.getvRegistraEmpleado().txtHoraEntrada.getText();
+                if (hora.length() == 2 && !hora.endsWith(":")) {
+                    modelo.getvRegistraEmpleado().txtHoraEntrada.setText(hora + ":");
+                }
+            });
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Error hora: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
+    private void horasSalida(DocumentEvent e) {
+        try {
+            SwingUtilities.invokeLater(() ->{
+                String hora = modelo.getvRegistraEmpleado().txtHoraSalida.getText();
+                if (hora.length() == 2 && !hora.endsWith(":")) {
+                    modelo.getvRegistraEmpleado().txtHoraSalida.setText(hora + ":");
+                }
+            });
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Error hora: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void limpiarPanelHuella(JPanel panel) {
         panel.removeAll();
@@ -650,6 +671,8 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
         verificarBlancos();
         tamaniMaxCampos();
         fechas(e);
+        horasEntrada(e);
+        horasSalida(e);
     }
 
     @Override
@@ -663,6 +686,39 @@ public class ControladorRegistrarEmpleado implements MouseListener, ActionListen
     public void changedUpdate(DocumentEvent e) {
         verificarBlancos();
         tamaniMaxCampos();
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.getComponent().equals(modelo.getvRegistraEmpleado().txtFecha)){
+            int key = e.getKeyChar();
+            boolean numero = key >= 48 && key <= 57;
+            if (!numero) {
+                e.consume();
+            }
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().txtHoraEntrada)){
+            int key = e.getKeyChar();
+            boolean numero = key >= 48 && key <= 57;
+            if (!numero) {
+                e.consume();
+            }
+        } else if (e.getComponent().equals(modelo.getvRegistraEmpleado().txtHoraSalida)){
+            int key = e.getKeyChar();
+            boolean numero = key >= 48 && key <= 57;
+            if (!numero) {
+                e.consume();
+            }
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }

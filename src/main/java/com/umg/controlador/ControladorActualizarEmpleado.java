@@ -16,11 +16,11 @@ import com.umg.modelos.ModeloJefeInmediato;
 import com.umg.modelos.ModeloPuesto;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * @author axels
  */
-public class ControladorActualizarEmpleado implements MouseListener, ActionListener {
+public class ControladorActualizarEmpleado implements MouseListener, ActionListener, DocumentListener, KeyListener {
     ModeloActualizarEmpleado modelo;
     PuestoImp implementacionPuesto = new PuestoImp();
     EmpleadoImp implementacion = new EmpleadoImp();
@@ -344,6 +344,22 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         }
     }
 
+    private void fechas(DocumentEvent e) {
+        try {
+            SwingUtilities.invokeLater(() ->{
+                String fechaA = modelo.getvActualizarEmpleado().txtFecha.getText();
+                if (fechaA.length() == 2 && !fechaA.endsWith("/")) {
+                    modelo.getvActualizarEmpleado().txtFecha.setText(fechaA + "/");
+                }
+                if (fechaA.length() == 5 && fechaA.charAt(4) != '/') {
+                    modelo.getvActualizarEmpleado().txtFecha.setText(fechaA + "/");
+                }
+            });
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Erro fecha: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     private void agregarMunicipios() {
         municipiosPorDepartamento = new HashMap<>();
 
@@ -573,6 +589,102 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
                 panel.repaint();
             }
         }
+    }
+
+    private void tamaniMaxCampos(){
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtNom1.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtNom2.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtNom3.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtApe1.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtApe2.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtApeC.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtFecha.getDocument()).setDocumentFilter(new LimiteCaracteres(10));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtDPI.getDocument()).setDocumentFilter(new LimiteCaracteres(13));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtCorreo.getDocument()).setDocumentFilter(new LimiteCaracteres(100));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtNum1.getDocument()).setDocumentFilter(new LimiteCaracteres(15));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtNum2.getDocument()).setDocumentFilter(new LimiteCaracteres(15));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtAldea.getDocument()).setDocumentFilter(new LimiteCaracteres(50));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtDireccion.getDocument()).setDocumentFilter(new LimiteCaracteres(100));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtHoraEntrada.getDocument()).setDocumentFilter(new LimiteCaracteres(5));
+        ((AbstractDocument) modelo.getvActualizarEmpleado().txtHoraSalida.getDocument()).setDocumentFilter(new LimiteCaracteres(5));
+
+    }
+
+    private void horasEntrada(DocumentEvent e) {
+        try {
+            SwingUtilities.invokeLater(() ->{
+                String hora = modelo.getvActualizarEmpleado().txtHoraEntrada.getText();
+                if (hora.length() == 2 && !hora.endsWith(":")) {
+                    modelo.getvActualizarEmpleado().txtHoraEntrada.setText(hora + ":");
+                }
+            });
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Error hora: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void horasSalida(DocumentEvent e) {
+        try {
+            SwingUtilities.invokeLater(() ->{
+                String hora = modelo.getvActualizarEmpleado().txtHoraSalida.getText();
+                if (hora.length() == 2 && !hora.endsWith(":")) {
+                    modelo.getvActualizarEmpleado().txtHoraSalida.setText(hora + ":");
+                }
+            });
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Error hora: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        fechas(e);
+        horasEntrada(e);
+        horasSalida(e);
+        tamaniMaxCampos();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        tamaniMaxCampos();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        tamaniMaxCampos();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.getComponent().equals(modelo.getvActualizarEmpleado().txtFecha)){
+            int key = e.getKeyChar();
+            boolean numero = key >= 48 && key <= 57;
+            if (!numero) {
+                e.consume();
+            }
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().txtHoraEntrada)){
+            int key = e.getKeyChar();
+            boolean numero = key >= 48 && key <= 57;
+            if (!numero) {
+                e.consume();
+            }
+        } else if (e.getComponent().equals(modelo.getvActualizarEmpleado().txtHoraSalida)){
+            int key = e.getKeyChar();
+            boolean numero = key >= 48 && key <= 57;
+            if (!numero) {
+                e.consume();
+            }
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
 
