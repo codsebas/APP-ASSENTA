@@ -11,6 +11,8 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,9 +27,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class ControladorReportes implements ActionListener, MouseListener {
+public class ControladorReportes implements ActionListener, MouseListener, DocumentListener {
     public ControladorReportes(ModeloVistaReportes modelo) {
         this.modelo = modelo;
     }
@@ -48,7 +52,8 @@ public class ControladorReportes implements ActionListener, MouseListener {
     }
 
     public void generarReporteFecha() {
-        try {
+        String fechaNacimientoTexto = modelo.getvReportes().txtFechaDesde.getText().trim();
+      try {
             String dpiTexto = modelo.getvReportes().txtDpi.getText().trim();
 
             // Validar que solo contiene dígitos
@@ -71,6 +76,7 @@ public class ControladorReportes implements ActionListener, MouseListener {
                 return;
             }
 
+
             reportes.generarExcelPorEmpleadoYRango(dpi, inicio, fin);
             reportesPDF.generarReportePorEmpleadoYRangoPDF(dpi, inicio, fin); // <--- Genera también PDF
 
@@ -82,6 +88,58 @@ public class ControladorReportes implements ActionListener, MouseListener {
             JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }
+
+    private void fechas(DocumentEvent e) {
+        try {
+            SwingUtilities.invokeLater(() -> {
+                // Fecha Desde
+                String fechaDesde = modelo.getvReportes().txtFechaDesde.getText();
+                if (fechaDesde.length() > 10) {
+                    fechaDesde = fechaDesde.substring(0, 10);
+                    modelo.getvReportes().txtFechaDesde.setText(fechaDesde);
+                }
+                if (fechaDesde.length() == 2 && !fechaDesde.endsWith("/")) {
+                    modelo.getvReportes().txtFechaDesde.setText(fechaDesde + "/");
+                }
+                if (fechaDesde.length() == 5 && fechaDesde.charAt(4) != '/') {
+                    modelo.getvReportes().txtFechaDesde.setText(fechaDesde + "/");
+                }
+
+                // Fecha Hasta
+                String fechaHasta = modelo.getvReportes().txtFechaHasta.getText();
+                if (fechaHasta.length() > 10) {
+                    fechaHasta = fechaHasta.substring(0, 10);
+                    modelo.getvReportes().txtFechaHasta.setText(fechaHasta);
+                }
+                if (fechaHasta.length() == 2 && !fechaHasta.endsWith("/")) {
+                    modelo.getvReportes().txtFechaHasta.setText(fechaHasta + "/");
+                }
+                if (fechaHasta.length() == 5 && fechaHasta.charAt(4) != '/') {
+                    modelo.getvReportes().txtFechaHasta.setText(fechaHasta + "/");
+                }
+            });
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error fecha: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+
+        fechas(e);
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+
     }
 
     @Override

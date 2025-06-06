@@ -2,7 +2,7 @@ package com.umg.sql;
 
 public class Sql {
 
-    private final String ReporteDiarioGeneral= """
+    private final String ReporteDiarioGeneral = """
     SELECT 
         e.id_empleado,
         e.nombre1_empleado || ' ' || COALESCE(e.nombre2_empleado, '') || ' ' || 
@@ -12,6 +12,7 @@ public class Sql {
         a.hora_salida
     FROM asistencia_diaria a
     JOIN empleado e ON a.empleado_id = e.id_empleado
+    WHERE a.fecha_asistencia::text LIKE '%A%'
     ORDER BY a.fecha_asistencia, e.id_empleado
 """;
 
@@ -27,8 +28,10 @@ public class Sql {
                     "FROM empleado e " +
                     "JOIN asistencia_diaria a ON e.id_empleado = a.empleado_id " +
                     "WHERE e.dpi_empleado = ? " +
+                    "AND e.estado_empleado = 'A' " +
                     "AND a.fecha_asistencia BETWEEN ? AND ? " +
                     "ORDER BY a.fecha_asistencia";
+
 
 
     private final String getReporteAsistenciaTardios =
@@ -38,8 +41,10 @@ public class Sql {
                     "a.fecha_asistencia, a.hora_entrada, a.hora_salida " +
                     "FROM asistencia_diaria a " +
                     "JOIN empleado e ON e.id_empleado = a.empleado_id " +
-                    "WHERE a.hora_entrada IS NULL OR a.hora_entrada > '08:00:00' " +
+                    "WHERE (a.hora_entrada IS NULL OR a.hora_entrada > '08:00:00') " +
+                    "AND e.estado_empleado = 'A' " +
                     "ORDER BY a.fecha_asistencia DESC, a.hora_entrada ASC;";
+
 
 
 
