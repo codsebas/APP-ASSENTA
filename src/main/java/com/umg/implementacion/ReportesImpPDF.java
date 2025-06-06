@@ -84,7 +84,7 @@ public class ReportesImpPDF {
             table.setWidthPercentage(100);
             table.setSpacingBefore(15f);
             table.setSpacingAfter(10f);
-            table.setWidths(new float[]{1.2f, 3.8f, 2.2f, 2.2f, 2.2f, 2.5f});
+            table.setWidths(new float[]{2.5f, 3.8f, 2.2f, 2.2f, 2.2f, 2.5f});
 
             // Encabezados
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
@@ -346,7 +346,6 @@ public class ReportesImpPDF {
 
             // Recorre el ResultSet
             while (rs.next()) {
-                // *** Aquí se lee "dpi_empleado" en lugar de "id_empleado" ***
                 table.addCell(new PdfPCell(new Phrase(
                         rs.getString("dpi_empleado"),
                         cellFont
