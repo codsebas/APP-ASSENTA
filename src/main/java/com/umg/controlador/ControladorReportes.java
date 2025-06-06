@@ -14,10 +14,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,7 +28,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class ControladorReportes implements ActionListener, MouseListener, DocumentListener {
+public class ControladorReportes implements ActionListener, MouseListener, DocumentListener, KeyListener {
     public ControladorReportes(ModeloVistaReportes modelo) {
         this.modelo = modelo;
     }
@@ -191,5 +188,40 @@ public class ControladorReportes implements ActionListener, MouseListener, Docum
         } else if (e.getComponent().equals(modelo.getvReportes().btnSinMarca)) {
             modelo.getvReportes().btnSinMarca.setBackground(new Color(0, 127, 75));
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // DPI: solo números
+        if (e.getComponent().equals(modelo.getvReportes().txtDpi)) {
+            char key = e.getKeyChar();
+            if (!Character.isDigit(key)) {
+                e.consume();
+            }
+        }
+
+        // Fechas: solo números y '/'
+        else if (e.getComponent().equals(modelo.getvReportes().txtFechaDesde) ||
+                e.getComponent().equals(modelo.getvReportes().txtFechaHasta)) {
+
+            char key = e.getKeyChar();
+            boolean esNumero = Character.isDigit(key);
+            boolean esSlash = key == '/';
+
+            if (!esNumero && !esSlash) {
+                e.consume();
+            }
+        }
+    }
+
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

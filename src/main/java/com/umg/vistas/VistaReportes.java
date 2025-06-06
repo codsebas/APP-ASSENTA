@@ -235,5 +235,8 @@ public class VistaReportes extends javax.swing.JPanel {
         btnSinMarca.addMouseListener(controlador);
         txtFechaHasta.getDocument().addDocumentListener(controlador);
         txtFechaDesde.getDocument().addDocumentListener(controlador);
+        txtDpi.addKeyListener(controlador);
+        txtFechaDesde.addKeyListener(controlador);
+        txtFechaHasta.addKeyListener(controlador);
     }
 }
