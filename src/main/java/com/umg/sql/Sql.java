@@ -75,6 +75,7 @@ public class Sql {
             "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado, " +
             "e.fec_nacimiento, e.edad_empleado, p.nombre_puesto, e.email_empleado, " +
             "e.telefono1_empleado, e.telefono2_empleado, e.horario_entrada, e.horario_salida, " +
+            "e.estado_empleado, " +
             "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS jefe_inmediato_nombre " +
             "FROM empleado e " +
             "INNER JOIN puesto p ON e.puesto_id = p.id_puesto " +
@@ -134,8 +135,9 @@ public class Sql {
             "UPDATE empleado SET\n" +
                     "    sexo_empleado = ?, estado_civil = ?, nombre1_empleado = ?, nombre2_empleado = ?, nombre3_empleado = ?,\n" +
                     "    apellido1_empleado = ?, apellido2_empleado = ?, apellidocasada_empleado = ?, fec_nacimiento = ?, edad_empleado = ?,\n" +
-                    "    puesto_id = ?, email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ?, jefe_inmediato_id = ?\n" +
-                    "WHERE dpi_empleado = ?\n";
+                    "    puesto_id = ?, email_empleado = ?, telefono1_empleado = ?, telefono2_empleado = ?, horario_entrada = ?, horario_salida = ?,\n" +
+                    "    jefe_inmediato_id = ?, estado_empleado = 'A'\n" +
+                    "WHERE dpi_empleado = ?";
 
     private final String ELIMINAR_EMPLEADO = "DELETE FROM cliente WHERE dpi_empleado = ?";
     private final String CONSULTA_TODOS_USUARIO = "SELECT * FROM usuarios";

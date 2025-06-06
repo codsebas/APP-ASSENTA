@@ -232,7 +232,17 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         vista.txtApe1.setText(empleado.getPrimerApellido());
         vista.txtApe2.setText(empleado.getSegundoApellido());
         vista.txtApeC.setText(empleado.getApellidoCasada());
-        vista.txtFecha.setText(empleado.getFechaNacimiento());
+
+        String fechaNacimineto = empleado.getFechaNacimiento();
+
+        DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Parsear y formatear
+        LocalDate fecha = LocalDate.parse(fechaNacimineto, formatoEntrada);
+        String fechaFormateada = fecha.format(formatoSalida);
+
+        vista.txtFecha.setText(fechaFormateada);
         // Si quieres mostrar la edad
         // vista.txtEdad.setText(String.valueOf(empleado.getEdad()));
         vista.txtCorreo.setText(empleado.getCorreoElectronico());
@@ -306,16 +316,21 @@ public class ControladorActualizarEmpleado implements MouseListener, ActionListe
         modeloEmpleado.setAldeaColonia(modelo.getvActualizarEmpleado().txtAldea.getText());
         modeloEmpleado.setDireccionVivienda(modelo.getvActualizarEmpleado().txtDireccion.getText());
 
+
+
         // 🟢 Conversión de fecha
         String fechaTexto = modelo.getvActualizarEmpleado().txtFecha.getText().trim();
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate fechaNacimiento = LocalDate.parse(fechaTexto, formatter);
 
-            modeloEmpleado.setFechaNacimiento(fechaNacimiento.toString());
-            modeloEmpleado.setEdad(Period.between(fechaNacimiento, LocalDate.now()).getYears());
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato yyyy-MM-dd (ej: 2000-12-25)");
+        String fechaFormateada;
+        try {
+            DateTimeFormatter formatoEntrada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            LocalDate fecha = LocalDate.parse(fechaTexto, formatoEntrada);
+            fechaFormateada = fecha.format(formatoSalida);
+            modeloEmpleado.setFechaNacimiento(fechaFormateada);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "La fecha debe tener el formato dd/mm/yyyy (ej: 25/12/2000)");
             return;
         }
 

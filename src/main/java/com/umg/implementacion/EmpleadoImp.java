@@ -9,6 +9,7 @@ import com.umg.modelos.ModeloPuesto;
 import com.umg.sql.Conector;
 import com.umg.sql.Sql;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
@@ -244,7 +245,13 @@ public class EmpleadoImp implements IEmpleados {
             ps.setString(1, dpi_empleado);
             rs = ps.executeQuery();
 
+
             if (rs.next()) {
+                String estado = rs.getString("estado_empleado");
+                if ("I".equals(estado)) {
+                    JOptionPane.showMessageDialog(null, "Este empleado está inactivo. Al guardar los cambios, se activará nuevamente.");
+                }
+
                 modelo = new ModeloEmpleado(); // Solo si encuentra resultado
 
                 modelo.setDpi(rs.getString(2));                           // dpi_empleado
