@@ -131,7 +131,7 @@ public class Sql {
     private final String CONSULTA_EMPLEADO_DPI_ELIMINAR =  "SELECT e.nombre1_empleado, e.apellido1_empleado, p.nombre_puesto " +
             "FROM empleado e " +
             "INNER JOIN puesto p ON e.puesto_id = p.id_puesto " +
-            "WHERE e.dpi_empleado = ?";
+            "WHERE e.dpi_empleado = ? and e.estado_empleado = 'A'";
     private final String INSERTAR_HUELLA = "INSERT INTO huella (empleado_id, huella) VALUES (?, ?);";
     private final String ACTUALIZAR_EMPLEADO =
             "UPDATE empleado SET\n" +
@@ -160,8 +160,8 @@ public class Sql {
     private final String OBTENER_ID_EMPLEADO_POR_DPI_ELIMINAR = "SELECT id_empleado FROM empleado WHERE dpi_empleado = ?";
     private final String ELIMINAR_HUELLA_ELIMINAR = "DELETE FROM huella WHERE empleado_id = ?";
     private final String ELIMINAR_DIRECCION_ELIMINAR = "DELETE FROM direccion_empleado WHERE empleado_id = ?";
-    private final String ELIMINAR_USUARIO_ELIMINAR = "DELETE FROM usuarios WHERE empleado_id = ?";
-    private final String ELIMINAR_EMPLEADO_ELIMINAR = "DELETE FROM empleado WHERE dpi_empleado = ?";
+    private final String ELIMINAR_USUARIO_ELIMINAR = "DELETE FROM usuarios WHERE empleado_dpi = ?";
+    private final String ELIMINAR_EMPLEADO_ELIMINAR = "UPDATE empleado SET estado_empleado = 'I' WHERE dpi_empleado = ?";
     private final String INSERTAR_HUELLA_EMPLEADO = "INSERT INTO huella (empleado_id, huella_template) VALUES (?, ?)";
 
     private final String ACTUALIZAR_ID_JEFE_EMPLEADO = "UPDATE empleado SET jefe_inmediato_id = NULL WHERE jefe_inmediato_id = ?";

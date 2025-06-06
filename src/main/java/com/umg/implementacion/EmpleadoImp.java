@@ -187,23 +187,6 @@ public class EmpleadoImp implements IEmpleados {
                 ps.executeUpdate();
                 ps.close();
 
-                ps = conector.preparar(sql.getELIMINAR_REGISTRO_ASISTENCIA());
-                ps.setInt(1, idEmpleado);
-                ps.executeUpdate();
-                ps.close();
-
-                // 🔵 Ahora sí, elimino huellas
-                ps = conector.preparar(sql.getELIMINAR_HUELLA_ELIMINAR());
-                ps.setInt(1, idEmpleado);
-                ps.executeUpdate();
-                ps.close();
-
-                // 🔵 Luego dirección
-                ps = conector.preparar(sql.getELIMINAR_DIRECCION_ELIMINAR());
-                ps.setInt(1, idEmpleado);
-                ps.executeUpdate();
-                ps.close();
-
                 // 🔵 Luego usuarios
                 ps = conector.preparar(sql.getELIMINAR_USUARIO_ELIMINAR());
                 ps.setString(1, dpi);

@@ -61,7 +61,7 @@ public class ControladorEliminarEmpleado implements MouseListener {
         String dpi = modelo.getVistaEliminarEmpleados().txtDpiEmp.getText().trim();
 
         if (dpi == null || dpi.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingresa un DPI afdasfa.");
+            JOptionPane.showMessageDialog(null, "Por favor, ingresa un DPI.");
             return;
         }
 
@@ -69,7 +69,7 @@ public class ControladorEliminarEmpleado implements MouseListener {
         ModeloEmpleado empleado = imp.mostrarNombreApellidoPuestoPorDPI(dpi);
 
         if (empleado == null) {
-            JOptionPane.showMessageDialog(null, "El DPI no existe en la base de burrro.");
+            JOptionPane.showMessageDialog(null, "Empleado no existe");
             return;
         }
 
