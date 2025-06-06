@@ -247,10 +247,6 @@ public class EmpleadoImp implements IEmpleados {
 
 
             if (rs.next()) {
-                String estado = rs.getString("estado_empleado");
-                if ("I".equals(estado)) {
-                    JOptionPane.showMessageDialog(null, "Este empleado está inactivo. Al guardar los cambios, se activará nuevamente.");
-                }
 
                 modelo = new ModeloEmpleado(); // Solo si encuentra resultado
 
@@ -346,6 +342,11 @@ public class EmpleadoImp implements IEmpleados {
             rs = ps.executeQuery();
 
             if (rs.next()) {
+                String estado = rs.getString("estado_empleado");
+                System.out.println("Estado: " + estado);
+                if ("I".equals(estado)) {
+                    JOptionPane.showMessageDialog(null, "Este empleado está inactivo. Al guardar los cambios, se activará nuevamente.");
+                }
                 modelo = new ModeloEmpleado(); // Solo si encuentra un resultado
 
                 // Llenamos el objeto modelo con los datos recuperados

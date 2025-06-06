@@ -68,7 +68,8 @@ public class Sql {
             "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS jefe_inmediato_nombre " +
             "FROM empleado e " +
             "INNER JOIN puesto p ON e.puesto_id = p.id_puesto " +
-            "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado";
+            "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado " +
+            "WHERE e.estado_empleado = 'A'";
     private final String CONSULTA_EMPLEADO_DPI = "SELECT " +
             "e.id_empleado, e.dpi_empleado, e.sexo_empleado, e.estado_civil, " +
             "e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
@@ -80,7 +81,7 @@ public class Sql {
             "FROM empleado e " +
             "INNER JOIN puesto p ON e.puesto_id = p.id_puesto " +
             "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado " +
-            "WHERE e.dpi_empleado = ?";
+            "WHERE e.dpi_empleado = ? AND e.estado_empleado = 'A'";
 
 
     private final String CONSULTA_EMPLEADO_DPIUPD =
@@ -92,7 +93,8 @@ public class Sql {
                     "e.horario_entrada, e.horario_salida, " +
                     "e.jefe_inmediato_id AS id_jefe_inmediato, " +
                     "CONCAT(j.nombre1_empleado, ' ', j.apellido1_empleado) AS nombre_jefe_inmediato, " +
-                    "d.departamento, d.municipio, d.aldea, d.direccion " +
+                    "d.departamento, d.municipio, d.aldea, d.direccion, " +
+                    "e.estado_empleado " +
                     "FROM empleado e " +
                     "LEFT JOIN puesto p ON e.puesto_id = p.id_puesto " +
                     "LEFT JOIN empleado j ON e.jefe_inmediato_id = j.id_empleado " +
