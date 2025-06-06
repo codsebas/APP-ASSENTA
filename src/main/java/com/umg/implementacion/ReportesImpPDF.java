@@ -88,7 +88,7 @@ public class ReportesImpPDF {
 
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
             BaseColor azul = new BaseColor(40, 70, 130);
-            String[] headers = {"ID Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
+            String[] headers = {"DPI Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
             for (String header : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
                 cell.setBackgroundColor(azul);
@@ -103,7 +103,7 @@ public class ReportesImpPDF {
             Font cellFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
 
             while (rs.next()) {
-                table.addCell(new PdfPCell(new Phrase(rs.getString("id_empleado"), cellFont)));
+                table.addCell(new PdfPCell(new Phrase(rs.getString("dpi_empleado"), cellFont)));
                 table.addCell(new PdfPCell(new Phrase(rs.getString("nombre_completo"), cellFont)));
 
                 java.sql.Date fecha = rs.getDate("fecha_asistencia");
@@ -167,7 +167,7 @@ public class ReportesImpPDF {
 
             Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
             BaseColor azul = new BaseColor(40, 70, 130);
-            String[] headers = {"ID Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
+            String[] headers = {"DPI Empleado", "Nombre", "Fecha Asistencia", "Hora Entrada", "Hora Salida", "Estatus"};
             for (String header : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
                 cell.setBackgroundColor(azul);
@@ -182,7 +182,7 @@ public class ReportesImpPDF {
             Font cellFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
 
             while (rs.next()) {
-                table.addCell(new PdfPCell(new Phrase(rs.getString("id_empleado"), cellFont)));
+                table.addCell(new PdfPCell(new Phrase(rs.getString("dpi_empleado"), cellFont)));
                 table.addCell(new PdfPCell(new Phrase(rs.getString("nombre_completo"), cellFont)));
 
                 java.sql.Date fecha = rs.getDate("fecha_asistencia");

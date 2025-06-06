@@ -3,17 +3,17 @@ package com.umg.sql;
 public class Sql {
 
     private final String ReporteDiarioGeneral = """
-    SELECT 
-        e.id_empleado,
-        e.nombre1_empleado || ' ' || COALESCE(e.nombre2_empleado, '') || ' ' || 
-        e.apellido1_empleado || ' ' || COALESCE(e.apellido2_empleado, '') AS nombre_completo,
-        a.fecha_asistencia,
-        a.hora_entrada,
-        a.hora_salida
-    FROM asistencia_diaria a
-    JOIN empleado e ON a.empleado_id = e.id_empleado
-    WHERE a.fecha_asistencia::text LIKE '%A%'
-    ORDER BY a.fecha_asistencia, e.id_empleado
+        SELECT 
+            e.dpi_empleado,
+            e.nombre1_empleado || ' ' || COALESCE(e.nombre2_empleado, '') || ' ' || 
+            e.apellido1_empleado || ' ' || COALESCE(e.apellido2_empleado, '') AS nombre_completo,
+            a.fecha_asistencia,
+            a.hora_entrada,
+            a.hora_salida
+        FROM asistencia_diaria a
+        JOIN empleado e ON a.empleado_id = e.id_empleado
+        WHERE a.fecha_asistencia::text LIKE '%A%'
+        ORDER BY a.fecha_asistencia, e.id_empleado
 """;
 
     private final String ReportePorRango =
@@ -35,7 +35,7 @@ public class Sql {
 
 
     private final String getReporteAsistenciaTardios =
-            "SELECT e.id_empleado, " +
+            "SELECT e.dpi_empleado, " +
                     "CONCAT_WS(' ', e.nombre1_empleado, e.nombre2_empleado, e.nombre3_empleado, " +
                     "e.apellido1_empleado, e.apellido2_empleado, e.apellidocasada_empleado) AS nombre_completo, " +
                     "a.fecha_asistencia, a.hora_entrada, a.hora_salida " +
