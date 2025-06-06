@@ -742,6 +742,9 @@ public class VistaRegistrarEmpleado extends javax.swing.JPanel {
         txtAldea.getDocument().addDocumentListener(controlador);
         txtHoraEntrada.getDocument().addDocumentListener(controlador);
         txtHoraSalida.getDocument().addDocumentListener(controlador);
+        txtFecha.addKeyListener(controlador);
+        txtHoraSalida.addKeyListener(controlador);
+        txtHoraEntrada.addKeyListener(controlador);
     }
 
     public Reader obtenerReader() {

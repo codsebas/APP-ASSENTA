@@ -671,6 +671,24 @@ public class VistaActualizarEmpleado extends javax.swing.JPanel {
         panelH2.addMouseListener(controlador);
         panelH3.addMouseListener(controlador);
         panelH4.addMouseListener(controlador);
+        txtNom1.getDocument().addDocumentListener(controlador);
+        txtNom2.getDocument().addDocumentListener(controlador);
+        txtNom3.getDocument().addDocumentListener(controlador);
+        txtApe1.getDocument().addDocumentListener(controlador);
+        txtApe2.getDocument().addDocumentListener(controlador);
+        txtApeC.getDocument().addDocumentListener(controlador);
+        txtFecha.getDocument().addDocumentListener(controlador);
+        txtCorreo.getDocument().addDocumentListener(controlador);
+        txtNum1.getDocument().addDocumentListener(controlador);
+        txtNum2.getDocument().addDocumentListener(controlador);
+        txtDPI.getDocument().addDocumentListener(controlador);
+        txtDireccion.getDocument().addDocumentListener(controlador);
+        txtAldea.getDocument().addDocumentListener(controlador);
+        txtHoraEntrada.getDocument().addDocumentListener(controlador);
+        txtHoraSalida.getDocument().addDocumentListener(controlador);
+        txtFecha.addKeyListener(controlador);
+        txtHoraSalida.addKeyListener(controlador);
+        txtHoraEntrada.addKeyListener(controlador);
     }
 
 }
